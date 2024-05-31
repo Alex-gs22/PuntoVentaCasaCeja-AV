@@ -23,13 +23,11 @@ namespace PuntoVentaCasaCeja
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.Label txtdescripcion;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Ventas));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblcobranza = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.tabla = new System.Windows.Forms.DataGridView();
             this.articulos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,7 +46,6 @@ namespace PuntoVentaCasaCeja
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.lblTime = new System.Windows.Forms.Label();
             this.lblFolio = new System.Windows.Forms.Label();
-            this.imagen = new System.Windows.Forms.PictureBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.opcionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ingresarEfectivoF3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,34 +54,22 @@ namespace PuntoVentaCasaCeja
             this.reimprimirTicketF6ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.administrarCatálogoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.establecerImpresoraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.actualizarBaseDeDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logout = new System.Windows.Forms.Button();
             this.apartados = new System.Windows.Forms.Button();
-            this.actualizarBaseDeDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            txtdescripcion = new System.Windows.Forms.Label();
+            this.eliminarCarrito_button = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tabla)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imagen)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // txtdescripcion
-            // 
-            resources.ApplyResources(txtdescripcion, "txtdescripcion");
-            txtdescripcion.BackColor = System.Drawing.SystemColors.Control;
-            txtdescripcion.Name = "txtdescripcion";
             // 
             // lblcobranza
             // 
             resources.ApplyResources(this.lblcobranza, "lblcobranza");
             this.lblcobranza.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lblcobranza.Name = "lblcobranza";
-            // 
-            // label3
-            // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
             // 
             // tabla
             // 
@@ -136,6 +121,7 @@ namespace PuntoVentaCasaCeja
             this.tabla.RowTemplate.Height = 50;
             this.tabla.RowTemplate.ReadOnly = true;
             this.tabla.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.tabla.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tabla_CellContentClick);
             this.tabla.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tabla_KeyDown);
             // 
             // articulos
@@ -265,15 +251,9 @@ namespace PuntoVentaCasaCeja
             this.lblFolio.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lblFolio.Name = "lblFolio";
             // 
-            // imagen
-            // 
-            resources.ApplyResources(this.imagen, "imagen");
-            this.imagen.BackColor = System.Drawing.SystemColors.Control;
-            this.imagen.Name = "imagen";
-            this.imagen.TabStop = false;
-            // 
             // menuStrip1
             // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.opcionesToolStripMenuItem});
             resources.ApplyResources(this.menuStrip1, "menuStrip1");
@@ -328,6 +308,12 @@ namespace PuntoVentaCasaCeja
             resources.ApplyResources(this.establecerImpresoraToolStripMenuItem, "establecerImpresoraToolStripMenuItem");
             this.establecerImpresoraToolStripMenuItem.Click += new System.EventHandler(this.establecerImpresoraToolStripMenuItem_Click);
             // 
+            // actualizarBaseDeDatosToolStripMenuItem
+            // 
+            this.actualizarBaseDeDatosToolStripMenuItem.Name = "actualizarBaseDeDatosToolStripMenuItem";
+            resources.ApplyResources(this.actualizarBaseDeDatosToolStripMenuItem, "actualizarBaseDeDatosToolStripMenuItem");
+            this.actualizarBaseDeDatosToolStripMenuItem.Click += new System.EventHandler(this.actualizarBaseDeDatosToolStripMenuItem_Click);
+            // 
             // logout
             // 
             resources.ApplyResources(this.logout, "logout");
@@ -346,44 +332,43 @@ namespace PuntoVentaCasaCeja
             this.apartados.UseVisualStyleBackColor = false;
             this.apartados.Click += new System.EventHandler(this.apartados_Click);
             // 
-            // actualizarBaseDeDatosToolStripMenuItem
+            // eliminarCarrito_button
             // 
-            this.actualizarBaseDeDatosToolStripMenuItem.Name = "actualizarBaseDeDatosToolStripMenuItem";
-            resources.ApplyResources(this.actualizarBaseDeDatosToolStripMenuItem, "actualizarBaseDeDatosToolStripMenuItem");
-            this.actualizarBaseDeDatosToolStripMenuItem.Click += new System.EventHandler(this.actualizarBaseDeDatosToolStripMenuItem_Click);
+            resources.ApplyResources(this.eliminarCarrito_button, "eliminarCarrito_button");
+            this.eliminarCarrito_button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(166)))), ((int)(((byte)(64)))));
+            this.eliminarCarrito_button.FlatAppearance.BorderSize = 0;
+            this.eliminarCarrito_button.Name = "eliminarCarrito_button";
+            this.eliminarCarrito_button.UseVisualStyleBackColor = false;
+            this.eliminarCarrito_button.Click += new System.EventHandler(this.eliminarCarrito_button_Click);
             // 
             // Ventas
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
+            this.Controls.Add(this.eliminarCarrito_button);
             this.Controls.Add(this.apartados);
             this.Controls.Add(this.logout);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.nuevacaja);
             this.Controls.Add(this.existencia);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.imagen);
             this.Controls.Add(this.tabla);
             this.Controls.Add(this.salir);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.modcant);
             this.Controls.Add(this.abonar);
-            this.Controls.Add(txtdescripcion);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Ventas";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Ventas_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.tabla)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imagen)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -392,8 +377,6 @@ namespace PuntoVentaCasaCeja
         }
 
         #endregion
-        private Label label3;
-        private PictureBox imagen;
         private DataGridView tabla;
         private Button salir;
         private Panel panel1;
@@ -424,5 +407,6 @@ namespace PuntoVentaCasaCeja
         private ToolStripMenuItem administrarCatálogoToolStripMenuItem;
         private Button apartados;
         private ToolStripMenuItem actualizarBaseDeDatosToolStripMenuItem;
+        private Button eliminarCarrito_button;
     }
 }

@@ -9,12 +9,15 @@ using Newtonsoft.Json;
 using PuntoVentaCasaCeja.Properties;
 using Windows.Storage;
 using Firebase.Database;
+using System.Reflection;
+using System.Data;
 
 namespace PuntoVentaCasaCeja
 {
     public partial class Ventas : Form
     {
         FirebaseClient firebase;
+        private bool mensajeMayoreoMostrado = false;
         bool hasTemporal;
         double totalcarrito = 0;
         double totalpagado = 0;
@@ -52,6 +55,8 @@ namespace PuntoVentaCasaCeja
         public Ventas()
         {
             InitializeComponent();
+            txtcodigo.GotFocus += txtcodigo_FocusChanged;
+            txtcodigo.LostFocus += txtcodigo_FocusChanged;
             localDM = new LocaldataManager();
             webDM = new WebDataManager(localDM, setInt, cajero);
             carrito = new List<ProductoVenta>();
@@ -107,7 +112,7 @@ namespace PuntoVentaCasaCeja
                 lw.setData(42, "Sincronizando datos desde el servidor...");
                 await webDM.GetCreditos();
                 lw.setData(49, "Sincronizando datos desde el servidor...");
-                await webDM.GetClientes();
+                //await webDM.GetClientes();
                 lw.setData(56, "Sincronizando datos desde el servidor...");
                 await webDM.enviarApartadosTemporal();
                 lw.setData(63, "Sincronizando datos desde el servidor...");
@@ -163,7 +168,7 @@ namespace PuntoVentaCasaCeja
                         lw.setData(42, "Sincronizando datos desde el servidor...");
                         await webDM.GetCreditos();
                         lw.setData(49, "Sincronizando datos desde el servidor...");
-                        await webDM.GetClientes();
+                        //await webDM.GetClientes();
                         lw.setData(56, "Sincronizando datos desde el servidor...");
                         await webDM.enviarApartadosTemporal();
                         lw.setData(63, "Sincronizando datos desde el servidor...");
@@ -380,11 +385,6 @@ namespace PuntoVentaCasaCeja
         {
             apertura = monto;
         }
-
-        private void txtcodigo_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
-        }
         private void agregarProducto(Producto p)
         {
             int index = list.IndexOf(p.codigo);
@@ -392,12 +392,15 @@ namespace PuntoVentaCasaCeja
             {
                 tabla.Rows[index].Cells[1].Value = int.Parse(tabla.Rows[index].Cells[1].Value.ToString()) + 1;
                 carrito[index].cantidad++;
-                if (p.cantidad_mayoreo != 0 && carrito[index].cantidad >= p.cantidad_mayoreo && p.mayoreo > 0)
+                if (p.cantidad_mayoreo != 0 && carrito[index].cantidad == p.cantidad_mayoreo && p.mayoreo > 0)
                 {
+                    if (!mensajeMayoreoMostrado)
+                    {
+                        MessageBox.Show("Precio de Mayoreo");
+                        mensajeMayoreoMostrado = true;
+                    }
                     carrito[index].precio_venta = Math.Round(p.mayoreo, 2);
                     tabla["precio", index].Value = p.mayoreo.ToString("0.00");
-                    MessageBox.Show("Precio al mayoreo", "Advertencia");
-
                 }
                 tabla["total", index].Value = (carrito[index].cantidad * carrito[index].precio_venta).ToString("0.00");
             }
@@ -413,11 +416,11 @@ namespace PuntoVentaCasaCeja
                     precio_venta = Math.Round(p.menudeo, 2)
                 });
                 tabla.Rows.Insert(0, new object[]{
-                            p.nombre.ToUpper().ToString() + " " + p.presentacion.ToUpper().ToString(),
-                            1,
-                             p.menudeo.ToString("0.00"),
-                             p.menudeo.ToString("0.00")
-                        });
+            p.nombre.ToUpper().ToString() + " " + p.presentacion.ToUpper().ToString(),
+            1,
+            p.menudeo.ToString("0.00"),
+            p.menudeo.ToString("0.00")
+        });
                 tabla.Rows[0].Selected = true;
                 txtcodigo.Focus();
             }
@@ -427,8 +430,8 @@ namespace PuntoVentaCasaCeja
             }
             totalcarrito = GetTotal();
             txttotal.Text = "Por pagar MXN: $" + totalcarrito.ToString("0.00");
-            //imagen.LoadAsync(p.imagen);
         }
+
         private void modCant(int index, int cantidad)
         {
             Producto p = localDM.GetProductByCode(list[index]);
@@ -437,20 +440,28 @@ namespace PuntoVentaCasaCeja
             tabla[1, index].Value = cantidad;
             if (cantidad >= p.cantidad_mayoreo && p.cantidad_mayoreo != 0 && p.mayoreo > 0)
             {
-                carrito[index].precio_venta = Math.Round(p.mayoreo,2);
+                if (!mensajeMayoreoMostrado)
+                {
+                    MessageBox.Show("Precio de Mayoreo");
+                    mensajeMayoreoMostrado = true;
+                }
+                carrito[index].precio_venta = Math.Round(p.mayoreo, 2);
                 tabla[2, index].Value = p.mayoreo.ToString("0.00");
-                MessageBox.Show("Precio al mayoreo", "Advertencia");
             }
             else
             {
-                carrito[index].precio_venta = Math.Round(p.menudeo,2);
+                carrito[index].precio_venta = Math.Round(p.menudeo, 2);
                 tabla[2, index].Value = p.menudeo.ToString("0.00");
+                if (mensajeMayoreoMostrado && cantidad < p.cantidad_mayoreo)
+                {
+                    mensajeMayoreoMostrado = false;
+                }
             }
             tabla["total", index].Value = (carrito[index].cantidad * carrito[index].precio_venta).ToString("0.00");
             totalcarrito = GetTotal();
             txttotal.Text = "Por pagar MXN: $" + totalcarrito.ToString("0.00");
-
         }
+
         double GetTotal()
         {
             double result = 0;
@@ -545,7 +556,6 @@ namespace PuntoVentaCasaCeja
             carrito.Clear();
             refreshFolio();
             txttotal.Text = "Por pagar MXN: $" + totalcarrito.ToString("0.00");
-            imagen.Image = null;
             pagos.Clear();
         }
         public async void send(Dictionary<string, string> venta, int id)
@@ -554,6 +564,15 @@ namespace PuntoVentaCasaCeja
             foreach(var x in venta)
             {
                 temp[x.Key] = x.Value;
+                //Console.WriteLine(x.Key + ": " + x.Value);
+                //    total: 14.00
+                //    folio: 010130042024V0012
+                //    folio_corte: 01220420240001
+                //    fecha_venta: 2024 - 04 - 30 23:42:16.105
+                //    metodo_pago: { "efectivo":14.0}
+                //    tipo: 1
+                //    sucursal_id: 1
+                //    usuario_id: 1
             }
 
             if (await webDM.SendVentaAsync(temp, hasTemporal, id))
@@ -563,7 +582,32 @@ namespace PuntoVentaCasaCeja
             //else 
             //MessageBox.Show("Producto vendido", "Éxito");
         }
-
+        public async void send2(Dictionary<string, string> venta, int id)
+        {
+            if (await webDM.SendVentaAsync(venta, hasTemporal, id))
+            {
+                localDM.changeEstadoVenta(id, 2, "Enviado");
+            }
+            //else 
+            //MessageBox.Show("Producto no enviado", "Éxito");
+        }
+        public void EnviarVentasPendientes()
+        {
+            DataTable ventasPendientes = localDM.getVentasPendientes();
+            foreach (DataRow ventaRow in ventasPendientes.Rows)
+            {
+                int ventaId = Convert.ToInt32(ventaRow["id"]);
+                Dictionary<string, string> venta = new Dictionary<string, string>();
+                foreach (DataColumn column in ventasPendientes.Columns)
+                {
+                    if (column.ColumnName != "id") // Excluir el ID de la venta
+                    {
+                        venta[column.ColumnName] = ventaRow[column].ToString();
+                    }
+                }
+                send2(venta, ventaId);
+            }
+        }
         private void btn1_Click(object sender, EventArgs e)
         {
             if (tabla.SelectedRows.Count > 0)
@@ -575,9 +619,34 @@ namespace PuntoVentaCasaCeja
         }
         protected override bool ProcessDialogKey(Keys keyData)
         {
-            if (Form.ModifierKeys == Keys.None)
+            Keys key = keyData & Keys.KeyCode;
+            if ((keyData & Keys.Control) == Keys.Control)
             {
-                switch (keyData)
+               //cambiarVentana(key);
+                return true;
+            }
+
+            if ((keyData & Keys.Alt) == Keys.Alt)
+            {
+                if (key == Keys.F4)
+                {                    
+                    btn4_Click_1(null, null);
+                    return true;
+                }
+            }
+
+
+            if ((keyData & Keys.Shift) == Keys.Shift)
+                {
+                    if (key == Keys.F5)
+                    {
+                        eliminarCarrito_button.PerformClick();
+                        return true;
+                    }
+                }
+            else
+            {
+                switch (key)
                 {
                     case Keys.F1:
                         txtcodigo.Focus();
@@ -587,6 +656,7 @@ namespace PuntoVentaCasaCeja
                         break;
                     case Keys.F3:
                         existencia.PerformClick();
+                        tabla.Focus();
                         break;
                     case Keys.F4:
                         nuevacaja.PerformClick();
@@ -628,30 +698,7 @@ namespace PuntoVentaCasaCeja
                 }
                 return true;
             }
-            else
-            {
-                if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
-                {
-                    cambiarVentana(keyData);
-                    return true;
-                }
-                if (Control.ModifierKeys == Keys.Shift)
-                {
-                    funcionesextra(keyData);
-                    return true;
-                }
-            }
             return base.ProcessDialogKey(keyData);
-        }
-        void funcionesextra(Keys keyData)
-        {
-            switch (keyData)
-            {
-                case Keys.F2:
-                    apartados.PerformClick();
-                    break;
-            }
-
         }
         void cambiarVentana(Keys keyData)
         {
@@ -661,37 +708,37 @@ namespace PuntoVentaCasaCeja
                     cajas[0].Focus();
                     break;
                 case Keys.F2:
-                    if (cajas.Count > 1) cajas[1].Focus();
+                if (cajaActual > 1) cajas[1].Focus();
                     break;
                 case Keys.F3:
-                    if (cajas.Count > 2) cajas[2].Focus();
+                    if (cajaActual > 2) cajas[2].Focus();
                     break;
                 case Keys.F4:
-                    if (cajas.Count > 3) cajas[3].Focus();
+                    if (cajaActual > 3) cajas[3].Focus();
                     break;
                 case Keys.F5:
-                    if (cajas.Count > 4) cajas[4].Focus();
+                    if (cajaActual > 4) cajas[4].Focus();
                     break;
                 case Keys.F6:
-                    if (cajas.Count > 5) cajas[5].Focus();
+                    if (cajaActual > 5) cajas[5].Focus();
                     break;
                 case Keys.F7:
-                    if (cajas.Count > 6) cajas[6].Focus();
+                    if (cajaActual > 6) cajas[6].Focus();
                     break;
                 case Keys.F8:
-                    if (cajas.Count > 7) cajas[7].Focus();
+                    if (cajaActual > 7) cajas[7].Focus();
                     break;
                 case Keys.F9:
-                    if (cajas.Count > 8) cajas[8].Focus();
+                    if (cajaActual > 8) cajas[8].Focus();
                     break;
                 case Keys.F10:
-                    if (cajas.Count > 9) cajas[9].Focus();
+                    if (cajaActual > 9) cajas[9].Focus();
                     break;
                 case Keys.F11:
-                    if (cajas.Count > 10) cajas[10].Focus();
+                    if (cajaActual > 10) cajas[10].Focus();
                     break;
                 case Keys.F12:
-                    if (cajas.Count > 11) cajas[11].Focus();
+                    if (cajaActual > 11) cajas[11].Focus();
                     break;
             }
         }
@@ -703,6 +750,32 @@ namespace PuntoVentaCasaCeja
 
         private void tabla_KeyDown(object sender, KeyEventArgs e)
         {
+        
+            if (e.KeyData == Keys.Right)
+            { 
+             int selectedIndex = tabla.SelectedCells[0].RowIndex;
+             if (selectedIndex >= 0 && selectedIndex < carrito.Count)
+             {
+                carrito[selectedIndex].cantidad++;
+                tabla.Rows[selectedIndex].Cells["Cantidad"].Value = carrito[selectedIndex].cantidad;
+                modCant(selectedIndex, carrito[selectedIndex].cantidad);
+                actualizarTotalCarrito();
+                }
+            }
+            if (e.KeyData == Keys.Left)
+            {
+             int selectedIndex = tabla.SelectedCells[0].RowIndex;
+             if (selectedIndex >= 0 && selectedIndex < carrito.Count)
+             {
+                    if (carrito[selectedIndex].cantidad > 1)
+                    {
+                        carrito[selectedIndex].cantidad--;
+                        tabla.Rows[selectedIndex].Cells["Cantidad"].Value = carrito[selectedIndex].cantidad;
+                        modCant(selectedIndex, carrito[selectedIndex].cantidad);
+                        actualizarTotalCarrito();
+                    }
+             }
+            }
             if (e.KeyData == Keys.F2)
             {
                 modcant.PerformClick();
@@ -719,6 +792,16 @@ namespace PuntoVentaCasaCeja
             {
                 cambiarVentana(e.KeyData);
             }
+        }
+
+        private void actualizarTotalCarrito()
+        {
+            // Calcular el nuevo total del carrito
+            totalcarrito = carrito.Sum(p => p.cantidad * p.precio_venta);
+
+            // Actualizar la vista para reflejar el nuevo total
+            // (Reemplaza 'totalCarritoLabel' con el nombre de tu control)
+            txttotal.Text = "Por Pagar MXN: " + totalcarrito.ToString("0.00");
         }
 
         private void existencia_Click(object sender, EventArgs e)
@@ -755,11 +838,6 @@ namespace PuntoVentaCasaCeja
                     tabla.Focus();
                     SendKeys.Send("{UP}");
                     break;
-            }
-            if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
-            {
-                MessageBox.Show("si");
-                cambiarVentana(e.KeyData);
             }
         }
 
@@ -1019,11 +1097,6 @@ namespace PuntoVentaCasaCeja
             Ticket1.CortaTicket();
         }
 
-        private void Ventas_KeyDown(object sender, KeyEventArgs e)
-        {
-
-        }
-
         private void logout_Click(object sender, EventArgs e)
         {
             if (carrito.Count > 0)
@@ -1113,12 +1186,14 @@ namespace PuntoVentaCasaCeja
                  "LE ATENDIO: " + cajero.nombre.ToUpper() + "\n" +
                  "NO DE ARTICULOS: " + carrito.Count.ToString().PadLeft(5, '0') + "\n" +
                  "GRACIAS POR SU COMPRA\n\n" +
-                 "SI DESEA FACTURAR ESTA COMPRA INGRESE A \n" +
+                 "ANTONIO CEJA MARON\n"+
+                 "RFC: CEMA-721020-NM5\n\n"+
+                 "SI DESEA FACTURAR ESTA COMPRA INGRESE A :\n" +
                  "https://cm-papeleria.com/public/facturacion";
-        
-        createdoc();
+        Console.WriteLine(ticket);
+            createdoc();
     }
-        private void imprimirCorteCarta(Dictionary<string, string> corte)
+        /*private void imprimirCorteCarta(Dictionary<string, string> corte)
         {
             ticket = "";
             Dictionary<string, string> gastos = JsonConvert.DeserializeObject<Dictionary<string, string>>(corte["gastos"]);
@@ -1152,7 +1227,7 @@ namespace PuntoVentaCasaCeja
                 ticket += (x.Key + " : " + x.Value) + "\n";
             }
             createdoc();
-        }
+        }*/
         private void createdoc()
         {
 
@@ -1414,9 +1489,11 @@ namespace PuntoVentaCasaCeja
                 idCorte = idcorte,
                 printerType = printerType
                 };
-                AltaCliente alta = new AltaCliente(cd);
-                DialogResult response = alta.ShowDialog();
-                if (response == DialogResult.Yes)
+            //AltaCliente alta = new AltaCliente(cd);
+            //DialogResult response = alta.ShowDialog();
+            CredApartSel CredApar = new CredApartSel(cd);
+            DialogResult response = CredApar.ShowDialog();
+            if (response == DialogResult.Yes)
                 {
                     resetVenta();
                 }
@@ -1431,7 +1508,35 @@ namespace PuntoVentaCasaCeja
         private void actualizarBaseDeDatosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             reloadData();
+            //Aun no se corrige
+            //EnviarVentasPendientes();
+
+        }
+
+        private void eliminarCarrito_button_Click(object sender, EventArgs e)
+        {
+            if (carrito.Count == 0)
+            {
+                MessageBox.Show("El carrito ya está vacío.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                DialogResult result = MessageBox.Show("¿Está seguro de que quiere vaciar el carrito?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    resetVenta();
+                }
+            }
+        }
+        private void txtcodigo_FocusChanged(object sender, EventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            textBox.BackColor = textBox.Focused ? Color.FromArgb(220, 166, 64) : SystemColors.Window;
+        }
+
+        private void tabla_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
-    }
-    
+}

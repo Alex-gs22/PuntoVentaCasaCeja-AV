@@ -37,7 +37,7 @@ namespace PuntoVentaCasaCeja
             currentmed = 0;
             currentPage = 1;
             maxPages = 1;
-            rowsPerPage = 10;
+            rowsPerPage = 19;
             urls = new Dictionary<string, string>();
             this.addProd = addProd;
             this.idsucursal = idsucursal;

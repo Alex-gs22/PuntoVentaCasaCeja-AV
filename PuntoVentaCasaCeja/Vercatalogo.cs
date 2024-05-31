@@ -72,7 +72,7 @@ namespace PuntoVentaCasaCeja
         {
             
             active = true;            
-            generateImgRow();
+            //generateImgRow();
         }
 
         private void Vercatalago_FormClosed(object sender, FormClosedEventArgs e)
@@ -157,22 +157,9 @@ namespace PuntoVentaCasaCeja
                 
             }            
             catalogo.DataSource = tablacatalogo;
-            generateImgRow();
+            //generateImgRow();
         }
-        private void generateImgRow()
-        {
-            urls.Clear();
-            for (int i = 0; i < catalogo.Rows.Count; i++)
-            {
-                urls[catalogo[0, i].Value.ToString()] = catalogo[12, i].Value.ToString();
-                catalogo[12, i].Value = "Ver imagen";
-            }
-            DataGridViewCellStyle cell_style = new DataGridViewCellStyle();
-            cell_style.ForeColor = Color.Blue;
-            cell_style.Font= new Font("Segoe UI", 12, FontStyle.Underline);
-            catalogo.Columns[12].DefaultCellStyle = cell_style;
-        }
-        private void catalogo_CellClick(object sender, DataGridViewCellEventArgs e)
+      /*  private void catalogo_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == catalogo.Columns["IMAGEN"].Index)
             {
@@ -180,7 +167,7 @@ namespace PuntoVentaCasaCeja
                 MessageBox.Show("Imagen no encontrada", "Advertencia");
 
             }
-        }
+        }*/
         private void calculateMaxPages( int rowCount)
         {
             maxPages = ((rowCount % rowsPerPage) == 0) ? rowCount / rowsPerPage : rowCount / rowsPerPage + 1;

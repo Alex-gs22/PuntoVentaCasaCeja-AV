@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using Windows.Storage;
 using Newtonsoft.Json;
 using PuntoVentaCasaCeja.Properties;
+using Windows.UI.Xaml;
 
 namespace PuntoVentaCasaCeja
 {
@@ -18,6 +19,7 @@ namespace PuntoVentaCasaCeja
     {
         LocaldataManager localDM;
         DataTable data;
+        bool firstTicket = false;
         int idcaja;
         string sucursalName, sucursalDir;
         List<ProductoVenta> productos;
@@ -72,22 +74,25 @@ namespace PuntoVentaCasaCeja
         private void VerOperaciones_Load(object sender, EventArgs e)
         {
             loadData();
-            
         }
+
         private void loadData()
-        {
-            data = localDM.getVentas();
+        {   
+            //Console.WriteLine(filtrarFecha.Value.ToString("dd/MM/yyyy"));
+            data = localDM.getVentasFecha(filtrarFecha.Value.ToString("dd/MM/yyyy"));
+            data.DefaultView.Sort = "id DESC";
             tabla.DataSource = data;
             txtbuscar.Focus();
            // loadTicket();
            // se comento para que no se cargue el ticket automaticamente al cargar la ventana.
         }
-
+        //cada que cambienla fecha en el combobox se actualiza la tabla
+   
         private void txtbuscar_TextChanged(object sender, EventArgs e)
         {
             if (txtbuscar.Text.Equals(""))
             {
-                data = localDM.getVentas();
+                data = localDM.getVentasFecha(filtrarFecha.Value.ToString("dd/MM/yyyy"));
             }
             else
             {
@@ -331,8 +336,13 @@ namespace PuntoVentaCasaCeja
 
         private void tabla_SelectionChanged(object sender, EventArgs e)
         {
-        // esto se cambio para que no se cargue el ticket automaticamente al seleccionar una fila en la tabla de ventas
-            //loadTicket();
+            // esto se cambio para que no se cargue el ticket automaticamente al seleccionar una fila en la tabla de ventas
+            //Asi solo muestra el primer ticket al cargar la ventana y despues solo se muestra al hacer click o enter en la tabla.
+            if (!firstTicket)
+            {
+                loadTicket();
+                firstTicket = true;
+            }
         }
 
         private void delete_Click(object sender, EventArgs e)
@@ -344,6 +354,18 @@ namespace PuntoVentaCasaCeja
                 loadData();
             }
         }
+
+        private void tabla_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void filtrarFecha_ValueChanged(object sender, EventArgs e)
+        {
+            //Console.WriteLine(filtrarFecha.Value.ToString("dd/MM/yyyy"));   
+            loadData();
+        }
+
         private void print_Click(object sender, EventArgs e)
         {
             if (isValidTicket)

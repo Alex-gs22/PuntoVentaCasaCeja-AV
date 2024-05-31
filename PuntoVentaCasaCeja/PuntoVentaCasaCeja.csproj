@@ -16,7 +16,8 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\jlra3\OneDrive\Escritorio\pos\</PublishUrl>
+    <TargetFrameworkProfile />
+    <PublishUrl>C:\Users\itiel\PuntoVentaCasaCeja\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -26,13 +27,11 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -63,7 +62,13 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>CasaCejaImg.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -182,6 +187,12 @@
     <Compile Include="ApCrSel.Designer.cs">
       <DependentUpon>ApCrSel.cs</DependentUpon>
     </Compile>
+    <Compile Include="BuscarCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BuscarCliente.Designer.cs">
+      <DependentUpon>BuscarCliente.cs</DependentUpon>
+    </Compile>
     <Compile Include="BuscarExistencia.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -209,6 +220,12 @@
       <DependentUpon>CrearProducto.cs</DependentUpon>
     </Compile>
     <Compile Include="CreaTicket.cs" />
+    <Compile Include="CredApartSel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CredApartSel.Designer.cs">
+      <DependentUpon>CredApartSel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Credito.cs" />
     <Compile Include="CurrentData.cs" />
     <Compile Include="Dropcustom.cs">
@@ -242,6 +259,24 @@
     <Compile Include="IngresarTexto.designer.cs">
       <DependentUpon>IngresarTexto.cs</DependentUpon>
     </Compile>
+    <Compile Include="ListaApartados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListaApartados.Designer.cs">
+      <DependentUpon>ListaApartados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ListaClientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListaClientes.Designer.cs">
+      <DependentUpon>ListaClientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ListaCreditos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListaCreditos.Designer.cs">
+      <DependentUpon>ListaCreditos.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoadWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -255,6 +290,12 @@
     </Compile>
     <Compile Include="MetodoPago.designer.cs">
       <DependentUpon>MetodoPago.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModCliente.Designer.cs">
+      <DependentUpon>ModCliente.cs</DependentUpon>
     </Compile>
     <Compile Include="ModificarProducto.cs">
       <SubType>Form</SubType>
@@ -339,6 +380,9 @@
     <EmbeddedResource Include="ApCrSel.resx">
       <DependentUpon>ApCrSel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="BuscarCliente.resx">
+      <DependentUpon>BuscarCliente.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BuscarExistencia.resx">
       <DependentUpon>BuscarExistencia.cs</DependentUpon>
     </EmbeddedResource>
@@ -350,6 +394,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CrearProducto.resx">
       <DependentUpon>CrearProducto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CredApartSel.resx">
+      <DependentUpon>CredApartSel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dropcustom.resx">
       <DependentUpon>Dropcustom.cs</DependentUpon>
@@ -363,11 +410,23 @@
     <EmbeddedResource Include="IngresarTexto.resx">
       <DependentUpon>IngresarTexto.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ListaApartados.resx">
+      <DependentUpon>ListaApartados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListaClientes.resx">
+      <DependentUpon>ListaClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListaCreditos.resx">
+      <DependentUpon>ListaCreditos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoadWindow.resx">
       <DependentUpon>LoadWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MetodoPago.resx">
       <DependentUpon>MetodoPago.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModCliente.resx">
+      <DependentUpon>ModCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModificarProducto.resx">
       <DependentUpon>ModificarProducto.cs</DependentUpon>
@@ -435,6 +494,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CasaCejaImg.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

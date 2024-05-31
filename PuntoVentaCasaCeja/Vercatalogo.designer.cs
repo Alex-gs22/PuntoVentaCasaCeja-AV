@@ -94,7 +94,6 @@
             this.catalogo.Size = new System.Drawing.Size(1204, 514);
             this.catalogo.StandardTab = true;
             this.catalogo.TabIndex = 0;
-            this.catalogo.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.catalogo_CellClick);
             this.catalogo.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.catalogo_CellDoubleClick);
             this.catalogo.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.catalogo_CellMouseEnter);
             this.catalogo.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.catalogo_CellMouseLeave);

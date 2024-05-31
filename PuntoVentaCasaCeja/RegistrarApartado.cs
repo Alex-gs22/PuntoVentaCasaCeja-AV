@@ -131,6 +131,7 @@ namespace PuntoVentaCasaCeja
                 }
                 txtfolio.Text = folio;
                 imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
+                imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
                 if (localDM.impresora.Equals(""))
                 {
                     MessageBox.Show("No se ha establecido una impresora", "Advertencia");
@@ -355,8 +356,9 @@ namespace PuntoVentaCasaCeja
                 "POR PAGAR $\t------>\t\t" + (totalcarrito - totalpagado).ToString("0.00") + "\n\n" +
                  "LE ATENDIO: " + cajero.nombre.ToUpper() + "\n" +
                  "NO DE ARTICULOS: " + carrito.Count.ToString().PadLeft(5, '0') + "\n" +
-                 "FECHA DE VENCIMIENTO:\n"+txtfecha.Text+"\n";
-
+                 "FECHA DE VENCIMIENTO:\n"+txtfecha.Text+"\n"+
+                 "CLIENTE:\n"+cliente.nombre+"\n"+
+                 "NUMERO DE CELULAR:\n"+cliente.telefono+"\n";
             createdoc();
         }
         private void createdoc()

@@ -236,8 +236,8 @@ namespace PuntoVentaCasaCeja
             DataTable dt = new DataTable();
             SQLiteCommand command = connection.CreateCommand();
             command.CommandText = "SELECT productos.id AS ID, productos.codigo AS CODIGO, productos.nombre AS NOMBRE, categorias.nombre AS CATEGORIA, medidas.nombre AS MEDIDA, productos.presentacion AS PRESENTACION, productos.iva AS IVA," +
-                " productos.menudeo AS MENUDEO, productos.mayoreo AS MAYOREO, productos.cantidad_mayoreo AS CANTIDAD_MAYOREO, productos.especial AS ESPECIAL, productos.vendedor AS VENDEDOR, productos.imagen AS IMAGEN" +
-                " FROM productos INNER JOIN categorias ON productos.categoria_id = categorias.id INNER JOIN medidas ON productos.medida_id = medidas.id WHERE productos.activo=1 LIMIT 10 OFFSET @setOffset";
+                " productos.menudeo AS MENUDEO, productos.mayoreo AS MAYOREO, productos.cantidad_mayoreo AS CANTIDAD_MAYOREO, productos.especial AS ESPECIAL, productos.vendedor AS VENDEDOR" +
+                " FROM productos INNER JOIN categorias ON productos.categoria_id = categorias.id INNER JOIN medidas ON productos.medida_id = medidas.id WHERE productos.activo=1 LIMIT 19 OFFSET @setOffset";
             command.Parameters.AddWithValue("setOffset", offset);
             SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
             adapter.Fill(dt);
@@ -248,8 +248,8 @@ namespace PuntoVentaCasaCeja
             DataTable dt = new DataTable();
             SQLiteCommand command = connection.CreateCommand();
             command.CommandText = "SELECT productos.id AS ID, productos.codigo AS CODIGO, productos.nombre AS NOMBRE, categorias.nombre AS CATEGORIA, medidas.nombre AS MEDIDA, productos.presentacion AS PRESENTACION, productos.iva AS IVA," +
-                " productos.menudeo AS MENUDEO, productos.mayoreo AS MAYOREO, productos.cantidad_mayoreo AS CANTIDAD_MAYOREO, productos.especial AS ESPECIAL, productos.vendedor AS VENDEDOR, productos.imagen AS IMAGEN" +
-                " FROM productos INNER JOIN categorias ON productos.categoria_id = categorias.id INNER JOIN medidas ON productos.medida_id = medidas.id WHERE productos.activo=1 " + arg + " LIMIT 10 OFFSET @setOffset";
+                " productos.menudeo AS MENUDEO, productos.mayoreo AS MAYOREO, productos.cantidad_mayoreo AS CANTIDAD_MAYOREO, productos.especial AS ESPECIAL, productos.vendedor AS VENDEDOR" +
+                " FROM productos INNER JOIN categorias ON productos.categoria_id = categorias.id INNER JOIN medidas ON productos.medida_id = medidas.id WHERE productos.activo=1 " + arg + " LIMIT 19 OFFSET @setOffset";
             command.Parameters.AddWithValue("setOffset", offset);
             SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
             adapter.Fill(dt);
@@ -287,7 +287,7 @@ namespace PuntoVentaCasaCeja
             SQLiteCommand command = connection.CreateCommand();
             command.CommandText = "SELECT productos.id AS ID, productos.codigo AS CODIGO, productos.nombre AS NOMBRE, categorias.nombre AS CATEGORIA, medidas.nombre AS MEDIDA, productos.presentacion AS PRESENTACION, productos.iva AS IVA," +
                 " productos.menudeo AS MENUDEO, productos.mayoreo AS MAYOREO, productos.cantidad_mayoreo AS CANTIDAD_MAYOREO, productos.especial AS ESPECIAL, productos.vendedor AS VENDEDOR, productos.imagen AS IMAGEN" +
-                " FROM productos INNER JOIN categorias ON productos.categoria_id = categorias.id INNER JOIN medidas ON productos.medida_id = medidas.id WHERE productos.activo=1 AND (UPPER(productos.codigo) LIKE @setCodigo OR UPPER(productos.nombre) LIKE @setNombre) " + arg + " LIMIT 10 OFFSET @setOffset";
+                " FROM productos INNER JOIN categorias ON productos.categoria_id = categorias.id INNER JOIN medidas ON productos.medida_id = medidas.id WHERE productos.activo=1 AND (UPPER(productos.codigo) LIKE @setCodigo OR UPPER(productos.nombre) LIKE @setNombre) " + arg + " LIMIT 19 OFFSET @setOffset";
             command.Parameters.AddWithValue("setOffset", offset);
             command.Parameters.AddWithValue("setCodigo", "%" + arg2 + "%");
             command.Parameters.AddWithValue("setNombre", "%" + arg2 + "%");
@@ -443,15 +443,168 @@ namespace PuntoVentaCasaCeja
             adapter.Fill(dt);
             return dt;
         }
-        public DataTable getVentas()
+        public DataTable getVentasPendientes()
         {
             DataTable dt = new DataTable();
             SQLiteCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT ventas.id AS ID, ventas.total AS TOTAL, ventas.folio AS FOLIO, ventas.fecha_venta AS FECHA_DE_VENTA, usuarios.nombre AS CAJERO, ventas.metodo_pago AS PAGOS FROM ventas INNER JOIN usuarios ON ventas.usuario_id=usuarios.id";
+            command.CommandText = "SELECT ventas.total AS total, ventas.folio AS folio, ventas.folio_corte AS folio_corte, ventas.fecha_venta AS 'fecha_venta', ventas.metodo_pago AS metodo_pago, ventas.tipo AS tipo, ventas.sucursal_id AS sucursal_id, ventas.usuario_id AS usuario_id, ventas.id AS id FROM ventas";
             SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
             adapter.Fill(dt);
             return dt;
         }
+
+        public DataTable getVentasFecha(string fecha)
+        {
+            DataTable dt = new DataTable();
+            SQLiteCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT ventas.id AS ID, ventas.total AS TOTAL, ventas.folio AS FOLIO, ventas.fecha_venta AS 'FECHA DE VENTA', usuarios.nombre AS CAJERO, ventas.metodo_pago AS PAGOS FROM ventas INNER JOIN usuarios ON ventas.usuario_id=usuarios.id WHERE SUBSTR(ventas.fecha_venta, 1, 10) = @fecha";
+            command.Parameters.AddWithValue("@fecha", fecha);
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
+            adapter.Fill(dt);
+            return dt;
+        }
+        public int GetCliente(string nombre)
+        {
+            SQLiteCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT id FROM clientes WHERE nombre = @nombre";
+            command.Parameters.AddWithValue("@nombre", nombre);
+
+            int clienteId = -1;  // Valor por defecto en caso de no encontrar el cliente
+            using (SQLiteDataReader result = command.ExecuteReader())
+            {
+                if (result.Read())
+                {
+                    clienteId = result.GetInt32(0);
+                }
+            }
+            return clienteId;
+        }
+
+        public DataTable GetCreditosDataTable()
+        {
+            DataTable creditosTable = new DataTable();
+
+            creditosTable.Columns.Add("Folio", typeof(string));
+            creditosTable.Columns.Add("Cliente", typeof(string));
+            creditosTable.Columns.Add("Total", typeof(double));
+            creditosTable.Columns.Add("Pagado", typeof(double));
+            creditosTable.Columns.Add("Fecha", typeof(string));
+            creditosTable.Columns.Add("Estado", typeof(string));
+            creditosTable.Columns.Add("Orden", typeof(int));  
+            SQLiteCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT folio, cliente_creditos_id, total, total_pagado, fecha_de_credito, estado FROM creditos";
+
+            using (SQLiteDataReader result = command.ExecuteReader())
+            {
+                while (result.Read())
+                {
+                    string folio = result.GetString(0);
+                    int clienteId = result.GetInt32(1);
+                    double total = result.GetDouble(2);
+                    double totalPagado = result.GetDouble(3);
+                    string fechaCredito = result.GetString(4);
+                    int estado = result.GetInt32(5);
+                    string estadoString = GetEstadoString(estado);
+                    int orden = GetEstadoOrden(estado);
+
+                    string clienteNombre = GetClienteNombre(clienteId);
+
+                    creditosTable.Rows.Add(folio, clienteNombre, total, totalPagado, fechaCredito, estadoString, orden);
+                }
+            }
+
+            DataView dv = creditosTable.DefaultView;
+            dv.Sort = "Orden ASC";
+            DataTable sortedTable = dv.ToTable();
+
+            sortedTable.Columns.Remove("Orden");
+
+            return sortedTable;
+        }
+
+        public DataTable GetApartadosDataTable()
+        {
+            DataTable apartadosTable = new DataTable();
+
+            apartadosTable.Columns.Add("Folio", typeof(string));
+            apartadosTable.Columns.Add("Cliente", typeof(string));
+            apartadosTable.Columns.Add("Total", typeof(double));
+            apartadosTable.Columns.Add("Pagado", typeof(double));
+            apartadosTable.Columns.Add("Fecha", typeof(string));
+            apartadosTable.Columns.Add("Estado", typeof(string));
+            apartadosTable.Columns.Add("Orden", typeof(int)); 
+
+            SQLiteCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT folio, cliente_creditos_id, total, total_pagado, fecha_apartado, estado FROM apartados";
+
+            using (SQLiteDataReader result = command.ExecuteReader())
+            {
+                while (result.Read())
+                {
+                    string folio = result.GetString(0);
+                    int clienteId = result.GetInt32(1);
+                    double total = result.GetDouble(2);
+                    double totalPagado = result.GetDouble(3);
+                    string fechaApartado = result.GetString(4);
+                    int estado = result.GetInt32(5);
+                    string estadoString = GetEstadoString(estado);
+                    int orden = GetEstadoOrden(estado);
+
+                    string clienteNombre = GetClienteNombre(clienteId);
+
+                    apartadosTable.Rows.Add(folio, clienteNombre, total, totalPagado, fechaApartado, estadoString, orden);
+                }
+            }
+
+            DataView dv = apartadosTable.DefaultView;
+            dv.Sort = "Orden ASC";
+            DataTable sortedTable = dv.ToTable();
+
+            sortedTable.Columns.Remove("Orden");
+
+            return sortedTable;
+        }
+
+        private string GetClienteNombre(int clienteId)
+        {
+            SQLiteCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT nombre FROM Clientes WHERE id = @clienteId";
+            command.Parameters.AddWithValue("@clienteId", clienteId);
+
+            string nombre = "";
+            using (SQLiteDataReader result = command.ExecuteReader())
+            {
+                if (result.Read())
+                {
+                    nombre = result.GetString(0);
+                }
+            }
+            return nombre;
+        }
+
+        private string GetEstadoString(int estado)
+        {
+            string[] estados = { "PENDIENTE", "EXPIRO", "CANCELADO", "PAGADO", "ENTREGADO" };
+            if (estado >= 0 && estado < estados.Length)
+            {
+                return estados[estado];
+            }
+            return "DESCONOCIDO";
+        }
+
+        private int GetEstadoOrden(int estado)
+        {
+            switch (estado)
+            {
+                case 1: return 0;  // Expiro
+                case 0: return 1;  // Pendiente
+                case 3: return 2;  // Pagado
+                case 4: return 3;  // Entregado
+                case 2: return 4;  // Cancelado
+                default: return 5; // Desconocido
+            }
+        }
+
         public Dictionary<string, List<Apartado>> getApartadosCliente(int idCliente)
         {
             Dictionary<string, List<Apartado>> apartados = new Dictionary<string, List<Apartado>>();
@@ -1314,6 +1467,7 @@ namespace PuntoVentaCasaCeja
                 command.ExecuteNonQuery();
             }
         }
+       
         public int clienteTemporal(NuevoCliente cliente)
         {
             int id = -1;
@@ -1489,6 +1643,92 @@ namespace PuntoVentaCasaCeja
             }
             return c;
         }
+        public bool UpdateCliente(Cliente cliente)
+        {
+            SQLiteCommand command = connection.CreateCommand();
+            command.CommandText = @"UPDATE clientes SET nombre = @nombre, rfc = @rfc, calle = @calle, no_exterior = @no_exterior, no_interior = @no_interior, cp = @cp, colonia = @colonia, ciudad = @ciudad, telefono = @telefono, correo = @correo WHERE id = @id";
+            command.Parameters.AddWithValue("@id", cliente.id);
+            command.Parameters.AddWithValue("@nombre", cliente.nombre);
+            command.Parameters.AddWithValue("@rfc", cliente.rfc);
+            command.Parameters.AddWithValue("@calle", cliente.calle);
+            command.Parameters.AddWithValue("@no_exterior", cliente.numero_exterior);
+            command.Parameters.AddWithValue("@no_interior", cliente.numero_interior);
+            command.Parameters.AddWithValue("@cp", cliente.codigo_postal);
+            command.Parameters.AddWithValue("@colonia", cliente.colonia);
+            command.Parameters.AddWithValue("@ciudad", cliente.ciudad);
+            command.Parameters.AddWithValue("@telefono", cliente.telefono);
+            command.Parameters.AddWithValue("@correo", cliente.correo);
+
+            int rowsAffected = command.ExecuteNonQuery();
+            return rowsAffected > 0;
+        }
+        public Cliente getCliente(string nombre)
+        {
+            Cliente c = null;
+            SQLiteCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM clientes WHERE nombre = @setNombre";
+            command.Parameters.AddWithValue("setNombre", nombre);
+            SQLiteDataReader result = command.ExecuteReader();
+            if (result.Read())
+            {
+                c = new Cliente
+                {
+                    id = result.GetInt32(0),
+                    nombre = result.GetString(1),
+                    rfc = result.GetString(2),
+                    calle = result.GetString(3),
+                    numero_exterior = result.GetString(4),
+                    numero_interior = result.GetString(5),
+                    codigo_postal = result.GetString(6),
+                    colonia = result.GetString(7),
+                    ciudad = result.GetString(8),
+                    telefono = result.GetString(9),
+                    correo = result.GetString(10),
+                };
+            }
+            return c;
+        }
+        public Cliente getCliente(int id)
+        {   
+            Cliente c = null;
+            SQLiteCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM clientes WHERE id = @setId";
+            command.Parameters.AddWithValue("setId", id);
+            SQLiteDataReader result = command.ExecuteReader();
+            if (result.Read())
+            {
+                c = new Cliente
+                {
+                    id = result.GetInt32(0),
+                    nombre = result.GetString(1),
+                    rfc = result.GetString(2),
+                    calle = result.GetString(3),
+                    numero_exterior = result.GetString(4),
+                    numero_interior = result.GetString(5),
+                    codigo_postal = result.GetString(6),
+                    colonia = result.GetString(7),
+                    ciudad = result.GetString(8),
+                    telefono = result.GetString(9),
+                    correo = result.GetString(10),
+                };
+            }
+            return c;
+        }
+        public void eliminarCliente(int id)
+        {
+            SQLiteCommand command = connection.CreateCommand();
+            command.CommandText = "DELETE FROM clientes WHERE id = @setId";
+            command.Parameters.AddWithValue("setId", id);
+            command.ExecuteNonQuery();
+
+        }
+        public void eliminarClienteTemporal(int id)
+        {
+            SQLiteCommand command = connection.CreateCommand();
+            command.CommandText = "DELETE FROM clientes_temporal WHERE id = @setId";
+            command.Parameters.AddWithValue("setId", id);
+            command.ExecuteNonQuery();
+        }
         public void reconectarApartados(int viejoID, int nuevoID)
         {
             SQLiteCommand command = connection.CreateCommand();
@@ -1505,6 +1745,16 @@ namespace PuntoVentaCasaCeja
             command.Parameters.AddWithValue("viejoId", viejoID);
             command.ExecuteNonQuery();
         }
+        public DataTable getClientes()
+        {
+            DataTable dt = new DataTable();
+            SQLiteCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT clientes.id AS ID, clientes.nombre AS NOMBRE, clientes.telefono AS TELEFONO, clientes.correo AS CORREO, clientes.rfc AS RFC, clientes.no_exterior AS [No. EXTERIOR], clientes.no_interior AS [No. INTERIOR], clientes.cp AS [C.P.],clientes.calle AS CALLE, clientes.colonia AS COLONIA, clientes.ciudad AS CIUDAD FROM clientes";
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
+            adapter.Fill(dt);
+            return dt;
+        }
+
         public List<NuevoCliente> GetClientesTemporales()
         {
             List<NuevoCliente> clientes = new List<NuevoCliente>();
@@ -2367,9 +2617,8 @@ namespace PuntoVentaCasaCeja
             result = command.ExecuteReader();
             while (result.Read())
             {
-                res += result.GetDouble(0);
+             //   res += result.GetDouble(0);
             }
-
             return res;
         }
         public double getTotalCreditos(string foliocorte)

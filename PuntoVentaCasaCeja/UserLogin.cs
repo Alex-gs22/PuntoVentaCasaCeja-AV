@@ -42,7 +42,7 @@ namespace PuntoVentaCasaCeja
                 Usuario usuarioActivo = localDM.getLoginUser(usr, pass);
                 if (usuarioActivo != null)
                 {
-                    if (admin && usuarioActivo.es_raiz>1)
+                    if (admin && usuarioActivo.es_raiz > 1)
                     {
                         MessageBox.Show("Esta cuenta no tiene permisos administrativos para realizar esta acción", "Advertencia");
                     }
@@ -53,7 +53,7 @@ namespace PuntoVentaCasaCeja
                         this.Close();
 
                     }
-                                      
+
                 }
                 else
                 {
@@ -87,7 +87,7 @@ namespace PuntoVentaCasaCeja
 
         private void user_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyData == Keys.Enter)
+            if (e.KeyData == Keys.Enter)
             {
                 SendKeys.Send("{TAB}");
                 e.Handled = true;

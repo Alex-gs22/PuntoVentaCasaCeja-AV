@@ -1,0 +1,512 @@
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\PuntoVentaCasaCeja.exe.config
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\PuntoVentaCasaCeja.exe.manifest
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\PuntoVentaCasaCeja.application
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\PuntoVentaCasaCeja.exe
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\PuntoVentaCasaCeja.pdb
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\EntityFramework.dll
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Firebase.dll
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\LiteDB.dll
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Newtonsoft.Json.dll
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Buffers.dll
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Collections.Immutable.dll
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Data.SQLite.dll
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Memory.dll
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Reactive.dll
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.Diagnostics.Eventing.dll
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.dll
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.Foundation.dll
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.Foundation.Logging.dll
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.Composition.dll
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.Dispatching.dll
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.dll
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.FluentTheme.dll
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.FluentTheme.v1.dll
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.FluentTheme.v2.dll
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.Toolkit.dll
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.Xaml.dll
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\EntityFramework.xml
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Firebase.xml
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\LiteDB.xml
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Newtonsoft.Json.xml
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Buffers.xml
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Collections.Immutable.xml
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Data.SQLite.xml
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Memory.xml
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Reactive.xml
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.Diagnostics.Eventing.pdb
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.FluentTheme.pdb
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.FluentTheme.v1.pdb
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.FluentTheme.v2.pdb
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.Toolkit.pdb
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.csproj.AssemblyReference.cache
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.Abonos.resources
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.AltaCliente.resources
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ApCrSel.resources
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.BuscarExistencia.resources
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.CambiarCantidad.resources
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ConfigWindow.resources
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.CrearProducto.resources
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.Dropcustom.resources
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.GastosIngresos.resources
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.IngresarMonto.resources
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.IngresarTexto.resources
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.LoadWindow.resources
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.MetodoPago.resources
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ModificarProducto.resources
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.Properties.Resources.resources
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.RegistrarApartado.resources
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.RegistrarCredito.resources
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.UserLogin.resources
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.Ventas.resources
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.Vercatalogo.resources
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.VerCorte.resources
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.VerCredApa.resources
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.VerExistencia.resources
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.VerOperaciones.resources
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.csproj.GenerateResource.cache
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.csproj.CoreCompileInputs.cache
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.exe.manifest
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.application
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVen.CE9849ED.Up2Date
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.exe
+C:\Users\itiel\source\repos\Campus-TD\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.pdb
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\PuntoVentaCasaCeja.exe.config
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\PuntoVentaCasaCeja.exe.manifest
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\PuntoVentaCasaCeja.application
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\PuntoVentaCasaCeja.exe
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\PuntoVentaCasaCeja.pdb
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\EntityFramework.dll
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Firebase.dll
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\LiteDB.dll
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Newtonsoft.Json.dll
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Buffers.dll
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Collections.Immutable.dll
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Data.SQLite.dll
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Memory.dll
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Reactive.dll
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.Diagnostics.Eventing.dll
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.dll
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.Foundation.dll
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.Foundation.Logging.dll
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.Composition.dll
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.Dispatching.dll
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.dll
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.FluentTheme.dll
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.FluentTheme.v1.dll
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.FluentTheme.v2.dll
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.Toolkit.dll
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.Xaml.dll
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\EntityFramework.xml
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Firebase.xml
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\LiteDB.xml
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Newtonsoft.Json.xml
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Buffers.xml
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Collections.Immutable.xml
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Data.SQLite.xml
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Memory.xml
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Reactive.xml
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.Diagnostics.Eventing.pdb
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.FluentTheme.pdb
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.FluentTheme.v1.pdb
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.FluentTheme.v2.pdb
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.Toolkit.pdb
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.csproj.AssemblyReference.cache
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.Abonos.resources
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.AltaCliente.resources
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ApCrSel.resources
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.BuscarExistencia.resources
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.CambiarCantidad.resources
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ConfigWindow.resources
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.CrearProducto.resources
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.Dropcustom.resources
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.GastosIngresos.resources
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.IngresarMonto.resources
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.IngresarTexto.resources
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.LoadWindow.resources
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.MetodoPago.resources
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ModificarProducto.resources
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.Properties.Resources.resources
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.RegistrarApartado.resources
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.RegistrarCredito.resources
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.UserLogin.resources
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.Ventas.resources
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.Vercatalogo.resources
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.VerCorte.resources
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.VerCredApa.resources
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.VerExistencia.resources
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.VerOperaciones.resources
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.csproj.GenerateResource.cache
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.csproj.CoreCompileInputs.cache
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.exe.manifest
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.application
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVen.CE9849ED.Up2Date
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.exe
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.pdb
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\PuntoVentaCasaCeja.exe.config
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\PuntoVentaCasaCeja.exe.manifest
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\PuntoVentaCasaCeja.application
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\PuntoVentaCasaCeja.exe
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\PuntoVentaCasaCeja.pdb
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\EntityFramework.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Firebase.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\LiteDB.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Buffers.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Collections.Immutable.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Data.SQLite.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Memory.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Reactive.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.Diagnostics.Eventing.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.Foundation.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.Foundation.Logging.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.Composition.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.Dispatching.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.FluentTheme.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.FluentTheme.v1.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.FluentTheme.v2.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.Toolkit.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.Xaml.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\EntityFramework.xml
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Firebase.xml
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\LiteDB.xml
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Buffers.xml
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Collections.Immutable.xml
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Data.SQLite.xml
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Memory.xml
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Reactive.xml
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.Diagnostics.Eventing.pdb
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.FluentTheme.pdb
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.FluentTheme.v1.pdb
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.FluentTheme.v2.pdb
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.Toolkit.pdb
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.csproj.AssemblyReference.cache
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.Abonos.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.AltaCliente.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ApCrSel.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.BuscarExistencia.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.CambiarCantidad.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ConfigWindow.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.CrearProducto.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.Dropcustom.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.GastosIngresos.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.IngresarMonto.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.IngresarTexto.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.LoadWindow.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.MetodoPago.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ModificarProducto.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.Properties.Resources.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.RegistrarApartado.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.RegistrarCredito.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.UserLogin.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.Ventas.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.Vercatalogo.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.VerCorte.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.VerCredApa.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.VerExistencia.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.VerOperaciones.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.csproj.GenerateResource.cache
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.csproj.CoreCompileInputs.cache
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.exe.manifest
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.application
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVen.CE9849ED.Up2Date
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.exe
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.pdb
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ListaClientes.resources
+C:\Users\itiel\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ListaClientes.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\PuntoVentaCasaCeja.exe.config
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\PuntoVentaCasaCeja.exe.manifest
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\PuntoVentaCasaCeja.application
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\PuntoVentaCasaCeja.exe
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\PuntoVentaCasaCeja.pdb
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\EntityFramework.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Firebase.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\LiteDB.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Buffers.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Collections.Immutable.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Data.SQLite.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Memory.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Reactive.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.Diagnostics.Eventing.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.Foundation.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.Foundation.Logging.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.Composition.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.Dispatching.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.FluentTheme.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.FluentTheme.v1.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.FluentTheme.v2.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.Toolkit.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.Xaml.dll
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\EntityFramework.xml
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Firebase.xml
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\LiteDB.xml
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Buffers.xml
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Collections.Immutable.xml
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Data.SQLite.xml
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Memory.xml
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Reactive.xml
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.Diagnostics.Eventing.pdb
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.FluentTheme.pdb
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.FluentTheme.v1.pdb
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.FluentTheme.v2.pdb
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.Toolkit.pdb
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.csproj.AssemblyReference.cache
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.Abonos.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.AltaCliente.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ApCrSel.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.BuscarExistencia.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.CambiarCantidad.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ConfigWindow.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.CrearProducto.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.Dropcustom.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.GastosIngresos.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.IngresarMonto.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.IngresarTexto.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ListaClientes.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.LoadWindow.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.MetodoPago.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ModificarProducto.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.Properties.Resources.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.RegistrarApartado.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.RegistrarCredito.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.UserLogin.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.Ventas.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.Vercatalogo.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.VerCorte.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.VerCredApa.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.VerExistencia.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.VerOperaciones.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.csproj.GenerateResource.cache
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.csproj.CoreCompileInputs.cache
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.exe.manifest
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.application
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVen.CE9849ED.Up2Date
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.exe
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.pdb
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.csproj.AssemblyReference.cache
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.Abonos.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.AltaCliente.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ApCrSel.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.BuscarExistencia.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.CambiarCantidad.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ConfigWindow.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.CrearProducto.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.Dropcustom.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.GastosIngresos.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.IngresarMonto.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.IngresarTexto.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ListaClientes.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.LoadWindow.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.MetodoPago.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ModificarProducto.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.Properties.Resources.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.RegistrarApartado.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.RegistrarCredito.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.UserLogin.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.Ventas.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.Vercatalogo.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.VerCorte.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.VerCredApa.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.VerExistencia.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.VerOperaciones.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.csproj.GenerateResource.cache
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.exe
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.pdb
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\PuntoVentaCasaCeja.exe.config
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\PuntoVentaCasaCeja.exe.manifest
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\PuntoVentaCasaCeja.application
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\PuntoVentaCasaCeja.exe
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\PuntoVentaCasaCeja.pdb
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\EntityFramework.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Firebase.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\LiteDB.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Newtonsoft.Json.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Buffers.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Collections.Immutable.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Data.SQLite.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Memory.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Reactive.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.Diagnostics.Eventing.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.Foundation.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.Foundation.Logging.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.Composition.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.Dispatching.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.FluentTheme.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.FluentTheme.v1.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.FluentTheme.v2.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.Toolkit.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.Xaml.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\EntityFramework.xml
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Firebase.xml
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\LiteDB.xml
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Newtonsoft.Json.xml
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Buffers.xml
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Collections.Immutable.xml
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Data.SQLite.xml
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Memory.xml
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Reactive.xml
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.Diagnostics.Eventing.pdb
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.FluentTheme.pdb
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.FluentTheme.v1.pdb
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.FluentTheme.v2.pdb
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.Toolkit.pdb
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.csproj.CoreCompileInputs.cache
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.exe.manifest
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.application
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVen.CE9849ED.Up2Date
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.CredApartSel.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ListaCreditos.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ListaApartados.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.CredApartSel.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ListaApartados.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ListaCreditos.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\PuntoVentaCasaCeja.exe.config
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\PuntoVentaCasaCeja.exe.manifest
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\PuntoVentaCasaCeja.application
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\PuntoVentaCasaCeja.exe
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\PuntoVentaCasaCeja.pdb
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\EntityFramework.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Firebase.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\LiteDB.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Newtonsoft.Json.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Buffers.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Collections.Immutable.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Data.SQLite.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Memory.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Reactive.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.Diagnostics.Eventing.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.Foundation.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.Foundation.Logging.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.Composition.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.Dispatching.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.FluentTheme.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.FluentTheme.v1.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.FluentTheme.v2.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.Toolkit.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.Xaml.dll
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\EntityFramework.xml
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Firebase.xml
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\LiteDB.xml
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Newtonsoft.Json.xml
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Buffers.xml
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Collections.Immutable.xml
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Data.SQLite.xml
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Memory.xml
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Reactive.xml
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.Diagnostics.Eventing.pdb
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.FluentTheme.pdb
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.FluentTheme.v1.pdb
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.FluentTheme.v2.pdb
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\bin\Debug\Uno.UI.Toolkit.pdb
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.csproj.AssemblyReference.cache
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.Abonos.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.AltaCliente.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ApCrSel.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.BuscarCliente.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.BuscarExistencia.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.CambiarCantidad.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ConfigWindow.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.CrearProducto.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.CredApartSel.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.Dropcustom.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.GastosIngresos.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.IngresarMonto.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.IngresarTexto.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ListaApartados.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ListaClientes.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ListaCreditos.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.LoadWindow.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.MetodoPago.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ModificarCliente.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ModificarProducto.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.Properties.Resources.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.RegistrarApartado.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.RegistrarCredito.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.UserLogin.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.Ventas.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.Vercatalogo.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.VerCorte.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.VerCredApa.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.VerExistencia.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.VerOperaciones.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.csproj.GenerateResource.cache
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.csproj.CoreCompileInputs.cache
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.exe.manifest
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.application
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVen.CE9849ED.Up2Date
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.exe
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.pdb
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.BuscarCliente.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ModificarCliente.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.BuscarCliente.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ModificarCliente.resources

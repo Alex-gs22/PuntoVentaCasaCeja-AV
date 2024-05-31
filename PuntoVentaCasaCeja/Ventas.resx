@@ -117,48 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="txtdescripcion.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="txtdescripcion.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="txtdescripcion.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI Semibold, 12pt, style=Bold</value>
-  </data>
-  <data name="txtdescripcion.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="txtdescripcion.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1090, 329</value>
-  </data>
-  <data name="txtdescripcion.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 227</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="txtdescripcion.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;txtdescripcion.Name" xml:space="preserve">
-    <value>txtdescripcion</value>
-  </data>
-  <data name="&gt;&gt;txtdescripcion.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtdescripcion.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;txtdescripcion.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
   <data name="lblcobranza.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblcobranza.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblcobranza.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI Semibold, 14.25pt, style=Bold</value>
   </data>
@@ -166,10 +133,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblcobranza.Location" type="System.Drawing.Point, System.Drawing">
-    <value>598, 0</value>
+    <value>801, 0</value>
+  </data>
+  <data name="lblcobranza.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="lblcobranza.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 37</value>
+    <value>140, 46</value>
   </data>
   <data name="lblcobranza.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -192,39 +162,6 @@
   <data name="&gt;&gt;lblcobranza.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="label3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="label3.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1091, 138</value>
-  </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 13</value>
-  </data>
-  <data name="label3.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>Imagen</value>
-  </data>
-  <data name="&gt;&gt;label3.Name" xml:space="preserve">
-    <value>label3</value>
-  </data>
-  <data name="&gt;&gt;label3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
   <data name="tabla.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
@@ -234,14 +171,20 @@
   <data name="articulos.HeaderText" xml:space="preserve">
     <value>ARTÍCULOS</value>
   </data>
+  <data name="articulos.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <metadata name="cantidad.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="cantidad.HeaderText" xml:space="preserve">
     <value>CANTIDAD</value>
   </data>
+  <data name="cantidad.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="cantidad.Width" type="System.Int32, mscorlib">
-    <value>141</value>
+    <value>179</value>
   </data>
   <metadata name="precio.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -249,8 +192,11 @@
   <data name="precio.HeaderText" xml:space="preserve">
     <value>PRECIO</value>
   </data>
+  <data name="precio.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="precio.Width" type="System.Int32, mscorlib">
-    <value>107</value>
+    <value>136</value>
   </data>
   <metadata name="total.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -258,14 +204,23 @@
   <data name="total.HeaderText" xml:space="preserve">
     <value>TOTAL</value>
   </data>
+  <data name="total.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="total.Width" type="System.Int32, mscorlib">
-    <value>96</value>
+    <value>121</value>
   </data>
   <data name="tabla.Location" type="System.Drawing.Point, System.Drawing">
-    <value>41, 165</value>
+    <value>66, 203</value>
+  </data>
+  <data name="tabla.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="tabla.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
   </data>
   <data name="tabla.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1029, 421</value>
+    <value>1591, 518</value>
   </data>
   <data name="tabla.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -280,7 +235,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;tabla.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="salir.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -295,10 +250,13 @@
     <value>NoControl</value>
   </data>
   <data name="salir.Location" type="System.Drawing.Point, System.Drawing">
-    <value>509, 638</value>
+    <value>1001, 785</value>
+  </data>
+  <data name="salir.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="salir.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 88</value>
+    <value>148, 108</value>
   </data>
   <data name="salir.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -317,7 +275,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;salir.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="panel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -332,10 +290,13 @@
     <value>NoControl</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 22</value>
+    <value>16, 27</value>
+  </data>
+  <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 25</value>
+    <value>382, 32</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -362,10 +323,13 @@
     <value>Segoe UI Semibold, 18pt, style=Bold</value>
   </data>
   <data name="txtcodigo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 48</value>
+    <value>11, 59</value>
+  </data>
+  <data name="txtcodigo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="txtcodigo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1021, 39</value>
+    <value>1590, 47</value>
   </data>
   <data name="txtcodigo.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -383,10 +347,13 @@
     <value>1</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>41, 72</value>
+    <value>55, 89</value>
+  </data>
+  <data name="panel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1029, 87</value>
+    <value>1602, 107</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -401,7 +368,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="panel3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
@@ -416,10 +383,13 @@
     <value>NoControl</value>
   </data>
   <data name="txttotal.Location" type="System.Drawing.Point, System.Drawing">
-    <value>360, 4</value>
+    <value>480, 5</value>
+  </data>
+  <data name="txttotal.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="txttotal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>675, 26</value>
+    <value>1119, 32</value>
   </data>
   <data name="txttotal.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -443,10 +413,13 @@
     <value>0</value>
   </data>
   <data name="panel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>41, 592</value>
+    <value>66, 729</value>
+  </data>
+  <data name="panel3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="panel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1029, 40</value>
+    <value>1591, 49</value>
   </data>
   <data name="panel3.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -461,7 +434,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panel3.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="modcant.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -476,10 +449,13 @@
     <value>NoControl</value>
   </data>
   <data name="modcant.Location" type="System.Drawing.Point, System.Drawing">
-    <value>41, 638</value>
+    <value>65, 785</value>
+  </data>
+  <data name="modcant.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="modcant.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 88</value>
+    <value>148, 108</value>
   </data>
   <data name="modcant.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -500,7 +476,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;modcant.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="abonar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -515,10 +491,13 @@
     <value>NoControl</value>
   </data>
   <data name="abonar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>392, 638</value>
+    <value>689, 785</value>
+  </data>
+  <data name="abonar.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="abonar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 88</value>
+    <value>148, 108</value>
   </data>
   <data name="abonar.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -537,7 +516,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;abonar.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>11</value>
   </data>
   <data name="existencia.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -552,10 +531,13 @@
     <value>NoControl</value>
   </data>
   <data name="existencia.Location" type="System.Drawing.Point, System.Drawing">
-    <value>158, 638</value>
+    <value>221, 785</value>
+  </data>
+  <data name="existencia.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="existencia.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 88</value>
+    <value>148, 108</value>
   </data>
   <data name="existencia.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -573,7 +555,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;existencia.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="nuevacaja.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -588,10 +570,13 @@
     <value>NoControl</value>
   </data>
   <data name="nuevacaja.Location" type="System.Drawing.Point, System.Drawing">
-    <value>275, 638</value>
+    <value>377, 785</value>
+  </data>
+  <data name="nuevacaja.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="nuevacaja.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 88</value>
+    <value>148, 108</value>
   </data>
   <data name="nuevacaja.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -609,7 +594,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;nuevacaja.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="tableLayoutPanel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -630,10 +615,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblTime.Location" type="System.Drawing.Point, System.Drawing">
-    <value>715, 0</value>
+    <value>949, 0</value>
+  </data>
+  <data name="lblTime.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="lblTime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>589, 37</value>
+    <value>790, 46</value>
   </data>
   <data name="lblTime.TabIndex" type="System.Int32, mscorlib">
     <value>29</value>
@@ -669,10 +657,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblFolio.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
+    <value>4, 0</value>
+  </data>
+  <data name="lblFolio.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="lblFolio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>589, 37</value>
+    <value>789, 46</value>
   </data>
   <data name="lblFolio.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
@@ -696,13 +687,16 @@
     <value>2</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 27</value>
+    <value>0, 33</value>
+  </data>
+  <data name="tableLayoutPanel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1307, 37</value>
+    <value>1743, 46</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -717,91 +711,58 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lblTime" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblcobranza" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblFolio" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,AutoSize,0,Percent,50" /&gt;&lt;Rows Styles="Absolute,37" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <data name="imagen.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="imagen.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="imagen.InitialImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="imagen.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1090, 165</value>
-  </data>
-  <data name="imagen.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 155</value>
-  </data>
-  <data name="imagen.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>StretchImage</value>
-  </data>
-  <data name="imagen.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="&gt;&gt;imagen.Name" xml:space="preserve">
-    <value>imagen</value>
-  </data>
-  <data name="&gt;&gt;imagen.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;imagen.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;imagen.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lblTime" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblcobranza" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblFolio" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,AutoSize,0,Percent,50" /&gt;&lt;Rows Styles="Absolute,46" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
   <data name="ingresarEfectivoF3ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 22</value>
+    <value>261, 26</value>
   </data>
   <data name="ingresarEfectivoF3ToolStripMenuItem.Text" xml:space="preserve">
     <value>Ingresar efectivo (F5)</value>
   </data>
   <data name="retirarEfectivoF4ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 22</value>
+    <value>261, 26</value>
   </data>
   <data name="retirarEfectivoF4ToolStripMenuItem.Text" xml:space="preserve">
     <value>Retirar efectivo (F6)</value>
   </data>
   <data name="corteZF7ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 22</value>
+    <value>261, 26</value>
   </data>
   <data name="corteZF7ToolStripMenuItem.Text" xml:space="preserve">
     <value>Corte - Z (F7)</value>
   </data>
   <data name="reimprimirTicketF6ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 22</value>
+    <value>261, 26</value>
   </data>
   <data name="reimprimirTicketF6ToolStripMenuItem.Text" xml:space="preserve">
     <value>Historial de ventas (F8)</value>
   </data>
   <data name="administrarCatálogoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 22</value>
+    <value>261, 26</value>
   </data>
   <data name="administrarCatálogoToolStripMenuItem.Text" xml:space="preserve">
     <value>Administrar catálogo (F9)</value>
   </data>
   <data name="establecerImpresoraToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 22</value>
+    <value>261, 26</value>
   </data>
   <data name="establecerImpresoraToolStripMenuItem.Text" xml:space="preserve">
     <value>Configuración (F10)</value>
   </data>
   <data name="actualizarBaseDeDatosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 22</value>
+    <value>261, 26</value>
   </data>
   <data name="actualizarBaseDeDatosToolStripMenuItem.Text" xml:space="preserve">
     <value>Actualizar Base de Datos</value>
   </data>
   <data name="opcionesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 20</value>
+    <value>85, 24</value>
   </data>
   <data name="opcionesToolStripMenuItem.Text" xml:space="preserve">
     <value>Opciones</value>
@@ -810,7 +771,7 @@
     <value>0, 0</value>
   </data>
   <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1307, 24</value>
+    <value>1743, 28</value>
   </data>
   <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>29</value>
@@ -828,7 +789,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>12</value>
   </data>
   <data name="logout.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -843,10 +804,13 @@
     <value>NoControl</value>
   </data>
   <data name="logout.Location" type="System.Drawing.Point, System.Drawing">
-    <value>626, 638</value>
+    <value>1157, 785</value>
+  </data>
+  <data name="logout.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="logout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 88</value>
+    <value>148, 108</value>
   </data>
   <data name="logout.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
@@ -864,7 +828,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;logout.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="apartados.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -879,10 +843,13 @@
     <value>NoControl</value>
   </data>
   <data name="apartados.Location" type="System.Drawing.Point, System.Drawing">
-    <value>743, 638</value>
+    <value>845, 785</value>
+  </data>
+  <data name="apartados.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="apartados.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 88</value>
+    <value>148, 108</value>
   </data>
   <data name="apartados.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
@@ -902,16 +869,61 @@ apartados
     <value>$this</value>
   </data>
   <data name="&gt;&gt;apartados.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="eliminarCarrito_button.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="eliminarCarrito_button.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="eliminarCarrito_button.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 12pt, style=Bold</value>
+  </data>
+  <data name="eliminarCarrito_button.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="eliminarCarrito_button.Location" type="System.Drawing.Point, System.Drawing">
+    <value>533, 785</value>
+  </data>
+  <data name="eliminarCarrito_button.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="eliminarCarrito_button.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 108</value>
+  </data>
+  <data name="eliminarCarrito_button.TabIndex" type="System.Int32, mscorlib">
+    <value>33</value>
+  </data>
+  <data name="eliminarCarrito_button.Text" xml:space="preserve">
+    <value>Vaciar Carrito (Shift+F5)</value>
+  </data>
+  <data name="&gt;&gt;eliminarCarrito_button.Name" xml:space="preserve">
+    <value>eliminarCarrito_button</value>
+  </data>
+  <data name="&gt;&gt;eliminarCarrito_button.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;eliminarCarrito_button.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;eliminarCarrito_button.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>57</value>
+  </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>8, 16</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1307, 738</value>
+    <value>1743, 908</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

@@ -9,6 +9,7 @@ using System.Net.Http.Headers;
 using Windows.Storage;
 using System.Net.NetworkInformation;
 using System.Windows.Forms;
+using System.Data;
 
 namespace PuntoVentaCasaCeja
 {
@@ -469,6 +470,35 @@ namespace PuntoVentaCasaCeja
 
             return false;
         }
+        public async Task<Dictionary<string, string>> DeleteClienteAsync(int idCliente)
+        {
+            var result = new Dictionary<string, string>();
+            try
+            {
+                var response = await client.DeleteAsync($"api/clientes_creditos\"{idCliente}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    result["status"] = "success";
+                    result["message"] = "Cliente eliminado con éxito";
+                    MessageBox.Show("Cliente eliminado con éxito");
+                }
+                else
+                {
+                    result["status"] = "error";
+                    result["message"] = $"Error al eliminar el cliente: {response.StatusCode}";
+                    MessageBox.Show($"Error al eliminar el cliente: {response.StatusCode}");
+                }
+            }
+            catch (Exception ex)
+            {
+                result["status"] = "error";
+                result["message"] = $"Excepción capturada: {ex.Message}";
+            }
+
+            return result;
+        }
+
         public async Task<bool> GetUsuarios()
         {
             string res = "";
@@ -1159,6 +1189,7 @@ namespace PuntoVentaCasaCeja
 
             return false;
         }
+       
         public async Task<bool> ModifyProductoAsync(string id, Dictionary<string, string> producto)
         {
             string res = "";

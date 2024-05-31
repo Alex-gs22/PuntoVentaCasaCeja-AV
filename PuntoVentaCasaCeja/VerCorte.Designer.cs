@@ -75,10 +75,12 @@ namespace PuntoVentaCasaCeja
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.tableLayoutPanel1);
-            this.groupBox1.Font = new System.Drawing.Font("Segoe UI Semibold", 24F, System.Drawing.FontStyle.Bold);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Font = new System.Drawing.Font("Segoe UI Semibold", 22F, System.Drawing.FontStyle.Bold);
+            this.groupBox1.Location = new System.Drawing.Point(2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1152, 870);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Size = new System.Drawing.Size(1740, 950);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "CORTE Z DE CAJA";
@@ -107,9 +109,7 @@ namespace PuntoVentaCasaCeja
             this.tableLayoutPanel1.Controls.Add(this.label12, 1, 16);
             this.tableLayoutPanel1.Controls.Add(this.txtfechapertura, 0, 17);
             this.tableLayoutPanel1.Controls.Add(this.txtfechcorte, 1, 17);
-            this.tableLayoutPanel1.Controls.Add(this.accept, 0, 18);
             this.tableLayoutPanel1.Controls.Add(this.cancel, 1, 18);
-            this.tableLayoutPanel1.Controls.Add(this.listagastos, 0, 15);
             this.tableLayoutPanel1.Controls.Add(this.txttransferencias, 1, 11);
             this.tableLayoutPanel1.Controls.Add(this.txtsobrante, 1, 13);
             this.tableLayoutPanel1.Controls.Add(this.label7, 1, 10);
@@ -126,9 +126,12 @@ namespace PuntoVentaCasaCeja
             this.tableLayoutPanel1.Controls.Add(this.txtcredito, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.label4, 1, 6);
             this.tableLayoutPanel1.Controls.Add(this.txtcheques, 1, 7);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 49);
+            this.tableLayoutPanel1.Controls.Add(this.listagastos, 0, 15);
+            this.tableLayoutPanel1.Controls.Add(this.accept, 0, 18);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(8, 60);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 19;
+            this.tableLayoutPanel1.RowCount = 17;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -148,8 +151,8 @@ namespace PuntoVentaCasaCeja
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1140, 821);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1725, 859);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // txttotapa
@@ -158,9 +161,10 @@ namespace PuntoVentaCasaCeja
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txttotapa.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txttotapa.Enabled = false;
-            this.txttotapa.Location = new System.Drawing.Point(3, 463);
+            this.txttotapa.Location = new System.Drawing.Point(4, 546);
+            this.txttotapa.Margin = new System.Windows.Forms.Padding(4);
             this.txttotapa.Name = "txttotapa";
-            this.txttotapa.Size = new System.Drawing.Size(564, 50);
+            this.txttotapa.Size = new System.Drawing.Size(844, 56);
             this.txttotapa.TabIndex = 28;
             // 
             // txttotcred
@@ -169,18 +173,20 @@ namespace PuntoVentaCasaCeja
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txttotcred.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txttotcred.Enabled = false;
-            this.txttotcred.Location = new System.Drawing.Point(3, 377);
+            this.txttotcred.Location = new System.Drawing.Point(4, 445);
+            this.txttotcred.Margin = new System.Windows.Forms.Padding(4);
             this.txttotcred.Name = "txttotcred";
-            this.txttotcred.Size = new System.Drawing.Size(564, 50);
+            this.txttotcred.Size = new System.Drawing.Size(844, 56);
             this.txttotcred.TabIndex = 10;
             // 
             // label16
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label16.Location = new System.Drawing.Point(3, 430);
+            this.label16.Location = new System.Drawing.Point(4, 505);
+            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(229, 30);
+            this.label16.Size = new System.Drawing.Size(292, 37);
             this.label16.TabIndex = 27;
             this.label16.Text = "TOTAL DE APARTADOS";
             // 
@@ -188,9 +194,10 @@ namespace PuntoVentaCasaCeja
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label15.Location = new System.Drawing.Point(3, 344);
+            this.label15.Location = new System.Drawing.Point(4, 404);
+            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(207, 30);
+            this.label15.Size = new System.Drawing.Size(265, 37);
             this.label15.TabIndex = 17;
             this.label15.Text = "TOTAL DE CRÉDITOS";
             // 
@@ -198,20 +205,23 @@ namespace PuntoVentaCasaCeja
             // 
             this.listaingresos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.listaingresos.Font = new System.Drawing.Font("Segoe UI Semibold", 22F, System.Drawing.FontStyle.Bold);
             this.listaingresos.FormattingEnabled = true;
-            this.listaingresos.ItemHeight = 45;
-            this.listaingresos.Location = new System.Drawing.Point(573, 549);
+            this.listaingresos.ItemHeight = 50;
+            this.listaingresos.Location = new System.Drawing.Point(856, 647);
+            this.listaingresos.Margin = new System.Windows.Forms.Padding(4);
             this.listaingresos.Name = "listaingresos";
-            this.listaingresos.Size = new System.Drawing.Size(564, 94);
+            this.listaingresos.Size = new System.Drawing.Size(844, 54);
             this.listaingresos.TabIndex = 25;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label10.Location = new System.Drawing.Point(573, 516);
+            this.label10.Location = new System.Drawing.Point(856, 606);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(112, 30);
+            this.label10.Size = new System.Drawing.Size(146, 37);
             this.label10.TabIndex = 19;
             this.label10.Text = "INGRESOS";
             // 
@@ -219,9 +229,10 @@ namespace PuntoVentaCasaCeja
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label9.Location = new System.Drawing.Point(3, 516);
+            this.label9.Location = new System.Drawing.Point(4, 606);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(91, 30);
+            this.label9.Size = new System.Drawing.Size(118, 37);
             this.label9.TabIndex = 18;
             this.label9.Text = "GASTOS";
             // 
@@ -231,18 +242,20 @@ namespace PuntoVentaCasaCeja
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtapertura.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtapertura.Enabled = false;
-            this.txtapertura.Location = new System.Drawing.Point(573, 33);
+            this.txtapertura.Location = new System.Drawing.Point(856, 41);
+            this.txtapertura.Margin = new System.Windows.Forms.Padding(4);
             this.txtapertura.Name = "txtapertura";
-            this.txtapertura.Size = new System.Drawing.Size(564, 50);
+            this.txtapertura.Size = new System.Drawing.Size(844, 56);
             this.txtapertura.TabIndex = 2;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label2.Location = new System.Drawing.Point(573, 0);
+            this.label2.Location = new System.Drawing.Point(856, 0);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(229, 30);
+            this.label2.Size = new System.Drawing.Size(291, 37);
             this.label2.TabIndex = 2;
             this.label2.Text = "FONDO DE APERTURA";
             // 
@@ -250,9 +263,10 @@ namespace PuntoVentaCasaCeja
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Location = new System.Drawing.Point(4, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 30);
+            this.label1.Size = new System.Drawing.Size(92, 37);
             this.label1.TabIndex = 0;
             this.label1.Text = "FOLIO";
             // 
@@ -262,18 +276,20 @@ namespace PuntoVentaCasaCeja
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtfolio.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtfolio.Enabled = false;
-            this.txtfolio.Location = new System.Drawing.Point(3, 33);
+            this.txtfolio.Location = new System.Drawing.Point(4, 41);
+            this.txtfolio.Margin = new System.Windows.Forms.Padding(4);
             this.txtfolio.Name = "txtfolio";
-            this.txtfolio.Size = new System.Drawing.Size(564, 50);
+            this.txtfolio.Size = new System.Drawing.Size(844, 56);
             this.txtfolio.TabIndex = 1;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label11.Location = new System.Drawing.Point(3, 646);
+            this.label11.Location = new System.Drawing.Point(4, 709);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(219, 30);
+            this.label11.Size = new System.Drawing.Size(280, 37);
             this.label11.TabIndex = 22;
             this.label11.Text = "FECHA DE APERTURA";
             // 
@@ -281,9 +297,10 @@ namespace PuntoVentaCasaCeja
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label12.Location = new System.Drawing.Point(573, 646);
+            this.label12.Location = new System.Drawing.Point(856, 709);
+            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(180, 30);
+            this.label12.Size = new System.Drawing.Size(229, 37);
             this.label12.TabIndex = 23;
             this.label12.Text = "FECHA DE CORTE";
             // 
@@ -293,9 +310,11 @@ namespace PuntoVentaCasaCeja
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtfechapertura.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtfechapertura.Enabled = false;
-            this.txtfechapertura.Location = new System.Drawing.Point(3, 679);
+            this.txtfechapertura.Font = new System.Drawing.Font("Segoe UI Semibold", 22F, System.Drawing.FontStyle.Bold);
+            this.txtfechapertura.Location = new System.Drawing.Point(4, 750);
+            this.txtfechapertura.Margin = new System.Windows.Forms.Padding(4);
             this.txtfechapertura.Name = "txtfechapertura";
-            this.txtfechapertura.Size = new System.Drawing.Size(564, 50);
+            this.txtfechapertura.Size = new System.Drawing.Size(844, 56);
             this.txtfechapertura.TabIndex = 11;
             // 
             // txtfechcorte
@@ -304,18 +323,21 @@ namespace PuntoVentaCasaCeja
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtfechcorte.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtfechcorte.Enabled = false;
-            this.txtfechcorte.Location = new System.Drawing.Point(573, 679);
+            this.txtfechcorte.Font = new System.Drawing.Font("Segoe UI Semibold", 22F, System.Drawing.FontStyle.Bold);
+            this.txtfechcorte.Location = new System.Drawing.Point(856, 750);
+            this.txtfechcorte.Margin = new System.Windows.Forms.Padding(4);
             this.txtfechcorte.Name = "txtfechcorte";
-            this.txtfechcorte.Size = new System.Drawing.Size(564, 50);
+            this.txtfechcorte.Size = new System.Drawing.Size(844, 56);
             this.txtfechcorte.TabIndex = 12;
             // 
             // accept
             // 
             this.accept.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.accept.Location = new System.Drawing.Point(3, 735);
+            this.accept.Location = new System.Drawing.Point(4, 814);
+            this.accept.Margin = new System.Windows.Forms.Padding(4);
             this.accept.Name = "accept";
-            this.accept.Size = new System.Drawing.Size(564, 60);
+            this.accept.Size = new System.Drawing.Size(844, 74);
             this.accept.TabIndex = 13;
             this.accept.Text = "ACEPTAR (F5)";
             this.accept.UseVisualStyleBackColor = true;
@@ -325,9 +347,10 @@ namespace PuntoVentaCasaCeja
             // 
             this.cancel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cancel.Location = new System.Drawing.Point(573, 735);
+            this.cancel.Location = new System.Drawing.Point(856, 814);
+            this.cancel.Margin = new System.Windows.Forms.Padding(4);
             this.cancel.Name = "cancel";
-            this.cancel.Size = new System.Drawing.Size(564, 60);
+            this.cancel.Size = new System.Drawing.Size(844, 74);
             this.cancel.TabIndex = 14;
             this.cancel.Text = "CANCELAR (Esc)";
             this.cancel.UseVisualStyleBackColor = true;
@@ -335,13 +358,16 @@ namespace PuntoVentaCasaCeja
             // 
             // listagastos
             // 
-            this.listagastos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.listagastos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.listagastos.Font = new System.Drawing.Font("Segoe UI Semibold", 22F, System.Drawing.FontStyle.Bold);
             this.listagastos.FormattingEnabled = true;
-            this.listagastos.ItemHeight = 45;
-            this.listagastos.Location = new System.Drawing.Point(3, 549);
+            this.listagastos.ItemHeight = 50;
+            this.listagastos.Location = new System.Drawing.Point(4, 647);
+            this.listagastos.Margin = new System.Windows.Forms.Padding(4);
             this.listagastos.Name = "listagastos";
-            this.listagastos.Size = new System.Drawing.Size(564, 94);
+            this.listagastos.Size = new System.Drawing.Size(844, 54);
             this.listagastos.TabIndex = 24;
             // 
             // txttransferencias
@@ -350,9 +376,10 @@ namespace PuntoVentaCasaCeja
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txttransferencias.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txttransferencias.Enabled = false;
-            this.txttransferencias.Location = new System.Drawing.Point(573, 377);
+            this.txttransferencias.Location = new System.Drawing.Point(856, 445);
+            this.txttransferencias.Margin = new System.Windows.Forms.Padding(4);
             this.txttransferencias.Name = "txttransferencias";
-            this.txttransferencias.Size = new System.Drawing.Size(564, 50);
+            this.txttransferencias.Size = new System.Drawing.Size(844, 56);
             this.txttransferencias.TabIndex = 7;
             // 
             // txtsobrante
@@ -360,9 +387,11 @@ namespace PuntoVentaCasaCeja
             this.txtsobrante.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtsobrante.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtsobrante.Location = new System.Drawing.Point(573, 463);
+            this.txtsobrante.Font = new System.Drawing.Font("Segoe UI Semibold", 22F, System.Drawing.FontStyle.Bold);
+            this.txtsobrante.Location = new System.Drawing.Point(856, 546);
+            this.txtsobrante.Margin = new System.Windows.Forms.Padding(4);
             this.txtsobrante.Name = "txtsobrante";
-            this.txtsobrante.Size = new System.Drawing.Size(564, 50);
+            this.txtsobrante.Size = new System.Drawing.Size(844, 56);
             this.txtsobrante.TabIndex = 8;
             this.txtsobrante.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericInput_KeyPress);
             // 
@@ -370,9 +399,10 @@ namespace PuntoVentaCasaCeja
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label7.Location = new System.Drawing.Point(573, 344);
+            this.label7.Location = new System.Drawing.Point(856, 404);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(284, 30);
+            this.label7.Size = new System.Drawing.Size(367, 37);
             this.label7.TabIndex = 14;
             this.label7.Text = "TOTAL EN TRANSFERENCIAS";
             // 
@@ -380,9 +410,10 @@ namespace PuntoVentaCasaCeja
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label8.Location = new System.Drawing.Point(573, 430);
+            this.label8.Location = new System.Drawing.Point(856, 505);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(119, 30);
+            this.label8.Size = new System.Drawing.Size(153, 37);
             this.label8.TabIndex = 15;
             this.label8.Text = "SOBRANTE";
             // 
@@ -392,18 +423,20 @@ namespace PuntoVentaCasaCeja
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtefeapa.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtefeapa.Enabled = false;
-            this.txtefeapa.Location = new System.Drawing.Point(3, 291);
+            this.txtefeapa.Location = new System.Drawing.Point(4, 344);
+            this.txtefeapa.Margin = new System.Windows.Forms.Padding(4);
             this.txtefeapa.Name = "txtefeapa";
-            this.txtefeapa.Size = new System.Drawing.Size(564, 50);
+            this.txtefeapa.Size = new System.Drawing.Size(844, 56);
             this.txtefeapa.TabIndex = 27;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label14.Location = new System.Drawing.Point(3, 258);
+            this.label14.Location = new System.Drawing.Point(4, 303);
+            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(262, 30);
+            this.label14.Size = new System.Drawing.Size(334, 37);
             this.label14.TabIndex = 26;
             this.label14.Text = "EFECTIVO DE APARTADOS";
             // 
@@ -413,18 +446,20 @@ namespace PuntoVentaCasaCeja
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtefecred.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtefecred.Enabled = false;
-            this.txtefecred.Location = new System.Drawing.Point(3, 205);
+            this.txtefecred.Location = new System.Drawing.Point(4, 243);
+            this.txtefecred.Margin = new System.Windows.Forms.Padding(4);
             this.txtefecred.Name = "txtefecred";
-            this.txtefecred.Size = new System.Drawing.Size(564, 50);
+            this.txtefecred.Size = new System.Drawing.Size(844, 56);
             this.txtefecred.TabIndex = 9;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label13.Location = new System.Drawing.Point(3, 172);
+            this.label13.Location = new System.Drawing.Point(4, 202);
+            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(240, 30);
+            this.label13.Size = new System.Drawing.Size(307, 37);
             this.label13.TabIndex = 16;
             this.label13.Text = "EFECTIVO DE CRÉDITOS";
             // 
@@ -434,18 +469,20 @@ namespace PuntoVentaCasaCeja
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtefectivo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtefectivo.Enabled = false;
-            this.txtefectivo.Location = new System.Drawing.Point(3, 119);
+            this.txtefectivo.Location = new System.Drawing.Point(4, 142);
+            this.txtefectivo.Margin = new System.Windows.Forms.Padding(4);
             this.txtefectivo.Name = "txtefectivo";
-            this.txtefectivo.Size = new System.Drawing.Size(564, 50);
+            this.txtefectivo.Size = new System.Drawing.Size(844, 56);
             this.txtefectivo.TabIndex = 3;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label3.Location = new System.Drawing.Point(3, 86);
+            this.label3.Location = new System.Drawing.Point(4, 101);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(205, 30);
+            this.label3.Size = new System.Drawing.Size(262, 37);
             this.label3.TabIndex = 4;
             this.label3.Text = "TOTAL EN EFECTIVO";
             // 
@@ -453,9 +490,10 @@ namespace PuntoVentaCasaCeja
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label5.Location = new System.Drawing.Point(573, 86);
+            this.label5.Location = new System.Drawing.Point(856, 101);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(303, 30);
+            this.label5.Size = new System.Drawing.Size(386, 37);
             this.label5.TabIndex = 8;
             this.label5.Text = "TOTAL EN TARJETA DE DÉBITO";
             // 
@@ -465,18 +503,20 @@ namespace PuntoVentaCasaCeja
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtdebito.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtdebito.Enabled = false;
-            this.txtdebito.Location = new System.Drawing.Point(573, 119);
+            this.txtdebito.Location = new System.Drawing.Point(856, 142);
+            this.txtdebito.Margin = new System.Windows.Forms.Padding(4);
             this.txtdebito.Name = "txtdebito";
-            this.txtdebito.Size = new System.Drawing.Size(564, 50);
+            this.txtdebito.Size = new System.Drawing.Size(844, 56);
             this.txtdebito.TabIndex = 4;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label6.Location = new System.Drawing.Point(573, 172);
+            this.label6.Location = new System.Drawing.Point(856, 202);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(316, 30);
+            this.label6.Size = new System.Drawing.Size(404, 37);
             this.label6.TabIndex = 9;
             this.label6.Text = "TOTAL EN TARJETA DE CRÉDITO";
             // 
@@ -486,18 +526,20 @@ namespace PuntoVentaCasaCeja
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtcredito.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtcredito.Enabled = false;
-            this.txtcredito.Location = new System.Drawing.Point(573, 205);
+            this.txtcredito.Location = new System.Drawing.Point(856, 243);
+            this.txtcredito.Margin = new System.Windows.Forms.Padding(4);
             this.txtcredito.Name = "txtcredito";
-            this.txtcredito.Size = new System.Drawing.Size(564, 50);
+            this.txtcredito.Size = new System.Drawing.Size(844, 56);
             this.txtcredito.TabIndex = 5;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label4.Location = new System.Drawing.Point(573, 258);
+            this.label4.Location = new System.Drawing.Point(856, 303);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(204, 30);
+            this.label4.Size = new System.Drawing.Size(262, 37);
             this.label4.TabIndex = 5;
             this.label4.Text = "TOTAL EN CHEQUES";
             // 
@@ -507,17 +549,19 @@ namespace PuntoVentaCasaCeja
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtcheques.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtcheques.Enabled = false;
-            this.txtcheques.Location = new System.Drawing.Point(573, 291);
+            this.txtcheques.Location = new System.Drawing.Point(856, 344);
+            this.txtcheques.Margin = new System.Windows.Forms.Padding(4);
             this.txtcheques.Name = "txtcheques";
-            this.txtcheques.Size = new System.Drawing.Size(564, 50);
+            this.txtcheques.Size = new System.Drawing.Size(844, 56);
             this.txtcheques.TabIndex = 6;
             // 
             // VerCorte
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1176, 894);
+            this.ClientSize = new System.Drawing.Size(1743, 908);
             this.Controls.Add(this.groupBox1);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "VerCorte";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PreCorte Z";

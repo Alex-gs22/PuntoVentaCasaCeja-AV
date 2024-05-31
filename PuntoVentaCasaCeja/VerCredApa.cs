@@ -448,7 +448,6 @@ namespace PuntoVentaCasaCeja
 
         private void groupBox1_Enter(object sender, EventArgs e)
         {
-    //este es un cambio de prueba
         }
 
         private void cargarTicketCarta()
