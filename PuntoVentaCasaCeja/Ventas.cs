@@ -112,7 +112,7 @@ namespace PuntoVentaCasaCeja
                 lw.setData(42, "Sincronizando datos desde el servidor...");
                 await webDM.GetCreditos();
                 lw.setData(49, "Sincronizando datos desde el servidor...");
-                //await webDM.GetClientes();
+                await webDM.GetClientes();
                 lw.setData(56, "Sincronizando datos desde el servidor...");
                 await webDM.enviarApartadosTemporal();
                 lw.setData(63, "Sincronizando datos desde el servidor...");
@@ -168,7 +168,7 @@ namespace PuntoVentaCasaCeja
                         lw.setData(42, "Sincronizando datos desde el servidor...");
                         await webDM.GetCreditos();
                         lw.setData(49, "Sincronizando datos desde el servidor...");
-                        //await webDM.GetClientes();
+                        await webDM.GetClientes();
                         lw.setData(56, "Sincronizando datos desde el servidor...");
                         await webDM.enviarApartadosTemporal();
                         lw.setData(63, "Sincronizando datos desde el servidor...");

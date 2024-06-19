@@ -10,6 +10,7 @@ using Windows.Storage;
 using System.Net.NetworkInformation;
 using System.Windows.Forms;
 using System.Data;
+using System.Text;
 
 namespace PuntoVentaCasaCeja
 {
@@ -470,34 +471,114 @@ namespace PuntoVentaCasaCeja
 
             return false;
         }
-        public async Task<Dictionary<string, string>> DeleteClienteAsync(int idCliente)
+        public async Task<Dictionary<string, string>> UpdateClienteAsync(Cliente cliente)
         {
             var result = new Dictionary<string, string>();
             try
             {
-                var response = await client.DeleteAsync($"api/clientes_creditos\"{idCliente}");
+                // Serializar el objeto cliente a JSON
+                var json = JsonConvert.SerializeObject(cliente);
+
+                // Crear el contenido de la solicitud
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                // Enviar la solicitud PUT al servidor
+                var response = await client.PutAsync($"{url}api/clientes_creditos/{cliente.id}", content);
 
                 if (response.IsSuccessStatusCode)
                 {
                     result["status"] = "success";
-                    result["message"] = "Cliente eliminado con éxito";
-                    MessageBox.Show("Cliente eliminado con éxito");
+                    result["message"] = "Cliente modificado con éxito";
+                    //MessageBox.Show("Cliente modificado con éxito", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
                     result["status"] = "error";
-                    result["message"] = $"Error al eliminar el cliente: {response.StatusCode}";
-                    MessageBox.Show($"Error al eliminar el cliente: {response.StatusCode}");
+                    result["message"] = $"Error al modificar el cliente: {response.StatusCode}";
+                    //MessageBox.Show($"Error al modificar el cliente: {response.StatusCode}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
                 result["status"] = "error";
                 result["message"] = $"Excepción capturada: {ex.Message}";
+                //MessageBox.Show($"Excepción capturada: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return result;
         }
+        public async Task<Dictionary<string, string>> DesactivarClienteAsync(int idCliente)
+        {
+            var result = new Dictionary<string, string>();
+            try
+            {
+                // Crear un objeto vacío para enviar en el cuerpo (puede ser "{}" o null según el servidor)
+                var json = "{}"; // O puedes usar "null" si el servidor lo acepta así
+
+                // Crear el contenido de la solicitud
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                // Enviar la solicitud POST al servidor
+                var response = await client.PostAsync($"{url}api/clientes_creditos/desactivar/{idCliente}", content);
+                Console.WriteLine("Respuesta del servidor: " + response.StatusCode);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    result["status"] = "success";
+                    result["message"] = "Cliente desactivado correctamente";
+                    Console.WriteLine("Cliente desactivado correctamente");
+                }
+                else
+                {
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    result["status"] = "error";
+                    result["message"] = $"Error al desactivar el cliente: {response.StatusCode}, Detalles: {responseContent}";
+                    Console.WriteLine($"Error al desactivar el cliente: {response.StatusCode}, Detalles: {responseContent}");
+                    MessageBox.Show($"Error al desactivar el cliente: {response.StatusCode}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                result["status"] = "error";
+                result["message"] = $"Excepción capturada: {ex.Message}";
+                Console.WriteLine("Excepción capturada: " + ex.Message);
+                MessageBox.Show($"Excepción capturada: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return result;
+        }
+
+        /*public async Task<Dictionary<string, string>> DeleteClienteAsync(int idCliente)
+        {
+            var result = new Dictionary<string, string>();
+            try
+            {
+                // Correct the URL format
+                var response = await client.DeleteAsync($"{url}api/clientes_creditos/{idCliente}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    result["status"] = "success";
+                    result["message"] = "Cliente eliminado con éxito";
+                    MessageBox.Show("Cliente dado de baja con éxito", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    result["status"] = "error";
+                    result["message"] = $"Error al eliminar el cliente: {response.StatusCode}";
+                    MessageBox.Show($"Error al eliminar el cliente: {response.StatusCode}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                result["status"] = "error";
+                result["message"] = $"Excepción capturada: {ex.Message}";
+                MessageBox.Show($"Excepción capturada: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return result;
+        }*/
+
 
         public async Task<bool> GetUsuarios()
         {

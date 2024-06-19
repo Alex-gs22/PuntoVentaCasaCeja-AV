@@ -5,6 +5,7 @@ using System.IO;
 using System.Data;
 using Newtonsoft.Json;
 using System;
+using System.Windows.Forms;
 
 namespace PuntoVentaCasaCeja
 {
@@ -1645,23 +1646,48 @@ namespace PuntoVentaCasaCeja
         }
         public bool UpdateCliente(Cliente cliente)
         {
-            SQLiteCommand command = connection.CreateCommand();
-            command.CommandText = @"UPDATE clientes SET nombre = @nombre, rfc = @rfc, calle = @calle, no_exterior = @no_exterior, no_interior = @no_interior, cp = @cp, colonia = @colonia, ciudad = @ciudad, telefono = @telefono, correo = @correo WHERE id = @id";
-            command.Parameters.AddWithValue("@id", cliente.id);
-            command.Parameters.AddWithValue("@nombre", cliente.nombre);
-            command.Parameters.AddWithValue("@rfc", cliente.rfc);
-            command.Parameters.AddWithValue("@calle", cliente.calle);
-            command.Parameters.AddWithValue("@no_exterior", cliente.numero_exterior);
-            command.Parameters.AddWithValue("@no_interior", cliente.numero_interior);
-            command.Parameters.AddWithValue("@cp", cliente.codigo_postal);
-            command.Parameters.AddWithValue("@colonia", cliente.colonia);
-            command.Parameters.AddWithValue("@ciudad", cliente.ciudad);
-            command.Parameters.AddWithValue("@telefono", cliente.telefono);
-            command.Parameters.AddWithValue("@correo", cliente.correo);
+            try
+            {
+                using (SQLiteCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = @"UPDATE clientes SET nombre = @nombre, rfc = @rfc, calle = @calle, no_exterior = @no_exterior, no_interior = @no_interior, cp = @cp, colonia = @colonia, ciudad = @ciudad, telefono = @telefono, correo = @correo WHERE id = @id";
+                    command.Parameters.AddWithValue("@id", cliente.id);
+                    command.Parameters.AddWithValue("@nombre", cliente.nombre);
+                    command.Parameters.AddWithValue("@rfc", cliente.rfc);
+                    command.Parameters.AddWithValue("@calle", cliente.calle);
+                    command.Parameters.AddWithValue("@no_exterior", cliente.numero_exterior);
+                    command.Parameters.AddWithValue("@no_interior", cliente.numero_interior);
+                    command.Parameters.AddWithValue("@cp", cliente.codigo_postal);
+                    command.Parameters.AddWithValue("@colonia", cliente.colonia);
+                    command.Parameters.AddWithValue("@ciudad", cliente.ciudad);
+                    command.Parameters.AddWithValue("@telefono", cliente.telefono);
+                    command.Parameters.AddWithValue("@correo", cliente.correo);
 
-            int rowsAffected = command.ExecuteNonQuery();
-            return rowsAffected > 0;
+                    if (connection.State != ConnectionState.Open)
+                    {
+                        connection.Open();
+                    }
+
+                    // Log the SQL command for debugging
+                    Console.WriteLine(command.CommandText);
+                    foreach (SQLiteParameter parameter in command.Parameters)
+                    {
+                        Console.WriteLine($"{parameter.ParameterName}: {parameter.Value}");
+                    }
+
+                    int rowsAffected = command.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Show a message box with the error
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
         }
+
+
         public Cliente getCliente(string nombre)
         {
             Cliente c = null;
@@ -1749,11 +1775,25 @@ namespace PuntoVentaCasaCeja
         {
             DataTable dt = new DataTable();
             SQLiteCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT clientes.id AS ID, clientes.nombre AS NOMBRE, clientes.telefono AS TELEFONO, clientes.correo AS CORREO, clientes.rfc AS RFC, clientes.no_exterior AS [No. EXTERIOR], clientes.no_interior AS [No. INTERIOR], clientes.cp AS [C.P.],clientes.calle AS CALLE, clientes.colonia AS COLONIA, clientes.ciudad AS CIUDAD FROM clientes";
+            command.CommandText = @"SELECT clientes.id AS ID,
+                                   clientes.nombre AS NOMBRE,
+                                   clientes.telefono AS TELEFONO,
+                                   clientes.correo AS CORREO,
+                                   clientes.rfc AS RFC,
+                                   clientes.no_exterior AS [No. EXTERIOR],
+                                   clientes.no_interior AS [No. INTERIOR],
+                                   clientes.cp AS [C.P.],
+                                   clientes.calle AS CALLE,
+                                   clientes.colonia AS COLONIA,
+                                   clientes.ciudad AS CIUDAD 
+                            FROM clientes 
+                            WHERE clientes.activo = 1"; // Filtrar solo activos
+
             SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
             adapter.Fill(dt);
             return dt;
         }
+
 
         public List<NuevoCliente> GetClientesTemporales()
         {
@@ -2981,7 +3021,6 @@ namespace PuntoVentaCasaCeja
         public bool imprimirAbono(int tipo, Dictionary<string, double> pagos, string cajero, string sucursalName, string sucursalDir, string fecha, double abonado, double porpagar, string folioAbono, string folioOperacion)
         {
             bool state = false;
-            int art = 0;
             if (!impresora.Equals(""))
             {
                 state = true;

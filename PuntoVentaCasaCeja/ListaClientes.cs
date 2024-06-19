@@ -85,21 +85,37 @@ namespace PuntoVentaCasaCeja
             admin = usuario;
             webDM.activeUser = usuario;
         }
-        private void BajaButton_Click(object sender, EventArgs e)
+        
+        private async void BajaButton_Click(object sender, EventArgs e)
         {
             if (tablaClientes.SelectedRows.Count == 0)
             {
                 MessageBox.Show("No se ha seleccionado ningun cliente");
                 return;
             }
+
             UserLogin login = new UserLogin(localDM, setAdmin, true);
             DialogResult result = login.ShowDialog();
+
             if (result == DialogResult.Yes)
             {
-                localDM.eliminarCliente(Convert.ToInt32(tablaClientes.SelectedRows[0].Cells[0].Value));
-                localDM.eliminarClienteTemporal(Convert.ToInt32(tablaClientes.SelectedRows[0].Cells[0].Value));
-                this.tablaClientes.DataSource = localDM.getClientes();
-                MessageBox.Show("Cliente dado de baja");
+                int idCliente = Convert.ToInt32(tablaClientes.SelectedRows[0].Cells[0].Value);
+
+                // Llamar al método para desactivar el cliente
+                var desactivarResult = await webDM.DesactivarClienteAsync(idCliente);
+
+                if (desactivarResult["status"] == "success")
+                {
+                    MessageBox.Show("Cliente dado de baja correctamente");
+                    localDM.eliminarCliente(idCliente);
+                    localDM.eliminarClienteTemporal(idCliente);
+                    tablaClientes.DataSource = localDM.getClientes();
+                }
+                else
+                {
+                    MessageBox.Show($"Error al desactivar el cliente: {desactivarResult["message"]}");
+                }
+
                 tablaClientes.Focus();
             }
             else
@@ -107,6 +123,8 @@ namespace PuntoVentaCasaCeja
                 MessageBox.Show("Autenticacion Fallida");
             }
         }
+
+
         private void seleccion(object sender, EventArgs e)
         {
             if (tablaClientes.SelectedRows.Count > 0)
@@ -117,37 +135,6 @@ namespace PuntoVentaCasaCeja
             }
             //this.Close();
         }
-
-        /*
-        private async void BajaButton_Click(object sender, EventArgs e)
-        {
-            if (tablaClientes.SelectedRows.Count == 0)
-            {
-                MessageBox.Show("No se ha seleccionado ningun cliente");
-                return;
-            }
-            UserLogin login = new UserLogin(localDM, setCajero, false);
-            DialogResult result = login.ShowDialog();
-            if (result == DialogResult.Yes)
-            {
-                int idCliente = Convert.ToInt32(tablaClientes.SelectedRows[0].Cells[0].Value);
-                Dictionary<string, string> deleteResult = await webDM.DeleteClienteAsync(idCliente);
-                MessageBox.Show(deleteResult["message"], "Estado: " + deleteResult["status"]);
-                if (deleteResult["status"] == "success")
-                {
-                    localDM.eliminarCliente(idCliente);
-                    localDM.eliminarClienteTemporal(idCliente);
-                    this.tablaClientes.DataSource = null;
-                    this.tablaClientes.DataSource = localDM.getClientes();
-                    tablaClientes.Focus();
-                }
-            }
-            else
-            {
-                MessageBox.Show("Autenticacion Fallida");
-            }
-        }
-        */
 
         private void seleccion_KeyDown(object sender, KeyEventArgs e)
         {
