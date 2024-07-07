@@ -197,6 +197,7 @@ namespace PuntoVentaCasaCeja
         {
             AltaCliente altaCliente = new AltaCliente(data);
             altaCliente.ShowDialog();
+            tablaClientes.DataSource = localDM.getClientes();
         }
     }
 }

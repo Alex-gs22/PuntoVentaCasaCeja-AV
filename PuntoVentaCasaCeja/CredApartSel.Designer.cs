@@ -95,7 +95,7 @@
             this.credito.Name = "credito";
             this.credito.Size = new System.Drawing.Size(233, 178);
             this.credito.TabIndex = 4;
-            this.credito.Text = "CREDITOS (F1)";
+            this.credito.Text = "CREDITOS  Y\r\nABONOS (F1)";
             this.credito.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.credito.UseVisualStyleBackColor = false;
             this.credito.Click += new System.EventHandler(this.credito_Click);
@@ -114,7 +114,7 @@
             this.apartado.Name = "apartado";
             this.apartado.Size = new System.Drawing.Size(233, 178);
             this.apartado.TabIndex = 5;
-            this.apartado.Text = "APARTADOS \r\n(F2)";
+            this.apartado.Text = "APARTADOS Y\r\nABONOS (F2)\r\n";
             this.apartado.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.apartado.UseVisualStyleBackColor = false;
             this.apartado.Click += new System.EventHandler(this.apartado_Click);
@@ -133,7 +133,7 @@
             this.BuscarCliente.Name = "BuscarCliente";
             this.BuscarCliente.Size = new System.Drawing.Size(233, 178);
             this.BuscarCliente.TabIndex = 6;
-            this.BuscarCliente.Text = "BUSCAR CLIENTE (F3)";
+            this.BuscarCliente.Text = "BUSCAR CLIENTE \r\nABONOS (F3)";
             this.BuscarCliente.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.BuscarCliente.UseVisualStyleBackColor = false;
             this.BuscarCliente.Click += new System.EventHandler(this.BuscarCliente_Click);
@@ -152,7 +152,7 @@
             this.ListaClientes.Name = "ListaClientes";
             this.ListaClientes.Size = new System.Drawing.Size(233, 178);
             this.ListaClientes.TabIndex = 7;
-            this.ListaClientes.Text = "LISTA DE CLIENTES (F4)";
+            this.ListaClientes.Text = "LISTA DE CLIENTES \r\nALTAS \r\nMODIFICAR (F4)";
             this.ListaClientes.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.ListaClientes.UseVisualStyleBackColor = false;
             this.ListaClientes.Click += new System.EventHandler(this.ListaClientes_Click);

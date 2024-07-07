@@ -110,7 +110,10 @@ namespace PuntoVentaCasaCeja
                             activo = -1
                         };
                         send(cl);
-                        ClearAllText(this);
+                        if (!temporal)
+                        {
+                            ClearAllText(this);
+                        }
                     }
                     else
                     {
@@ -118,10 +121,10 @@ namespace PuntoVentaCasaCeja
                     }
                 }
             }
-            if (cliente != null)
+            if (cliente != null && !temporal)
             {
                 data.cliente = cliente;
-                this.Close();
+                    this.Close();
             }
         }
         public void clienteSeleccionado(Cliente cliente)
@@ -135,8 +138,13 @@ namespace PuntoVentaCasaCeja
         async void send(NuevoCliente cliente)
         {
             Dictionary<string, string> result = await webDM.SendClienteAsync(cliente);
-            MessageBox.Show(result["message"], "Estado: " + result["status"]);
-
+            //MessageBox.Show(result["message"], "Estado: " + result["status"]);
+            temporal = true;
+            if (result["status"].Equals("error"))
+            {
+                MessageBox.Show("Numero de Telefono ya registrado");
+                temporal = false;
+            }
         }
         void ClearAllText(Control con)
         {
@@ -153,6 +161,5 @@ namespace PuntoVentaCasaCeja
         {
             usuario = user;
         }
-
     }
 }

@@ -494,7 +494,7 @@ namespace PuntoVentaCasaCeja
                 else
                 {
                     result["status"] = "error";
-                    result["message"] = $"Error al modificar el cliente: {response.StatusCode}";
+                    result["message"] = $"Error al modificar el cliente: {response.StatusCode}"; // generalmente sale cuando hay un dato duplicado
                     //MessageBox.Show($"Error al modificar el cliente: {response.StatusCode}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
