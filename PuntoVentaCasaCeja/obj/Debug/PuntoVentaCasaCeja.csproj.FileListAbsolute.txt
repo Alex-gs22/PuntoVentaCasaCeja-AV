@@ -607,3 +607,4 @@ C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\Punt
 =======
 C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ConfigSuc.resources
 >>>>>>> Vega Cambios
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ConfigSuc.resources
