@@ -42,6 +42,7 @@ namespace PuntoVentaCasaCeja
             this.BajaButton = new System.Windows.Forms.Button();
             this.clientinfo = new System.Windows.Forms.TableLayoutPanel();
             this.tablaClientes = new System.Windows.Forms.DataGridView();
+            this.BSelCliente = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -54,6 +55,7 @@ namespace PuntoVentaCasaCeja
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.BSelCliente);
             this.groupBox1.Controls.Add(this.exitButton);
             this.groupBox1.Controls.Add(this.tableLayoutPanel3);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI Semibold", 24F, System.Drawing.FontStyle.Bold);
@@ -203,7 +205,7 @@ namespace PuntoVentaCasaCeja
             this.tablaClientes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI Semibold", 24F, System.Drawing.FontStyle.Bold);
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -236,6 +238,19 @@ namespace PuntoVentaCasaCeja
             this.tablaClientes.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.tablaClientes_CellClick);
             this.tablaClientes.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tablaClientes_KeyDown);
             // 
+            // BSelCliente
+            // 
+            this.BSelCliente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BSelCliente.Font = new System.Drawing.Font("Segoe UI Semibold", 20F, System.Drawing.FontStyle.Bold);
+            this.BSelCliente.Location = new System.Drawing.Point(783, -4);
+            this.BSelCliente.Margin = new System.Windows.Forms.Padding(4);
+            this.BSelCliente.Name = "BSelCliente";
+            this.BSelCliente.Size = new System.Drawing.Size(385, 57);
+            this.BSelCliente.TabIndex = 6;
+            this.BSelCliente.Text = "SEL. CLIENTE (ENTER)";
+            this.BSelCliente.UseVisualStyleBackColor = true;
+            this.BSelCliente.Click += new System.EventHandler(this.BSelCliente_Click);
+            // 
             // ListaClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -266,5 +281,6 @@ namespace PuntoVentaCasaCeja
         private System.Windows.Forms.Button exitButton;
         private System.Windows.Forms.DataGridView tablaClientes;
         private Button modificarButton;
+        private Button BSelCliente;
     }
 }

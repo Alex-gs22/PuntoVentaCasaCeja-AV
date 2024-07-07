@@ -42,7 +42,7 @@ namespace PuntoVentaCasaCeja
                         //eliminarButton.PerformClick();
                         break;
                     case Keys.Enter:
-                        //aceptarButton.PerformClick();
+                        tablaCreditos_CellDoubleClick(tablaCreditos, new DataGridViewCellEventArgs(tablaCreditos.CurrentCell.ColumnIndex, tablaCreditos.CurrentCell.RowIndex));
                         break;
                     default:
                         return base.ProcessDialogKey(keyData);
@@ -62,11 +62,21 @@ namespace PuntoVentaCasaCeja
 
         }
 
+        private void TablaCreditos_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                DataGridViewCellEventArgs cellEventArgs = new DataGridViewCellEventArgs(tablaCreditos.CurrentCell.ColumnIndex, tablaCreditos.CurrentCell.RowIndex);
+                tablaCreditos_CellDoubleClick(sender, cellEventArgs);
+            }
+        }
+
         private void tablaCreditos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == tablaCreditos.Columns["Cliente"].Index && e.RowIndex >= 0)
+            if (e.RowIndex >= 0)
             {
-                string clienteNombre = tablaCreditos.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                DataGridViewRow selectedRow = tablaCreditos.Rows[e.RowIndex];
+                string clienteNombre = selectedRow.Cells["Cliente"].Value.ToString();
 
                 if (data.cliente == null)
                 {
@@ -86,6 +96,12 @@ namespace PuntoVentaCasaCeja
                     MessageBox.Show("Cliente no encontrado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private void BSelCliente_Click(object sender, EventArgs e)
+        {
+            tablaCreditos_CellDoubleClick(tablaCreditos, new DataGridViewCellEventArgs(tablaCreditos.CurrentCell.ColumnIndex, tablaCreditos.CurrentCell.RowIndex));
+            tablaCreditos.Focus();
         }
     }
 }

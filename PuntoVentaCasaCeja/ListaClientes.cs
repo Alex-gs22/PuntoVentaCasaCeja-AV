@@ -199,5 +199,11 @@ namespace PuntoVentaCasaCeja
             altaCliente.ShowDialog();
             tablaClientes.DataSource = localDM.getClientes();
         }
+
+        private void BSelCliente_Click(object sender, EventArgs e)
+        {
+            seleccion(sender, e);
+            tablaClientes.Focus();
+        }
     }
 }

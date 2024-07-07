@@ -103,14 +103,22 @@
     </dependentAssembly>
   </dependency>
   <dependency>
+<<<<<<< HEAD
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PuntoVentaCasaCeja.exe" size="568320">
+=======
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PuntoVentaCasaCeja.exe" size="575488">
+>>>>>>> Vega Cambios
       <assemblyIdentity name="PuntoVentaCasaCeja" version="1.0.0.1" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+<<<<<<< HEAD
         <dsig:DigestValue>Q1fwawfHweXMP+hYwpblRNoiCCjk4lVJixhURYzkTxE=</dsig:DigestValue>
+=======
+        <dsig:DigestValue>Aofgku3Y2n3m89ufrv3QH27yhzL+v3PHBdRSBFjXpjM=</dsig:DigestValue>
+>>>>>>> Vega Cambios
       </hash>
     </dependentAssembly>
   </dependency>

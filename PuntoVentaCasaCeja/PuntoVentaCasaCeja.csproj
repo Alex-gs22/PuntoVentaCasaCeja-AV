@@ -207,6 +207,12 @@
     </Compile>
     <Compile Include="Categoria.cs" />
     <Compile Include="Cliente.cs" />
+    <Compile Include="ConfigSuc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConfigSuc.Designer.cs">
+      <DependentUpon>ConfigSuc.cs</DependentUpon>
+    </Compile>
     <Compile Include="ConfigWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -388,6 +394,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CambiarCantidad.resx">
       <DependentUpon>CambiarCantidad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConfigSuc.resx">
+      <DependentUpon>ConfigSuc.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ConfigWindow.resx">
       <DependentUpon>ConfigWindow.cs</DependentUpon>

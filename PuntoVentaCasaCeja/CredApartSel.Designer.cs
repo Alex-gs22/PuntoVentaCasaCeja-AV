@@ -31,9 +31,9 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.credito = new System.Windows.Forms.Button();
-            this.apartado = new System.Windows.Forms.Button();
             this.BuscarCliente = new System.Windows.Forms.Button();
             this.ListaClientes = new System.Windows.Forms.Button();
+            this.apartado = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -66,9 +66,9 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.tableLayoutPanel1.Controls.Add(this.credito, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.apartado, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.BuscarCliente, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.ListaClientes, 3, 3);
+            this.tableLayoutPanel1.Controls.Add(this.apartado, 3, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(8, 60);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -156,6 +156,25 @@
             this.ListaClientes.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.ListaClientes.UseVisualStyleBackColor = false;
             this.ListaClientes.Click += new System.EventHandler(this.ListaClientes_Click);
+            // 
+            // apartado
+            // 
+            this.apartado.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.apartado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(166)))), ((int)(((byte)(64)))));
+            this.apartado.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.apartado.FlatAppearance.BorderSize = 0;
+            this.apartado.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.apartado.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
+            this.apartado.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.apartado.Location = new System.Drawing.Point(437, 32);
+            this.apartado.Margin = new System.Windows.Forms.Padding(4);
+            this.apartado.Name = "apartado";
+            this.apartado.Size = new System.Drawing.Size(233, 178);
+            this.apartado.TabIndex = 5;
+            this.apartado.Text = "ABONOS APARTADOS \r\n(F2)";
+            this.apartado.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.apartado.UseVisualStyleBackColor = false;
+            this.apartado.Click += new System.EventHandler(this.apartado_Click);
             // 
             // CredApartSel
             // 

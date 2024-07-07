@@ -37,6 +37,7 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.clientinfo = new System.Windows.Forms.TableLayoutPanel();
             this.tablaCreditos = new System.Windows.Forms.DataGridView();
+            this.BSelCliente = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.clientinfo.SuspendLayout();
@@ -48,6 +49,7 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.BSelCliente);
             this.groupBox1.Controls.Add(this.exitButton);
             this.groupBox1.Controls.Add(this.tableLayoutPanel3);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI Semibold", 24F, System.Drawing.FontStyle.Bold);
@@ -179,6 +181,20 @@
             this.tablaCreditos.TabIndex = 0;
             this.tablaCreditos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tablaCreditos_CellContentClick);
             this.tablaCreditos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tablaCreditos_CellDoubleClick);
+            this.tablaCreditos.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TablaCreditos_KeyDown);
+            // 
+            // BSelCliente
+            // 
+            this.BSelCliente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BSelCliente.Font = new System.Drawing.Font("Segoe UI Semibold", 20F, System.Drawing.FontStyle.Bold);
+            this.BSelCliente.Location = new System.Drawing.Point(794, -3);
+            this.BSelCliente.Margin = new System.Windows.Forms.Padding(4);
+            this.BSelCliente.Name = "BSelCliente";
+            this.BSelCliente.Size = new System.Drawing.Size(385, 57);
+            this.BSelCliente.TabIndex = 8;
+            this.BSelCliente.Text = "SEL. CLIENTE (ENTER)";
+            this.BSelCliente.UseVisualStyleBackColor = true;
+            this.BSelCliente.Click += new System.EventHandler(this.BSelCliente_Click);
             // 
             // ListaCreditos
             // 
@@ -205,5 +221,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel clientinfo;
         private System.Windows.Forms.DataGridView tablaCreditos;
+        private System.Windows.Forms.Button BSelCliente;
     }
 }

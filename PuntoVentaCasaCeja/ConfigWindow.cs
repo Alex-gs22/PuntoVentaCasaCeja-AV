@@ -25,25 +25,25 @@ namespace PuntoVentaCasaCeja
             InitializeComponent();
             this.localDM = localdata;
             mapasucursales = localDM.getIndicesSucursales();
-            sucursales = new List<string> (mapasucursales.Keys);
+            sucursales = new List<string>(mapasucursales.Keys);
             boxsucursal.DataSource = sucursales;
             listfont = new List<string>();
-            listSizes = new List<int> {5,6,7,8,9,10,11,12,13,14,15};
+            listSizes = new List<int> { 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
         }
 
         private void selectprinter_Click(object sender, EventArgs e)
         {
             PrintDialog pd = new PrintDialog();
             DialogResult result = pd.ShowDialog();
-            if(result == DialogResult.OK)
+            if (result == DialogResult.OK)
             {
                 txtprintername.Text = pd.PrinterSettings.PrinterName;
             }
         }
 
-        private void aceptar_Click(object sender, EventArgs e)
+        private void guardar_Click(object sender, EventArgs e)
         {
-            if (tamaños.SelectedIndex==-1)
+            if (tamaños.SelectedIndex == -1)
             {
                 MessageBox.Show("No se ha establecido el tamaño de texto", "Advertencia");
                 return;
@@ -81,7 +81,7 @@ namespace PuntoVentaCasaCeja
         {
             tamaños.DataSource = listSizes;
             string key = mapasucursales.FirstOrDefault(x => x.Value == int.Parse(Settings.Default["sucursalid"].ToString())).Key;
-            boxsucursal.SelectedIndex = sucursales.IndexOf(key)==-1?0: sucursales.IndexOf(key);
+            boxsucursal.SelectedIndex = sucursales.IndexOf(key) == -1 ? 0 : sucursales.IndexOf(key);
             txtprintername.Text = Settings.Default["printername"].ToString();
             txtid.Text = Settings.Default["posid"].ToString();
             tamaños.SelectedIndex = listSizes.IndexOf(int.Parse(Settings.Default["fontSize"].ToString()));
@@ -111,9 +111,12 @@ namespace PuntoVentaCasaCeja
                 {
                     case Keys.Escape:
                         this.Close();
-                        break;                    
+                        break;
                     case Keys.F5:
-                        aceptar.PerformClick();
+                        guardar.PerformClick();
+                        break;
+                    case Keys.F6:
+                        ConfigSuc.PerformClick();
                         break;
                     default:
                         return base.ProcessDialogKey(keyData);
@@ -122,5 +125,20 @@ namespace PuntoVentaCasaCeja
             }
             return base.ProcessDialogKey(keyData);
         }
+
+        private void ConfigSuc_Click(object sender, EventArgs e)
+        {
+            ConfigSuc cs = new ConfigSuc(localDM);
+            var result = cs.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                boxsucursal.SelectedItem = cs.SelectedSucursal;
+                txtid.Text = cs.IdCaja;
+
+                // Por ahora se mostrara en la vista para verificar que se haya guardado, pero se tiene que ver como mandar ese texto al ticket.
+                txtPieTicket.Text = cs.PieTicket;
+            }
+        } 
+
     }
 }

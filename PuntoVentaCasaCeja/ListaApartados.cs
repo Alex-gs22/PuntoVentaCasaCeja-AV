@@ -37,13 +37,13 @@ namespace PuntoVentaCasaCeja
                         this.Close();
                         break;
                     case Keys.F5:
-                       // aceptarButton.PerformClick();
+                        // aceptarButton.PerformClick();
                         break;
                     case Keys.F6:
-                        //eliminarButton.PerformClick();
+                        // eliminarButton.PerformClick();
                         break;
                     case Keys.Enter:
-                        //aceptarButton.PerformClick();
+                        tablaApartados_CellDoubleClick(tablaApartados, new DataGridViewCellEventArgs(tablaApartados.CurrentCell.ColumnIndex, tablaApartados.CurrentCell.RowIndex));
                         break;
                     default:
                         return base.ProcessDialogKey(keyData);
@@ -62,17 +62,26 @@ namespace PuntoVentaCasaCeja
         {
 
         }
+        private void TablaApartados_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                DataGridViewCellEventArgs cellEventArgs = new DataGridViewCellEventArgs(tablaApartados.CurrentCell.ColumnIndex, tablaApartados.CurrentCell.RowIndex);
+                tablaApartados_CellDoubleClick(sender, cellEventArgs);
+            }
+        }
 
         private void tablaApartados_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == tablaApartados.Columns["Cliente"].Index && e.RowIndex >= 0)
+            if (e.RowIndex >= 0)
             {
-                string clienteNombre = tablaApartados.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                DataGridViewRow selectedRow = tablaApartados.Rows[e.RowIndex];
+                string clienteNombre = selectedRow.Cells["Cliente"].Value.ToString();
 
                 // Verificar y inicializar data.cliente si es null
                 if (data.cliente == null)
                 {
-                    data.cliente = new Cliente();  // Asume que Cliente es la clase adecuada
+                    data.cliente = new Cliente();
                 }
 
                 int clienteId = localDM.GetCliente(clienteNombre);
@@ -90,5 +99,10 @@ namespace PuntoVentaCasaCeja
             }
         }
 
+        private void BSelCliente_Click(object sender, EventArgs e)
+        {
+            tablaApartados_CellDoubleClick(tablaApartados, new DataGridViewCellEventArgs(tablaApartados.CurrentCell.ColumnIndex, tablaApartados.CurrentCell.RowIndex));
+            tablaApartados.Focus();
+        }
     }
 }
