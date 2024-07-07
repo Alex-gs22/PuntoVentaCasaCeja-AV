@@ -95,29 +95,10 @@
             this.credito.Name = "credito";
             this.credito.Size = new System.Drawing.Size(233, 178);
             this.credito.TabIndex = 4;
-            this.credito.Text = "CREDITOS  Y\r\nABONOS (F1)";
+            this.credito.Text = "ABONOS CREDITOS (F1)";
             this.credito.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.credito.UseVisualStyleBackColor = false;
             this.credito.Click += new System.EventHandler(this.credito_Click);
-            // 
-            // apartado
-            // 
-            this.apartado.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.apartado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(166)))), ((int)(((byte)(64)))));
-            this.apartado.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.apartado.FlatAppearance.BorderSize = 0;
-            this.apartado.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.apartado.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
-            this.apartado.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.apartado.Location = new System.Drawing.Point(437, 32);
-            this.apartado.Margin = new System.Windows.Forms.Padding(4);
-            this.apartado.Name = "apartado";
-            this.apartado.Size = new System.Drawing.Size(233, 178);
-            this.apartado.TabIndex = 5;
-            this.apartado.Text = "APARTADOS Y\r\nABONOS (F2)\r\n";
-            this.apartado.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.apartado.UseVisualStyleBackColor = false;
-            this.apartado.Click += new System.EventHandler(this.apartado_Click);
             // 
             // BuscarCliente
             // 
@@ -133,7 +114,7 @@
             this.BuscarCliente.Name = "BuscarCliente";
             this.BuscarCliente.Size = new System.Drawing.Size(233, 178);
             this.BuscarCliente.TabIndex = 6;
-            this.BuscarCliente.Text = "BUSCAR CLIENTE \r\nABONOS (F3)";
+            this.BuscarCliente.Text = "BUSCAR CLIENTE  (F3)";
             this.BuscarCliente.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.BuscarCliente.UseVisualStyleBackColor = false;
             this.BuscarCliente.Click += new System.EventHandler(this.BuscarCliente_Click);
@@ -145,14 +126,14 @@
             this.ListaClientes.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.ListaClientes.FlatAppearance.BorderSize = 0;
             this.ListaClientes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ListaClientes.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
+            this.ListaClientes.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold);
             this.ListaClientes.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ListaClientes.Location = new System.Drawing.Point(437, 246);
             this.ListaClientes.Margin = new System.Windows.Forms.Padding(4);
             this.ListaClientes.Name = "ListaClientes";
             this.ListaClientes.Size = new System.Drawing.Size(233, 178);
             this.ListaClientes.TabIndex = 7;
-            this.ListaClientes.Text = "LISTA DE CLIENTES \r\nALTAS \r\nMODIFICAR (F4)";
+            this.ListaClientes.Text = "NUEVO CLIENTE, CREDITO O APARTADO (F4)";
             this.ListaClientes.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.ListaClientes.UseVisualStyleBackColor = false;
             this.ListaClientes.Click += new System.EventHandler(this.ListaClientes_Click);
