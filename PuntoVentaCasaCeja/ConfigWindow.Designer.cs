@@ -40,6 +40,7 @@ namespace PuntoVentaCasaCeja
             this.cancelar = new System.Windows.Forms.Button();
             this.guardar = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.boxsucursal = new System.Windows.Forms.ComboBox();
             this.txtid = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tamaños = new System.Windows.Forms.ComboBox();
@@ -49,8 +50,6 @@ namespace PuntoVentaCasaCeja
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.ConfigSuc = new System.Windows.Forms.Button();
-            this.txtPieTicket = new System.Windows.Forms.TextBox();
-            this.boxsucursal = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -63,7 +62,6 @@ namespace PuntoVentaCasaCeja
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.txtPieTicket);
             this.groupBox1.Controls.Add(this.tableLayoutPanel4);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI Semibold", 24F, System.Drawing.FontStyle.Bold);
             this.groupBox1.Location = new System.Drawing.Point(16, 15);
@@ -231,6 +229,19 @@ namespace PuntoVentaCasaCeja
             this.label3.TabIndex = 5;
             this.label3.Text = "SUCURSAL";
             // 
+            // boxsucursal
+            // 
+            this.boxsucursal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.boxsucursal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.boxsucursal.Enabled = false;
+            this.boxsucursal.FormattingEnabled = true;
+            this.boxsucursal.Location = new System.Drawing.Point(532, 158);
+            this.boxsucursal.Margin = new System.Windows.Forms.Padding(4);
+            this.boxsucursal.Name = "boxsucursal";
+            this.boxsucursal.Size = new System.Drawing.Size(520, 62);
+            this.boxsucursal.TabIndex = 4;
+            // 
             // txtid
             // 
             this.txtid.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -340,26 +351,6 @@ namespace PuntoVentaCasaCeja
             this.ConfigSuc.UseVisualStyleBackColor = true;
             this.ConfigSuc.Click += new System.EventHandler(this.ConfigSuc_Click);
             // 
-            // txtPieTicket
-            // 
-            this.txtPieTicket.Location = new System.Drawing.Point(502, -8);
-            this.txtPieTicket.Name = "txtPieTicket";
-            this.txtPieTicket.Size = new System.Drawing.Size(243, 61);
-            this.txtPieTicket.TabIndex = 12;
-            // 
-            // boxsucursal
-            // 
-            this.boxsucursal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.boxsucursal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.boxsucursal.Enabled = false;
-            this.boxsucursal.FormattingEnabled = true;
-            this.boxsucursal.Location = new System.Drawing.Point(532, 158);
-            this.boxsucursal.Margin = new System.Windows.Forms.Padding(4);
-            this.boxsucursal.Name = "boxsucursal";
-            this.boxsucursal.Size = new System.Drawing.Size(520, 62);
-            this.boxsucursal.TabIndex = 4;
-            // 
             // ConfigWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -375,7 +366,6 @@ namespace PuntoVentaCasaCeja
             this.Text = "ConfigWindow";
             this.Load += new System.EventHandler(this.ConfigWindow_Load);
             this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
@@ -408,7 +398,6 @@ namespace PuntoVentaCasaCeja
         private System.Windows.Forms.ComboBox tipo;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button ConfigSuc;
-        private System.Windows.Forms.TextBox txtPieTicket;
         private System.Windows.Forms.ComboBox boxsucursal;
     }
 }

@@ -105,6 +105,7 @@ namespace PuntoVentaCasaCeja
         }
         private void loadTicket()
         {
+            string piedeticket = Settings.Default["pieDeTicket"].ToString();
             ticket = "";
             isValidTicket = false;
             if (tabla.SelectedRows.Count > 0)
@@ -118,8 +119,8 @@ namespace PuntoVentaCasaCeja
                 totalformat = double.Parse(total);
                 pagos = JsonConvert.DeserializeObject<Dictionary<string, double>>(tabla.SelectedRows[0].Cells[5].Value.ToString());
                 ticket += "CASA CEJA S.A. de C.V.\n" +
-                    "SUCURSAL: " + sucursalName + "\n" +
-                    "" + sucursalDir + "\n" +
+                    "SUCURSAL: " + sucursalName.ToUpper() + "\n" +
+                    "" + sucursalDir.ToUpper() + "\n" +
                     "" + fecha + "\n" + 
                     "FOLIO: " + folio + "\n\n" +
                     "DESCRIPCION\tCANT\tP. UNIT\tP. TOTAL\n";
@@ -172,10 +173,20 @@ namespace PuntoVentaCasaCeja
                 if (!fontName.Equals("Consolas"))
                     ticket += "--------------------";
                 ticket += "--------------------------------------------------------------\n\n" +
-                     "LE ATENDIO: " + cajero + "\n" +
+                     "LE ATENDIO: " + cajero.ToUpper() + "\n" +
                      "NO DE ARTICULOS: "+productos.Count.ToString().PadLeft(5, '0')+"\n" +
                      "GRACIAS POR SU COMPRA\n\n" +
-                     "SI DESEA FACTURAR ESTA COMPRA INGRESE A \n" +
+                     "ANTONIO CEJA MARON\n" +
+                     "RFC: CEMA-721020-NM5\n\n";
+
+                if (piedeticket != "")
+                {
+                    ticket += "----------------------------------------------------------------------------------\n" +
+                    piedeticket + "\n" +
+                    "----------------------------------------------------------------------------------\n\n";
+                }
+
+                ticket += "SI DESEA FACTURAR ESTA COMPRA INGRESE A :\n" +
                      "https://cm-papeleria.com/public/facturacion";
             }            
             createdoc();

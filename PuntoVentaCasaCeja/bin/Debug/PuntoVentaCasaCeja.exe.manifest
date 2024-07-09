@@ -103,14 +103,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PuntoVentaCasaCeja.exe" size="575488">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PuntoVentaCasaCeja.exe" size="576512">
       <assemblyIdentity name="PuntoVentaCasaCeja" version="1.0.0.1" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ZtEZrTzj7d8hQ6/9MahBYtFsO5b8N+Y9O80FqZWfcZM=</dsig:DigestValue>
+        <dsig:DigestValue>keV4hXjW8a/KkHmUrUdcbFr2PlPGOng9FFKP3f1V6NE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -387,13 +387,13 @@
       <dsig:DigestValue>oYPaRhzroLr4WLcOKceLph4DsqDAAjDr+sO6Cl36x3E=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="PuntoVentaCasaCeja.exe.config" size="3497">
+  <file name="PuntoVentaCasaCeja.exe.config" size="3600">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>Ny4VH5R7hJbQwov4XG/SVeqLHKqbB7UJF8G8BTMW9yA=</dsig:DigestValue>
+      <dsig:DigestValue>U9HAIK2MTIW1Fm6ABw7XSTnKMiJkIY6g3pmpZHBkv+A=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

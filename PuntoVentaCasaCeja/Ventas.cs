@@ -1128,6 +1128,7 @@ namespace PuntoVentaCasaCeja
         }
         private void imprimirTicketCarta(string fecha)
         {
+            string piedeticket = Settings.Default["pieDeTicket"].ToString();
             ticket = "";
             string caj = cajero.nombre;
             double cambio = totalcarrito;
@@ -1186,11 +1187,20 @@ namespace PuntoVentaCasaCeja
                  "LE ATENDIO: " + cajero.nombre.ToUpper() + "\n" +
                  "NO DE ARTICULOS: " + carrito.Count.ToString().PadLeft(5, '0') + "\n" +
                  "GRACIAS POR SU COMPRA\n\n" +
-                 "ANTONIO CEJA MARON\n"+
-                 "RFC: CEMA-721020-NM5\n\n"+
-                 "SI DESEA FACTURAR ESTA COMPRA INGRESE A :\n" +
+                 "ANTONIO CEJA MARON\n" +
+                 "RFC: CEMA-721020-NM5\n\n";
+
+            if (piedeticket != "")
+            {
+                ticket += "----------------------------------------------------------------------------------\n" +
+                piedeticket + "\n" +
+                "----------------------------------------------------------------------------------\n\n";
+            }
+
+            ticket += "SI DESEA FACTURAR ESTA COMPRA INGRESE A :\n" +
                  "https://cm-papeleria.com/public/facturacion";
-        Console.WriteLine(ticket);
+
+            Console.WriteLine(ticket);
             createdoc();
     }
         /*private void imprimirCorteCarta(Dictionary<string, string> corte)

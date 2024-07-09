@@ -37,13 +37,11 @@ namespace PuntoVentaCasaCeja
         private void TextBox_TextChanged(object sender, EventArgs e)
         {
             TextBox textBox = sender as TextBox;
-            if (textBox != null && textBox.TextLength > 5)
+            if (textBox != null && textBox.TextLength > 55)
             {
-                // Si el texto supera los 50 caracteres, lo recorta a 50 caracteres
-                textBox.Text = textBox.Text.Substring(0, 5);
-                // Mueve el cursor al final del texto
+                // limita el texto a 30 caracteres
+                textBox.Text = textBox.Text.Substring(0, 55);
                 textBox.SelectionStart = textBox.TextLength;
-
                 MessageBox.Show("Se excedio el limite de caracteres", "Advertencia");
             }
         }
@@ -74,6 +72,9 @@ namespace PuntoVentaCasaCeja
                     case Keys.F5:
                         Baceptar.PerformClick();
                         break;
+                    case Keys.F6:
+                        Blimpiar.PerformClick();
+                        break;
                     default:
                         return base.ProcessDialogKey(keyData);
                 }
@@ -87,21 +88,27 @@ namespace PuntoVentaCasaCeja
             string key = mapasucursales.FirstOrDefault(x => x.Value == int.Parse(Settings.Default["sucursalid"].ToString())).Key;
             boxsucursal.SelectedIndex = sucursales.IndexOf(key) == -1 ? 0 : sucursales.IndexOf(key);
             txtid.Text = Settings.Default["posid"].ToString();
+            txtPieTicket.Text = Settings.Default["pieDeTicket"].ToString();
         }
 
         private void Baceptar_Click(object sender, EventArgs e)
         {
-            // con estas lineas se deberia de guardar directamente al presionar aceptar y no al presionar guardar en ConfigWindow.
-            //Settings.Default["txtPieTicket"] = txtPieTicket.Text;
-            //Settings.Default.Save();
-
             if (txtid.Text.Equals(""))
             {
                 MessageBox.Show("No se ha establecido el ID de caja", "Advertencia");
                 return;
             }
+
+            Settings.Default["pieDeTicket"] = txtPieTicket.Text;
+            Settings.Default.Save();
+
             this.DialogResult = DialogResult.OK;
             this.Close();
+        }
+
+        private void Blimpiar_Click(object sender, EventArgs e)
+        {
+            txtPieTicket.Text = "";
         }
     }
 }
