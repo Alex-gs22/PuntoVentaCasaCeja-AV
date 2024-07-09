@@ -77,14 +77,19 @@ namespace PuntoVentaCasaCeja
         {
             DateTime localDate = DateTime.Now;
             string folioabono;
+
             if (pagos.Count > 0)
             {
-                if(tipo == 0)
+                AbonoCredito abonoCredito = null;
+                AbonoApartado abonoApartado = null;
+                string folioBase = data.idSucursal.ToString().PadLeft(2, '0') + data.idCaja.ToString().PadLeft(2, '0') + localDate.Day.ToString().PadLeft(2, '0') + localDate.Month.ToString().PadLeft(2, '0') + localDate.Year + "AA";
+
+                if (tipo == 0)
                 {
-                    AbonoCredito abono = new AbonoCredito
+                    abonoCredito = new AbonoCredito
                     {
                         fecha = localDate.ToString("yyyy-MM-dd HH:mm:ss"),
-                        folio = data.idSucursal.ToString().PadLeft(2, '0') + data.idCaja.ToString().PadLeft(2, '0') + localDate.Day.ToString().PadLeft(2, '0') + localDate.Month.ToString().PadLeft(2, '0') + localDate.Year + "AA",
+                        folio = folioBase,
                         folio_corte = data.folioCorte,
                         usuario_id = data.webDM.activeUser.id,
                         folio_credito = folio,
@@ -92,55 +97,67 @@ namespace PuntoVentaCasaCeja
                         metodo_pago = JsonConvert.SerializeObject(pagos),
                         total_abonado = abonado
                     };
-                    
-                    int ida = data.webDM.localDM.abonoCreditoTemporal(abono);
-                    folioabono = abono.folio;
-                    data.webDM.localDM.acumularPagos(pagos, data.idCorte);                    
-                    if (pagos.ContainsKey("efectivo"))
-                    {
-                        data.webDM.localDM.acumularEfectivoCredito(pagos["efectivo"], data.idCorte);
-                    }
-                    if (id == 0)
-                    {
-                        sendCreditoTemporal();
-                    }
-                    else
-                    {
-                        sendAbonoCredito(abono);
-                    }
-                    
+
+                    int ida = data.webDM.localDM.abonoCreditoTemporal(abonoCredito);
+                    folioabono = abonoCredito.folio;
                 }
                 else
                 {
-                    AbonoApartado abono = new AbonoApartado
+                    abonoApartado = new AbonoApartado
                     {
                         fecha = localDate.ToString("yyyy-MM-dd HH:mm:ss"),
-                        folio = data.idSucursal.ToString().PadLeft(2, '0') + data.idCaja.ToString().PadLeft(2, '0') + localDate.Day.ToString().PadLeft(2, '0') + localDate.Month.ToString().PadLeft(2, '0') + localDate.Year + "AA",
+                        folio = folioBase,
                         folio_corte = data.folioCorte,
                         usuario_id = data.webDM.activeUser.id,
                         folio_apartado = folio,
                         apartado_id = id,
                         metodo_pago = JsonConvert.SerializeObject(pagos),
                         total_abonado = abonado
-                    };                    
-                    int ida = data.webDM.localDM.abonoApartadoTemporal(abono);
-                    data.webDM.localDM.acumularPagos(pagos, data.idCorte);
-                    folioabono = abono.folio;
-                    if (pagos.ContainsKey("efectivo"))
+                    };
+
+                    int ida = data.webDM.localDM.abonoApartadoTemporal(abonoApartado);
+                    folioabono = abonoApartado.folio;
+                }
+
+                data.webDM.localDM.acumularPagos(pagos, data.idCorte);
+
+                if (pagos.ContainsKey("efectivo"))
+                {
+                    if (tipo == 0)
                     {
-                        data.webDM.localDM.acumularEfectivoApartado(pagos["efectivo"], data.idCorte);
-                    }
-                    if (id == 0)
-                    {
-                        sendApartadoTemporal();
+                        data.webDM.localDM.acumularEfectivoCredito(pagos["efectivo"], data.idCorte);
                     }
                     else
                     {
-                        sendAbonoAprattado(abono);
+                        data.webDM.localDM.acumularEfectivoApartado(pagos["efectivo"], data.idCorte);
                     }
-                    
                 }
+
+                if (id == 0)
+                {
+                    if (tipo == 0)
+                    {
+                        sendCreditoTemporal();
+                    }
+                    else
+                    {
+                        sendApartadoTemporal();
+                    }
+                }
+                else
+                {
+                    if (tipo == 0)
+                    {
+                        sendAbonoCredito(abonoCredito);
+                    }
+                    else
+                    {
+                        sendAbonoAprattado(abonoApartado);
+                    }
+                }
+
                 cargarTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"), folioabono);
+
                 if (data.webDM.localDM.impresora.Equals(""))
                 {
                     MessageBox.Show("No se ha establecido una impresora", "Advertencia");
@@ -155,14 +172,12 @@ namespace PuntoVentaCasaCeja
                             printPreviewControl1.Document.Print();
                         }
                     }
-
                     else
                     {
-                        data.webDM.localDM.imprimirAbono(tipo, pagos, data.webDM.activeUser.nombre, data.sucursalName, data.sucursalDir, localDate.ToString("dd/MM/yyyy hh:mm tt"), abonado, porpagar, folioabono, folio); ;
+                        data.webDM.localDM.imprimirAbono(tipo, pagos, data.webDM.activeUser.nombre, data.sucursalName, data.sucursalDir, localDate.ToString("dd/MM/yyyy hh:mm tt"), abonado, porpagar, folioabono, folio);
                         if (reprint)
                         {
-                            data.webDM.localDM.imprimirAbono(tipo, pagos, data.webDM.activeUser.nombre, data.sucursalName, data.sucursalDir, localDate.ToString("dd/MM/yyyy hh:mm tt"), abonado, porpagar, folioabono, folio); ;
-
+                            data.webDM.localDM.imprimirAbono(tipo, pagos, data.webDM.activeUser.nombre, data.sucursalName, data.sucursalDir, localDate.ToString("dd/MM/yyyy hh:mm tt"), abonado, porpagar, folioabono, folio);
                         }
                     }
                 }
@@ -173,98 +188,124 @@ namespace PuntoVentaCasaCeja
             else
             {
                 MessageBox.Show("Favor de hacer un abono antes de continuar", "Advertencia");
-            }            
+            }
         }
+
         private async void sendAbonoCredito(AbonoCredito datos)
         {
-            bool result = false;
-            
-            result = await data.webDM.enviarAbonoCredito(datos, id);
-            
-            if (result)
+            try
             {
-                MessageBox.Show("Abono registrado con éxito", "Éxito");                
+                bool result = await data.webDM.enviarAbonoCredito(datos, id);
+                if (result)
+                {
+                    MessageBox.Show("Abono registrado con éxito", "Éxito");
+                }
+                else
+                {
+                    MessageBox.Show("Abono registrado de manera local", "Advertencia");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Abono registrado de manera local", "Advertencia");
+                MessageBox.Show($"Error al enviar abono crédito: {ex.Message}", "Error");
             }
             refresh();
         }
+
         private async void sendCreditoTemporal()
         {
-            bool result = false;
-
-            result = await data.webDM.enviarCreditoTemporal(folio);
-
-            if (result)
+            try
             {
-                MessageBox.Show("Abono registrado con éxito", "Éxito");
+                bool result = await data.webDM.enviarCreditoTemporal(folio);
+                if (result)
+                {
+                    MessageBox.Show("Abono registrado con éxito", "Éxito");
+                }
+                else
+                {
+                    MessageBox.Show("Abono registrado de manera local", "Advertencia");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Abono registrado de manera local", "Advertencia");
+                MessageBox.Show($"Error al enviar crédito temporal: {ex.Message}", "Error");
             }
             refresh();
         }
+
         private async void sendAbonoAprattado(AbonoApartado datos)
         {
-            bool result = false;
-
-            result = await data.webDM.enviarAbonoApartado(datos, id);
-
-            if (result)
+            try
             {
-                MessageBox.Show("Abono registrado con éxito", "Éxito");
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                bool result = await data.webDM.enviarAbonoApartado(datos, id);
+                if (result)
+                {
+                    MessageBox.Show("Abono registrado con éxito", "Éxito");
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("No se pudo conectar al servidor, favor de intentar más tarde", "Error");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("No se pudo conectar al servidor, favor dde intentar mas tarde", "Error");
+                MessageBox.Show($"Error al enviar abono apartado: {ex.Message}", "Error");
             }
             refresh();
-
         }
+
         private async void sendApartadoTemporal()
         {
-            bool result = false;
-
-            result = await data.webDM.enviarApartadoTemporal(folio);
-
-            if (result)
+            try
             {
-                MessageBox.Show("Abono registrado con éxito", "Éxito");
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                bool result = await data.webDM.enviarApartadoTemporal(folio);
+                if (result)
+                {
+                    MessageBox.Show("Abono registrado con éxito", "Éxito");
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("No se pudo conectar al servidor, favor de intentar más tarde", "Error");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("No se pudo conectar al servidor, favor dde intentar mas tarde", "Error");
+                MessageBox.Show($"Error al enviar apartado temporal: {ex.Message}", "Error");
             }
             refresh();
         }
+
 
 
         private void abonar_Click(object sender, EventArgs e)
         {
             MetodoPago mp = new MetodoPago(porpagar, abono);
             mp.ShowDialog();
+
             if (total <= (pagado + abonado))
             {
                 double cambio = pagado + abonado - total;
                 MessageBox.Show("Cambio MXN: $" + cambio.ToString("0.00"), "Cambio");
-                Dictionary<string, double> info = new Dictionary<string, double>();
-                info["efectivo"] =  - cambio;
+                Dictionary<string, double> info = new Dictionary<string, double>
+                {
+                    ["efectivo"] = -cambio
+                };
+
                 if (pagos.ContainsKey("efectivo"))
                 {
                     pagos["efectivo"] = Math.Round((pagos["efectivo"] - cambio), 2);
-                }                
+                }
+
                 abonado -= cambio;
                 txtporpagar.Text = "0.00";
                 data.webDM.localDM.acumularPagos(info, data.idCorte);
             }
         }
+
 
         private void cancelar_Click(object sender, EventArgs e)
         {

@@ -23,7 +23,8 @@ namespace PuntoVentaCasaCeja
         List<string> sucursales;
         List<string> listfont;
         List<int> listSizes;
-        public ConfigSuc(LocaldataManager localdata)
+        CurrentData data;
+        public ConfigSuc(LocaldataManager localdata, CurrentData data)
         {
             InitializeComponent();
             this.localDM = localdata;
@@ -98,7 +99,8 @@ namespace PuntoVentaCasaCeja
                 MessageBox.Show("No se ha establecido el ID de caja", "Advertencia");
                 return;
             }
-
+            //aqui esta mi error, quiero que id de sucursal sea el valor de la sucursal seleccionada 
+            //data.idSucursal = mapasucursales[boxsucursal.SelectedItem.ToString()];
             Settings.Default["pieDeTicket"] = txtPieTicket.Text;
             Settings.Default.Save();
 
@@ -109,6 +111,11 @@ namespace PuntoVentaCasaCeja
         private void Blimpiar_Click(object sender, EventArgs e)
         {
             txtPieTicket.Text = "";
+        }
+
+        private void boxsucursal_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

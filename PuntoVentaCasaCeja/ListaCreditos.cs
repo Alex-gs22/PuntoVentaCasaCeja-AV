@@ -23,7 +23,7 @@ namespace PuntoVentaCasaCeja
             this.webDM = data.webDM;
             this.data = data;
             this.localDM = webDM.localDM;
-            tablaCreditos.DataSource = localDM.GetCreditosDataTable();
+            tablaCreditos.DataSource = localDM.GetCreditosDataTable(data.idSucursal);
         }
 
         protected override bool ProcessDialogKey(Keys keyData)
@@ -66,6 +66,11 @@ namespace PuntoVentaCasaCeja
         {
             if (e.KeyCode == Keys.Enter)
             {
+                //verificar si hay una fila seleccionada
+                if (tablaCreditos.CurrentCell == null)
+                {
+                    return;
+                }
                 DataGridViewCellEventArgs cellEventArgs = new DataGridViewCellEventArgs(tablaCreditos.CurrentCell.ColumnIndex, tablaCreditos.CurrentCell.RowIndex);
                 tablaCreditos_CellDoubleClick(sender, cellEventArgs);
             }
@@ -99,7 +104,7 @@ namespace PuntoVentaCasaCeja
         }
 
         private void BSelCliente_Click(object sender, EventArgs e)
-        {
+        {   
             tablaCreditos_CellDoubleClick(tablaCreditos, new DataGridViewCellEventArgs(tablaCreditos.CurrentCell.ColumnIndex, tablaCreditos.CurrentCell.RowIndex));
             tablaCreditos.Focus();
         }
