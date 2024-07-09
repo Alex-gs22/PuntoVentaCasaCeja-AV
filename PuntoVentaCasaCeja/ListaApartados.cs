@@ -24,7 +24,7 @@ namespace PuntoVentaCasaCeja
             this.webDM = data.webDM;
             this.data = data;
             this.localDM = webDM.localDM;
-            tablaApartados.DataSource = localDM.GetApartadosDataTable();
+            tablaApartados.DataSource = localDM.GetApartadosDataTable(data.idSucursal);
         }
 
         protected override bool ProcessDialogKey(Keys keyData)
@@ -64,8 +64,14 @@ namespace PuntoVentaCasaCeja
         }
         private void TablaApartados_KeyDown(object sender, KeyEventArgs e)
         {
+            
             if (e.KeyCode == Keys.Enter)
             {
+                //verificar si hay una fila seleccionada
+                if (tablaApartados.CurrentCell == null)
+                {
+                    return;
+                }
                 DataGridViewCellEventArgs cellEventArgs = new DataGridViewCellEventArgs(tablaApartados.CurrentCell.ColumnIndex, tablaApartados.CurrentCell.RowIndex);
                 tablaApartados_CellDoubleClick(sender, cellEventArgs);
             }
@@ -100,7 +106,7 @@ namespace PuntoVentaCasaCeja
         }
 
         private void BSelCliente_Click(object sender, EventArgs e)
-        {
+        {  
             tablaApartados_CellDoubleClick(tablaApartados, new DataGridViewCellEventArgs(tablaApartados.CurrentCell.ColumnIndex, tablaApartados.CurrentCell.RowIndex));
             tablaApartados.Focus();
         }

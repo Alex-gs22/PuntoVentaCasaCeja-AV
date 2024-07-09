@@ -24,10 +24,12 @@ namespace PuntoVentaCasaCeja
         List<string> sucursales;
         List<string> listfont;
         List<int> listSizes;
+        CurrentData data;
 
-        public ConfigWindow(LocaldataManager localdata)
+        public ConfigWindow(LocaldataManager localdata, CurrentData data)
         {
             InitializeComponent();
+            this.data = data;
             this.localDM = localdata;
             mapasucursales = localDM.getIndicesSucursales();
             sucursales = new List<string>(mapasucursales.Keys);
@@ -62,6 +64,7 @@ namespace PuntoVentaCasaCeja
             if (mapasucursales.ContainsKey(selectsedsucursal))
             {
                 Settings.Default["sucursalid"] = mapasucursales[selectsedsucursal];
+                data.idSucursal = mapasucursales[selectsedsucursal];
             }
             else
             {
@@ -137,7 +140,7 @@ namespace PuntoVentaCasaCeja
             DialogResult resultLogin = login.ShowDialog();
             if (resultLogin == DialogResult.Yes)
             {
-                ConfigSuc cs = new ConfigSuc(localDM);
+                ConfigSuc cs = new ConfigSuc(localDM,data);
                 var result = cs.ShowDialog();
                 if (result == DialogResult.OK)
                 {

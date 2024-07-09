@@ -481,7 +481,7 @@ namespace PuntoVentaCasaCeja
             return clienteId;
         }
 
-        public DataTable GetCreditosDataTable()
+        /*public DataTable GetCreditosDataTable()
         {
             DataTable creditosTable = new DataTable();
 
@@ -521,9 +521,57 @@ namespace PuntoVentaCasaCeja
             sortedTable.Columns.Remove("Orden");
 
             return sortedTable;
-        }
+        }*/
+        public DataTable GetCreditosDataTable(int idSucursal)
+        {
+            DataTable creditosTable = new DataTable();
 
-        public DataTable GetApartadosDataTable()
+            creditosTable.Columns.Add("Folio", typeof(string));
+            creditosTable.Columns.Add("Cliente", typeof(string));
+            creditosTable.Columns.Add("Total", typeof(double));
+            creditosTable.Columns.Add("Pagado", typeof(double));
+            creditosTable.Columns.Add("Fecha", typeof(string));
+            creditosTable.Columns.Add("Estado", typeof(string));
+            creditosTable.Columns.Add("Orden", typeof(int));
+            creditosTable.Columns.Add("Sucursal", typeof(string));
+
+            SQLiteCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT folio, cliente_creditos_id, total, total_pagado, fecha_de_credito, estado FROM creditos";
+
+            using (SQLiteDataReader result = command.ExecuteReader())
+            {
+                while (result.Read())
+                {
+                    string folio = result.GetString(0);
+                    int clienteId = result.GetInt32(1);
+                    double total = result.GetDouble(2);
+                    double totalPagado = result.GetDouble(3);
+                    string fechaCredito = result.GetString(4);
+                    int estado = result.GetInt32(5);
+
+                    string estadoString = GetEstadoString(estado);
+                    int orden = GetEstadoOrden(estado);
+
+                    string clienteNombre = GetClienteNombre(clienteId);
+                    int sucursalId = ExtractSucursalIdFromFolio(folio);
+
+                    if (sucursalId == idSucursal)
+                    {
+                        string razonSocial = GetRazonSocial(sucursalId);
+                        creditosTable.Rows.Add(folio, clienteNombre, total, totalPagado, fechaCredito, estadoString, orden, razonSocial);
+                    }
+                }
+            }
+
+            DataView dv = creditosTable.DefaultView;
+            dv.Sort = "Orden ASC";
+            DataTable sortedTable = dv.ToTable();
+
+            sortedTable.Columns.Remove("Orden");
+
+            return sortedTable;
+        }
+        public DataTable GetApartadosDataTable(int idSucursal)
         {
             DataTable apartadosTable = new DataTable();
 
@@ -533,7 +581,8 @@ namespace PuntoVentaCasaCeja
             apartadosTable.Columns.Add("Pagado", typeof(double));
             apartadosTable.Columns.Add("Fecha", typeof(string));
             apartadosTable.Columns.Add("Estado", typeof(string));
-            apartadosTable.Columns.Add("Orden", typeof(int)); 
+            apartadosTable.Columns.Add("Orden", typeof(int));
+            apartadosTable.Columns.Add("Sucursal", typeof(string));
 
             SQLiteCommand command = connection.CreateCommand();
             command.CommandText = "SELECT folio, cliente_creditos_id, total, total_pagado, fecha_apartado, estado FROM apartados";
@@ -548,12 +597,17 @@ namespace PuntoVentaCasaCeja
                     double totalPagado = result.GetDouble(3);
                     string fechaApartado = result.GetString(4);
                     int estado = result.GetInt32(5);
+
                     string estadoString = GetEstadoString(estado);
                     int orden = GetEstadoOrden(estado);
 
                     string clienteNombre = GetClienteNombre(clienteId);
-
-                    apartadosTable.Rows.Add(folio, clienteNombre, total, totalPagado, fechaApartado, estadoString, orden);
+                    int sucursalId = ExtractSucursalIdFromFolio(folio);
+                    if (sucursalId == idSucursal)
+                    {
+                        string razonSocial = GetRazonSocial(sucursalId);
+                        apartadosTable.Rows.Add(folio, clienteNombre, total, totalPagado, fechaApartado, estadoString, orden, razonSocial);
+                    }
                 }
             }
 
@@ -564,6 +618,29 @@ namespace PuntoVentaCasaCeja
             sortedTable.Columns.Remove("Orden");
 
             return sortedTable;
+        }
+
+        private int ExtractSucursalIdFromFolio(string folio)
+        {
+            return int.Parse(folio.Substring(0, 2));
+        }
+
+        private string GetRazonSocial(int sucursalId)
+        {
+            SQLiteCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT razon_social FROM sucursales WHERE id = @Id";
+            command.Parameters.AddWithValue("@Id", sucursalId);
+
+            string razonSocial = string.Empty;
+            using (SQLiteDataReader result = command.ExecuteReader())
+            {
+                if (result.Read())
+                {
+                    razonSocial = result.GetString(0);
+                }
+            }
+
+            return razonSocial;
         }
 
         private string GetClienteNombre(int clienteId)

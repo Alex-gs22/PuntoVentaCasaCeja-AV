@@ -122,7 +122,7 @@
             this.tableLayoutPanel3.ColumnCount = 3;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.38055F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.61946F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 402F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 404F));
             this.tableLayoutPanel3.Controls.Add(this.txtid, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.label2, 1, 0);
@@ -144,11 +144,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtid.Font = new System.Drawing.Font("Segoe UI Semibold", 24F, System.Drawing.FontStyle.Bold);
-            this.txtid.Location = new System.Drawing.Point(458, 61);
+            this.txtid.Location = new System.Drawing.Point(457, 61);
             this.txtid.Margin = new System.Windows.Forms.Padding(4);
             this.txtid.Name = "txtid";
             this.txtid.ShortcutsEnabled = false;
-            this.txtid.Size = new System.Drawing.Size(222, 61);
+            this.txtid.Size = new System.Drawing.Size(221, 61);
             this.txtid.TabIndex = 11;
             this.txtid.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtid.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.integerInput_KeyPress);
@@ -161,7 +161,7 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
             this.label1.Location = new System.Drawing.Point(3, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(448, 37);
+            this.label1.Size = new System.Drawing.Size(447, 37);
             this.label1.TabIndex = 8;
             this.label1.Text = "SELEC. SUCURSAL";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -172,9 +172,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
-            this.label2.Location = new System.Drawing.Point(457, 20);
+            this.label2.Location = new System.Drawing.Point(456, 20);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(224, 37);
+            this.label2.Size = new System.Drawing.Size(223, 37);
             this.label2.TabIndex = 10;
             this.label2.Text = "ID DE CAJA";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -185,9 +185,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
-            this.label3.Location = new System.Drawing.Point(687, 20);
+            this.label3.Location = new System.Drawing.Point(685, 20);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(397, 37);
+            this.label3.Size = new System.Drawing.Size(399, 37);
             this.label3.TabIndex = 12;
             this.label3.Text = "PIE DE TICKET";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -198,9 +198,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPieTicket.Font = new System.Drawing.Font("Segoe UI Semibold", 24F, System.Drawing.FontStyle.Bold);
-            this.txtPieTicket.Location = new System.Drawing.Point(687, 60);
+            this.txtPieTicket.Location = new System.Drawing.Point(685, 60);
             this.txtPieTicket.Name = "txtPieTicket";
-            this.txtPieTicket.Size = new System.Drawing.Size(397, 61);
+            this.txtPieTicket.Size = new System.Drawing.Size(399, 61);
             this.txtPieTicket.TabIndex = 13;
             this.txtPieTicket.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
             // 
@@ -215,8 +215,9 @@
             this.boxsucursal.Location = new System.Drawing.Point(4, 61);
             this.boxsucursal.Margin = new System.Windows.Forms.Padding(4);
             this.boxsucursal.Name = "boxsucursal";
-            this.boxsucursal.Size = new System.Drawing.Size(446, 58);
+            this.boxsucursal.Size = new System.Drawing.Size(445, 58);
             this.boxsucursal.TabIndex = 9;
+            this.boxsucursal.SelectedIndexChanged += new System.EventHandler(this.boxsucursal_SelectedIndexChanged);
             // 
             // Bsalir
             // 

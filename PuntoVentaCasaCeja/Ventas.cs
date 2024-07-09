@@ -15,7 +15,7 @@ using System.Data;
 namespace PuntoVentaCasaCeja
 {
     public partial class Ventas : Form
-    {
+    {   
         FirebaseClient firebase;
         private bool mensajeMayoreoMostrado = false;
         bool hasTemporal;
@@ -37,7 +37,7 @@ namespace PuntoVentaCasaCeja
         bool reprint = false;
         string folio;
         static bool loaded = false;
-        static int idsucursal;
+        public  int idsucursal;
         static int idcaja;
         static string sucursalName;
         static string sucursalDir;
@@ -52,9 +52,11 @@ namespace PuntoVentaCasaCeja
     new System.Drawing.Printing.PrintDocument();
         private System.Drawing.Printing.PrintDocument docZToPrint =
    new System.Drawing.Printing.PrintDocument();
+        CurrentData data;
         public Ventas()
         {
             InitializeComponent();
+            //MessageBox.Show("genial");
             txtcodigo.GotFocus += txtcodigo_FocusChanged;
             txtcodigo.LostFocus += txtcodigo_FocusChanged;
             localDM = new LocaldataManager();
@@ -80,6 +82,21 @@ namespace PuntoVentaCasaCeja
             idsucursal = int.Parse(Settings.Default["sucursalid"].ToString());
             webDM.sucursal_id = idsucursal;
             (printPreview as Form).WindowState = FormWindowState.Maximized;
+            data = new CurrentData
+            {
+                webDM = webDM,
+                sucursalDir = sucursalDir,
+                sucursalName = sucursalName,
+                folioCorte = folioCorte,
+                carrito = carrito,
+                totalcarrito = totalcarrito,
+                idCaja = idcaja,
+                idSucursal = idsucursal,
+                fontName = fontName,
+                fontSize = fontSize,
+                idCorte = idcorte,
+                printerType = printerType
+            };
         }
         void setInt(int x)
         {
@@ -1112,7 +1129,7 @@ namespace PuntoVentaCasaCeja
 
         private void establecerImpresoraToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ConfigWindow config = new ConfigWindow(localDM);
+            ConfigWindow config = new ConfigWindow(localDM,data);
             DialogResult result = config.ShowDialog();
             if (result == DialogResult.OK)
             {
@@ -1485,23 +1502,9 @@ namespace PuntoVentaCasaCeja
         {
             sucursalName = localDM.getSucursalname(idsucursal);
             sucursalDir = localDM.getSucursalAddr(idsucursal);
-            CurrentData cd = new CurrentData {
-                webDM= webDM,
-                sucursalDir = sucursalDir,
-                sucursalName = sucursalName,
-                folioCorte = folioCorte,
-                carrito=carrito,
-                totalcarrito=totalcarrito,
-                idCaja = idcaja,
-                idSucursal = idsucursal,
-                fontName = fontName,
-                fontSize = fontSize,
-                idCorte = idcorte,
-                printerType = printerType
-                };
             //AltaCliente alta = new AltaCliente(cd);
             //DialogResult response = alta.ShowDialog();
-            CredApartSel CredApar = new CredApartSel(cd);
+            CredApartSel CredApar = new CredApartSel(data);
             DialogResult response = CredApar.ShowDialog();
             if (response == DialogResult.Yes)
                 {
