@@ -152,7 +152,7 @@
             this.apartado.Name = "apartado";
             this.apartado.Size = new System.Drawing.Size(233, 178);
             this.apartado.TabIndex = 5;
-            this.apartado.Text = "APARTADOS \r\n(F2)";
+            this.apartado.Text = "ABONOS APARTADOS \r\n(F2)";
             this.apartado.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.apartado.UseVisualStyleBackColor = false;
             this.apartado.Click += new System.EventHandler(this.apartado_Click);

@@ -14,6 +14,11 @@ namespace PuntoVentaCasaCeja
 {
     public partial class ConfigWindow : Form
     {
+        Action<Usuario> setUser;
+        Usuario usuario;
+        static Usuario activador = null;
+        static Usuario admin = null;
+        WebDataManager webDM;
         LocaldataManager localDM;
         Dictionary<string, int> mapasucursales;
         List<string> sucursales;
@@ -128,17 +133,46 @@ namespace PuntoVentaCasaCeja
 
         private void ConfigSuc_Click(object sender, EventArgs e)
         {
-            ConfigSuc cs = new ConfigSuc(localDM);
-            var result = cs.ShowDialog();
-            if (result == DialogResult.OK)
+            UserLogin login = new UserLogin(localDM, setAdmin, true);
+            DialogResult resultLogin = login.ShowDialog();
+            if (resultLogin == DialogResult.Yes)
             {
-                boxsucursal.SelectedItem = cs.SelectedSucursal;
-                txtid.Text = cs.IdCaja;
-
-                // Por ahora se mostrara en la vista para verificar que se haya guardado, pero se tiene que ver como mandar ese texto al ticket.
-                txtPieTicket.Text = cs.PieTicket;
+                ConfigSuc cs = new ConfigSuc(localDM);
+                var result = cs.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    boxsucursal.SelectedItem = cs.SelectedSucursal;
+                    txtid.Text = cs.IdCaja;
+                }
             }
-        } 
+            else
+            {
+                MessageBox.Show("Autenticación Fallida");
+            }
+        }
+
+        bool pedirAutorizacion()
+        {
+            UserLogin login = new UserLogin(localDM, setActivador, true);
+            DialogResult response = login.ShowDialog();
+            if (response == DialogResult.Yes)
+            {
+                return true;
+            }
+            else
+            {
+                this.Dispose();
+                return false;
+            }
+        }
+        void setActivador(Usuario usuario)
+        {
+            activador = usuario;
+        }
+        void setAdmin(Usuario usuario)
+        {
+            admin = usuario;
+        }
 
     }
 }
