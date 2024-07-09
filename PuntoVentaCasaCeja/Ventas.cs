@@ -307,7 +307,7 @@ namespace PuntoVentaCasaCeja
             }
             else
             {
-                if (cajero.es_raiz <= 1)
+                if (cajero.es_raiz <= 1) //aqui se configura para que los admin tengan acceso a todo
                 {
                     ingresarEfectivoF3ToolStripMenuItem.Enabled = true;
                     retirarEfectivoF4ToolStripMenuItem.Enabled = true;                    
@@ -315,15 +315,18 @@ namespace PuntoVentaCasaCeja
                     establecerImpresoraToolStripMenuItem.Enabled = true;
                     administrarCatálogoToolStripMenuItem.Enabled = true;
                     actualizarBaseDeDatosToolStripMenuItem.Enabled = true;
+                    historialDeCortesToolStripMenuItem.Enabled = true;
                 }
                 else
                 {
+                    //aqui se configura para desactivar acceso a los usuarios generales
                     ingresarEfectivoF3ToolStripMenuItem.Enabled = false;
                     retirarEfectivoF4ToolStripMenuItem.Enabled = false;
                     corteZF7ToolStripMenuItem.Enabled = false;
-                    establecerImpresoraToolStripMenuItem.Enabled = false;
+                    establecerImpresoraToolStripMenuItem.Enabled = true;
                     administrarCatálogoToolStripMenuItem.Enabled = false;
                     actualizarBaseDeDatosToolStripMenuItem.Enabled = false;
+                    historialDeCortesToolStripMenuItem.Enabled = false;
                 }
             }
         }
@@ -1550,6 +1553,12 @@ namespace PuntoVentaCasaCeja
         private void tabla_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void historialDeCortesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HistorialCortes hc = new HistorialCortes(data);
+            hc.ShowDialog();
         }
     }
 }

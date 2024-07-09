@@ -253,6 +253,12 @@
     <Compile Include="GastosIngresos.designer.cs">
       <DependentUpon>GastosIngresos.cs</DependentUpon>
     </Compile>
+    <Compile Include="HistorialCortes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HistorialCortes.Designer.cs">
+      <DependentUpon>HistorialCortes.cs</DependentUpon>
+    </Compile>
     <Compile Include="IngresarMonto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -356,6 +362,12 @@
     <Compile Include="VerCorte.Designer.cs">
       <DependentUpon>VerCorte.cs</DependentUpon>
     </Compile>
+    <Compile Include="VerCorteHistorial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VerCorteHistorial.Designer.cs">
+      <DependentUpon>VerCorteHistorial.cs</DependentUpon>
+    </Compile>
     <Compile Include="VerCredApa.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -413,6 +425,9 @@
     <EmbeddedResource Include="GastosIngresos.resx">
       <DependentUpon>GastosIngresos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HistorialCortes.resx">
+      <DependentUpon>HistorialCortes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="IngresarMonto.resx">
       <DependentUpon>IngresarMonto.cs</DependentUpon>
     </EmbeddedResource>
@@ -467,6 +482,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="VerCorte.resx">
       <DependentUpon>VerCorte.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VerCorteHistorial.resx">
+      <DependentUpon>VerCorteHistorial.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VerCredApa.resx">
       <DependentUpon>VerCredApa.cs</DependentUpon>

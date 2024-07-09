@@ -697,3 +697,5 @@ C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV2\PuntoVentaCasaCeja-AV\Pu
 C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV2\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVen.CE9849ED.Up2Date
 C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV2\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.exe
 C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV2\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.pdb
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV2\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.HistorialCortes.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV2\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.VerCorteHistorial.resources
