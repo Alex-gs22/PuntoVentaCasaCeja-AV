@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using System.Data;
 using System.Text;
 using Newtonsoft.Json.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace PuntoVentaCasaCeja
 {
@@ -31,6 +32,7 @@ namespace PuntoVentaCasaCeja
         string abonos_apartado_lu;
         string sucursales_lastupdate;
         string clientes_lastupdate;
+        String cortes_lastupdate;
         public int sucursal_id;
         Action<int> refreshData;
         public Usuario activeUser;
@@ -58,6 +60,7 @@ namespace PuntoVentaCasaCeja
             clientes_lastupdate = localDM.getTableLastUpdate("clientes");
             abonos_credito_lu = localDM.getTableLastUpdate("abonos_credito");
             abonos_apartado_lu = localDM.getTableLastUpdate("abonos_apartado");
+            cortes_lastupdate = localDM.getTableLastUpdate("cortes");
         }
         public void resetDates()
         {
@@ -72,6 +75,7 @@ namespace PuntoVentaCasaCeja
             abonos_credito_lu = localDM.getTableLastUpdate("abonos_credito");
             abonos_apartado_lu = localDM.getTableLastUpdate("abonos_apartado");
             clientes_lastupdate = localDM.getTableLastUpdate("clientes");
+            cortes_lastupdate = localDM.getTableLastUpdate("cortes");
         }
         public async Task<bool> PingServerAsync()
         {
@@ -353,6 +357,51 @@ namespace PuntoVentaCasaCeja
 
             return false;
         }
+        public async Task<bool> GetCortes()
+        {
+            string res = "";
+            Dictionary<string, object> date = new Dictionary<string, object>();
+            date["fecha_de_actualizacion"] = cortes_lastupdate;
+            date["sucursal_id"] = sucursal_id;
+            try
+            {
+                HttpResponseMessage response = await client.PostAsJsonAsync(url + "api/cortes", date);
+                res = await response.Content.ReadAsStringAsync();
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = JsonConvert.DeserializeObject<Dictionary<string, object>>(res);
+                    if (result["status"].ToString().Equals("success"))
+                    {
+                        var data = JsonConvert.DeserializeObject<Dictionary<string, object>>(result["data"].ToString());
+                        var cortes = JsonConvert.DeserializeObject<List<Corte>>(data["cortes"].ToString());
+                        localDM.saveCortes(cortes);
+                        return true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error: " + result["data"].ToString(), "Error en la respuesta del servidor");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Código de estado: " + response.StatusCode + "\nContenido: " + res, "Error en la conexión con el servidor");
+                }
+            }
+            catch (HttpRequestException hre)
+            {
+                MessageBox.Show("Solicitud HTTP fallida: " + hre.Message, "Error de conexión");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error inesperado: " + e.Message, "Error");
+            }
+
+            return false;
+        }
+
+
+
+
         public async Task<bool> GetCreditos()
         {
             string res = "";

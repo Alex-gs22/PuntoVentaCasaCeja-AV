@@ -219,6 +219,7 @@
     <Compile Include="ConfigWindow.Designer.cs">
       <DependentUpon>ConfigWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Corte.cs" />
     <Compile Include="CrearProducto.cs">
       <SubType>Form</SubType>
     </Compile>
