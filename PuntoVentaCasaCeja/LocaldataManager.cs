@@ -2662,7 +2662,7 @@ namespace PuntoVentaCasaCeja
             command.CommandText = "INSERT INTO cortes (fondo_apertura, total_efectivo, total_debito, total_credito, total_cheques, total_transferencias, efectivo_apartados, efectivo_creditos, gastos, ingresos, sobrante, fecha_apertura, estado, detalles)" +
                 "values(@setApertura, 0, 0, 0, 0, 0, 0, 0, '{}', '{}', 0, @setFecha, 0, 'Abierta')";
             command.Parameters.AddWithValue("setApertura", apertura);
-            command.Parameters.AddWithValue("setFecha", localDate.Day.ToString().PadLeft(2, '0') + "-" + localDate.Month.ToString().PadLeft(2, '0') + "-" + localDate.Year);
+            command.Parameters.AddWithValue("setFecha", localDate.ToString("yyyy-MM-dd"));
             command.ExecuteNonQuery();
             command.CommandText = "select last_insert_rowid()";
             Int64 LastRowID64 = (Int64)command.ExecuteScalar();

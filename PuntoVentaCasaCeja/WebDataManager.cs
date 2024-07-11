@@ -11,6 +11,7 @@ using System.Net.NetworkInformation;
 using System.Windows.Forms;
 using System.Data;
 using System.Text;
+using Newtonsoft.Json.Linq;
 
 namespace PuntoVentaCasaCeja
 {
@@ -1178,39 +1179,63 @@ namespace PuntoVentaCasaCeja
             }
             return false;
         }
-        public async Task<bool> SendCorte(Dictionary<string, string> data)
+        public async Task<(bool Success, string Message)> SendCorte(Dictionary<string, string> data)
         {
-            string res = "";
             try
             {
+                HttpResponseMessage response = await client.PostAsJsonAsync($"{url}api/cortes", data);
+                string res = await response.Content.ReadAsStringAsync();
 
-                HttpResponseMessage response = await client.PostAsJsonAsync(
-                    url + "api/cortes", data);
-                res = await response.Content.ReadAsStringAsync();
                 if (response.IsSuccessStatusCode)
                 {
-                    var result = JsonConvert.DeserializeObject<Dictionary<string, object>>(res);
-
-                    if (result["status"].ToString().Equals("success"))
+                    if (IsValidJson(res))
                     {
-                        return true;
+                        var result = JsonConvert.DeserializeObject<Dictionary<string, object>>(res);
+                        if (result.TryGetValue("status", out var status) && status.ToString().Equals("success"))
+                        {
+                            return (true, string.Empty);
+                        }
+                        else if (result.TryGetValue("data", out var dataMessage))
+                        {
+                            return (false, dataMessage.ToString());
+                        }
                     }
-                    else
-                    {
-                        MessageBox.Show(result["data"].ToString());
-                    }
+                    return (false, "Respuesta del servidor no válida.");
                 }
                 else
                 {
-                    MessageBox.Show(res, "Error");
+                    return (false, res);
                 }
-        }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "Hubo un problema al establecer la conexion con el servidor");
             }
-            return false;
+            catch (Exception ex)
+            {
+                return (false, $"Hubo un problema al establecer la conexión con el servidor: {ex.Message}");
+            }
         }
+
+        private bool IsValidJson(string strInput)
+        {
+            if (string.IsNullOrWhiteSpace(strInput)) return false;
+            strInput = strInput.Trim();
+            if ((strInput.StartsWith("{") && strInput.EndsWith("}")) || // For object
+                (strInput.StartsWith("[") && strInput.EndsWith("]")))   // For array
+            {
+                try
+                {
+                    var obj = JToken.Parse(strInput);
+                    return true;
+                }
+                catch (JsonReaderException) // Invalid JSON
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public async Task<bool> SendVentaAsync(Dictionary<string, string> venta, bool hasTemporal, int id)
         {
             List<ProductoVenta> productos = productos = localDM.getCarrito(id);

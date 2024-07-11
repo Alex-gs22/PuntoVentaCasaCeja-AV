@@ -61,7 +61,7 @@ namespace PuntoVentaCasaCeja
             txtfechapertura.Text = data["fecha_apertura_caja"];
             txttotapa.Text = data["total_apartados"];
             txttotcred.Text = data["total_creditos"];
-            txtfechcorte.Text = localDate.Day.ToString().PadLeft(2, '0') + "-" + localDate.Month.ToString().PadLeft(2, '0') + "-" + localDate.Year;
+            txtfechcorte.Text = localDate.ToString("yyyy-MM-dd");
             var ingresos = JsonConvert.DeserializeObject<Dictionary<string, double>>(data["ingresos"]);
             foreach (var x in ingresos)
             {
@@ -72,6 +72,11 @@ namespace PuntoVentaCasaCeja
             {
                 listagastos.Items.Add(x.Key + ": " + x.Value);
             }        
+        }
+
+        private void txtfechcorte_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void txtingresos_TextChanged(object sender, EventArgs e)

@@ -978,14 +978,18 @@ namespace PuntoVentaCasaCeja
 
         public async void enviarCorte(int id, Dictionary<string, string> data)
         {
-
-            if (await webDM.SendCorte(data))
+            var (success, message) = await webDM.SendCorte(data);
+            if (success)
             {
                 localDM.changeEstadoCorte(id, 2, "Enviado");
-
+                MessageBox.Show("Corte guardado con exito");
             }
-            else MessageBox.Show("No se pudo conectar con el servidor, favor de intentar más tarde", "Advertencia");
+            else
+            {
+                MessageBox.Show(message, "Advertencia");
+            }
         }
+
 
         private void ingreso_Click(object sender, EventArgs e)
         {
