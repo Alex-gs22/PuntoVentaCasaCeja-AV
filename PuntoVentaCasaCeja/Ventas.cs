@@ -143,7 +143,7 @@ namespace PuntoVentaCasaCeja
                 lw.setData(100, "Sincronizando datos desde el servidor...");
                 await webDM.GetAbonosCredito();
                 lw.setData(100, "Sincronizando datos desde el servidor...");
-                //await webDM.GetCortes();
+                await webDM.GetCortes();
             }
             else
             {
@@ -201,7 +201,7 @@ namespace PuntoVentaCasaCeja
                         lw.setData(100, "Sincronizando datos desde el servidor...");
                         await webDM.GetAbonosCredito();
                         lw.setData(100, "Sincronizando datos desde el servidor...");
-                        //await webDM.GetCortes();
+                        await webDM.GetCortes();
                 }
                     else
                     {
