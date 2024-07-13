@@ -60,7 +60,7 @@ namespace PuntoVentaCasaCeja
             clientes_lastupdate = localDM.getTableLastUpdate("clientes");
             abonos_credito_lu = localDM.getTableLastUpdate("abonos_credito");
             abonos_apartado_lu = localDM.getTableLastUpdate("abonos_apartado");
-            cortes_lastupdate = localDM.getTableLastUpdate("cortes");
+            cortes_lastupdate = "2000-01-01T00:00:00Z";
         }
         public void resetDates()
         {

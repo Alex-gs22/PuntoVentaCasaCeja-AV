@@ -363,12 +363,6 @@
     <Compile Include="VerCorte.Designer.cs">
       <DependentUpon>VerCorte.cs</DependentUpon>
     </Compile>
-    <Compile Include="VerCorteHistorial.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="VerCorteHistorial.Designer.cs">
-      <DependentUpon>VerCorteHistorial.cs</DependentUpon>
-    </Compile>
     <Compile Include="VerCredApa.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -484,9 +478,6 @@
     <EmbeddedResource Include="VerCorte.resx">
       <DependentUpon>VerCorte.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="VerCorteHistorial.resx">
-      <DependentUpon>VerCorteHistorial.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="VerCredApa.resx">
       <DependentUpon>VerCredApa.cs</DependentUpon>
     </EmbeddedResource>
@@ -496,6 +487,7 @@
     <EmbeddedResource Include="VerOperaciones.resx">
       <DependentUpon>VerOperaciones.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="ClassDiagram2.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

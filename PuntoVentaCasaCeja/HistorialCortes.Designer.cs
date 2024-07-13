@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.exitButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -194,12 +195,27 @@
             // 
             // tablaCortesZ
             // 
-            this.tablaCortesZ.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tablaCortesZ.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tablaCortesZ.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tablaCortesZ.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.tablaCortesZ.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllHeaders;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI Semibold", 24F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.tablaCortesZ.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.tablaCortesZ.ColumnHeadersHeight = 16;
             this.tablaCortesZ.Location = new System.Drawing.Point(3, 3);
             this.tablaCortesZ.Name = "tablaCortesZ";
+            this.tablaCortesZ.ReadOnly = true;
             this.tablaCortesZ.RowHeadersWidth = 51;
             this.tablaCortesZ.RowTemplate.Height = 24;
+            this.tablaCortesZ.RowTemplate.ReadOnly = true;
+            this.tablaCortesZ.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.tablaCortesZ.Size = new System.Drawing.Size(1429, 639);
             this.tablaCortesZ.TabIndex = 0;
             this.tablaCortesZ.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tablaCortesZ_KeyDown);

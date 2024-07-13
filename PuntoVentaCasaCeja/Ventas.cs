@@ -11,6 +11,7 @@ using Windows.Storage;
 using Firebase.Database;
 using System.Reflection;
 using System.Data;
+using System.Threading.Tasks;
 
 namespace PuntoVentaCasaCeja
 {
@@ -143,7 +144,7 @@ namespace PuntoVentaCasaCeja
                 lw.setData(100, "Sincronizando datos desde el servidor...");
                 await webDM.GetAbonosCredito();
                 lw.setData(100, "Sincronizando datos desde el servidor...");
-                await webDM.GetCortes();
+                //await webDM.GetCortes();
             }
             else
             {
@@ -201,7 +202,7 @@ namespace PuntoVentaCasaCeja
                         lw.setData(100, "Sincronizando datos desde el servidor...");
                         await webDM.GetAbonosCredito();
                         lw.setData(100, "Sincronizando datos desde el servidor...");
-                        await webDM.GetCortes();
+                        //await webDM.GetCortes();
                 }
                     else
                     {
@@ -980,19 +981,20 @@ namespace PuntoVentaCasaCeja
             totalpagado += cantidad;
         }
 
-        public async void enviarCorte(int id, Dictionary<string, string> data)
+        public async Task enviarCorte(int id, Dictionary<string, string> data)
         {
             var (success, message) = await webDM.SendCorte(data);
             if (success)
             {
                 localDM.changeEstadoCorte(id, 2, "Enviado");
-                MessageBox.Show("Corte guardado con exito");
+                MessageBox.Show("Corte guardado con éxito");
             }
             else
             {
                 MessageBox.Show(message, "Advertencia");
             }
         }
+
 
 
         private void ingreso_Click(object sender, EventArgs e)
@@ -1020,7 +1022,7 @@ namespace PuntoVentaCasaCeja
             }
         }
 
-        private void cortep_Click(object sender, EventArgs e)
+        private async void cortep_Click(object sender, EventArgs e)
         {
             sucursalName = localDM.getSucursalname(idsucursal);
             sucursalDir = localDM.getSucursalAddr(idsucursal);
@@ -1043,13 +1045,14 @@ namespace PuntoVentaCasaCeja
                     {
                         printPreviewControl1.Document.Print();
                     }
-
                     else
                     {
                         imprimirCorte(corte);
                     }
                 }
-                enviarCorte(idcorte, corte);
+
+                await enviarCorte(idcorte, corte); // Espera a que enviarCorte termine
+
                 idcorte = -1;
                 apertura = 0;
                 cajero = null;
@@ -1057,6 +1060,7 @@ namespace PuntoVentaCasaCeja
                 this.Dispose();
             }
         }
+
         void imprimirCorte(Dictionary<string, string> corte)
         {
             double efedir = double.Parse(corte["total_efectivo"]) - double.Parse(corte["efectivo_apartados"]) - double.Parse(corte["efectivo_creditos"]);
