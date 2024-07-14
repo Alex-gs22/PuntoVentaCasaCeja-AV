@@ -57,6 +57,8 @@ namespace PuntoVentaCasaCeja
 
         private void BSelCorte_Click(object sender, EventArgs e)
         {
+            VerCorteHistorial verCorte = new VerCorteHistorial();
+            verCorte.ShowDialog();
             int selectedRowIndex = tablaCortesZ.CurrentCell.RowIndex;
             if (selectedRowIndex < 0)
             {
