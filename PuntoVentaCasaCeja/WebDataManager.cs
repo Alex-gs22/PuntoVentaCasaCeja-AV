@@ -60,7 +60,7 @@ namespace PuntoVentaCasaCeja
             clientes_lastupdate = localDM.getTableLastUpdate("clientes");
             abonos_credito_lu = localDM.getTableLastUpdate("abonos_credito");
             abonos_apartado_lu = localDM.getTableLastUpdate("abonos_apartado");
-            cortes_lastupdate = "2000-01-01T00:00:00Z";
+            cortes_lastupdate = localDM.getTableLastUpdate("apartados");
         }
         public void resetDates()
         {
@@ -363,42 +363,44 @@ namespace PuntoVentaCasaCeja
             Dictionary<string, object> date = new Dictionary<string, object>();
             date["fecha_de_actualizacion"] = cortes_lastupdate;
             date["sucursal_id"] = sucursal_id;
+
             try
             {
-                HttpResponseMessage response = await client.PostAsJsonAsync(url + "api/cortes", date);
+                string apiUrl = url + "api/cortes";
+                Console.WriteLine($"Making request to: {apiUrl}");
+
+                HttpResponseMessage response = await client.PostAsJsonAsync(apiUrl, date);
                 res = await response.Content.ReadAsStringAsync();
+
+                Console.WriteLine($"Response status code: {response.StatusCode}"); 
                 if (response.IsSuccessStatusCode)
                 {
                     var result = JsonConvert.DeserializeObject<Dictionary<string, object>>(res);
+
                     if (result["status"].ToString().Equals("success"))
                     {
                         var data = JsonConvert.DeserializeObject<Dictionary<string, object>>(result["data"].ToString());
                         var cortes = JsonConvert.DeserializeObject<List<Corte>>(data["cortes"].ToString());
                         localDM.saveCortes(cortes);
+                        
                         return true;
                     }
                     else
                     {
-                        MessageBox.Show("Error: " + result["data"].ToString(), "Error en la respuesta del servidor");
+                        MessageBox.Show("Error", result["data"].ToString());
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Código de estado: " + response.StatusCode + "\nContenido: " + res, "Error en la conexión con el servidor");
+                    MessageBox.Show("Hubo un problema al establecer la conexión con el servidor", "Error");
                 }
-            }
-            catch (HttpRequestException hre)
-            {
-                MessageBox.Show("Solicitud HTTP fallida: " + hre.Message, "Error de conexión");
             }
             catch (Exception e)
             {
-                MessageBox.Show("Error inesperado: " + e.Message, "Error");
+                MessageBox.Show(e.Message, "Hubo un problema al establecer la conexión con el servidor");
             }
-
             return false;
         }
-
         public async Task<bool> GetCreditos()
         {
             string res = "";
@@ -407,6 +409,7 @@ namespace PuntoVentaCasaCeja
             date["sucursal_id"] = sucursal_id;
             try
             {
+
                 HttpResponseMessage response = await client.PostAsJsonAsync(url + "api/creditos/sincronizar", date);
                 res = await response.Content.ReadAsStringAsync();
                 if (response.IsSuccessStatusCode)
