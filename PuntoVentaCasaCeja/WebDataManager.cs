@@ -399,9 +399,6 @@ namespace PuntoVentaCasaCeja
             return false;
         }
 
-
-
-
         public async Task<bool> GetCreditos()
         {
             string res = "";

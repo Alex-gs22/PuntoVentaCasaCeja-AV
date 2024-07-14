@@ -340,6 +340,7 @@
             this.cancel.TabIndex = 14;
             this.cancel.Text = "CANCELAR (Esc)";
             this.cancel.UseVisualStyleBackColor = true;
+            this.cancel.Click += new System.EventHandler(this.cancel_Click);
             // 
             // txttransferencias
             // 
@@ -358,6 +359,7 @@
             this.txtsobrante.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtsobrante.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtsobrante.Enabled = false;
             this.txtsobrante.Font = new System.Drawing.Font("Segoe UI Semibold", 22F, System.Drawing.FontStyle.Bold);
             this.txtsobrante.Location = new System.Drawing.Point(866, 546);
             this.txtsobrante.Margin = new System.Windows.Forms.Padding(4);
@@ -550,6 +552,7 @@
             this.Bimprimir.TabIndex = 13;
             this.Bimprimir.Text = "IMPRIMIR (F5)";
             this.Bimprimir.UseVisualStyleBackColor = true;
+            this.Bimprimir.Click += new System.EventHandler(this.Bimprimir_Click);
             // 
             // VerCorteHistorial
             // 

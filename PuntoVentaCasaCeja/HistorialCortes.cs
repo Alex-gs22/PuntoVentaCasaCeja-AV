@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace PuntoVentaCasaCeja
 {
@@ -57,8 +56,11 @@ namespace PuntoVentaCasaCeja
 
         private void BSelCorte_Click(object sender, EventArgs e)
         {
-            VerCorteHistorial verCorte = new VerCorteHistorial();
-            verCorte.ShowDialog();
+            if (tablaCortesZ.Rows.Count == 0)
+            {
+                MessageBox.Show("La tabla de cortes está vacía.", "Advertencia");
+                return;
+            }
             int selectedRowIndex = tablaCortesZ.CurrentCell.RowIndex;
             if (selectedRowIndex < 0)
             {
@@ -70,21 +72,8 @@ namespace PuntoVentaCasaCeja
             Dictionary<string, string> corteData = localDM.getCorte(idCorte);
             if (corteData != null)
             {
-                /* VerCorteHistorial verCorte = new VerCorteHistorial(
-                     corteData,
-                     Convert.ToInt32(corteData["sucursal_id"]),
-                     Convert.ToInt32(corteData["usuario_id"]),
-                     idCorte,
-                     Convert.ToInt32(corteData["idcaja"]),
-                     localDM
-                 );
-                 var result = verCorte.ShowDialog();
-                 if (result == DialogResult.Yes)
-                 {
-                     // Aquí puedes realizar acciones adicionales después de aceptar el corte
-                     //MessageBox.Show("Corte completado exitosamente.", "Éxito");
-                 }*/
-                // Puedes agregar más lógica según sea necesario para otros resultados de DialogResult
+                VerCorteHistorial verCorte = new VerCorteHistorial(corteData, data);
+                verCorte.ShowDialog();
             }
             else
             {
@@ -165,13 +154,26 @@ namespace PuntoVentaCasaCeja
         }
         private void Bimprimir_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Imprimiendo corte");
+            if (localDM.impresora == null)
+            {
+                MessageBox.Show("No se ha configurado la impresora para imprimir el corte.", "Error");
+                return;
+            }
+
+            if (tablaCortesZ.Rows.Count == 0)
+            {
+                MessageBox.Show("La tabla de cortes está vacía.", "Advertencia");
+                return;
+            }
+
             int selectedRowIndex = tablaCortesZ.CurrentCell.RowIndex;
             if (selectedRowIndex < 0)
             {
                 MessageBox.Show("Seleccione un corte de la lista.", "Advertencia");
                 return;
             }
+
+            MessageBox.Show("Imprimiendo corte");
             Dictionary<string, string> corte = localDM.getCorte(selectedRowIndex);
             if (corte != null)
             {
@@ -187,9 +189,9 @@ namespace PuntoVentaCasaCeja
         {
             if (DialogResult.Yes == MessageBox.Show("Esta seguro que desea eliminar el historial de cortes?", "Eliminar historial", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
             {
+                localDM.eliminarCortes();
                 MessageBox.Show("Historial de cortes eliminado");
-                tablaCortesZ = new DataGridView();
-                //realmente crees que sea necesario eliminar el historial de cortes?
+                tablaCortesZ.DataSource = localDM.getCortes();
             }
         }
 
