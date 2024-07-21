@@ -24,6 +24,11 @@ namespace PuntoVentaCasaCeja
             ListaCreditos listaCr = new ListaCreditos(data);
             listaCr.ShowDialog();
         }
+        private void BuscarCliente_Click(object sender, EventArgs e)
+        {
+            BuscarCliente buscarCl = new BuscarCliente(data);
+            buscarCl.ShowDialog();
+        }
 
         private void apartado_Click(object sender, EventArgs e)
         {
@@ -43,13 +48,10 @@ namespace PuntoVentaCasaCeja
                         credito.PerformClick();
                         break;
                     case Keys.F2:
-                        apartado.PerformClick();
-                        break;
-                    case Keys.F3:
                         BuscarCliente.PerformClick();
                         break;
-                    case Keys.F4:
-                        ListaClientes.PerformClick();
+                    case Keys.F3:
+                        apartado.PerformClick();
                         break;
                     default:
                         return base.ProcessDialogKey(keyData);
@@ -57,18 +59,6 @@ namespace PuntoVentaCasaCeja
                 return true;
             }
             return base.ProcessDialogKey(keyData);
-        }
-
-        private void BuscarCliente_Click(object sender, EventArgs e)
-        {
-            BuscarCliente buscarCl = new BuscarCliente(data);
-            buscarCl.ShowDialog();
-        }
-
-        private void ListaClientes_Click(object sender, EventArgs e)
-        {
-            ListaClientes listaCl = new ListaClientes(data);
-            listaCl.ShowDialog();
         }
     }
 }
