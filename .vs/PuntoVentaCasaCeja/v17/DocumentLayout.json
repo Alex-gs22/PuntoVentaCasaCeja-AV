@@ -3,6 +3,7 @@
   "WorkspaceRootPath": "C:\\Users\\Alex_\\OneDrive\\Documentos\\Visual Studio 2022\\PuntoVentaCasaCeja-AV\\",
   "Documents": [
     {
+<<<<<<< HEAD
       "AbsoluteMoniker": "D:0:0:{9139B20E-4F0B-4242-BB74-85D8C316A06B}|PuntoVentaCasaCeja\\PuntoVentaCasaCeja.csproj|c:\\users\\alex_\\onedrive\\documentos\\visual studio 2022\\puntoventacasaceja-av\\puntoventacasaceja\\webdatamanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9139B20E-4F0B-4242-BB74-85D8C316A06B}|PuntoVentaCasaCeja\\PuntoVentaCasaCeja.csproj|solutionrelative:puntoventacasaceja\\webdatamanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -25,6 +26,22 @@
     {
       "AbsoluteMoniker": "D:0:0:{9139B20E-4F0B-4242-BB74-85D8C316A06B}|PuntoVentaCasaCeja\\PuntoVentaCasaCeja.csproj|C:\\Users\\Alex_\\OneDrive\\Documentos\\Visual Studio 2022\\PuntoVentaCasaCeja-AV\\puntoventacasaceja\\historialcortes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9139B20E-4F0B-4242-BB74-85D8C316A06B}|PuntoVentaCasaCeja\\PuntoVentaCasaCeja.csproj|solutionrelative:puntoventacasaceja\\historialcortes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+=======
+      "AbsoluteMoniker": "D:0:0:{9139B20E-4F0B-4242-BB74-85D8C316A06B}|PuntoVentaCasaCeja\\PuntoVentaCasaCeja.csproj|c:\\users\\victorvega\\source\\repos\\puntoventacasaceja-av\\puntoventacasaceja-av\\puntoventacasaceja\\listaclientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{9139B20E-4F0B-4242-BB74-85D8C316A06B}|PuntoVentaCasaCeja\\PuntoVentaCasaCeja.csproj|solutionrelative:puntoventacasaceja\\listaclientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9139B20E-4F0B-4242-BB74-85D8C316A06B}|PuntoVentaCasaCeja\\PuntoVentaCasaCeja.csproj|c:\\users\\victorvega\\source\\repos\\puntoventacasaceja-av\\puntoventacasaceja-av\\puntoventacasaceja\\ventas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{9139B20E-4F0B-4242-BB74-85D8C316A06B}|PuntoVentaCasaCeja\\PuntoVentaCasaCeja.csproj|solutionrelative:puntoventacasaceja\\ventas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9139B20E-4F0B-4242-BB74-85D8C316A06B}|PuntoVentaCasaCeja\\PuntoVentaCasaCeja.csproj|c:\\users\\victorvega\\source\\repos\\puntoventacasaceja-av\\puntoventacasaceja-av\\puntoventacasaceja\\credapartsel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{9139B20E-4F0B-4242-BB74-85D8C316A06B}|PuntoVentaCasaCeja\\PuntoVentaCasaCeja.csproj|solutionrelative:puntoventacasaceja\\credapartsel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9139B20E-4F0B-4242-BB74-85D8C316A06B}|PuntoVentaCasaCeja\\PuntoVentaCasaCeja.csproj|C:\\Users\\victorvega\\source\\repos\\PuntoVentaCasaCeja-AV\\PuntoVentaCasaCeja-AV\\puntoventacasaceja\\ventas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9139B20E-4F0B-4242-BB74-85D8C316A06B}|PuntoVentaCasaCeja\\PuntoVentaCasaCeja.csproj|solutionrelative:puntoventacasaceja\\ventas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+>>>>>>> cambio de botones y ubicacion de campos en buscar cliente.
     }
   ],
   "DocumentGroupContainers": [
@@ -34,6 +51,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
+<<<<<<< HEAD
           "SelectedChildIndex": 4,
           "Children": [
             {
@@ -93,10 +111,49 @@
               "RelativeToolTip": "PuntoVentaCasaCeja\\HistorialCortes.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-11T05:42:35.915Z",
+=======
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ListaClientes.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\victorvega\\source\\repos\\PuntoVentaCasaCeja-AV\\PuntoVentaCasaCeja-AV\\PuntoVentaCasaCeja\\ListaClientes.cs",
+              "RelativeDocumentMoniker": "PuntoVentaCasaCeja\\ListaClientes.cs",
+              "ToolTip": "C:\\Users\\victorvega\\source\\repos\\PuntoVentaCasaCeja-AV\\PuntoVentaCasaCeja-AV\\PuntoVentaCasaCeja\\ListaClientes.cs [Dise\u00F1o]",
+              "RelativeToolTip": "PuntoVentaCasaCeja\\ListaClientes.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-20T04:20:24.345Z",
               "EditorCaption": " [Dise\u00F1o]"
             },
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CredApartSel.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\victorvega\\source\\repos\\PuntoVentaCasaCeja-AV\\PuntoVentaCasaCeja-AV\\PuntoVentaCasaCeja\\CredApartSel.cs",
+              "RelativeDocumentMoniker": "PuntoVentaCasaCeja\\CredApartSel.cs",
+              "ToolTip": "C:\\Users\\victorvega\\source\\repos\\PuntoVentaCasaCeja-AV\\PuntoVentaCasaCeja-AV\\PuntoVentaCasaCeja\\CredApartSel.cs [Dise\u00F1o]",
+              "RelativeToolTip": "PuntoVentaCasaCeja\\CredApartSel.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-20T03:10:09.287Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Ventas.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\victorvega\\source\\repos\\PuntoVentaCasaCeja-AV\\PuntoVentaCasaCeja-AV\\PuntoVentaCasaCeja\\Ventas.cs",
+              "RelativeDocumentMoniker": "PuntoVentaCasaCeja\\Ventas.cs",
+              "ToolTip": "C:\\Users\\victorvega\\source\\repos\\PuntoVentaCasaCeja-AV\\PuntoVentaCasaCeja-AV\\PuntoVentaCasaCeja\\Ventas.cs [Dise\u00F1o]",
+              "RelativeToolTip": "PuntoVentaCasaCeja\\Ventas.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-09T06:05:26.964Z",
+>>>>>>> cambio de botones y ubicacion de campos en buscar cliente.
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+<<<<<<< HEAD
               "DocumentIndex": 2,
               "Title": "LocaldataManager.cs",
               "DocumentMoniker": "C:\\Users\\Alex_\\OneDrive\\Documentos\\Visual Studio 2022\\PuntoVentaCasaCeja-AV\\PuntoVentaCasaCeja\\LocaldataManager.cs",
@@ -119,6 +176,17 @@
               "ViewState": "AQIAAAcAAAAAAAAAAIA9wBUAAAAzAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-11T05:42:39.009Z",
+=======
+              "DocumentIndex": 3,
+              "Title": "Ventas.cs",
+              "DocumentMoniker": "C:\\Users\\victorvega\\source\\repos\\PuntoVentaCasaCeja-AV\\PuntoVentaCasaCeja-AV\\PuntoVentaCasaCeja\\Ventas.cs",
+              "RelativeDocumentMoniker": "PuntoVentaCasaCeja\\Ventas.cs",
+              "ToolTip": "C:\\Users\\victorvega\\source\\repos\\PuntoVentaCasaCeja-AV\\PuntoVentaCasaCeja-AV\\PuntoVentaCasaCeja\\Ventas.cs",
+              "RelativeToolTip": "PuntoVentaCasaCeja\\Ventas.cs",
+              "ViewState": "AQIAACIGAAAAAAAAAAAQwC8GAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-20T02:38:49.836Z",
+>>>>>>> cambio de botones y ubicacion de campos en buscar cliente.
               "EditorCaption": ""
             }
           ]

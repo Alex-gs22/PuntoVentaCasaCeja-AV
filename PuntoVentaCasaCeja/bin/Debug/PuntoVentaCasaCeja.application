@@ -14,7 +14,11 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+<<<<<<< HEAD
         <dsig:DigestValue>gt5zPuLmaBIyydN05nZnN1vZhTrDuHJtRjW/lkGjzbU=</dsig:DigestValue>
+=======
+        <dsig:DigestValue>H2XVxODmmTrXZTxrc/u9LzdH3mS3iced1JzNQwlr+W4=</dsig:DigestValue>
+>>>>>>> cambio de botones y ubicacion de campos en buscar cliente.
       </hash>
     </dependentAssembly>
   </dependency>

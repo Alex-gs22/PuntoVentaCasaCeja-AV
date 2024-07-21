@@ -120,8 +120,8 @@ namespace PuntoVentaCasaCeja
                     else
                     {
                         MessageBox.Show("Cliente no encontrado", "Advertencia");
-                        txtnombre.Text = "";
-                        txtnombre.Focus();
+                        txttel.Text = "";
+                        txttel.Focus();
                     }
                 }
             else
@@ -149,7 +149,7 @@ namespace PuntoVentaCasaCeja
                 txtcolonia.Enabled = true;
                 txtpostal.Enabled = true;
                 txtciudad.Enabled = true;
-                txtnombre.Focus();
+                txttel.Focus();
             }
         }
 
@@ -178,7 +178,7 @@ namespace PuntoVentaCasaCeja
             txtcolonia.Enabled = true;
             txtpostal.Enabled = true;
             txtciudad.Enabled = true;
-            txtnombre.Focus();
+            txttel.Focus();
             buscar.Text = "BUSCAR (F5)";
         }
 

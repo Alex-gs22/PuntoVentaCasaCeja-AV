@@ -103,14 +103,22 @@
     </dependentAssembly>
   </dependency>
   <dependency>
+<<<<<<< HEAD
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PuntoVentaCasaCeja.exe" size="607744">
+=======
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PuntoVentaCasaCeja.exe" size="606720">
+>>>>>>> cambio de botones y ubicacion de campos en buscar cliente.
       <assemblyIdentity name="PuntoVentaCasaCeja" version="1.0.0.1" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+<<<<<<< HEAD
         <dsig:DigestValue>ltozhY5hjDvxcME/fewLABNfOvJGr6TlJB3GNjPFSsg=</dsig:DigestValue>
+=======
+        <dsig:DigestValue>ju0rggubC6aY197BCLtKCx6mo/Y9pjpMAuPGddmqhHo=</dsig:DigestValue>
+>>>>>>> cambio de botones y ubicacion de campos en buscar cliente.
       </hash>
     </dependentAssembly>
   </dependency>

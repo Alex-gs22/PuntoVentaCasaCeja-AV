@@ -1572,5 +1572,16 @@ namespace PuntoVentaCasaCeja
             HistorialCortes hc = new HistorialCortes(data);
             hc.ShowDialog();
         }
+
+        private void ListaClientes_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ListaClientes_Click_1(object sender, EventArgs e)
+        {
+            ListaClientes listaCl = new ListaClientes(data);
+            listaCl.ShowDialog();
+        }
     }
 }

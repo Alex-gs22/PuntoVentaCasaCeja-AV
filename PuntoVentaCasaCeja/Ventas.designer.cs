@@ -24,9 +24,9 @@ namespace PuntoVentaCasaCeja
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Ventas));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblcobranza = new System.Windows.Forms.Label();
             this.tabla = new System.Windows.Forms.DataGridView();
             this.articulos = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,11 +54,12 @@ namespace PuntoVentaCasaCeja
             this.reimprimirTicketF6ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.administrarCatálogoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.establecerImpresoraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.historialDeCortesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.actualizarBaseDeDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logout = new System.Windows.Forms.Button();
             this.apartados = new System.Windows.Forms.Button();
             this.eliminarCarrito_button = new System.Windows.Forms.Button();
-            this.historialDeCortesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ListaClientes = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tabla)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -83,14 +84,14 @@ namespace PuntoVentaCasaCeja
             this.tabla.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.tabla.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.tabla.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.tabla.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.tabla.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
             this.tabla.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tabla.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.articulos,
@@ -98,26 +99,26 @@ namespace PuntoVentaCasaCeja
             this.precio,
             this.total});
             this.tabla.Cursor = System.Windows.Forms.Cursors.Hand;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.DarkOrange;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.tabla.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.DarkOrange;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.tabla.DefaultCellStyle = dataGridViewCellStyle11;
             this.tabla.EnableHeadersVisualStyles = false;
             this.tabla.MultiSelect = false;
             this.tabla.Name = "tabla";
             this.tabla.ReadOnly = true;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.OrangeRed;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.tabla.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.OrangeRed;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.tabla.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.tabla.RowHeadersVisible = false;
             this.tabla.RowTemplate.Height = 50;
             this.tabla.RowTemplate.ReadOnly = true;
@@ -310,6 +311,12 @@ namespace PuntoVentaCasaCeja
             resources.ApplyResources(this.establecerImpresoraToolStripMenuItem, "establecerImpresoraToolStripMenuItem");
             this.establecerImpresoraToolStripMenuItem.Click += new System.EventHandler(this.establecerImpresoraToolStripMenuItem_Click);
             // 
+            // historialDeCortesToolStripMenuItem
+            // 
+            this.historialDeCortesToolStripMenuItem.Name = "historialDeCortesToolStripMenuItem";
+            resources.ApplyResources(this.historialDeCortesToolStripMenuItem, "historialDeCortesToolStripMenuItem");
+            this.historialDeCortesToolStripMenuItem.Click += new System.EventHandler(this.historialDeCortesToolStripMenuItem_Click);
+            // 
             // actualizarBaseDeDatosToolStripMenuItem
             // 
             this.actualizarBaseDeDatosToolStripMenuItem.Name = "actualizarBaseDeDatosToolStripMenuItem";
@@ -343,17 +350,22 @@ namespace PuntoVentaCasaCeja
             this.eliminarCarrito_button.UseVisualStyleBackColor = false;
             this.eliminarCarrito_button.Click += new System.EventHandler(this.eliminarCarrito_button_Click);
             // 
-            // historialDeCortesToolStripMenuItem
+            // ListaClientes
             // 
-            this.historialDeCortesToolStripMenuItem.Name = "historialDeCortesToolStripMenuItem";
-            resources.ApplyResources(this.historialDeCortesToolStripMenuItem, "historialDeCortesToolStripMenuItem");
-            this.historialDeCortesToolStripMenuItem.Click += new System.EventHandler(this.historialDeCortesToolStripMenuItem_Click);
+            resources.ApplyResources(this.ListaClientes, "ListaClientes");
+            this.ListaClientes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(166)))), ((int)(((byte)(64)))));
+            this.ListaClientes.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.ListaClientes.FlatAppearance.BorderSize = 0;
+            this.ListaClientes.Name = "ListaClientes";
+            this.ListaClientes.UseVisualStyleBackColor = false;
+            this.ListaClientes.Click += new System.EventHandler(this.ListaClientes_Click_1);
             // 
             // Ventas
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
+            this.Controls.Add(this.ListaClientes);
             this.Controls.Add(this.eliminarCarrito_button);
             this.Controls.Add(this.apartados);
             this.Controls.Add(this.logout);
@@ -417,5 +429,6 @@ namespace PuntoVentaCasaCeja
         private ToolStripMenuItem actualizarBaseDeDatosToolStripMenuItem;
         private Button eliminarCarrito_button;
         private ToolStripMenuItem historialDeCortesToolStripMenuItem;
+        private Button ListaClientes;
     }
 }

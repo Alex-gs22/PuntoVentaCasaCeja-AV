@@ -30,10 +30,11 @@ namespace PuntoVentaCasaCeja
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.BSelCliente = new System.Windows.Forms.Button();
             this.exitButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -42,7 +43,6 @@ namespace PuntoVentaCasaCeja
             this.BajaButton = new System.Windows.Forms.Button();
             this.clientinfo = new System.Windows.Forms.TableLayoutPanel();
             this.tablaClientes = new System.Windows.Forms.DataGridView();
-            this.BSelCliente = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -66,7 +66,20 @@ namespace PuntoVentaCasaCeja
             this.groupBox1.Size = new System.Drawing.Size(1460, 821);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "LISTADO DE CLIENTES";
+            this.groupBox1.Text = "LISTA DE CLIENTES";
+            // 
+            // BSelCliente
+            // 
+            this.BSelCliente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BSelCliente.Font = new System.Drawing.Font("Segoe UI Semibold", 20F, System.Drawing.FontStyle.Bold);
+            this.BSelCliente.Location = new System.Drawing.Point(783, -4);
+            this.BSelCliente.Margin = new System.Windows.Forms.Padding(4);
+            this.BSelCliente.Name = "BSelCliente";
+            this.BSelCliente.Size = new System.Drawing.Size(385, 57);
+            this.BSelCliente.TabIndex = 6;
+            this.BSelCliente.Text = "SEL. CLIENTE (ENTER)";
+            this.BSelCliente.UseVisualStyleBackColor = true;
+            this.BSelCliente.Click += new System.EventHandler(this.BSelCliente_Click);
             // 
             // exitButton
             // 
@@ -203,23 +216,23 @@ namespace PuntoVentaCasaCeja
             this.tablaClientes.AllowUserToAddRows = false;
             this.tablaClientes.AllowUserToDeleteRows = false;
             this.tablaClientes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI Semibold", 24F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.tablaClientes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI Semibold", 24F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.tablaClientes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.tablaClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI Semibold", 24F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.tablaClientes.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI Semibold", 24F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.tablaClientes.DefaultCellStyle = dataGridViewCellStyle5;
             this.tablaClientes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tablaClientes.Location = new System.Drawing.Point(3, 2);
             this.tablaClientes.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -227,8 +240,8 @@ namespace PuntoVentaCasaCeja
             this.tablaClientes.ReadOnly = true;
             this.tablaClientes.RowHeadersVisible = false;
             this.tablaClientes.RowHeadersWidth = 51;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
-            this.tablaClientes.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.tablaClientes.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.tablaClientes.RowTemplate.Height = 50;
             this.tablaClientes.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.tablaClientes.Size = new System.Drawing.Size(1429, 641);
@@ -237,19 +250,6 @@ namespace PuntoVentaCasaCeja
             this.tablaClientes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tablaClientes_CellContentClick);
             this.tablaClientes.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.tablaClientes_CellClick);
             this.tablaClientes.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tablaClientes_KeyDown);
-            // 
-            // BSelCliente
-            // 
-            this.BSelCliente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BSelCliente.Font = new System.Drawing.Font("Segoe UI Semibold", 20F, System.Drawing.FontStyle.Bold);
-            this.BSelCliente.Location = new System.Drawing.Point(783, -4);
-            this.BSelCliente.Margin = new System.Windows.Forms.Padding(4);
-            this.BSelCliente.Name = "BSelCliente";
-            this.BSelCliente.Size = new System.Drawing.Size(385, 57);
-            this.BSelCliente.TabIndex = 6;
-            this.BSelCliente.Text = "SEL. CLIENTE (ENTER)";
-            this.BSelCliente.UseVisualStyleBackColor = true;
-            this.BSelCliente.Click += new System.EventHandler(this.BSelCliente_Click);
             // 
             // ListaClientes
             // 
@@ -261,6 +261,7 @@ namespace PuntoVentaCasaCeja
             this.Name = "ListaClientes";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Clientes";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
