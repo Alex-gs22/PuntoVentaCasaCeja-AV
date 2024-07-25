@@ -49,7 +49,7 @@ namespace PuntoVentaCasaCeja
                 command.ExecuteNonQuery();
                 command.CommandText = "CREATE TABLE 'clientes_temporal' (    'id'    INTEGER,	'nombre'    TEXT,	'rfc'   TEXT,	'calle' TEXT,	'no_exterior'   TEXT,	'no_interior'   TEXT,	'cp'    TEXT,	'colonia'   TEXT,	'ciudad'    TEXT,	'telefono'  TEXT,	'correo'    TEXT,	PRIMARY KEY('id' AUTOINCREMENT))";
                 command.ExecuteNonQuery();
-                command.CommandText = "CREATE TABLE 'cortes' (    'id'    INTEGER NOT NULL UNIQUE,    'folio' TEXT,	'fondo_apertura'    REAL,	'total_efectivo'    REAL,	'total_debito'  REAL,	'total_credito' REAL,	'total_cheques' REAL,	'total_transferencias'  REAL,	'efectivo_apartados'    REAL,	'efectivo_creditos' REAL,	'gastos'    TEXT,	'ingresos'  TEXT,	'sobrante'  REAL,	'fecha_apertura'    TEXT,	'fecha_corte'   TEXT,	'sucursal_id'   INTEGER,	'usuario_id'    INTEGER,	'estado'    INTEGER,	'detalles'  TEXT,	FOREIGN KEY('sucursal_id') REFERENCES 'sucursales'('id'),	FOREIGN KEY('usuario_id') REFERENCES 'usuarios'('id'),	PRIMARY KEY('id' AUTOINCREMENT))";
+                command.CommandText = "CREATE TABLE 'cortes' (    'id'    INTEGER NOT NULL UNIQUE,    'folio_corte' TEXT,	'fondo_apertura'    REAL,	'total_efectivo'    REAL,	'total_tarjetas_debito'  REAL,	'total_tarjetas_credito' REAL,	'total_cheques' REAL,	'total_transferencias'  REAL,	'efectivo_apartados'    REAL,	'efectivo_creditos' REAL,	'gastos'    TEXT,	'ingresos'  TEXT,	'sobrante'  REAL,	'fecha_apertura_caja'    TEXT,	'fecha_corte_caja'   TEXT,	'sucursal_id'   INTEGER,	'usuario_id'    INTEGER,	'estado'    INTEGER, 'detalles'  TEXT, 'created_at'    TEXT, 'updated_at'	TEXT, FOREIGN KEY('sucursal_id') REFERENCES 'sucursales'('id'),	FOREIGN KEY('usuario_id') REFERENCES 'usuarios'('id'),	PRIMARY KEY('id' AUTOINCREMENT))";
                 command.ExecuteNonQuery();
                 command.CommandText = "CREATE TABLE 'creditos' (    'id'    INTEGER,	'productos' TEXT,	'total' REAL,	'total_pagado'  REAL,	'fecha_de_credito'  TEXT,	'folio' TEXT,	'estado'    INTEGER,	'cliente_creditos_id'   INTEGER,	'id_cajero_registro'    INTEGER,	'sucursal_id'   INTEGER,	'observaciones' TEXT,	'created_at'    TEXT,	'updated_at'    TEXT,	FOREIGN KEY('sucursal_id') REFERENCES 'sucursales'('id'),	FOREIGN KEY('id_cajero_registro') REFERENCES 'usuarios'('id'),	PRIMARY KEY('id'))";
                 command.ExecuteNonQuery();
@@ -1198,14 +1198,14 @@ namespace PuntoVentaCasaCeja
             foreach (Corte corte in cortes)
             {
                 SQLiteCommand command = connection.CreateCommand();
-                command.CommandText = "INSERT OR REPLACE INTO [cortes] (id, folio, fondo_apertura, total_efectivo, total_tarjetas_debito, " +
+                command.CommandText = "INSERT OR REPLACE INTO [cortes] (id, folio_corte, fondo_apertura, total_efectivo, total_tarjetas_debito, " +
                     "total_tarjetas_credito, total_cheques, total_transferencias, efectivo_apartados, efectivo_creditos, gastos, ingresos, sobrante, " +
-                    "fecha_apertura, fecha_corte, sucursal_id, usuario_id) VALUES (@setId, @setFolio, @setFondoApertura, @setTotalEfectivo, " +
+                    "fecha_apertura_caja, fecha_corte_caja, sucursal_id, usuario_id, estado, detalles, created_at, updated_at) VALUES (@setId, @setFolio, @setFondoApertura, @setTotalEfectivo, " +
                     "@setTotalTarjetasDebito, @setTotalTarjetasCredito, @setTotalCheques, @setTotalTransferencias, @setEfectivoApartados, " +
-                    "@setEfectivoCreditos, @setGastos, @setIngresos, @setSobrante, @setFechaAperturaCaja, @setFechaCorteCaja, @setSucursalId, @setUsuarioId)";
+                    "@setEfectivoCreditos, @setGastos, @setIngresos, @setSobrante, @setFechaAperturaCaja, @setFechaCorteCaja, @setSucursalId, @setUsuarioId, @setEstado, @setDetalles, @setCreated_at, @setUpdated_at)";
 
                 command.Parameters.AddWithValue("@setId", corte.id);
-                command.Parameters.AddWithValue("@setFolio", corte.folio);
+                command.Parameters.AddWithValue("@setFolio", corte.folio_corte);
                 command.Parameters.AddWithValue("@setFondoApertura", corte.fondo_apertura);
                 command.Parameters.AddWithValue("@setTotalEfectivo", corte.total_efectivo);
                 command.Parameters.AddWithValue("@setTotalTarjetasDebito", corte.total_tarjetas_debito);
@@ -1217,11 +1217,14 @@ namespace PuntoVentaCasaCeja
                 command.Parameters.AddWithValue("@setGastos", corte.gastos);
                 command.Parameters.AddWithValue("@setIngresos", corte.ingresos);
                 command.Parameters.AddWithValue("@setSobrante", corte.sobrante);
-                command.Parameters.AddWithValue("@setFechaAperturaCaja", corte.fecha_apertura);
-                command.Parameters.AddWithValue("@setFechaCorteCaja", corte.fecha_corte);
+                command.Parameters.AddWithValue("@setFechaAperturaCaja", corte.fecha_apertura_caja);
+                command.Parameters.AddWithValue("@setFechaCorteCaja", corte.fecha_corte_caja);
                 command.Parameters.AddWithValue("@setSucursalId", corte.sucursal_id);
                 command.Parameters.AddWithValue("@setUsuarioId", corte.usuario_id);
-
+                command.Parameters.AddWithValue("@setEstado",corte.estado);
+                command.Parameters.AddWithValue("@setDetalles", corte.detalles);
+                command.Parameters.AddWithValue("@setCreated_at",corte.created_at);
+                command.Parameters.AddWithValue("@setUpdated_at",corte.updated_at);
                 command.ExecuteNonQuery();
             }
         }
@@ -1905,19 +1908,20 @@ namespace PuntoVentaCasaCeja
             DataTable dtCortes = new DataTable();
             SQLiteCommand commandCortes = connection.CreateCommand();
             commandCortes.CommandText = @"
-        SELECT cortes.id AS ID,
-               cortes.folio AS FOLIO,
-               cortes.fondo_apertura AS 'FONDO_APERTURA',
-               cortes.fecha_corte AS 'FECHA_CORTE',
-               cortes.sucursal_id AS SUCURSAL,
-               cortes.usuario_id AS USUARIO,
-               (cortes.total_efectivo + 
-                cortes.total_debito + 
-                cortes.total_credito + 
-                cortes.total_cheques + 
-                cortes.total_transferencias) AS TOTAL
-        FROM cortes
-        WHERE cortes.id < (SELECT MAX(id) FROM cortes)";
+SELECT cortes.id AS ID,
+       cortes.folio_corte AS FOLIO,
+       cortes.fondo_apertura AS 'FONDO_APERTURA',
+       cortes.fecha_corte_caja AS 'FECHA_CORTE',
+       cortes.sucursal_id AS SUCURSAL,
+       cortes.usuario_id AS USUARIO,
+       (cortes.total_efectivo + 
+        cortes.total_tarjetas_debito + 
+        cortes.total_tarjetas_credito + 
+        cortes.total_cheques + 
+        cortes.total_transferencias) AS TOTAL
+FROM cortes
+WHERE cortes.id < (SELECT MAX(id) FROM cortes)
+ORDER BY cortes.id DESC";
 
             SQLiteDataAdapter adapterCortes = new SQLiteDataAdapter(commandCortes);
             adapterCortes.Fill(dtCortes);
@@ -1925,8 +1929,8 @@ namespace PuntoVentaCasaCeja
             DataTable dtSucursales = new DataTable();
             SQLiteCommand commandSucursales = connection.CreateCommand();
             commandSucursales.CommandText = @"
-        SELECT id, razon_social
-        FROM sucursales";
+SELECT id, razon_social
+FROM sucursales";
 
             SQLiteDataAdapter adapterSucursales = new SQLiteDataAdapter(commandSucursales);
             adapterSucursales.Fill(dtSucursales);
@@ -1934,8 +1938,8 @@ namespace PuntoVentaCasaCeja
             DataTable dtUsuarios = new DataTable();
             SQLiteCommand commandUsuarios = connection.CreateCommand();
             commandUsuarios.CommandText = @"
-        SELECT id, nombre
-        FROM usuarios";
+SELECT id, nombre
+FROM usuarios";
 
             SQLiteDataAdapter adapterUsuarios = new SQLiteDataAdapter(commandUsuarios);
             adapterUsuarios.Fill(dtUsuarios);
@@ -1973,7 +1977,6 @@ namespace PuntoVentaCasaCeja
 
             return dtCortes;
         }
-
 
         public DataTable getClientes()
         {
@@ -2754,7 +2757,7 @@ namespace PuntoVentaCasaCeja
         public string getFolioCorte(int id)
         {
             SQLiteCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT folio FROM cortes WHERE id = @setId";
+            command.CommandText = "SELECT folio_corte FROM cortes WHERE id = @setId";
             command.Parameters.AddWithValue("setId", id);
             SQLiteDataReader result = command.ExecuteReader();
             if (result.Read())
@@ -2786,34 +2789,41 @@ namespace PuntoVentaCasaCeja
             DateTime localDate = DateTime.Now;
             int id;
             SQLiteCommand command = connection.CreateCommand();
-            command.CommandText = "INSERT INTO cortes (fondo_apertura, total_efectivo, total_debito, total_credito, total_cheques, total_transferencias, efectivo_apartados, efectivo_creditos, gastos, ingresos, sobrante, fecha_apertura, estado, detalles)" +
-                "values(@setApertura, 0, 0, 0, 0, 0, 0, 0, '{}', '{}', 0, @setFecha, 0, 'Abierta')";
+            command.CommandText = "INSERT INTO cortes (fondo_apertura, total_efectivo, total_tarjetas_debito, total_tarjetas_credito, total_cheques, total_transferencias, efectivo_apartados, efectivo_creditos, gastos, ingresos, sobrante, fecha_apertura_caja, estado, detalles, created_at, updated_at) " +
+                "values(@setApertura, 0, 0, 0, 0, 0, 0, 0, '{}', '{}', 0, @setFecha, 0, 'Abierta', @setFechaActual, @setFechaActual)";
             command.Parameters.AddWithValue("setApertura", apertura);
             command.Parameters.AddWithValue("setFecha", localDate.ToString("yyyy-MM-dd"));
+            command.Parameters.AddWithValue("setFechaActual", localDate.ToString("yyyy-MM-dd HH:mm:ss"));
             command.ExecuteNonQuery();
+
             command.CommandText = "select last_insert_rowid()";
             Int64 LastRowID64 = (Int64)command.ExecuteScalar();
             id = (int)LastRowID64;
+
             string folio = idsucursal.ToString().PadLeft(2, '0') + localDate.Day.ToString().PadLeft(2, '0') + localDate.Month.ToString().PadLeft(2, '0') + localDate.Year + id.ToString().PadLeft(4, '0');
-            command.CommandText = "UPDATE cortes SET folio = @setFolio WHERE id = @setId";
+            command.CommandText = "UPDATE cortes SET folio_corte = @setFolio WHERE id = @setId";
             command.Parameters.AddWithValue("setId", id);
             command.Parameters.AddWithValue("setFolio", folio);
             command.ExecuteNonQuery();
+
             return id;
         }
+
         public void completarCorte(int idcorte, int idsucursal, int idusuario, string fecha, double sobrante)
         {
             DateTime localDate = DateTime.Now;
             SQLiteCommand command = connection.CreateCommand();
-            command.CommandText = "UPDATE cortes SET sobrante = @setSobrante, fecha_corte = @setFecha, sucursal_id = @setSucursal, usuario_id = @setUsuario, estado = 1, detalles = @setDetalles WHERE id = @setId";
+            command.CommandText = "UPDATE cortes SET sobrante = @setSobrante, fecha_corte_caja = @setFecha, sucursal_id = @setSucursal, usuario_id = @setUsuario, estado = 1, detalles = @setDetalles, updated_at = @setFechaActual WHERE id = @setId";
             command.Parameters.AddWithValue("setId", idcorte);
             command.Parameters.AddWithValue("setSobrante", sobrante);
             command.Parameters.AddWithValue("setFecha", fecha);
             command.Parameters.AddWithValue("setSucursal", idsucursal);
             command.Parameters.AddWithValue("setUsuario", idusuario);
             command.Parameters.AddWithValue("setDetalles", "Pendiente de envío");
+            command.Parameters.AddWithValue("setFechaActual", localDate.ToString("yyyy-MM-dd HH:mm:ss"));
             command.ExecuteNonQuery();
         }
+
         public Dictionary<string, string> getCorte(int id)
         {
             SQLiteCommand command = connection.CreateCommand();
@@ -2843,6 +2853,49 @@ namespace PuntoVentaCasaCeja
             }
             return null;
         }
+        public List<Dictionary<string, string>> GetPendingCortes()
+        {
+            List<Dictionary<string, string>> cortes = new List<Dictionary<string, string>>();
+            SQLiteCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM cortes WHERE detalles = 'Pendiente de envío'";
+            SQLiteDataReader result = command.ExecuteReader();
+            while (result.Read())
+            {
+                Dictionary<string, string> data = new Dictionary<string, string>
+                {
+                    ["id"] = result.GetInt32(0).ToString(),
+                    ["folio_corte"] = result.IsDBNull(1) ? "-" : result.GetString(1),
+                    ["fondo_apertura"] = result.GetDouble(2).ToString("0.00"),
+                    ["total_efectivo"] = result.GetDouble(3).ToString("0.00"),
+                    ["total_tarjetas_debito"] = result.GetDouble(4).ToString("0.00"),
+                    ["total_tarjetas_credito"] = result.GetDouble(5).ToString("0.00"),
+                    ["total_cheques"] = result.GetDouble(6).ToString("0.00"),
+                    ["total_transferencias"] = result.GetDouble(7).ToString("0.00"),
+                    ["efectivo_apartados"] = result.GetDouble(8).ToString("0.00"),
+                    ["efectivo_creditos"] = result.GetDouble(9).ToString("0.00"),
+                    ["gastos"] = result.GetString(10),
+                    ["ingresos"] = result.GetString(11),
+                    ["sobrante"] = result.GetDouble(12).ToString("0.00"),
+                    ["fecha_apertura_caja"] = result.GetString(13),
+                    ["fecha_corte_caja"] = result.IsDBNull(14) ? "-" : result.GetString(14),
+                    ["sucursal_id"] = result.IsDBNull(15) ? "-" : result.GetInt32(15).ToString(),
+                    ["usuario_id"] = result.IsDBNull(16) ? "-" : result.GetInt32(16).ToString(),
+                    ["estado"] = result.GetInt32(17).ToString()
+                };
+                cortes.Add(data);
+            }
+            return cortes;
+        }
+
+        public void UpdateCorteDetalles(int id, string detalles)
+        {
+            SQLiteCommand updateCommand = connection.CreateCommand();
+            updateCommand.CommandText = "UPDATE cortes SET detalles = @detalles WHERE id = @id";
+            updateCommand.Parameters.AddWithValue("id", id);
+            updateCommand.Parameters.AddWithValue("detalles", detalles);
+            updateCommand.ExecuteNonQuery();
+        }
+
         public double getTotalApartados(string foliocorte)
         {
             double res = 0;
@@ -2891,7 +2944,7 @@ namespace PuntoVentaCasaCeja
         public void acumularPagos(Dictionary<string, double> pagos, int idcorte)
         {
             SQLiteCommand command = connection.CreateCommand();
-            command.CommandText = "UPDATE cortes SET total_efectivo = total_efectivo + @setEfectivo, total_debito = total_debito + @setDebito, total_credito = total_credito + @setCredito," +
+            command.CommandText = "UPDATE cortes SET total_efectivo = total_efectivo + @setEfectivo, total_tarjetas_debito = total_trjetas_debito + @setDebito, total_tarjetas_credito = total_tarjetas_credito + @setCredito," +
                 "total_cheques = total_cheques + @setCheques, total_transferencias = total_transferencias + @setTransferencias WHERE id = @setId";
             command.Parameters.AddWithValue("setId", idcorte);
             command.Parameters.AddWithValue("setEfectivo", pagos.ContainsKey("efectivo") ? pagos["efectivo"] : 0);

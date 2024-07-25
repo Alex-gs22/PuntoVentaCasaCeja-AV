@@ -103,34 +103,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-<<<<<<< HEAD
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PuntoVentaCasaCeja.exe" size="607744">
-=======
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PuntoVentaCasaCeja.exe" size="606720">
->>>>>>> cambio de botones y ubicacion de campos en buscar cliente.
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PuntoVentaCasaCeja.exe" size="615424">
       <assemblyIdentity name="PuntoVentaCasaCeja" version="1.0.0.1" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <dsig:DigestValue>ltozhY5hjDvxcME/fewLABNfOvJGr6TlJB3GNjPFSsg=</dsig:DigestValue>
-=======
-        <dsig:DigestValue>ju0rggubC6aY197BCLtKCx6mo/Y9pjpMAuPGddmqhHo=</dsig:DigestValue>
->>>>>>> cambio de botones y ubicacion de campos en buscar cliente.
-=======
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-        <dsig:DigestValue>ju0rggubC6aY197BCLtKCx6mo/Y9pjpMAuPGddmqhHo=</dsig:DigestValue>
-=======
-        <dsig:DigestValue>nT5IDSHkAtobDbJERlsB9pa0OPMfgGGjr4t+jf8Uuz4=</dsig:DigestValue>
->>>>>>> Stashed changes
-=======
-        <dsig:DigestValue>nT5IDSHkAtobDbJERlsB9pa0OPMfgGGjr4t+jf8Uuz4=</dsig:DigestValue>
->>>>>>> Stashed changes
->>>>>>> Sincronizacion
+        <dsig:DigestValue>RaNYblV2aWLgCMiUPlXuwXrdhyjitNlVJqynaYVK9Lo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -3,7 +3,7 @@ using System;
 public class Corte
 {
     public int id { get; set; }
-    public string folio { get; set; }
+    public string folio_corte { get; set; }
     public decimal fondo_apertura { get; set; }
     public decimal total_efectivo { get; set; }
     public decimal total_tarjetas_debito { get; set; }
@@ -15,8 +15,12 @@ public class Corte
     public string gastos { get; set; }
     public string ingresos { get; set; }
     public decimal sobrante { get; set; }
-    public string fecha_apertura { get; set; }
-    public string fecha_corte { get; set; }
+    public string fecha_apertura_caja { get; set; }
+    public string fecha_corte_caja { get; set; }
     public int sucursal_id { get; set; }
     public int usuario_id { get; set; }
+    public int estado {  get; set; }
+    public string detalles {  get; set; }
+    public string created_at { get; set; }
+    public string updated_at { get; set; }
 }

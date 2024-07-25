@@ -57,7 +57,6 @@ namespace PuntoVentaCasaCeja
         public Ventas()
         {
             InitializeComponent();
-            //MessageBox.Show("genial");
             txtcodigo.GotFocus += txtcodigo_FocusChanged;
             txtcodigo.LostFocus += txtcodigo_FocusChanged;
             localDM = new LocaldataManager();
@@ -112,6 +111,10 @@ namespace PuntoVentaCasaCeja
         }
         async void reloadData()
         {
+            //Aun no se corrige
+            //EnviarVentasPendientes();
+            await SyncPendingCortes();
+
             this.Enabled = false;
             LoadWindow lw = new LoadWindow();
             lw.Show(this);
@@ -144,7 +147,7 @@ namespace PuntoVentaCasaCeja
                 lw.setData(100, "Sincronizando datos desde el servidor...");
                 await webDM.GetAbonosCredito();
                 lw.setData(100, "Sincronizando datos desde el servidor...");
-                //await webDM.GetCortes();
+                await webDM.GetCortes();
             }
             else
             {
@@ -202,7 +205,7 @@ namespace PuntoVentaCasaCeja
                         lw.setData(100, "Sincronizando datos desde el servidor...");
                         await webDM.GetAbonosCredito();
                         lw.setData(100, "Sincronizando datos desde el servidor...");
-                        //await webDM.GetCortes();
+                        await webDM.GetCortes();
                 }
                     else
                     {
@@ -1536,8 +1539,6 @@ namespace PuntoVentaCasaCeja
         private void actualizarBaseDeDatosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             reloadData();
-            //Aun no se corrige
-            //EnviarVentasPendientes();
 
         }
 
@@ -1582,6 +1583,18 @@ namespace PuntoVentaCasaCeja
         {
             ListaClientes listaCl = new ListaClientes(data);
             listaCl.ShowDialog();
+        }
+        public async Task SyncPendingCortes()
+        {
+            bool result = await webDM.SendPendingCortes();
+            if (result)
+            {
+                Console.WriteLine("Cortes pendientes enviados exitosamente.");
+            }
+            else
+            {
+                Console.WriteLine("Error al enviar los cortes pendientes.");
+            }
         }
     }
 }

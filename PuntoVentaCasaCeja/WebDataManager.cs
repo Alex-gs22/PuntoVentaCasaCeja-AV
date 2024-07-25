@@ -60,7 +60,7 @@ namespace PuntoVentaCasaCeja
             clientes_lastupdate = localDM.getTableLastUpdate("clientes");
             abonos_credito_lu = localDM.getTableLastUpdate("abonos_credito");
             abonos_apartado_lu = localDM.getTableLastUpdate("abonos_apartado");
-            cortes_lastupdate = localDM.getTableLastUpdate("apartados");
+            cortes_lastupdate = localDM.getTableLastUpdate("cortes");
         }
         public void resetDates()
         {
@@ -357,6 +357,46 @@ namespace PuntoVentaCasaCeja
 
             return false;
         }
+        public async Task<bool> SendPendingCortes()
+        {
+            List<Dictionary<string, string>> pendingCortes = localDM.GetPendingCortes();
+
+            foreach (var corte in pendingCortes)
+            {
+                try
+                {
+                    int id = int.Parse(corte["id"]);
+
+                    // Actualiza el estado del corte a "Enviado" antes de enviarlo
+                    localDM.UpdateCorteDetalles(id, "Enviado");
+
+                    string apiUrl = url + "api/cortes";
+                    HttpResponseMessage response = await client.PostAsJsonAsync(apiUrl, corte);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        Console.WriteLine($"Corte ID: {id} enviado exitosamente.");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Error al enviar el corte ID: {id}, Status Code: {response.StatusCode}");
+
+                        // Si no jalo se revierte el estado del corte a "Pendiente de envío"
+                        localDM.UpdateCorteDetalles(id, "Pendiente de envío");
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"Exception al enviar el corte ID: {corte["id"]}, Message: {e.Message}");
+
+                    // Revertir el estado del corte a "Pendiente de envío" en caso de excepción
+                    int id = int.Parse(corte["id"]);
+                    localDM.UpdateCorteDetalles(id, "Pendiente de envío");
+                }
+            }
+
+            return true;
+        }
         public async Task<bool> GetCortes()
         {
             string res = "";
@@ -366,13 +406,13 @@ namespace PuntoVentaCasaCeja
 
             try
             {
-                string apiUrl = url + "api/cortes";
+                string apiUrl = url + "api/cortes/sincronizar";
                 Console.WriteLine($"Making request to: {apiUrl}");
 
                 HttpResponseMessage response = await client.PostAsJsonAsync(apiUrl, date);
                 res = await response.Content.ReadAsStringAsync();
 
-                Console.WriteLine($"Response status code: {response.StatusCode}"); 
+                Console.WriteLine($"Response status code: {response.StatusCode}");
                 if (response.IsSuccessStatusCode)
                 {
                     var result = JsonConvert.DeserializeObject<Dictionary<string, object>>(res);
@@ -382,7 +422,19 @@ namespace PuntoVentaCasaCeja
                         var data = JsonConvert.DeserializeObject<Dictionary<string, object>>(result["data"].ToString());
                         var cortes = JsonConvert.DeserializeObject<List<Corte>>(data["cortes"].ToString());
                         localDM.saveCortes(cortes);
-                        
+                        Console.WriteLine(data["cortes"].ToString() );
+
+                        // Imprimir los cortes
+                       /* foreach (var corte in cortes)
+                        {
+                            Console.WriteLine($"ID: {corte.id}, Folio: {corte.folio_corte}, Fondo Apertura: {corte.fondo_apertura}, Total Efectivo: {corte.total_efectivo}, " +
+                                              $"Total Débito: {corte.total_tarjetas_debito}, Total Crédito: {corte.total_tarjetas_credito}, Total Cheques: {corte.total_cheques}, " +
+                                              $"Total Transferencias: {corte.total_transferencias}, Efectivo Apartados: {corte.efectivo_apartados}, " +
+                                              $"Efectivo Créditos: {corte.efectivo_creditos}, Gastos: {corte.gastos}, Ingresos: {corte.ingresos}, " +
+                                              $"Sobrante: {corte.sobrante}, Fecha Apertura: {corte.fecha_apertura_caja}, Fecha Corte: {corte.fecha_corte_caja}, " +
+                                              $"Sucursal ID: {corte.sucursal_id}, Usuario ID: {corte.usuario_id}");
+                        }*/
+
                         return true;
                     }
                     else
@@ -401,6 +453,7 @@ namespace PuntoVentaCasaCeja
             }
             return false;
         }
+
         public async Task<bool> GetCreditos()
         {
             string res = "";
