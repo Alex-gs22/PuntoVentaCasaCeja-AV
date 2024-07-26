@@ -48,7 +48,6 @@ namespace PuntoVentaCasaCeja
             this.totalcarrito = data.totalcarrito;
             this.sucursalName = data.sucursalName;
             this.sucursalDir = data.sucursalDir;
-            this.foliocorte = data.folioCorte;
             this.idcorte = data.idCorte;
             idsucursal = int.Parse(Settings.Default["sucursalid"].ToString());
             idcaja = int.Parse(Settings.Default["posid"].ToString());
@@ -59,6 +58,7 @@ namespace PuntoVentaCasaCeja
             pagos = new Dictionary<string, double>();
             this.cajero = webDM.activeUser;
             printPreviewControl1 = new PrintPreviewControl();
+            this.folio = idsucursal.ToString().PadLeft(2, '0') + idcaja.ToString().PadLeft(2, '0') + localDate.Day.ToString().PadLeft(2, '0') + localDate.Month.ToString().PadLeft(2, '0') + localDate.Year + "A";
             this.tabs = new Dictionary<int, float[]>()
             {
                 {5, new float[]{ 110, 30, 50, 50 } },
@@ -164,11 +164,30 @@ namespace PuntoVentaCasaCeja
             }
             
         }
-        async void send(Apartado apartado)
-        {
-            Dictionary<string, string> result = await webDM.SendapartadoAsync(apartado);            
-            MessageBox.Show(result["message"], "Estado: "+result["status"]);
-            
+        async void send(Apartado apartado){
+            Dictionary<string, string> result = await webDM.SendapartadoAsync(apartado);
+            MessageBox.Show(result["message"], "Estado: " + result["status"]);
+
+            if (result["status"] == "success")
+            {
+                List<ProductoVenta> productos = carrito;
+
+                if (productos == null || productos.Count == 0)
+                {
+                    MessageBox.Show("El carrito está vacío", "Error");
+                    return;
+                }
+
+                foreach (ProductoVenta p in productos)
+                {
+                    //Console.WriteLine($"Restando existencia para producto ID: {p.id}, cantidad: {p.cantidad}");
+                    await webDM.restarExistencia(idsucursal, p.id, p.cantidad);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No es posible realizar esta operacion ahora", "Error");
+            }
         }
 
 
@@ -267,6 +286,11 @@ namespace PuntoVentaCasaCeja
         {
             MetodoPago mp = new MetodoPago(totalcarrito-totalpagado, abono);
             mp.ShowDialog();
+        }
+
+        private void txtfolio_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void cancelar_Click(object sender, EventArgs e)

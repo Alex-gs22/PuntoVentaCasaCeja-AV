@@ -26,6 +26,7 @@ namespace PuntoVentaCasaCeja
                 RegistrarCredito rc = new RegistrarCredito(data);
                 this.DialogResult = rc.ShowDialog(this);
                 this.Close();
+                data.carrito.Clear();
             }
             else
             {
@@ -41,6 +42,7 @@ namespace PuntoVentaCasaCeja
                 RegistrarApartado ra = new RegistrarApartado(data);
             this.DialogResult = ra.ShowDialog(this);
             this.Close();
+            
             }
             else
             {

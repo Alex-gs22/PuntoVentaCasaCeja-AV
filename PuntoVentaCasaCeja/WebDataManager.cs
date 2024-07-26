@@ -412,11 +412,11 @@ namespace PuntoVentaCasaCeja
                 HttpResponseMessage response = await client.PutAsJsonAsync(apiUrl, requestData);
                 string res = await response.Content.ReadAsStringAsync();
 
-                //Console.WriteLine($"Response status code: {response.StatusCode}");
+                Console.WriteLine($"Response status code: {response.StatusCode}");
 
                 if (response.IsSuccessStatusCode)
                 {
-                    //Console.WriteLine("Producto actualizado con éxito.");
+                    Console.WriteLine("Producto actualizado con éxito.");
                     return true;
                 }
                 else

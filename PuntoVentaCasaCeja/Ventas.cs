@@ -65,6 +65,7 @@ namespace PuntoVentaCasaCeja
             pagos = new Dictionary<string, double>();
             cajas.Add(this);
             printPreviewControl1 = new PrintPreviewControl();
+            getConfig();
             this.tabs = new Dictionary<int, float[]>()
             {
                 {5, new float[]{ 110, 30, 50, 50 } },
@@ -106,7 +107,7 @@ namespace PuntoVentaCasaCeja
         {
             DateTime localDate = DateTime.Now;
             int id = localDM.getLastIdVentas() + 1;
-            folio = idsucursal.ToString().PadLeft(2, '0') + idcaja.ToString().PadLeft(2, '0') + localDate.Day.ToString().PadLeft(2, '0') + localDate.Month.ToString().PadLeft(2, '0') + localDate.Year + "V" + id.ToString().PadLeft(4, '0');
+            folio = idsucursal.ToString().PadLeft(2, '0') + idcaja.ToString().PadLeft(2, '0') + localDate.Day.ToString().PadLeft(2, '0') + localDate.Month.ToString().PadLeft(2, '0') + localDate.Year + "V" + id.ToString().PadLeft(4, '0');            
             lblFolio.Text = "FOLIO: " + folio;
         }
         async void reloadData()
@@ -1514,8 +1515,6 @@ namespace PuntoVentaCasaCeja
         {
             sucursalName = localDM.getSucursalname(idsucursal);
             sucursalDir = localDM.getSucursalAddr(idsucursal);
-            //AltaCliente alta = new AltaCliente(cd);
-            //DialogResult response = alta.ShowDialog();
             CredApartSel CredApar = new CredApartSel(data);
             DialogResult response = CredApar.ShowDialog();
             if (response == DialogResult.Yes)
@@ -1577,6 +1576,7 @@ namespace PuntoVentaCasaCeja
         {
             ListaClientes listaCl = new ListaClientes(data);
             listaCl.ShowDialog();
+
         }
         public async Task SyncPendingCortes()
         {

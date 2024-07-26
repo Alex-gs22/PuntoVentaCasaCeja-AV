@@ -134,6 +134,7 @@ namespace PuntoVentaCasaCeja
             //this.DialogResult = sel.ShowDialog(this);
             sel.ShowDialog();
             this.Close();
+            
         }
         async void send(NuevoCliente cliente)
         {

@@ -58,6 +58,8 @@ namespace PuntoVentaCasaCeja
             pagos = new Dictionary<string, double>();
             this.cajero = webDM.activeUser;
             printPreviewControl1 = new PrintPreviewControl();
+            this.folio = idsucursal.ToString().PadLeft(2, '0') + idcaja.ToString().PadLeft(2, '0') + localDate.Day.ToString().PadLeft(2, '0') + localDate.Month.ToString().PadLeft(2, '0') + localDate.Year + "A";
+            
             this.tabs = new Dictionary<int, float[]>()
             {
                 {5, new float[]{ 110, 30, 50, 50 } },
@@ -74,7 +76,7 @@ namespace PuntoVentaCasaCeja
             };
         }
 
-        private void aceptar_Click(object sender, EventArgs e)
+        private async void aceptar_Click(object sender, EventArgs e)
         {
             if (txtnombre.Text.Equals("") || txtcorreo.Text.Equals("") || txttel.Text.Equals("") || txtdias.Text.Equals(""))
             {
@@ -149,17 +151,37 @@ namespace PuntoVentaCasaCeja
                         }
                     }
                 }
-                send(nc);
+                await send(nc);
                 this.DialogResult = DialogResult.Yes;
                 this.Close();
             }
 
         }
-        async void send(Credito credito)
+        async Task send(Credito credito)
         {
             Dictionary<string, string> result = await webDM.SendcreditoAsync(credito);
             MessageBox.Show(result["message"], "Estado: " + result["status"]);
 
+            if (result["status"] == "success")
+            {
+                List<ProductoVenta> productos = carrito;
+
+                if (productos == null || productos.Count == 0)
+                {
+                    MessageBox.Show("El carrito está vacío", "Error");
+                    return;
+                }
+
+                foreach (ProductoVenta p in productos)
+                {
+                    //Console.WriteLine($"Restando existencia para producto ID: {p.id}, cantidad: {p.cantidad}");
+                    await webDM.restarExistencia(idsucursal, p.id, p.cantidad);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No es posible realizar esta operacion ahora", "Error");
+            }
         }
 
 

@@ -77,32 +77,35 @@ namespace PuntoVentaCasaCeja
         }
 
         private void loadData()
-        {   
-            //Console.WriteLine(filtrarFecha.Value.ToString("dd/MM/yyyy"));
-            data = localDM.getVentasFecha(filtrarFecha.Value.ToString("dd/MM/yyyy"));
+        {
+            string fechaSeleccionada = filtrarFecha.Value.ToString("yyyy-MM-dd");
+            data = localDM.getVentasFecha(fechaSeleccionada);
+
             data.DefaultView.Sort = "id DESC";
             tabla.DataSource = data;
             txtbuscar.Focus();
-           // loadTicket();
-           // se comento para que no se cargue el ticket automaticamente al cargar la ventana.
+            // Se comentó para que no se cargue el ticket automáticamente al cargar la ventana
+            // loadTicket();
         }
-        //cada que cambienla fecha en el combobox se actualiza la tabla
-   
+
+
         private void txtbuscar_TextChanged(object sender, EventArgs e)
         {
             if (txtbuscar.Text.Equals(""))
             {
-                data = localDM.getVentasFecha(filtrarFecha.Value.ToString("dd/MM/yyyy"));
+                string fechaSeleccionada = filtrarFecha.Value.ToString("yyyy-MM-dd");
+                data = localDM.getVentasFecha(fechaSeleccionada);
             }
             else
             {
                 data = localDM.getVentas(txtbuscar.Text);
-                
             }
             tabla.DataSource = data;
-            //loadTicket();
-            // se comento para que no se cargue el ticket automaticamente cuando el texto en buscar cambie.
+            
+            // Se comentó para que no se cargue el ticket automáticamente cuando el texto en buscar cambie
+            // loadTicket();
         }
+
         private void loadTicket()
         {
             string piedeticket = Settings.Default["pieDeTicket"].ToString();
