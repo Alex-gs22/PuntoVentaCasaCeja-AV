@@ -111,8 +111,7 @@ namespace PuntoVentaCasaCeja
         }
         async void reloadData()
         {
-            //Aun no se corrige
-            //EnviarVentasPendientes();
+            await SyncPendingVentas();
             await SyncPendingCortes();
 
             this.Enabled = false;
@@ -173,7 +172,8 @@ namespace PuntoVentaCasaCeja
                 //var runningProcessByName = Process.GetProcessesByName("CCSync");
                 //if (runningProcessByName.Length == 0)
                 //{
-                    this.Enabled = false;
+
+                this.Enabled = false;
                     LoadWindow lw = new LoadWindow();
                     lw.Show(this);
                     if (await webDM.GetProductos())
@@ -528,30 +528,35 @@ namespace PuntoVentaCasaCeja
                 MessageBox.Show("Favor de seleccionar un artículo", "Advertencia");
             }
         }
-        private void completarVenta()
+        private async void completarVenta()
         {
             sucursalName = localDM.getSucursalname(idsucursal);
             sucursalDir = localDM.getSucursalAddr(idsucursal);
             DateTime localDate = DateTime.Now;
+
+            string fechaVentaImpresion = localDate.ToString("dd/MM/yyyy hh:mm tt");
+
             Dictionary<string, string> venta = new Dictionary<string, string>();
             venta["total"] = totalcarrito.ToString("0.00");
             venta["folio"] = folio;
             venta["folio_corte"] = folioCorte;
-            venta["fecha_venta"] = localDate.ToString("dd/MM/yyyy hh:mm tt");
+            venta["fecha_venta"] = localDate.ToString("yyyy-MM-dd HH:mm:ss.fff"); // Formato para la ruta
             venta["metodo_pago"] = JsonConvert.SerializeObject(pagos);
             venta["tipo"] = 1.ToString();
             venta["sucursal_id"] = idsucursal.ToString();
             venta["usuario_id"] = cajero.id.ToString();
+
             int id = localDM.CrearVenta(venta, carrito);
             localDM.acumularPagos(pagos, idcorte);
-            imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
+            imprimirTicketCarta(fechaVentaImpresion);
+
             if (localDM.impresora.Equals(""))
             {
                 MessageBox.Show("No se ha establecido una impresora", "Advertencia");
             }
             else
             {
-                if (printerType==1)
+                if (printerType == 1)
                 {
                     printPreviewControl1.Document.Print();
                     if (reprint)
@@ -559,7 +564,6 @@ namespace PuntoVentaCasaCeja
                         printPreviewControl1.Document.Print();
                     }
                 }
-
                 else
                 {
                     localDM.imprimirTicket(venta, carrito, pagos, cajero.nombre, sucursalName, sucursalDir, false);
@@ -570,10 +574,10 @@ namespace PuntoVentaCasaCeja
                 }
             }
 
-            venta["fecha_venta"] = localDate.ToString("yyyy-MM-dd HH:mm:ss.fff");
-            send(venta, id);
+            await send(venta, id);
             resetVenta();
         }
+
         void resetVenta()
         {
             reprint = false;
@@ -586,54 +590,44 @@ namespace PuntoVentaCasaCeja
             txttotal.Text = "Por pagar MXN: $" + totalcarrito.ToString("0.00");
             pagos.Clear();
         }
-        public async void send(Dictionary<string, string> venta, int id)
-        {
+        public async Task send(Dictionary<string, string> venta, int id)
+        {   
+            
             Dictionary<string, string> temp = new Dictionary<string, string>();
             foreach(var x in venta)
             {
                 temp[x.Key] = x.Value;
-                //Console.WriteLine(x.Key + ": " + x.Value);
-                //    total: 14.00
-                //    folio: 010130042024V0012
-                //    folio_corte: 01220420240001
-                //    fecha_venta: 2024 - 04 - 30 23:42:16.105
-                //    metodo_pago: { "efectivo":14.0}
-                //    tipo: 1
-                //    sucursal_id: 1
-                //    usuario_id: 1
             }
 
             if (await webDM.SendVentaAsync(temp, hasTemporal, id))
             {
                 localDM.changeEstadoVenta(id, 2, "Enviado");
+                List<ProductoVenta> productos = localDM.getCarrito(id);
+                foreach(ProductoVenta p in productos)
+                {
+                   await webDM.restarExistencia(data.idSucursal, p.id, p.cantidad);
+                   
+                }
             }
-            //else 
-            //MessageBox.Show("Producto vendido", "Éxito");
         }
-        public async void send2(Dictionary<string, string> venta, int id)
-        {
-            if (await webDM.SendVentaAsync(venta, hasTemporal, id))
-            {
-                localDM.changeEstadoVenta(id, 2, "Enviado");
-            }
-            //else 
-            //MessageBox.Show("Producto no enviado", "Éxito");
-        }
-        public void EnviarVentasPendientes()
+        public async Task SyncPendingVentas()
         {
             DataTable ventasPendientes = localDM.getVentasPendientes();
+
             foreach (DataRow ventaRow in ventasPendientes.Rows)
             {
                 int ventaId = Convert.ToInt32(ventaRow["id"]);
+
                 Dictionary<string, string> venta = new Dictionary<string, string>();
+
                 foreach (DataColumn column in ventasPendientes.Columns)
                 {
-                    if (column.ColumnName != "id") // Excluir el ID de la venta
+                    if (column.ColumnName != "id") 
                     {
                         venta[column.ColumnName] = ventaRow[column].ToString();
                     }
                 }
-                send2(venta, ventaId);
+                await send(venta, ventaId);
             }
         }
         private void btn1_Click(object sender, EventArgs e)

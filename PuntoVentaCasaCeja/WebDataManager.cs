@@ -13,6 +13,7 @@ using System.Data;
 using System.Text;
 using Newtonsoft.Json.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
+using System.Linq;
 
 namespace PuntoVentaCasaCeja
 {
@@ -397,6 +398,41 @@ namespace PuntoVentaCasaCeja
 
             return true;
         }
+        public async Task<bool> restarExistencia(int sucursalId, int productoId, double cantidad)
+        {
+            string apiUrl = $"{url}api/sucursales/{sucursalId}/productos/{productoId}";
+            Console.WriteLine($"Making request to: {apiUrl}");
+            var requestData = new
+            {
+                cantidad = cantidad
+            };
+
+            try
+            {
+                HttpResponseMessage response = await client.PutAsJsonAsync(apiUrl, requestData);
+                string res = await response.Content.ReadAsStringAsync();
+
+                //Console.WriteLine($"Response status code: {response.StatusCode}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    //Console.WriteLine("Producto actualizado con éxito.");
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine("Error al actualizar el producto.");
+                    Console.WriteLine(res); 
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+
         public async Task<bool> GetCortes()
         {
             string res = "";
@@ -407,12 +443,12 @@ namespace PuntoVentaCasaCeja
             try
             {
                 string apiUrl = url + "api/cortes/sincronizar";
-                Console.WriteLine($"Making request to: {apiUrl}");
+                //Console.WriteLine($"Making request to: {apiUrl}");
 
                 HttpResponseMessage response = await client.PostAsJsonAsync(apiUrl, date);
                 res = await response.Content.ReadAsStringAsync();
 
-                Console.WriteLine($"Response status code: {response.StatusCode}");
+                //Console.WriteLine($"Response status code: {response.StatusCode}");
                 if (response.IsSuccessStatusCode)
                 {
                     var result = JsonConvert.DeserializeObject<Dictionary<string, object>>(res);
@@ -422,18 +458,7 @@ namespace PuntoVentaCasaCeja
                         var data = JsonConvert.DeserializeObject<Dictionary<string, object>>(result["data"].ToString());
                         var cortes = JsonConvert.DeserializeObject<List<Corte>>(data["cortes"].ToString());
                         localDM.saveCortes(cortes);
-                        Console.WriteLine(data["cortes"].ToString() );
-
-                        // Imprimir los cortes
-                       /* foreach (var corte in cortes)
-                        {
-                            Console.WriteLine($"ID: {corte.id}, Folio: {corte.folio_corte}, Fondo Apertura: {corte.fondo_apertura}, Total Efectivo: {corte.total_efectivo}, " +
-                                              $"Total Débito: {corte.total_tarjetas_debito}, Total Crédito: {corte.total_tarjetas_credito}, Total Cheques: {corte.total_cheques}, " +
-                                              $"Total Transferencias: {corte.total_transferencias}, Efectivo Apartados: {corte.efectivo_apartados}, " +
-                                              $"Efectivo Créditos: {corte.efectivo_creditos}, Gastos: {corte.gastos}, Ingresos: {corte.ingresos}, " +
-                                              $"Sobrante: {corte.sobrante}, Fecha Apertura: {corte.fecha_apertura_caja}, Fecha Corte: {corte.fecha_corte_caja}, " +
-                                              $"Sucursal ID: {corte.sucursal_id}, Usuario ID: {corte.usuario_id}");
-                        }*/
+                        //Console.WriteLine(data["cortes"].ToString() );
 
                         return true;
                     }
@@ -1209,42 +1234,6 @@ namespace PuntoVentaCasaCeja
             }
             return false;
         }
-        //public async Task<bool> SendProveedor(Dictionary<string, string> proveedor)
-        //{
-        //    string res = "";
-        //    try
-        //    {
-        //        proveedor["usuario_id"] = activeUser.id.ToString();
-        //        HttpResponseMessage response = await client.PostAsJsonAsync(
-        //            url + "api/proveedores", proveedor);
-        //        res = await response.Content.ReadAsStringAsync();
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            var result = JsonConvert.DeserializeObject<Dictionary<string, object>>(res);
-        //            if (result["status"].ToString().Equals("success"))
-        //            {
-        //                MessageBox.Show("Registro de proveedor creado", "Completado");
-        //                await GetProveedores();
-        //                refreshData(8);
-        //                return true;
-        //            }
-        //            else
-        //            {
-        //                //MessageBox.Show("Error", result["data"].ToString());
-        //            }
-        //        }
-        //        else
-        //        {
-        //            //MessageBox.Show("Hubo un problema al establecer la conexion con el servidor, favor de intentar mas tarde", "Error");
-        //        }
-
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        //MessageBox.Show(e.Message, "Hubo un problema al establecer la conexion con el servidor");
-        //    }
-        //    return false;
-        //}
         public async Task<bool> SendSucursalAsync(Dictionary<string, string> sucursal)
         {
             string res = "";
@@ -1340,14 +1329,16 @@ namespace PuntoVentaCasaCeja
 
         public async Task<bool> SendVentaAsync(Dictionary<string, string> venta, bool hasTemporal, int id)
         {
-            List<ProductoVenta> productos = productos = localDM.getCarrito(id);
+            List<ProductoVenta> productos = localDM.getCarrito(id);
+
             Dictionary<string, object> data = new Dictionary<string, object>();
-            foreach(var x in venta)
+            foreach (var x in venta)
             {
                 data[x.Key] = x.Value;
             }
             string res = "";
             bool success = true;
+
             if (hasTemporal)
             {
                 if (await enviarAltaTemporal())
@@ -1358,18 +1349,22 @@ namespace PuntoVentaCasaCeja
                 {
                     success = false;
                 }
-
             }
+
             if (success)
             {
-                data["productos"] = productos;
-                //File.WriteAllText(Path.Combine(ApplicationData.Current.LocalFolder.Path, "WriteText.txt"), JsonConvert.SerializeObject(venta));
+                data["productos"] = productos.Select(p => new
+                {
+                    id = p.id,
+                    cantidad = p.cantidad,
+                    precio_venta = p.precio_venta
+                }).ToList();
+
                 try
                 {
-                    HttpResponseMessage response = await client.PostAsJsonAsync(
-                        url + "api/ventas", data);
-                    //File.WriteAllText(Path.Combine(ApplicationData.Current.LocalFolder.Path, "WriteText.txt"), JsonConvert.SerializeObject(venta));
+                    HttpResponseMessage response = await client.PostAsJsonAsync(url + "api/ventas", data);
                     res = await response.Content.ReadAsStringAsync();
+
                     if (response.IsSuccessStatusCode)
                     {
                         var result = JsonConvert.DeserializeObject<Dictionary<string, object>>(res);
@@ -1378,26 +1373,26 @@ namespace PuntoVentaCasaCeja
                             refreshData(5);
                             return true;
                         }
-                        //else
-                        //{
-                        //    MessageBox.Show(result["data"].ToString(), "Error");
-                        //}
+                        else
+                        {
+                            Console.WriteLine($"Error: {result["data"].ToString()}");
+                        }
                     }
-                    //else
-                    //{
-                    //    MessageBox.Show(res, "Error");
-                    //}
-
+                    else
+                    {
+                        Console.WriteLine($"Error: {res}");
+                    }
                 }
                 catch (Exception e)
                 {
-                    //MessageBox.Show(e.Message, "Hubo un problema al establecer la conexion con el servidor");
+                    Console.WriteLine($"Exception: {e.Message}");
                 }
             }
 
             return false;
         }
-       
+
+
         public async Task<bool> ModifyProductoAsync(string id, Dictionary<string, string> producto)
         {
             string res = "";

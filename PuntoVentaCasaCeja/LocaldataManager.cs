@@ -2944,7 +2944,7 @@ FROM usuarios";
         public void acumularPagos(Dictionary<string, double> pagos, int idcorte)
         {
             SQLiteCommand command = connection.CreateCommand();
-            command.CommandText = "UPDATE cortes SET total_efectivo = total_efectivo + @setEfectivo, total_tarjetas_debito = total_trjetas_debito + @setDebito, total_tarjetas_credito = total_tarjetas_credito + @setCredito," +
+            command.CommandText = "UPDATE cortes SET total_efectivo = total_efectivo + @setEfectivo, total_tarjetas_debito = total_tarjetas_debito + @setDebito, total_tarjetas_credito = total_tarjetas_credito + @setCredito," +
                 "total_cheques = total_cheques + @setCheques, total_transferencias = total_transferencias + @setTransferencias WHERE id = @setId";
             command.Parameters.AddWithValue("setId", idcorte);
             command.Parameters.AddWithValue("setEfectivo", pagos.ContainsKey("efectivo") ? pagos["efectivo"] : 0);

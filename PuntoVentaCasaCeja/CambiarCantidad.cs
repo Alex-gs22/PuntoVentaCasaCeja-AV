@@ -48,6 +48,10 @@ namespace PuntoVentaCasaCeja
             }
             else
             {
+                if (txtcantidad.Text.Length>=9)
+                {
+                    MessageBox.Show("Cantidad demasiado grande, por favor no juegue con el sistema");
+                }
                 int cant = int.Parse(txtcantidad.Text);
                 if(cant > 0)
                 {
