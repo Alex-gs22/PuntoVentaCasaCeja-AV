@@ -35,9 +35,6 @@ namespace PuntoVentaCasaCeja
                     case Keys.Escape:
                         this.Close();
                         break;
-                    case Keys.F5:
-                        Bimprimir.PerformClick();
-                        break;
                     case Keys.F6:
                         BelimHistorial.PerformClick();
                         break;
@@ -85,6 +82,7 @@ namespace PuntoVentaCasaCeja
         {
             BSelCorte_Click(sender, e);
         }
+
         void imprimirCorte(Dictionary<string, string> corte)
         {
             double efedir = double.Parse(corte["total_efectivo"]) - double.Parse(corte["efectivo_apartados"]) - double.Parse(corte["efectivo_creditos"]);
@@ -173,7 +171,7 @@ namespace PuntoVentaCasaCeja
                 return;
             }
 
-            MessageBox.Show("Imprimiendo corte");
+            //MessageBox.Show("Imprimiendo corte");
             Dictionary<string, string> corte = localDM.getCorte(selectedRowIndex);
             if (corte != null)
             {
@@ -200,11 +198,6 @@ namespace PuntoVentaCasaCeja
             if (e.KeyCode == Keys.Enter)
             {
                 BSelCorte.PerformClick();
-                return;
-            }
-            if (e.KeyCode == Keys.F5)
-            {
-                Bimprimir.PerformClick();
                 return;
             }
             if (e.KeyCode == Keys.F6)

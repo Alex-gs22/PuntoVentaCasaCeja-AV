@@ -121,7 +121,7 @@ namespace PuntoVentaCasaCeja
                 cambio = double.Parse(total);
                 totalformat = double.Parse(total);
                 pagos = JsonConvert.DeserializeObject<Dictionary<string, double>>(tabla.SelectedRows[0].Cells[5].Value.ToString());
-                ticket += "CASA CEJA S.A. de C.V.\n" +
+                ticket += "CASA CEJA\n" +
                     "SUCURSAL: " + sucursalName.ToUpper() + "\n" +
                     "" + sucursalDir.ToUpper() + "\n" +
                     "" + fecha + "\n" + 

@@ -284,11 +284,11 @@
     <Compile Include="ListaClientes.Designer.cs">
       <DependentUpon>ListaClientes.cs</DependentUpon>
     </Compile>
-    <Compile Include="ListaCreditos.cs">
+    <Compile Include="ListaCred_Apart.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ListaCreditos.Designer.cs">
-      <DependentUpon>ListaCreditos.cs</DependentUpon>
+    <Compile Include="ListaCred_Apart.Designer.cs">
+      <DependentUpon>ListaCred_Apart.cs</DependentUpon>
     </Compile>
     <Compile Include="LoadWindow.cs">
       <SubType>Form</SubType>
@@ -441,8 +441,8 @@
     <EmbeddedResource Include="ListaClientes.resx">
       <DependentUpon>ListaClientes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ListaCreditos.resx">
-      <DependentUpon>ListaCreditos.cs</DependentUpon>
+    <EmbeddedResource Include="ListaCred_Apart.resx">
+      <DependentUpon>ListaCred_Apart.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoadWindow.resx">
       <DependentUpon>LoadWindow.cs</DependentUpon>

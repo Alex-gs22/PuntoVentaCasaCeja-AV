@@ -338,7 +338,7 @@
             this.cancel.Name = "cancel";
             this.cancel.Size = new System.Drawing.Size(855, 74);
             this.cancel.TabIndex = 14;
-            this.cancel.Text = "CANCELAR (Esc)";
+            this.cancel.Text = "SALIR (Esc)";
             this.cancel.UseVisualStyleBackColor = true;
             this.cancel.Click += new System.EventHandler(this.cancel_Click);
             // 

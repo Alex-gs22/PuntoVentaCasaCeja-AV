@@ -134,5 +134,25 @@ namespace PuntoVentaCasaCeja
                 MessageBox.Show("No se pudo obtener la información del corte.", "Error");
             }
         }
+
+        protected override bool ProcessDialogKey(Keys keyData)
+        {
+            if (Form.ModifierKeys == Keys.None)
+            {
+                switch (keyData)
+                {
+                    case Keys.Escape:
+                        this.Close();
+                        break;
+                    case Keys.F5:
+                        Bimprimir.PerformClick();
+                        break;
+                    default:
+                        return base.ProcessDialogKey(keyData);
+                }
+                return true;
+            }
+            return base.ProcessDialogKey(keyData);
+        }
     }
 }

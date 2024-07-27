@@ -322,7 +322,7 @@ namespace PuntoVentaCasaCeja
                     retirarEfectivoF4ToolStripMenuItem.Enabled = true;                    
                     corteZF7ToolStripMenuItem.Enabled = true;
                     establecerImpresoraToolStripMenuItem.Enabled = true;
-                    administrarCatálogoToolStripMenuItem.Enabled = true;
+                    //administrarCatálogoToolStripMenuItem.Enabled = true;
                     actualizarBaseDeDatosToolStripMenuItem.Enabled = true;
                     historialDeCortesToolStripMenuItem.Enabled = true;
                 }
@@ -333,7 +333,7 @@ namespace PuntoVentaCasaCeja
                     retirarEfectivoF4ToolStripMenuItem.Enabled = false;
                     corteZF7ToolStripMenuItem.Enabled = false;
                     establecerImpresoraToolStripMenuItem.Enabled = true;
-                    administrarCatálogoToolStripMenuItem.Enabled = false;
+                    //administrarCatálogoToolStripMenuItem.Enabled = false;
                     actualizarBaseDeDatosToolStripMenuItem.Enabled = false;
                     historialDeCortesToolStripMenuItem.Enabled = false;
                 }
@@ -574,7 +574,6 @@ namespace PuntoVentaCasaCeja
                     }
                 }
             }
-
             await send(venta, id);
             resetVenta();
         }
@@ -708,7 +707,8 @@ namespace PuntoVentaCasaCeja
                         reimprimirTicketF6ToolStripMenuItem.PerformClick();
                         break;
                     case Keys.F9:
-                        administrarCatálogoToolStripMenuItem.PerformClick();
+                       //administrarCatálogoToolStripMenuItem.PerformClick();
+                       ListaClientes.PerformClick();
                         break;
                     case Keys.F10:
                         establecerImpresoraToolStripMenuItem.PerformClick();
@@ -904,7 +904,6 @@ namespace PuntoVentaCasaCeja
                     data["efectivo"] = -cambio;
                     localDM.acumularPagos(data, idcorte);
                     completarVenta();
-
                 }
                 else
                 {
@@ -915,7 +914,6 @@ namespace PuntoVentaCasaCeja
             {
                 MessageBox.Show("Aún no hay productos en el carrito", "Advertencia");
             }
-
         }
         void abono(int tipo, double cantidad)
         {
@@ -1162,7 +1160,7 @@ namespace PuntoVentaCasaCeja
             ticket = "";
             string caj = cajero.nombre;
             double cambio = totalcarrito;
-            ticket += "CASA CEJA S.A. de C.V.\n" +
+            ticket += "CASA CEJA\n" +
                 "SUCURSAL: " + sucursalName.ToUpper() + "\n" +
                 "" + sucursalDir.ToUpper() + "\n" +
                 "" + fecha + "\n" +
@@ -1519,7 +1517,8 @@ namespace PuntoVentaCasaCeja
             DialogResult response = CredApar.ShowDialog();
             if (response == DialogResult.Yes)
                 {
-                    resetVenta();
+                MessageBox.Show("aaaaaaaaaaaaa", "Apartado"); 
+                resetVenta();
                 }
             }
 
@@ -1532,7 +1531,6 @@ namespace PuntoVentaCasaCeja
         private void actualizarBaseDeDatosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             reloadData();
-
         }
 
         private void eliminarCarrito_button_Click(object sender, EventArgs e)
@@ -1567,11 +1565,6 @@ namespace PuntoVentaCasaCeja
             hc.ShowDialog();
         }
 
-        private void ListaClientes_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void ListaClientes_Click_1(object sender, EventArgs e)
         {
             ListaClientes listaCl = new ListaClientes(data);
@@ -1589,6 +1582,11 @@ namespace PuntoVentaCasaCeja
             {
                 Console.WriteLine("Error al enviar los cortes pendientes.");
             }
+        }
+
+        private void altaDeUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Esta función no está disponible en esta versión.", "Advertencia");
         }
     }
 }

@@ -330,7 +330,7 @@ namespace PuntoVentaCasaCeja
         {
             ticket = "";
             string caj = cajero.nombre;
-            ticket += "CASA CEJA S.A. de C.V.\n" +
+            ticket += "CASA CEJA\n" +
                 "SUCURSAL: " + sucursalName.ToUpper() + "\n" +
                 "" + sucursalDir.ToUpper() + "\n" +
                 "" + fecha + "\n" +

@@ -10,19 +10,26 @@ using System.Windows.Forms;
 
 namespace PuntoVentaCasaCeja
 {
-    public partial class ListaCreditos : Form
+    public partial class ListaCred_Apart : Form
     {
         Action<Usuario> setUser;
         Usuario usuario;
         WebDataManager webDM;
         LocaldataManager localDM;
         CurrentData data;
-        public ListaCreditos(CurrentData data)
+        string[] tipo = { "Todos", "Creditos", "Apartados" };
+        string[] estado = { "Todos", "Pendiente", "Expirado", "Pagado", "Etc..." };
+
+        public ListaCred_Apart(CurrentData data)
         {
             InitializeComponent();
             this.webDM = data.webDM;
             this.data = data;
             this.localDM = webDM.localDM;
+            BoxTipo.Items.AddRange(tipo);
+            BoxTipo.SelectedIndex = 0;
+            BoxEstado.Items.AddRange(estado);
+            BoxEstado.SelectedIndex = 0;
             tablaCreditos.DataSource = localDM.GetCreditosDataTable(data.idSucursal);
         }
 
@@ -35,11 +42,13 @@ namespace PuntoVentaCasaCeja
                     case Keys.Escape:
                         this.Close();
                         break;
-                    case Keys.F5:
-                        //aceptarButton.PerformClick();
+                    case Keys.F1:
+                        BoxTipo.DroppedDown = true;
+                        BoxTipo.Focus();
                         break;
-                    case Keys.F6:
-                        //eliminarButton.PerformClick();
+                    case Keys.F2:
+                        BoxEstado.DroppedDown = true;
+                        BoxEstado.Focus();
                         break;
                     case Keys.Enter:
                         tablaCreditos_CellDoubleClick(tablaCreditos, new DataGridViewCellEventArgs(tablaCreditos.CurrentCell.ColumnIndex, tablaCreditos.CurrentCell.RowIndex));
@@ -73,6 +82,16 @@ namespace PuntoVentaCasaCeja
                 }
                 DataGridViewCellEventArgs cellEventArgs = new DataGridViewCellEventArgs(tablaCreditos.CurrentCell.ColumnIndex, tablaCreditos.CurrentCell.RowIndex);
                 tablaCreditos_CellDoubleClick(sender, cellEventArgs);
+            }
+            if (e.KeyCode == Keys.F1)
+            {
+                BoxTipo.DroppedDown = true;
+                BoxTipo.Focus();
+            }
+            if (e.KeyCode == Keys.F2)
+            {
+                BoxEstado.DroppedDown = true;
+                BoxEstado.Focus();
             }
         }
 

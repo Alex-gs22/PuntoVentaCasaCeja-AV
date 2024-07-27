@@ -21,7 +21,7 @@ namespace PuntoVentaCasaCeja
 
         private void credito_Click(object sender, EventArgs e)
         {
-            ListaCreditos listaCr = new ListaCreditos(data);
+            ListaCred_Apart listaCr = new ListaCred_Apart(data);
             listaCr.ShowDialog();
         }
         private void BuscarCliente_Click(object sender, EventArgs e)

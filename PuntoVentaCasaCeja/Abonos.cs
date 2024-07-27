@@ -386,7 +386,7 @@ namespace PuntoVentaCasaCeja
         private void cargarTicketCarta(string fecha, string folioAbono)
         {
             ticket = "";
-            ticket += "CASA CEJA S.A. de C.V.\n" +
+            ticket += "CASA CEJA\n" +
             "SUCURSAL: " + data.sucursalName.ToUpper() + "\n" +
             "" + data.sucursalDir.ToUpper() + "\n" +
             "" + fecha + "\n" +

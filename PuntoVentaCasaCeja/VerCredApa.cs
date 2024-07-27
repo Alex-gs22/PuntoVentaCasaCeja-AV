@@ -476,7 +476,7 @@ namespace PuntoVentaCasaCeja
                         totalpagado = selCred.total_pagado;
                         folio = selCred.folio;
                         idOperacion = selCred.id;
-                        ticket += "CASA CEJA S.A. de C.V.\n" +
+                        ticket += "CASA CEJA\n" +
                         "SUCURSAL: " + data.sucursalName + "\n" +
                         "" + data.sucursalDir + "\n" +
                         "" + selCred.fecha_de_credito + "\n" +
@@ -564,7 +564,7 @@ namespace PuntoVentaCasaCeja
                         totalpagado = selApa.total_pagado;
                         folio = selApa.folio;
                         idOperacion = selApa.id;
-                        ticket += "CASA CEJA S.A. de C.V.\n" +
+                        ticket += "CASA CEJA\n" +
                         "SUCURSAL: " + data.sucursalName + "\n" +
                         "" + data.sucursalDir + "\n" +
                         "" + selApa.fecha_de_apartado + "\n" +

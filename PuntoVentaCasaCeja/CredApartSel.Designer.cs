@@ -51,7 +51,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 266F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 84F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 266F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 38F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 39F));
             this.tableLayoutPanel1.Controls.Add(this.apartado, 7, 2);
             this.tableLayoutPanel1.Controls.Add(this.BuscarCliente, 5, 2);
             this.tableLayoutPanel1.Controls.Add(this.credito, 2, 2);
@@ -85,7 +85,7 @@
             this.apartado.Name = "apartado";
             this.apartado.Size = new System.Drawing.Size(258, 219);
             this.apartado.TabIndex = 7;
-            this.apartado.Text = "ABONOS APARTADOS (F3)";
+            this.apartado.Text = "LISTA APARTADOS (F3)";
             this.apartado.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.apartado.UseVisualStyleBackColor = false;
             this.apartado.Click += new System.EventHandler(this.apartado_Click);
@@ -127,7 +127,7 @@
             this.credito.Name = "credito";
             this.credito.Size = new System.Drawing.Size(258, 219);
             this.credito.TabIndex = 5;
-            this.credito.Text = "ABONOS CREDITOS (F1)";
+            this.credito.Text = "LISTA CREDITOS Y APARTADOS (F1)";
             this.credito.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.credito.UseVisualStyleBackColor = false;
             this.credito.Click += new System.EventHandler(this.credito_Click);

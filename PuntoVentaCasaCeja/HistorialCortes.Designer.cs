@@ -28,14 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.exitButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.Bimprimir = new System.Windows.Forms.Button();
             this.BSelCorte = new System.Windows.Forms.Button();
             this.BelimHistorial = new System.Windows.Forms.Button();
             this.clientinfo = new System.Windows.Forms.TableLayoutPanel();
@@ -101,11 +100,10 @@
             this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel2.ColumnCount = 3;
+            this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 491F));
-            this.tableLayoutPanel2.Controls.Add(this.Bimprimir, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.BSelCorte, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.BelimHistorial, 2, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(4, 657);
@@ -116,21 +114,6 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(1435, 72);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
-            // Bimprimir
-            // 
-            this.Bimprimir.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Bimprimir.Font = new System.Drawing.Font("Segoe UI Semibold", 20F, System.Drawing.FontStyle.Bold);
-            this.Bimprimir.Location = new System.Drawing.Point(476, 4);
-            this.Bimprimir.Margin = new System.Windows.Forms.Padding(4);
-            this.Bimprimir.Name = "Bimprimir";
-            this.Bimprimir.Size = new System.Drawing.Size(464, 64);
-            this.Bimprimir.TabIndex = 8;
-            this.Bimprimir.Text = "IMPRIMIR CORTE (F5)";
-            this.Bimprimir.UseVisualStyleBackColor = true;
-            this.Bimprimir.Click += new System.EventHandler(this.Bimprimir_Click);
-            // 
             // BSelCorte
             // 
             this.BSelCorte.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -140,7 +123,7 @@
             this.BSelCorte.Location = new System.Drawing.Point(4, 4);
             this.BSelCorte.Margin = new System.Windows.Forms.Padding(4);
             this.BSelCorte.Name = "BSelCorte";
-            this.BSelCorte.Size = new System.Drawing.Size(464, 64);
+            this.BSelCorte.Size = new System.Drawing.Size(709, 64);
             this.BSelCorte.TabIndex = 7;
             this.BSelCorte.Text = "SEL. CORTE (ENTER)";
             this.BSelCorte.UseVisualStyleBackColor = true;
@@ -152,10 +135,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.BelimHistorial.Font = new System.Drawing.Font("Segoe UI Semibold", 20F, System.Drawing.FontStyle.Bold);
-            this.BelimHistorial.Location = new System.Drawing.Point(948, 4);
+            this.BelimHistorial.Location = new System.Drawing.Point(721, 4);
             this.BelimHistorial.Margin = new System.Windows.Forms.Padding(4);
             this.BelimHistorial.Name = "BelimHistorial";
-            this.BelimHistorial.Size = new System.Drawing.Size(483, 64);
+            this.BelimHistorial.Size = new System.Drawing.Size(710, 64);
             this.BelimHistorial.TabIndex = 9;
             this.BelimHistorial.Text = "ELIM. HISTORIAL (F6)";
             this.BelimHistorial.UseVisualStyleBackColor = true;
@@ -200,31 +183,31 @@
             this.tablaCortesZ.AllowUserToAddRows = false;
             this.tablaCortesZ.AllowUserToDeleteRows = false;
             this.tablaCortesZ.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.tablaCortesZ.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI Semibold", 24F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.tablaCortesZ.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.tablaCortesZ.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI Semibold", 24F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.tablaCortesZ.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI Semibold", 24F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.tablaCortesZ.DefaultCellStyle = dataGridViewCellStyle5;
             this.tablaCortesZ.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tablaCortesZ.Location = new System.Drawing.Point(3, 3);
             this.tablaCortesZ.Name = "tablaCortesZ";
             this.tablaCortesZ.ReadOnly = true;
             this.tablaCortesZ.RowHeadersVisible = false;
             this.tablaCortesZ.RowHeadersWidth = 51;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
-            this.tablaCortesZ.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.tablaCortesZ.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.tablaCortesZ.RowTemplate.Height = 24;
             this.tablaCortesZ.RowTemplate.ReadOnly = true;
             this.tablaCortesZ.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -241,6 +224,7 @@
             this.Name = "HistorialCortes";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Historial de Cortes";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -259,7 +243,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel clientinfo;
         private System.Windows.Forms.DataGridView tablaCortesZ;
-        private System.Windows.Forms.Button Bimprimir;
         private System.Windows.Forms.Button BelimHistorial;
     }
 }

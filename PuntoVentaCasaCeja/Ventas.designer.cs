@@ -24,9 +24,9 @@ namespace PuntoVentaCasaCeja
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Ventas));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblcobranza = new System.Windows.Forms.Label();
             this.tabla = new System.Windows.Forms.DataGridView();
             this.articulos = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,7 +52,6 @@ namespace PuntoVentaCasaCeja
             this.retirarEfectivoF4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.corteZF7ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reimprimirTicketF6ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.administrarCatálogoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.establecerImpresoraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.historialDeCortesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.actualizarBaseDeDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,6 +59,7 @@ namespace PuntoVentaCasaCeja
             this.apartados = new System.Windows.Forms.Button();
             this.eliminarCarrito_button = new System.Windows.Forms.Button();
             this.ListaClientes = new System.Windows.Forms.Button();
+            this.altaDeUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.tabla)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -84,14 +84,14 @@ namespace PuntoVentaCasaCeja
             this.tabla.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.tabla.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.tabla.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.tabla.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.tabla.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.tabla.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tabla.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.articulos,
@@ -99,26 +99,26 @@ namespace PuntoVentaCasaCeja
             this.precio,
             this.total});
             this.tabla.Cursor = System.Windows.Forms.Cursors.Hand;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.DarkOrange;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.tabla.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.DarkOrange;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.tabla.DefaultCellStyle = dataGridViewCellStyle2;
             this.tabla.EnableHeadersVisualStyles = false;
             this.tabla.MultiSelect = false;
             this.tabla.Name = "tabla";
             this.tabla.ReadOnly = true;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.OrangeRed;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.tabla.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.OrangeRed;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.tabla.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.tabla.RowHeadersVisible = false;
             this.tabla.RowTemplate.Height = 50;
             this.tabla.RowTemplate.ReadOnly = true;
@@ -268,9 +268,9 @@ namespace PuntoVentaCasaCeja
             this.retirarEfectivoF4ToolStripMenuItem,
             this.corteZF7ToolStripMenuItem,
             this.reimprimirTicketF6ToolStripMenuItem,
-            this.administrarCatálogoToolStripMenuItem,
             this.establecerImpresoraToolStripMenuItem,
             this.historialDeCortesToolStripMenuItem,
+            this.altaDeUsuariosToolStripMenuItem,
             this.actualizarBaseDeDatosToolStripMenuItem});
             this.opcionesToolStripMenuItem.Name = "opcionesToolStripMenuItem";
             resources.ApplyResources(this.opcionesToolStripMenuItem, "opcionesToolStripMenuItem");
@@ -298,12 +298,6 @@ namespace PuntoVentaCasaCeja
             this.reimprimirTicketF6ToolStripMenuItem.Name = "reimprimirTicketF6ToolStripMenuItem";
             resources.ApplyResources(this.reimprimirTicketF6ToolStripMenuItem, "reimprimirTicketF6ToolStripMenuItem");
             this.reimprimirTicketF6ToolStripMenuItem.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // administrarCatálogoToolStripMenuItem
-            // 
-            this.administrarCatálogoToolStripMenuItem.Name = "administrarCatálogoToolStripMenuItem";
-            resources.ApplyResources(this.administrarCatálogoToolStripMenuItem, "administrarCatálogoToolStripMenuItem");
-            this.administrarCatálogoToolStripMenuItem.Click += new System.EventHandler(this.administrarCatálogoToolStripMenuItem_Click);
             // 
             // establecerImpresoraToolStripMenuItem
             // 
@@ -359,6 +353,12 @@ namespace PuntoVentaCasaCeja
             this.ListaClientes.Name = "ListaClientes";
             this.ListaClientes.UseVisualStyleBackColor = false;
             this.ListaClientes.Click += new System.EventHandler(this.ListaClientes_Click_1);
+            // 
+            // altaDeUsuariosToolStripMenuItem
+            // 
+            this.altaDeUsuariosToolStripMenuItem.Name = "altaDeUsuariosToolStripMenuItem";
+            resources.ApplyResources(this.altaDeUsuariosToolStripMenuItem, "altaDeUsuariosToolStripMenuItem");
+            this.altaDeUsuariosToolStripMenuItem.Click += new System.EventHandler(this.altaDeUsuariosToolStripMenuItem_Click);
             // 
             // Ventas
             // 
@@ -424,11 +424,11 @@ namespace PuntoVentaCasaCeja
         private ToolStripMenuItem corteZF7ToolStripMenuItem;
         private Button logout;
         private ToolStripMenuItem establecerImpresoraToolStripMenuItem;
-        private ToolStripMenuItem administrarCatálogoToolStripMenuItem;
         private Button apartados;
         private ToolStripMenuItem actualizarBaseDeDatosToolStripMenuItem;
         private Button eliminarCarrito_button;
         private ToolStripMenuItem historialDeCortesToolStripMenuItem;
         private Button ListaClientes;
+        private ToolStripMenuItem altaDeUsuariosToolStripMenuItem;
     }
 }
