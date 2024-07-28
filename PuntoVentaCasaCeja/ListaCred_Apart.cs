@@ -17,9 +17,10 @@ namespace PuntoVentaCasaCeja
         WebDataManager webDM;
         LocaldataManager localDM;
         CurrentData data;
-        string[] tipo = { "Todos", "Creditos", "Apartados" };
-        string[] estado = { "Todos", "Pendiente", "Expirado", "Pagado", "Etc..." };
-
+        List<string> estados = new List<string>();
+        string[] tipo = { "Creditos", "Apartados" };
+        string[] range = { "PENDIENTE", "EXPIRO", "CANCELADO", "PAGADO", "TODOS" };
+        
         public ListaCred_Apart(CurrentData data)
         {
             InitializeComponent();
@@ -28,7 +29,8 @@ namespace PuntoVentaCasaCeja
             this.localDM = webDM.localDM;
             BoxTipo.Items.AddRange(tipo);
             BoxTipo.SelectedIndex = 0;
-            BoxEstado.Items.AddRange(estado);
+            estados.AddRange(range);
+            BoxEstado.DataSource = estados;
             BoxEstado.SelectedIndex = 0;
             tablaCreditos.DataSource = localDM.GetCreditosDataTable(data.idSucursal);
         }
@@ -112,8 +114,17 @@ namespace PuntoVentaCasaCeja
                 if (clienteId != -1)
                 {
                     data.cliente.id = clienteId;
-                    VerCredApa vca = new VerCredApa(0, data);
-                    vca.ShowDialog();
+                    if (BoxTipo.SelectedIndex == 0)
+                    {
+                        VerCredApa vca = new VerCredApa(0, data);
+                        vca.ShowDialog();
+                    }
+                    else
+                    {
+                        VerCredApa vca = new VerCredApa(1, data);
+                        vca.ShowDialog();
+                    }
+
                 }
                 else
                 {
@@ -127,5 +138,26 @@ namespace PuntoVentaCasaCeja
             tablaCreditos_CellDoubleClick(tablaCreditos, new DataGridViewCellEventArgs(tablaCreditos.CurrentCell.ColumnIndex, tablaCreditos.CurrentCell.RowIndex));
             tablaCreditos.Focus();
         }
+
+        private void BoxTipo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (BoxTipo.SelectedIndex == 0)
+            {
+                tablaCreditos.DataSource = localDM.GetCreditosDataTable(data.idSucursal);
+                tablaCreditos.Focus();
+            }
+            else
+            {
+                tablaCreditos.DataSource = localDM.GetApartadosDataTable(data.idSucursal);
+                tablaCreditos.Focus();
+            }
+        }
+
+        private void BoxEstado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 }

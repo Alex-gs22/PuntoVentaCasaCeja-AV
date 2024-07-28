@@ -32,10 +32,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.BSelCliente = new System.Windows.Forms.Button();
-            this.exitButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.exitButton = new System.Windows.Forms.Button();
+            this.BSelCliente = new System.Windows.Forms.Button();
             this.clientinfo = new System.Windows.Forms.TableLayoutPanel();
             this.tablaCreditos = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -67,36 +67,6 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "LISTA DE CREDITOS Y APARTADOS";
-            // 
-            // BSelCliente
-            // 
-            this.BSelCliente.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.BSelCliente.Font = new System.Drawing.Font("Segoe UI Semibold", 20F, System.Drawing.FontStyle.Bold);
-            this.BSelCliente.Location = new System.Drawing.Point(4, 4);
-            this.BSelCliente.Margin = new System.Windows.Forms.Padding(4);
-            this.BSelCliente.Name = "BSelCliente";
-            this.BSelCliente.Size = new System.Drawing.Size(709, 64);
-            this.BSelCliente.TabIndex = 8;
-            this.BSelCliente.Text = "SEL. CLIENTE (ENTER)";
-            this.BSelCliente.UseVisualStyleBackColor = true;
-            this.BSelCliente.Click += new System.EventHandler(this.BSelCliente_Click);
-            // 
-            // exitButton
-            // 
-            this.exitButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.exitButton.Font = new System.Drawing.Font("Segoe UI Semibold", 22F, System.Drawing.FontStyle.Bold);
-            this.exitButton.Location = new System.Drawing.Point(721, 4);
-            this.exitButton.Margin = new System.Windows.Forms.Padding(4);
-            this.exitButton.Name = "exitButton";
-            this.exitButton.Size = new System.Drawing.Size(710, 64);
-            this.exitButton.TabIndex = 5;
-            this.exitButton.Text = "SALIR (Esc)";
-            this.exitButton.UseVisualStyleBackColor = true;
-            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
             // tableLayoutPanel3
             // 
@@ -134,6 +104,36 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(1435, 72);
             this.tableLayoutPanel2.TabIndex = 1;
+            // 
+            // exitButton
+            // 
+            this.exitButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.exitButton.Font = new System.Drawing.Font("Segoe UI Semibold", 22F, System.Drawing.FontStyle.Bold);
+            this.exitButton.Location = new System.Drawing.Point(721, 4);
+            this.exitButton.Margin = new System.Windows.Forms.Padding(4);
+            this.exitButton.Name = "exitButton";
+            this.exitButton.Size = new System.Drawing.Size(710, 64);
+            this.exitButton.TabIndex = 5;
+            this.exitButton.Text = "SALIR (Esc)";
+            this.exitButton.UseVisualStyleBackColor = true;
+            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
+            // 
+            // BSelCliente
+            // 
+            this.BSelCliente.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BSelCliente.Font = new System.Drawing.Font("Segoe UI Semibold", 20F, System.Drawing.FontStyle.Bold);
+            this.BSelCliente.Location = new System.Drawing.Point(4, 4);
+            this.BSelCliente.Margin = new System.Windows.Forms.Padding(4);
+            this.BSelCliente.Name = "BSelCliente";
+            this.BSelCliente.Size = new System.Drawing.Size(709, 64);
+            this.BSelCliente.TabIndex = 8;
+            this.BSelCliente.Text = "SEL. CLIENTE (ENTER)";
+            this.BSelCliente.UseVisualStyleBackColor = true;
+            this.BSelCliente.Click += new System.EventHandler(this.BSelCliente_Click);
             // 
             // clientinfo
             // 
@@ -216,7 +216,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.54111F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 376F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 57F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 59F));
             this.tableLayoutPanel1.Controls.Add(this.label2, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.BoxTipo, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 1);
@@ -237,9 +237,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 13F, System.Drawing.FontStyle.Bold);
-            this.label2.Location = new System.Drawing.Point(213, 0);
+            this.label2.Location = new System.Drawing.Point(212, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(192, 33);
+            this.label2.Size = new System.Drawing.Size(191, 33);
             this.label2.TabIndex = 7;
             this.label2.Text = "TIPO (F1)";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -248,12 +248,14 @@
             // 
             this.BoxTipo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.BoxTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.BoxTipo.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
             this.BoxTipo.FormattingEnabled = true;
-            this.BoxTipo.Location = new System.Drawing.Point(213, 36);
+            this.BoxTipo.Location = new System.Drawing.Point(212, 36);
             this.BoxTipo.Name = "BoxTipo";
-            this.BoxTipo.Size = new System.Drawing.Size(192, 49);
+            this.BoxTipo.Size = new System.Drawing.Size(191, 49);
             this.BoxTipo.TabIndex = 2;
+            this.BoxTipo.SelectedIndexChanged += new System.EventHandler(this.BoxTipo_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -264,7 +266,7 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
             this.label1.Location = new System.Drawing.Point(3, 33);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(204, 57);
+            this.label1.Size = new System.Drawing.Size(203, 57);
             this.label1.TabIndex = 0;
             this.label1.Text = "FILTRAR POR";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -273,12 +275,14 @@
             // 
             this.BoxEstado.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.BoxEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.BoxEstado.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
             this.BoxEstado.FormattingEnabled = true;
-            this.BoxEstado.Location = new System.Drawing.Point(451, 36);
+            this.BoxEstado.Location = new System.Drawing.Point(449, 36);
             this.BoxEstado.Name = "BoxEstado";
             this.BoxEstado.Size = new System.Drawing.Size(370, 49);
             this.BoxEstado.TabIndex = 1;
+            this.BoxEstado.SelectedIndexChanged += new System.EventHandler(this.BoxEstado_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -287,7 +291,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 13F, System.Drawing.FontStyle.Bold);
-            this.label3.Location = new System.Drawing.Point(451, 0);
+            this.label3.Location = new System.Drawing.Point(449, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(370, 33);
             this.label3.TabIndex = 8;
