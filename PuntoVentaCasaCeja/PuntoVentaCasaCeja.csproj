@@ -272,12 +272,6 @@
     <Compile Include="IngresarTexto.designer.cs">
       <DependentUpon>IngresarTexto.cs</DependentUpon>
     </Compile>
-    <Compile Include="ListaApartados.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ListaApartados.Designer.cs">
-      <DependentUpon>ListaApartados.cs</DependentUpon>
-    </Compile>
     <Compile Include="ListaClientes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -435,9 +429,6 @@
     <EmbeddedResource Include="IngresarTexto.resx">
       <DependentUpon>IngresarTexto.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ListaApartados.resx">
-      <DependentUpon>ListaApartados.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ListaClientes.resx">
       <DependentUpon>ListaClientes.cs</DependentUpon>
     </EmbeddedResource>
@@ -496,7 +487,6 @@
     <EmbeddedResource Include="VerOperaciones.resx">
       <DependentUpon>VerOperaciones.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="ClassDiagram2.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

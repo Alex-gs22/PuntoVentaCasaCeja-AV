@@ -29,9 +29,8 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.apartado = new System.Windows.Forms.Button();
             this.BuscarCliente = new System.Windows.Forms.Button();
-            this.credito = new System.Windows.Forms.Button();
+            this.ListacreditosApartados = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -42,53 +41,31 @@
             this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.ColumnCount = 9;
+            this.tableLayoutPanel1.ColumnCount = 7;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.398951F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 69.81628F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.78478F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 266F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 84F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 266F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 260F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 24F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 24F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 39F));
-            this.tableLayoutPanel1.Controls.Add(this.apartado, 7, 2);
+            this.tableLayoutPanel1.Controls.Add(this.ListacreditosApartados, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.BuscarCliente, 5, 2);
-            this.tableLayoutPanel1.Controls.Add(this.credito, 2, 2);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(10, 60);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(10, 73);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 5;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761905F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 83.39223F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90.45937F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.01413F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.946997F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 21F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1036, 273);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(656, 270);
             this.tableLayoutPanel1.TabIndex = 6;
-            // 
-            // apartado
-            // 
-            this.apartado.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.apartado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(166)))), ((int)(((byte)(64)))));
-            this.apartado.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.apartado.FlatAppearance.BorderSize = 0;
-            this.apartado.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.apartado.Font = new System.Drawing.Font("Segoe UI Semibold", 19F, System.Drawing.FontStyle.Bold);
-            this.apartado.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.apartado.Location = new System.Drawing.Point(735, 16);
-            this.apartado.Margin = new System.Windows.Forms.Padding(4);
-            this.apartado.Name = "apartado";
-            this.apartado.Size = new System.Drawing.Size(258, 219);
-            this.apartado.TabIndex = 7;
-            this.apartado.Text = "LISTA APARTADOS (F3)";
-            this.apartado.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.apartado.UseVisualStyleBackColor = false;
-            this.apartado.Click += new System.EventHandler(this.apartado_Click);
             // 
             // BuscarCliente
             // 
@@ -101,36 +78,36 @@
             this.BuscarCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BuscarCliente.Font = new System.Drawing.Font("Segoe UI Semibold", 19F, System.Drawing.FontStyle.Bold);
             this.BuscarCliente.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BuscarCliente.Location = new System.Drawing.Point(385, 16);
+            this.BuscarCliente.Location = new System.Drawing.Point(375, 16);
             this.BuscarCliente.Margin = new System.Windows.Forms.Padding(4);
             this.BuscarCliente.Name = "BuscarCliente";
-            this.BuscarCliente.Size = new System.Drawing.Size(258, 219);
+            this.BuscarCliente.Size = new System.Drawing.Size(252, 235);
             this.BuscarCliente.TabIndex = 6;
             this.BuscarCliente.Text = "BUSCAR CLIENTE (F2)";
             this.BuscarCliente.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.BuscarCliente.UseVisualStyleBackColor = false;
             this.BuscarCliente.Click += new System.EventHandler(this.BuscarCliente_Click);
             // 
-            // credito
+            // ListacreditosApartados
             // 
-            this.credito.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.ListacreditosApartados.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.credito.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(166)))), ((int)(((byte)(64)))));
-            this.credito.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.credito.FlatAppearance.BorderSize = 0;
-            this.credito.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.credito.Font = new System.Drawing.Font("Segoe UI Semibold", 19F, System.Drawing.FontStyle.Bold);
-            this.credito.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.credito.Location = new System.Drawing.Point(36, 16);
-            this.credito.Margin = new System.Windows.Forms.Padding(4);
-            this.credito.Name = "credito";
-            this.credito.Size = new System.Drawing.Size(258, 219);
-            this.credito.TabIndex = 5;
-            this.credito.Text = "LISTA CREDITOS Y APARTADOS (F1)";
-            this.credito.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.credito.UseVisualStyleBackColor = false;
-            this.credito.Click += new System.EventHandler(this.credito_Click);
+            this.ListacreditosApartados.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(166)))), ((int)(((byte)(64)))));
+            this.ListacreditosApartados.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.ListacreditosApartados.FlatAppearance.BorderSize = 0;
+            this.ListacreditosApartados.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ListacreditosApartados.Font = new System.Drawing.Font("Segoe UI Semibold", 19F, System.Drawing.FontStyle.Bold);
+            this.ListacreditosApartados.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.ListacreditosApartados.Location = new System.Drawing.Point(35, 16);
+            this.ListacreditosApartados.Margin = new System.Windows.Forms.Padding(4);
+            this.ListacreditosApartados.Name = "ListacreditosApartados";
+            this.ListacreditosApartados.Size = new System.Drawing.Size(251, 235);
+            this.ListacreditosApartados.TabIndex = 5;
+            this.ListacreditosApartados.Text = "LISTA CREDITOS Y APARTADOS (F1)";
+            this.ListacreditosApartados.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.ListacreditosApartados.UseVisualStyleBackColor = false;
+            this.ListacreditosApartados.Click += new System.EventHandler(this.credito_Click);
             // 
             // groupBox1
             // 
@@ -143,7 +120,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(1054, 341);
+            this.groupBox1.Size = new System.Drawing.Size(674, 351);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "CREDITOS Y APARTADOS";
@@ -152,11 +129,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1062, 343);
+            this.ClientSize = new System.Drawing.Size(682, 353);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.MaximumSize = new System.Drawing.Size(1080, 400);
-            this.MinimumSize = new System.Drawing.Size(1080, 390);
+            this.MaximumSize = new System.Drawing.Size(700, 400);
+            this.MinimumSize = new System.Drawing.Size(700, 390);
             this.Name = "CredApartSel";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Opciones de Creditos y Apartados";
@@ -169,9 +146,8 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Button apartado;
         private System.Windows.Forms.Button BuscarCliente;
-        private System.Windows.Forms.Button credito;
+        private System.Windows.Forms.Button ListacreditosApartados;
         private System.Windows.Forms.GroupBox groupBox1;
     }
 }

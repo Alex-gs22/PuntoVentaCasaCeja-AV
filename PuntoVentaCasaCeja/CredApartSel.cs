@@ -30,11 +30,6 @@ namespace PuntoVentaCasaCeja
             buscarCl.ShowDialog();
         }
 
-        private void apartado_Click(object sender, EventArgs e)
-        {
-            ListaApartados listaAp = new ListaApartados(data);
-            listaAp.ShowDialog();
-        }
         protected override bool ProcessDialogKey(Keys keyData)
         {
             if (Form.ModifierKeys == Keys.None)
@@ -45,13 +40,10 @@ namespace PuntoVentaCasaCeja
                         this.Close();
                         break;
                     case Keys.F1:
-                        credito.PerformClick();
+                        ListacreditosApartados.PerformClick();
                         break;
                     case Keys.F2:
                         BuscarCliente.PerformClick();
-                        break;
-                    case Keys.F3:
-                        apartado.PerformClick();
                         break;
                     default:
                         return base.ProcessDialogKey(keyData);
