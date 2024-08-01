@@ -14,7 +14,11 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+<<<<<<< HEAD
         <dsig:DigestValue>izSCgoHmp32s5C99kLIh2vOOIYO2/81mqKwdpRGJugk=</dsig:DigestValue>
+=======
+        <dsig:DigestValue>9KEtVGaUN3s7OFH5Tb2KyvTaByqFr4J/RN0l7zMo+bE=</dsig:DigestValue>
+>>>>>>> se hizo paginado en vista de creditos y apartados, ver operaciones y lista de cerditos y apartados. Se agrego el filtro de estado.
       </hash>
     </dependentAssembly>
   </dependency>

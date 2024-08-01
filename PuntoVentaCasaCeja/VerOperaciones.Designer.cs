@@ -48,6 +48,10 @@ namespace PuntoVentaCasaCeja
             this.tabla = new System.Windows.Forms.DataGridView();
             this.printPreviewControl1 = new System.Windows.Forms.PrintPreviewControl();
             this.cancel = new System.Windows.Forms.Button();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.prev = new System.Windows.Forms.Button();
+            this.next = new System.Windows.Forms.Button();
+            this.pageLabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -56,6 +60,7 @@ namespace PuntoVentaCasaCeja
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabla)).BeginInit();
+            this.tableLayoutPanel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -365,6 +370,73 @@ namespace PuntoVentaCasaCeja
             this.cancel.UseVisualStyleBackColor = true;
             this.cancel.Click += new System.EventHandler(this.cancel_Click);
             // 
+            // tableLayoutPanel6
+            // 
+            this.tableLayoutPanel6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel6.ColumnCount = 5;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 87F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 160F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 87F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel6.Controls.Add(this.prev, 1, 0);
+            this.tableLayoutPanel6.Controls.Add(this.next, 3, 0);
+            this.tableLayoutPanel6.Controls.Add(this.pageLabel, 2, 0);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(4, 562);
+            this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(4);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel6.RowCount = 1;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(825, 57);
+            this.tableLayoutPanel6.TabIndex = 6;
+            // 
+            // prev
+            // 
+            this.prev.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.prev.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.prev.Location = new System.Drawing.Point(249, 4);
+            this.prev.Margin = new System.Windows.Forms.Padding(4);
+            this.prev.Name = "prev";
+            this.prev.Size = new System.Drawing.Size(79, 49);
+            this.prev.TabIndex = 6;
+            this.prev.Text = "<";
+            this.prev.UseVisualStyleBackColor = true;
+            this.prev.Click += new System.EventHandler(this.prev_Click);
+            // 
+            // next
+            // 
+            this.next.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.next.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.next.Location = new System.Drawing.Point(496, 4);
+            this.next.Margin = new System.Windows.Forms.Padding(4);
+            this.next.Name = "next";
+            this.next.Size = new System.Drawing.Size(79, 49);
+            this.next.TabIndex = 7;
+            this.next.Text = ">";
+            this.next.UseVisualStyleBackColor = true;
+            this.next.Click += new System.EventHandler(this.next_Click);
+            // 
+            // pageLabel
+            // 
+            this.pageLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pageLabel.AutoSize = true;
+            this.pageLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold);
+            this.pageLabel.Location = new System.Drawing.Point(336, 0);
+            this.pageLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.pageLabel.Name = "pageLabel";
+            this.pageLabel.Size = new System.Drawing.Size(152, 57);
+            this.pageLabel.TabIndex = 2;
+            this.pageLabel.Text = "Página 1/1";
+            this.pageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // VerOperaciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -389,6 +461,8 @@ namespace PuntoVentaCasaCeja
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabla)).EndInit();
+            this.tableLayoutPanel6.ResumeLayout(false);
+            this.tableLayoutPanel6.PerformLayout();
             this.ResumeLayout(false);
 
         }
