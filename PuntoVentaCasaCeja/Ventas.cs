@@ -1512,16 +1512,21 @@ namespace PuntoVentaCasaCeja
         }
 
         private void apartados_Click(object sender, EventArgs e)
-        {
+        {   
+            data.totalcarrito = totalcarrito;
             sucursalName = localDM.getSucursalname(idsucursal);
             sucursalDir = localDM.getSucursalAddr(idsucursal);
             CredApartSel CredApar = new CredApartSel(data);
             DialogResult response = CredApar.ShowDialog();
             if (response == DialogResult.Yes)
                 {
-                MessageBox.Show("aaaaaaaaaaaaa", "Apartado"); 
+                MessageBox.Show("", "Apartado"); 
                 resetVenta();
                 }
+            if(data.totalcarrito == 0)
+            {
+                resetVenta();
+            }
             }
 
         private void limpiarBDToolStripMenuItem_Click(object sender, EventArgs e)
