@@ -705,3 +705,4 @@ C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\Pun
 C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.HistorialCortes.resources
 C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.VerCorteHistorial.resources
 C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ListaCred_Apart.resources
+C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ListaCred_Apart.resources

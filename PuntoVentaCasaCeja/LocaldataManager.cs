@@ -1977,6 +1977,83 @@ FROM usuarios";
 
             return dtCortes;
         }
+        public DataTable getCortesBySucursal(int sucursalId)
+        {
+            DataTable dtCortes = new DataTable();
+            SQLiteCommand commandCortes = connection.CreateCommand();
+            commandCortes.CommandText = @"
+SELECT cortes.id AS ID,
+       cortes.folio_corte AS FOLIO,
+       cortes.fondo_apertura AS 'FONDO_APERTURA',
+       cortes.fecha_corte_caja AS 'FECHA_CORTE',
+       cortes.sucursal_id AS SUCURSAL,
+       cortes.usuario_id AS USUARIO,
+       (cortes.total_efectivo + 
+        cortes.total_tarjetas_debito + 
+        cortes.total_tarjetas_credito + 
+        cortes.total_cheques + 
+        cortes.total_transferencias) AS TOTAL
+FROM cortes
+WHERE cortes.sucursal_id = @sucursalId
+  AND cortes.id < (SELECT MAX(id) FROM cortes)
+ORDER BY cortes.id DESC";
+
+            commandCortes.Parameters.AddWithValue("@sucursalId", sucursalId);
+
+            SQLiteDataAdapter adapterCortes = new SQLiteDataAdapter(commandCortes);
+            adapterCortes.Fill(dtCortes);
+
+            DataTable dtSucursales = new DataTable();
+            SQLiteCommand commandSucursales = connection.CreateCommand();
+            commandSucursales.CommandText = @"
+SELECT id, razon_social
+FROM sucursales";
+
+            SQLiteDataAdapter adapterSucursales = new SQLiteDataAdapter(commandSucursales);
+            adapterSucursales.Fill(dtSucursales);
+
+            DataTable dtUsuarios = new DataTable();
+            SQLiteCommand commandUsuarios = connection.CreateCommand();
+            commandUsuarios.CommandText = @"
+SELECT id, nombre
+FROM usuarios";
+
+            SQLiteDataAdapter adapterUsuarios = new SQLiteDataAdapter(commandUsuarios);
+            adapterUsuarios.Fill(dtUsuarios);
+
+            // Crear columnas para nombre de usuario y razon social
+            dtCortes.Columns.Add("USUARIO_NOMBRE", typeof(string));
+            dtCortes.Columns.Add("SUCURSAL_NOMBRE", typeof(string));
+
+            // Añadir datos a las nuevas columnas
+            foreach (DataRow row in dtCortes.Rows)
+            {
+                int usuarioId = Convert.ToInt32(row["USUARIO"]);
+                int sucursalIdFromRow = Convert.ToInt32(row["SUCURSAL"]);
+
+                DataRow[] usuarioRows = dtUsuarios.Select("id = " + usuarioId);
+                if (usuarioRows.Length > 0)
+                {
+                    row["USUARIO_NOMBRE"] = usuarioRows[0]["nombre"];
+                }
+
+                DataRow[] sucursalRows = dtSucursales.Select("id = " + sucursalIdFromRow);
+                if (sucursalRows.Length > 0)
+                {
+                    row["SUCURSAL_NOMBRE"] = sucursalRows[0]["razon_social"];
+                }
+            }
+
+            // Eliminar columnas de ID de usuario y sucursal si no son necesarias
+            dtCortes.Columns.Remove("USUARIO");
+            dtCortes.Columns.Remove("SUCURSAL");
+
+            // Renombrar columnas
+            dtCortes.Columns["USUARIO_NOMBRE"].ColumnName = "USUARIO";
+            dtCortes.Columns["SUCURSAL_NOMBRE"].ColumnName = "SUCURSAL";
+
+            return dtCortes;
+        }
 
         public DataTable getClientes()
         {
