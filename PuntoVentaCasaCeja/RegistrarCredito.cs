@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using Windows.Storage;
 using PuntoVentaCasaCeja.Properties;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace PuntoVentaCasaCeja
 {
@@ -37,9 +38,11 @@ namespace PuntoVentaCasaCeja
         PrintPreviewControl printPreviewControl1;
         private System.Drawing.Printing.PrintDocument docToPrint =
     new System.Drawing.Printing.PrintDocument();
+        CurrentData data;
         public RegistrarCredito(CurrentData data)
         {
             InitializeComponent();
+            this.data = data;
             this.cliente = data.cliente;
             this.webDM = data.webDM;
             this.localDM = webDM.localDM;
@@ -177,6 +180,7 @@ namespace PuntoVentaCasaCeja
                     //Console.WriteLine($"Restando existencia para producto ID: {p.id}, cantidad: {p.cantidad}");
                     await webDM.restarExistencia(idsucursal, p.id, p.cantidad);
                 }
+                data.totalcarrito = 0;
             }
             else
             {

@@ -38,9 +38,11 @@ namespace PuntoVentaCasaCeja
         PrintPreviewControl printPreviewControl1;
         private System.Drawing.Printing.PrintDocument docToPrint =
     new System.Drawing.Printing.PrintDocument();
+        CurrentData data;
         public RegistrarApartado(CurrentData data)
         {
             InitializeComponent();
+            this.data = data;
             this.cliente = data.cliente;
             this.webDM = data.webDM;
             this.localDM = webDM.localDM;
@@ -86,7 +88,7 @@ namespace PuntoVentaCasaCeja
                 Apartado na = new Apartado()
                 {
                     productos = JsonConvert.SerializeObject(carrito),
-                    total = totalcarrito,
+                    total = data.totalcarrito,
                     total_pagado = totalpagado,
                     folio = this.folio,
                     fecha_de_apartado = localDate.ToString("yyyy-MM-dd HH:mm:ss"),
@@ -183,6 +185,7 @@ namespace PuntoVentaCasaCeja
                     //Console.WriteLine($"Restando existencia para producto ID: {p.id}, cantidad: {p.cantidad}");
                     await webDM.restarExistencia(idsucursal, p.id, p.cantidad);
                 }
+                data.totalcarrito = 0;
             }
             else
             {
