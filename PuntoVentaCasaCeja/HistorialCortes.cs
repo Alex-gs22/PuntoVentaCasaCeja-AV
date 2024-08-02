@@ -19,7 +19,7 @@ namespace PuntoVentaCasaCeja
             this.webDM = data.webDM;
             this.data = data;
             this.localDM = webDM.localDM;
-            this.tablaCortesZ.DataSource = localDM.getCortes();
+            this.tablaCortesZ.DataSource = localDM.getCortesBySucursal(data.idSucursal);
             this.tablaCortesZ.CellDoubleClick += new DataGridViewCellEventHandler(this.tablaCortesZ_CellDoubleClick);
         }
 
@@ -189,7 +189,7 @@ namespace PuntoVentaCasaCeja
             {
                 localDM.eliminarCortes();
                 MessageBox.Show("Historial de cortes eliminado");
-                tablaCortesZ.DataSource = localDM.getCortes();
+                tablaCortesZ.DataSource = localDM.getCortesBySucursal(data.idSucursal);
             }
         }
 
