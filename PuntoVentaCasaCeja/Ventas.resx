@@ -755,11 +755,11 @@
   <data name="historialDeCortesToolStripMenuItem.Text" xml:space="preserve">
     <value>Historial de Cortes</value>
   </data>
-  <data name="altaDeUsuariosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="adminUsuariosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>257, 26</value>
   </data>
-  <data name="altaDeUsuariosToolStripMenuItem.Text" xml:space="preserve">
-    <value>Alta de Usuarios</value>
+  <data name="adminUsuariosToolStripMenuItem.Text" xml:space="preserve">
+    <value>Administrar Usuarios</value>
   </data>
   <data name="actualizarBaseDeDatosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>257, 26</value>
@@ -962,7 +962,7 @@ apartados
     <value>True</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>61</value>
+    <value>43</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>8, 16</value>
@@ -1045,16 +1045,16 @@ apartados
   <data name="&gt;&gt;historialDeCortesToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;adminUsuariosToolStripMenuItem.Name" xml:space="preserve">
+    <value>adminUsuariosToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;adminUsuariosToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;actualizarBaseDeDatosToolStripMenuItem.Name" xml:space="preserve">
     <value>actualizarBaseDeDatosToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;actualizarBaseDeDatosToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;altaDeUsuariosToolStripMenuItem.Name" xml:space="preserve">
-    <value>altaDeUsuariosToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;altaDeUsuariosToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

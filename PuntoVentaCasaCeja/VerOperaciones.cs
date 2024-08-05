@@ -89,16 +89,27 @@ namespace PuntoVentaCasaCeja
             calculateMaxPages(data.Rows.Count);
 
             // Obtener las filas para la página actual
-            var paginatedData = data.AsEnumerable().Skip(offset).Take(rowsPerPage).CopyToDataTable();
+            var paginatedRows = data.AsEnumerable().Skip(offset).Take(rowsPerPage);
 
-            // Asignar el DataSource al BindingSource para que administre las actualizaciones
-            source.DataSource = paginatedData;
-            tabla.DataSource = source;
+            if (paginatedRows.Any())
+            {
+                var paginatedData = paginatedRows.CopyToDataTable();
+                // Asignar el DataSource al BindingSource para que administre las actualizaciones
+                source.DataSource = paginatedData;
+                tabla.DataSource = source;
+            }
+            else
+            {
+                // Manejar el caso donde no hay filas para mostrar
+                source.DataSource = null;
+                tabla.DataSource = source;
+            }
 
             txtbuscar.Focus();
             // Se comentó para que no se cargue el ticket automáticamente al cargar la ventana
             // loadTicket();
         }
+
 
         private void calculateMaxPages(int rowCount)
         {

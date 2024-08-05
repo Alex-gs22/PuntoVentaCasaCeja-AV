@@ -41,21 +41,21 @@ namespace PuntoVentaCasaCeja
             this.delete = new System.Windows.Forms.Button();
             this.print = new System.Windows.Forms.Button();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.tabla = new System.Windows.Forms.DataGridView();
-            this.printPreviewControl1 = new System.Windows.Forms.PrintPreviewControl();
-            this.cancel = new System.Windows.Forms.Button();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.prev = new System.Windows.Forms.Button();
             this.next = new System.Windows.Forms.Button();
             this.pageLabel = new System.Windows.Forms.Label();
+            this.tabla = new System.Windows.Forms.DataGridView();
+            this.printPreviewControl1 = new System.Windows.Forms.PrintPreviewControl();
+            this.cancel = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tabla)).BeginInit();
             this.tableLayoutPanel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tabla)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -246,58 +246,6 @@ namespace PuntoVentaCasaCeja
             this.tableLayoutPanel4.Size = new System.Drawing.Size(1389, 623);
             this.tableLayoutPanel4.TabIndex = 4;
             // 
-            // tabla
-            // 
-            this.tabla.AllowUserToAddRows = false;
-            this.tabla.AllowUserToDeleteRows = false;
-            this.tabla.AllowUserToOrderColumns = true;
-            this.tabla.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabla.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.tabla.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.tabla.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tabla.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tabla.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.tabla.Location = new System.Drawing.Point(4, 4);
-            this.tabla.Margin = new System.Windows.Forms.Padding(4);
-            this.tabla.MultiSelect = false;
-            this.tabla.Name = "tabla";
-            this.tabla.RowHeadersVisible = false;
-            this.tabla.RowHeadersWidth = 51;
-            this.tabla.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.tabla.Size = new System.Drawing.Size(825, 550);
-            this.tabla.StandardTab = true;
-            this.tabla.TabIndex = 2;
-            this.tabla.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tabla_CellContentClick);
-            this.tabla.SelectionChanged += new System.EventHandler(this.tabla_SelectionChanged);
-            this.tabla.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tabla_KeyDown);
-            this.tabla.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabla_MouseClick);
-            // 
-            // printPreviewControl1
-            // 
-            this.printPreviewControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.printPreviewControl1.Location = new System.Drawing.Point(837, 4);
-            this.printPreviewControl1.Margin = new System.Windows.Forms.Padding(4);
-            this.printPreviewControl1.Name = "printPreviewControl1";
-            this.printPreviewControl1.Size = new System.Drawing.Size(548, 550);
-            this.printPreviewControl1.TabIndex = 3;
-            // 
-            // cancel
-            // 
-            this.cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cancel.Font = new System.Drawing.Font("Segoe UI Semibold", 22F, System.Drawing.FontStyle.Bold);
-            this.cancel.Location = new System.Drawing.Point(1114, -2);
-            this.cancel.Margin = new System.Windows.Forms.Padding(4);
-            this.cancel.Name = "cancel";
-            this.cancel.Size = new System.Drawing.Size(259, 57);
-            this.cancel.TabIndex = 4;
-            this.cancel.Text = "SALIR (Esc)";
-            this.cancel.UseVisualStyleBackColor = true;
-            this.cancel.Click += new System.EventHandler(this.cancel_Click);
-            // 
             // tableLayoutPanel6
             // 
             this.tableLayoutPanel6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -365,6 +313,58 @@ namespace PuntoVentaCasaCeja
             this.pageLabel.Text = "Página 1/1";
             this.pageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // tabla
+            // 
+            this.tabla.AllowUserToAddRows = false;
+            this.tabla.AllowUserToDeleteRows = false;
+            this.tabla.AllowUserToOrderColumns = true;
+            this.tabla.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabla.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.tabla.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.tabla.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tabla.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tabla.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.tabla.Location = new System.Drawing.Point(4, 4);
+            this.tabla.Margin = new System.Windows.Forms.Padding(4);
+            this.tabla.MultiSelect = false;
+            this.tabla.Name = "tabla";
+            this.tabla.RowHeadersVisible = false;
+            this.tabla.RowHeadersWidth = 51;
+            this.tabla.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.tabla.Size = new System.Drawing.Size(825, 550);
+            this.tabla.StandardTab = true;
+            this.tabla.TabIndex = 2;
+            this.tabla.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tabla_CellContentClick);
+            this.tabla.SelectionChanged += new System.EventHandler(this.tabla_SelectionChanged);
+            this.tabla.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tabla_KeyDown);
+            this.tabla.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabla_MouseClick);
+            // 
+            // printPreviewControl1
+            // 
+            this.printPreviewControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.printPreviewControl1.Location = new System.Drawing.Point(837, 4);
+            this.printPreviewControl1.Margin = new System.Windows.Forms.Padding(4);
+            this.printPreviewControl1.Name = "printPreviewControl1";
+            this.printPreviewControl1.Size = new System.Drawing.Size(548, 550);
+            this.printPreviewControl1.TabIndex = 3;
+            // 
+            // cancel
+            // 
+            this.cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cancel.Font = new System.Drawing.Font("Segoe UI Semibold", 22F, System.Drawing.FontStyle.Bold);
+            this.cancel.Location = new System.Drawing.Point(1114, -2);
+            this.cancel.Margin = new System.Windows.Forms.Padding(4);
+            this.cancel.Name = "cancel";
+            this.cancel.Size = new System.Drawing.Size(259, 57);
+            this.cancel.TabIndex = 4;
+            this.cancel.Text = "SALIR (Esc)";
+            this.cancel.UseVisualStyleBackColor = true;
+            this.cancel.Click += new System.EventHandler(this.cancel_Click);
+            // 
             // VerOperaciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -386,9 +386,9 @@ namespace PuntoVentaCasaCeja
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.tabla)).EndInit();
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tabla)).EndInit();
             this.ResumeLayout(false);
 
         }
