@@ -54,12 +54,12 @@ namespace PuntoVentaCasaCeja
             this.reimprimirTicketF6ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.establecerImpresoraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.historialDeCortesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.adminUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.actualizarBaseDeDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logout = new System.Windows.Forms.Button();
             this.apartados = new System.Windows.Forms.Button();
             this.eliminarCarrito_button = new System.Windows.Forms.Button();
             this.ListaClientes = new System.Windows.Forms.Button();
-            this.altaDeUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.tabla)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -270,7 +270,7 @@ namespace PuntoVentaCasaCeja
             this.reimprimirTicketF6ToolStripMenuItem,
             this.establecerImpresoraToolStripMenuItem,
             this.historialDeCortesToolStripMenuItem,
-            this.altaDeUsuariosToolStripMenuItem,
+            this.adminUsuariosToolStripMenuItem,
             this.actualizarBaseDeDatosToolStripMenuItem});
             this.opcionesToolStripMenuItem.Name = "opcionesToolStripMenuItem";
             resources.ApplyResources(this.opcionesToolStripMenuItem, "opcionesToolStripMenuItem");
@@ -310,6 +310,12 @@ namespace PuntoVentaCasaCeja
             this.historialDeCortesToolStripMenuItem.Name = "historialDeCortesToolStripMenuItem";
             resources.ApplyResources(this.historialDeCortesToolStripMenuItem, "historialDeCortesToolStripMenuItem");
             this.historialDeCortesToolStripMenuItem.Click += new System.EventHandler(this.historialDeCortesToolStripMenuItem_Click);
+            // 
+            // adminUsuariosToolStripMenuItem
+            // 
+            this.adminUsuariosToolStripMenuItem.Name = "adminUsuariosToolStripMenuItem";
+            resources.ApplyResources(this.adminUsuariosToolStripMenuItem, "adminUsuariosToolStripMenuItem");
+            this.adminUsuariosToolStripMenuItem.Click += new System.EventHandler(this.adminUsuariosToolStripMenuItem_Click);
             // 
             // actualizarBaseDeDatosToolStripMenuItem
             // 
@@ -353,12 +359,6 @@ namespace PuntoVentaCasaCeja
             this.ListaClientes.Name = "ListaClientes";
             this.ListaClientes.UseVisualStyleBackColor = false;
             this.ListaClientes.Click += new System.EventHandler(this.ListaClientes_Click_1);
-            // 
-            // altaDeUsuariosToolStripMenuItem
-            // 
-            this.altaDeUsuariosToolStripMenuItem.Name = "altaDeUsuariosToolStripMenuItem";
-            resources.ApplyResources(this.altaDeUsuariosToolStripMenuItem, "altaDeUsuariosToolStripMenuItem");
-            this.altaDeUsuariosToolStripMenuItem.Click += new System.EventHandler(this.altaDeUsuariosToolStripMenuItem_Click);
             // 
             // Ventas
             // 
@@ -429,6 +429,6 @@ namespace PuntoVentaCasaCeja
         private Button eliminarCarrito_button;
         private ToolStripMenuItem historialDeCortesToolStripMenuItem;
         private Button ListaClientes;
-        private ToolStripMenuItem altaDeUsuariosToolStripMenuItem;
+        private ToolStripMenuItem adminUsuariosToolStripMenuItem;
     }
 }

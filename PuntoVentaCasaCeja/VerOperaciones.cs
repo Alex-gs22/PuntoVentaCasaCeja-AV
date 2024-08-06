@@ -17,6 +17,7 @@ namespace PuntoVentaCasaCeja
 {
     public partial class VerOperaciones : Form
     {
+        int rowCount, maxPages, currentPage, offset, idCliente, rowsPerPage = 10;
         LocaldataManager localDM;
         DataTable data;
         bool firstTicket = false;
@@ -37,12 +38,15 @@ namespace PuntoVentaCasaCeja
         int userlvl;
         Dictionary<string, double> pagos;
         Dictionary<int, float[]> tabs;
+        BindingSource source = new BindingSource();
         private System.Drawing.Printing.PrintDocument docToPrint =
     new System.Drawing.Printing.PrintDocument();
 
         public VerOperaciones(LocaldataManager localdata, int idcaja, string sucursalName, string sucursalDir, int userlvl)
         {
             InitializeComponent();
+            offset = 0;
+            currentPage = 1;
             this.localDM = localdata;
             this.userlvl = userlvl;
             this.idcaja = idcaja;
@@ -82,12 +86,62 @@ namespace PuntoVentaCasaCeja
             data = localDM.getVentasFecha(fechaSeleccionada);
 
             data.DefaultView.Sort = "id DESC";
-            tabla.DataSource = data;
+            calculateMaxPages(data.Rows.Count);
+
+            // Obtener las filas para la página actual
+            var paginatedRows = data.AsEnumerable().Skip(offset).Take(rowsPerPage);
+
+            if (paginatedRows.Any())
+            {
+                var paginatedData = paginatedRows.CopyToDataTable();
+                // Asignar el DataSource al BindingSource para que administre las actualizaciones
+                source.DataSource = paginatedData;
+                tabla.DataSource = source;
+            }
+            else
+            {
+                // Manejar el caso donde no hay filas para mostrar
+                source.DataSource = null;
+                tabla.DataSource = source;
+            }
+
             txtbuscar.Focus();
             // Se comentó para que no se cargue el ticket automáticamente al cargar la ventana
             // loadTicket();
         }
 
+
+        private void calculateMaxPages(int rowCount)
+        {
+            maxPages = ((rowCount % rowsPerPage) == 0) ? rowCount / rowsPerPage : rowCount / rowsPerPage + 1;
+            if (maxPages == 0)
+                maxPages++;
+            if (maxPages < currentPage)
+            {
+                currentPage = maxPages;
+                offset = (currentPage - 1) * rowsPerPage;
+            }
+            pageLabel.Text = "Página " + currentPage + "/" + maxPages;
+        }
+        private void prev_Click(object sender, EventArgs e)
+        {
+            if (currentPage > 1)
+            {
+                offset -= rowsPerPage;
+                currentPage--;
+                loadData();
+            }
+        }
+
+        private void next_Click(object sender, EventArgs e)
+        {
+            if (currentPage < maxPages)
+            {
+                offset += rowsPerPage;
+                currentPage++;
+                loadData();
+            }
+        }
 
         private void txtbuscar_TextChanged(object sender, EventArgs e)
         {

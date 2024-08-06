@@ -21,8 +21,7 @@ namespace PuntoVentaCasaCeja
         LocaldataManager localDM;
         List<ProductoVenta> carrito;
         double totalcarrito;
-        int rowCount, maxPages, currentPage, offset, idCliente;
-        int rowsPerPage = 10;
+        int rowCount, maxPages, currentPage, offset, idCliente, rowsPerPage = 10;
         List<string> estados = new List<string> ();
         bool isValidTicket = false;
         double totalpagado = 0;
@@ -40,8 +39,8 @@ namespace PuntoVentaCasaCeja
         List<Apartado> currentApa;
         BindingSource source = new BindingSource();
         List<tabInfo> infoTabla = new List<tabInfo>();
-        private System.Drawing.Printing.PrintDocument docToPrint =
-    new System.Drawing.Printing.PrintDocument();
+        private System.Drawing.Printing.PrintDocument docToPrint = new System.Drawing.Printing.PrintDocument();
+
         public VerCredApa(int tipo, CurrentData data)
         {
             InitializeComponent();
@@ -185,9 +184,12 @@ namespace PuntoVentaCasaCeja
             int estado = boxestado.SelectedIndex;
             if (tipo == 0)
             {
+                // Limpiar la lista de información de la tabla
+                infoTabla.Clear();
+
                 if (txtbuscar.Text.Equals(""))
                 {
-                    infoTabla.Clear();
+                    // Filtrar los datos según el estado seleccionado
                     if (estado == 4)
                     {
                         currentCred = new List<Credito>();
@@ -200,93 +202,51 @@ namespace PuntoVentaCasaCeja
                     {
                         currentCred = creditos[estados[estado]];
                     }
-                    currentCred = currentCred.OrderByDescending(x => x.fecha_de_credito).ToList();
-                    rowCount = currentCred.Count;
-                    calculateMaxPages(rowCount);
-                    for (int i = offset; i < currentCred.Count && i<offset+rowsPerPage; i++)
-                    {
-                        tabInfo tempinfo = new tabInfo
-                        {
-                            ESTADO = estados[currentCred[i].estado],
-                            FOLIO = currentCred[i].folio,
-                            FECHA = currentCred[i].fecha_de_credito,
-                            TOTAL = currentCred[i].total.ToString("0.00")
-                        };
-
-                        infoTabla.Add(tempinfo);
-                    }
-                    source.ResetBindings(false);                 
                 }
                 else
                 {
-                    infoTabla.Clear();
-                    if (estado == 4)
+                    // Filtrar los datos según el texto de búsqueda y el estado seleccionado
+                    currentCred = new List<Credito>();
+                    foreach (var entry in creditos)
                     {
-                        currentCred = new List<Credito>();
-                        foreach (Credito c in creditos["PENDIENTE"])
+                        if (estado == 4 || entry.Key == estados[estado])
                         {
-                            if (c.folio.Contains(txtbuscar.Text))
+                            foreach (Credito c in entry.Value)
                             {
-                                currentCred.Add(c);
-                            }
-                        }
-                        foreach (Credito c in creditos["EXPIRO"])
-                        {
-                            if (c.folio.Contains(txtbuscar.Text))
-                            {
-                                currentCred.Add(c);
-                            }
-                        }
-                        foreach (Credito c in creditos["CANCELADO"])
-                        {
-                            if (c.folio.Contains(txtbuscar.Text))
-                            {
-                                currentCred.Add(c);
-                            }
-                        }
-                        foreach (Credito c in creditos["PAGADO"])
-                        {
-                            if (c.folio.Contains(txtbuscar.Text))
-                            {
-                                currentCred.Add(c);
+                                if (c.folio.Contains(txtbuscar.Text))
+                                {
+                                    currentCred.Add(c);
+                                }
                             }
                         }
                     }
-                    else
-                    {
-                        currentCred = new List<Credito>();
-                        foreach(Credito c in creditos[estados[estado]])
-                        {
-                            if (c.folio.Contains(txtbuscar.Text))
-                            {
-                                currentCred.Add(c);
-                            }
-                        }
-                    }
-                    currentCred = currentCred.OrderByDescending(x => x.fecha_de_credito).ToList();
-                    rowCount = currentCred.Count;
-                    calculateMaxPages(rowCount);
-                    for (int i = offset; i < currentCred.Count && i < offset + rowsPerPage; i++)
-                    {
-                        tabInfo tempinfo = new tabInfo
-                        {
-                            ESTADO = estados[currentCred[i].estado],
-                            FOLIO = currentCred[i].folio,
-                            FECHA = currentCred[i].fecha_de_credito,
-                            TOTAL = currentCred[i].total.ToString("0.00")
-                        };
+                }
 
-                        infoTabla.Add(tempinfo);
-                    }
-                    source.ResetBindings(false);
+                // Ordenar y contar los datos filtrados
+                currentCred = currentCred.OrderByDescending(x => x.fecha_de_credito).ToList();
+                rowCount = currentCred.Count;
+                calculateMaxPages(rowCount);
 
+                // Agregar solo las filas correspondientes a la página actual
+                for (int i = offset; i < offset + rowsPerPage && i < currentCred.Count; i++)
+                {
+                    tabInfo tempinfo = new tabInfo
+                    {
+                        ESTADO = estados[currentCred[i].estado],
+                        FOLIO = currentCred[i].folio,
+                        FECHA = currentCred[i].fecha_de_credito,
+                        TOTAL = currentCred[i].total.ToString("0.00")
+                    };
+                    infoTabla.Add(tempinfo);
                 }
             }
-            if (tipo == 1)
+            else if (tipo == 1)
             {
+                // Similar al bloque anterior, pero para los apartados
+                infoTabla.Clear();
+
                 if (txtbuscar.Text.Equals(""))
                 {
-                    infoTabla.Clear();
                     if (estado == 5)
                     {
                         currentApa = new List<Apartado>();
@@ -299,88 +259,46 @@ namespace PuntoVentaCasaCeja
                     {
                         currentApa = apartados[estados[estado]];
                     }
-                    currentApa = currentApa.OrderByDescending(x => x.fecha_de_apartado).ToList();
-                    rowCount = currentApa.Count;
-                    calculateMaxPages(rowCount);
-                    for (int i = offset; i < currentApa.Count && i < offset + rowsPerPage; i++)
-                    {
-                        tabInfo tempinfo = new tabInfo
-                        {
-                            ESTADO = estados[currentApa[i].estado],
-                            FOLIO = currentApa[i].folio,
-                            FECHA = currentApa[i].fecha_de_apartado,
-                            TOTAL = currentApa[i].total.ToString("0.00")
-                        };
-
-                        infoTabla.Add(tempinfo);
-                    }
-                    source.ResetBindings(false);
                 }
                 else
                 {
-                    infoTabla.Clear();
-                    if (estado == 5)
+                    currentApa = new List<Apartado>();
+                    foreach (var entry in apartados)
                     {
-                        currentApa = new List<Apartado>();
-                        foreach (Apartado c in apartados["PENDIENTE"])
+                        if (estado == 5 || entry.Key == estados[estado])
                         {
-                            if (c.folio.Contains(txtbuscar.Text))
+                            foreach (Apartado c in entry.Value)
                             {
-                                currentApa.Add(c);
-                            }
-                        }
-                        foreach (Apartado c in apartados["EXPIRO"])
-                        {
-                            if (c.folio.Contains(txtbuscar.Text))
-                            {
-                                currentApa.Add(c);
-                            }
-                        }
-                        foreach (Apartado c in apartados["CANCELADO"])
-                        {
-                            if (c.folio.Contains(txtbuscar.Text))
-                            {
-                                currentApa.Add(c);
-                            }
-                        }
-                        foreach (Apartado c in apartados["PAGADO"])
-                        {
-                            if (c.folio.Contains(txtbuscar.Text))
-                            {
-                                currentApa.Add(c);
+                                if (c.folio.Contains(txtbuscar.Text))
+                                {
+                                    currentApa.Add(c);
+                                }
                             }
                         }
                     }
-                    else
-                    {
-                        currentApa = new List<Apartado>();
-                        foreach (Apartado c in apartados[estados[estado]])
-                        {
-                            if (c.folio.Contains(txtbuscar.Text))
-                            {
-                                currentApa.Add(c);
-                            }
-                        }
-                    }
-                    currentApa = currentApa.OrderByDescending(x => x.fecha_de_apartado).ToList();
-                    rowCount = currentApa.Count;
-                    calculateMaxPages(rowCount);
-                    for (int i = offset; i < currentApa.Count && i < offset + rowsPerPage; i++)
-                    {
-                        tabInfo tempinfo = new tabInfo
-                        {
-                            ESTADO = estados[currentApa[i].estado],
-                            FOLIO = currentApa[i].folio,
-                            FECHA = currentApa[i].fecha_de_apartado,
-                            TOTAL = currentApa[i].total.ToString("0.00")
-                        };
+                }
 
-                        infoTabla.Add(tempinfo);
-                    }
-                    source.ResetBindings(false);
+                currentApa = currentApa.OrderByDescending(x => x.fecha_de_apartado).ToList();
+                rowCount = currentApa.Count;
+                calculateMaxPages(rowCount);
+
+                for (int i = offset; i < offset + rowsPerPage && i < currentApa.Count; i++)
+                {
+                    tabInfo tempinfo = new tabInfo
+                    {
+                        ESTADO = estados[currentApa[i].estado],
+                        FOLIO = currentApa[i].folio,
+                        FECHA = currentApa[i].fecha_de_apartado,
+                        TOTAL = currentApa[i].total.ToString("0.00")
+                    };
+                    infoTabla.Add(tempinfo);
                 }
             }
+
+            // Actualizar el origen de datos de la tabla
+            source.ResetBindings(false);
         }
+
 
         private void cancel_Click(object sender, EventArgs e)
         {

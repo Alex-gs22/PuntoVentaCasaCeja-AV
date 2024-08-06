@@ -1032,6 +1032,28 @@ namespace PuntoVentaCasaCeja
             adapter.Fill(dt);
             return dt;
         }
+
+        public DataTable getUsuariosCajero()
+        {
+            DataTable dt = new DataTable();
+            SQLiteCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT id AS ID, nombre AS NOMBRE, correo AS CORREO, confirmacion AS CONFIRMACION, telefono AS TELEFONO, imagen AS FOTOGRAFIA, usuario as USUARIO, clave AS CLAVE," +
+                "is_root AS NIVEL FROM usuarios WHERE activo=1 AND is_root = 2";
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
+            adapter.Fill(dt);
+            return dt;
+        }
+        public DataTable getUsuariosCajero(string arg)
+        {
+            DataTable dt = new DataTable();
+            SQLiteCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT id AS ID, nombre AS NOMBRE, correo AS CORREO, confirmacion AS CONFIRMACION, telefono AS TELEFONO, imagen AS FOTOGRAFIA, usuario as USUARIO, clave AS CLAVE," +
+                "is_root AS NIVEL FROM usuarios WHERE activo=1 AND is_root = 2";
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
+            adapter.Fill(dt);
+            return dt;
+        }
+
         public DataTable getUsuarios(string arg)
         {
             DataTable dt = new DataTable();

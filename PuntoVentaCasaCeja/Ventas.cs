@@ -325,6 +325,7 @@ namespace PuntoVentaCasaCeja
                     //administrarCatálogoToolStripMenuItem.Enabled = true;
                     actualizarBaseDeDatosToolStripMenuItem.Enabled = true;
                     historialDeCortesToolStripMenuItem.Enabled = true;
+                    adminUsuariosToolStripMenuItem.Enabled = true;
                 }
                 else
                 {
@@ -336,6 +337,7 @@ namespace PuntoVentaCasaCeja
                     //administrarCatálogoToolStripMenuItem.Enabled = false;
                     actualizarBaseDeDatosToolStripMenuItem.Enabled = false;
                     historialDeCortesToolStripMenuItem.Enabled = false;
+                    adminUsuariosToolStripMenuItem.Enabled = false;
                 }
             }
         }
@@ -1589,9 +1591,10 @@ namespace PuntoVentaCasaCeja
             }
         }
 
-        private void altaDeUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
+        private void adminUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Esta función no está disponible en esta versión.", "Advertencia");
+            Usuarios usuarios = new Usuarios(data);
+            usuarios.ShowDialog();
         }
     }
 }

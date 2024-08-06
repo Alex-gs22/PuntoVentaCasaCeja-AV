@@ -226,6 +226,12 @@
     <Compile Include="CrearProducto.designer.cs">
       <DependentUpon>CrearProducto.cs</DependentUpon>
     </Compile>
+    <Compile Include="CrearUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CrearUsuario.Designer.cs">
+      <DependentUpon>CrearUsuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="CreaTicket.cs" />
     <Compile Include="CredApartSel.cs">
       <SubType>Form</SubType>
@@ -272,12 +278,6 @@
     <Compile Include="IngresarTexto.designer.cs">
       <DependentUpon>IngresarTexto.cs</DependentUpon>
     </Compile>
-    <Compile Include="ListaApartados.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ListaApartados.Designer.cs">
-      <DependentUpon>ListaApartados.cs</DependentUpon>
-    </Compile>
     <Compile Include="ListaClientes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -316,6 +316,12 @@
     <Compile Include="ModificarProducto.designer.cs">
       <DependentUpon>ModificarProducto.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModifUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModifUsuario.Designer.cs">
+      <DependentUpon>ModifUsuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="NuevoCliente.cs" />
     <Compile Include="NuevoProducto.cs" />
     <Compile Include="PrintingDocument.cs" />
@@ -345,6 +351,12 @@
       <DependentUpon>UserLogin.cs</DependentUpon>
     </Compile>
     <Compile Include="Usuario.cs" />
+    <Compile Include="Usuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Usuarios.Designer.cs">
+      <DependentUpon>Usuarios.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ventas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -417,6 +429,9 @@
     <EmbeddedResource Include="CrearProducto.resx">
       <DependentUpon>CrearProducto.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CrearUsuario.resx">
+      <DependentUpon>CrearUsuario.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CredApartSel.resx">
       <DependentUpon>CredApartSel.cs</DependentUpon>
     </EmbeddedResource>
@@ -434,9 +449,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="IngresarTexto.resx">
       <DependentUpon>IngresarTexto.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ListaApartados.resx">
-      <DependentUpon>ListaApartados.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ListaClientes.resx">
       <DependentUpon>ListaClientes.cs</DependentUpon>
@@ -456,6 +468,9 @@
     <EmbeddedResource Include="ModificarProducto.resx">
       <DependentUpon>ModificarProducto.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModifUsuario.resx">
+      <DependentUpon>ModifUsuario.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -474,6 +489,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserLogin.resx">
       <DependentUpon>UserLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Usuarios.resx">
+      <DependentUpon>Usuarios.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ventas.resx">
       <DependentUpon>Ventas.cs</DependentUpon>
@@ -496,7 +514,6 @@
     <EmbeddedResource Include="VerOperaciones.resx">
       <DependentUpon>VerOperaciones.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="ClassDiagram2.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
