@@ -202,7 +202,12 @@ namespace PuntoVentaCasaCeja
 
         private void prev_Click(object sender, EventArgs e)
         {
-
+            if (currentPage > 1)
+            {
+                offset -= rowsPerPage;
+                currentPage--;
+                FiltrarDatos();
+            }
         }
 
         private void next_Click(object sender, EventArgs e)

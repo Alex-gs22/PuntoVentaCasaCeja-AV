@@ -709,3 +709,6 @@ C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\Punt
 C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.CrearUsuario.resources
 C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ModifUsuario.resources
 C:\Users\Alex_\OneDrive\Documentos\Visual Studio 2022\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.Usuarios.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.CrearUsuario.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.ModifUsuario.resources
+C:\Users\victorvega\source\repos\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja-AV\PuntoVentaCasaCeja\obj\Debug\PuntoVentaCasaCeja.Usuarios.resources
