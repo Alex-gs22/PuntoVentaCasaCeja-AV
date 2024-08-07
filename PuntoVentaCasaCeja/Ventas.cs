@@ -1574,9 +1574,20 @@ namespace PuntoVentaCasaCeja
 
         private void ListaClientes_Click_1(object sender, EventArgs e)
         {
+            data.totalcarrito = totalcarrito;
+            sucursalName = localDM.getSucursalname(idsucursal);
+            sucursalDir = localDM.getSucursalAddr(idsucursal);
             ListaClientes listaCl = new ListaClientes(data);
-            listaCl.ShowDialog();
-
+            DialogResult response = listaCl.ShowDialog();
+            if (response == DialogResult.Yes)
+            {
+                MessageBox.Show("", "Apartado");
+                resetVenta();
+            }
+            if (data.totalcarrito == 0)
+            {
+                resetVenta();
+            }
         }
         public async Task SyncPendingCortes()
         {
