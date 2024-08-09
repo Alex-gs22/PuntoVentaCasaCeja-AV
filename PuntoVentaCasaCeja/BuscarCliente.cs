@@ -70,7 +70,7 @@ namespace PuntoVentaCasaCeja
         {
             if (cliente != null && buscar.Text == "CONTINUAR (F5)")
             {
-                //abrir el selector clientes/apartados pasando creditos
+                
                 data.cliente = cliente;
                 ApCrSel sel = new ApCrSel(data);
                 this.DialogResult = sel.ShowDialog(this);

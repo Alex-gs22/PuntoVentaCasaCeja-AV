@@ -856,7 +856,7 @@ namespace PuntoVentaCasaCeja
                         folio = subresult.GetString(1),
                         metodo_pago = subresult.GetString(2),
                         total_abonado = subresult.GetDouble(3),
-                        fecha = subresult.GetString(4),
+                        fecha = subresult.GetDateTime(4).ToString("yyyy-MM-dd HH:mm:ss"),
                         credito_id = subresult.GetInt32(5),
                         folio_corte = subresult.GetString(6),
                         usuario_id = subresult.GetInt32(7)
@@ -869,19 +869,60 @@ namespace PuntoVentaCasaCeja
                 subresult = subcommand.ExecuteReader();
                 while (subresult.Read())
                 {
-                    AbonoCredito abono = new AbonoCredito
+                    AbonoCredito abono= new AbonoCredito();
+                    try { 
+
+                    // 'id' se establece en 0 según tu código
+                    abono.id = 0;
+
+                    // 'folio' - Columna "folio"
+                    abono.folio = subresult["folio"] != DBNull.Value ? subresult["folio"].ToString() : string.Empty;
+
+                    // 'metodo_pago' - Columna "metodo_pago"
+                    abono.metodo_pago = subresult["metodo_pago"] != DBNull.Value ? subresult["metodo_pago"].ToString() : string.Empty;
+
+                    // 'total_abonado' - Columna "total_abonado"
+                    abono.total_abonado = subresult["total_abonado"] != DBNull.Value ? Convert.ToDouble(subresult["total_abonado"]) : 0.0;
+
+                    // 'fecha' - Columna "fecha"
+                    if (subresult["fecha"] != DBNull.Value)
                     {
-                        id = 0,
-                        folio = subresult.GetString(1),
-                        metodo_pago = subresult.GetString(2),
-                        total_abonado = subresult.GetDouble(3),
-                        fecha = subresult.GetString(4),
-                        folio_credito = subresult.GetString(5),
-                        credito_id = subresult.GetInt32(6),
-                        folio_corte = subresult.GetString(7),
-                        usuario_id = subresult.GetInt32(8)
-                    };
-                    credito.abonos.Add(abono);
+                        DateTime fechaValue;
+                        if (DateTime.TryParse(subresult["fecha"].ToString(), out fechaValue))
+                        {
+                            abono.fecha = fechaValue.ToString("yyyy-MM-dd HH:mm:ss");
+                        }
+                        else
+                        {
+                            // Manejar si la conversión falla
+                            abono.fecha = string.Empty;
+                        }
+                    }
+                    else
+                    {
+                        abono.fecha = string.Empty;
+                    }
+
+                    // 'folio_credito' - Columna "folio_credito"
+                    abono.folio_credito = subresult["folio_credito"] != DBNull.Value ? subresult["folio_credito"].ToString() : string.Empty;
+
+                    // 'credito_id' - Columna "credito_id"
+                    abono.credito_id = subresult["credito_id"] != DBNull.Value ? Convert.ToInt32(subresult["credito_id"]) : 0;
+
+                    // 'folio_corte' - Columna "folio_corte"
+                    abono.folio_corte = subresult["folio_corte"] != DBNull.Value ? subresult["folio_corte"].ToString() : string.Empty;
+
+                    // 'usuario_id' - Columna "usuario_id"
+                    abono.usuario_id = subresult["usuario_id"] != DBNull.Value ? Convert.ToInt32(subresult["usuario_id"]) : 0;
+
+                    // Aquí puedes proceder con el objeto 'abono' según tus necesidades
+                }
+    catch (Exception ex)
+    {
+                    Console.WriteLine($"Error al procesar el registro: {ex.Message}");
+                    // Opcional: Puedes registrar más detalles o manejar la excepción según sea necesario
+                }
+                credito.abonos.Add(abono);
                     credito.total_pagado += abono.total_abonado;
                     if (credito.total_pagado >= credito.total)
                     {
@@ -924,7 +965,7 @@ namespace PuntoVentaCasaCeja
                         folio = subresult.GetString(1),
                         metodo_pago = subresult.GetString(2),
                         total_abonado = subresult.GetDouble(3),
-                        fecha = subresult.GetString(4),
+                        fecha = subresult.GetDateTime(4).ToString("yyyy-MM-dd HH:mm:ss"),
                         folio_credito = subresult.GetString(5),
                         credito_id = subresult.GetInt32(6),
                         folio_corte = subresult.GetString(7),

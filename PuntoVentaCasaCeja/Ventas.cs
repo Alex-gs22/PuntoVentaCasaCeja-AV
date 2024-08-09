@@ -1513,6 +1513,7 @@ namespace PuntoVentaCasaCeja
 
         private void apartados_Click(object sender, EventArgs e)
         {   
+            data.folioCorte = folioCorte;
             data.totalcarrito = totalcarrito;
             sucursalName = localDM.getSucursalname(idsucursal);
             sucursalDir = localDM.getSucursalAddr(idsucursal);
@@ -1574,6 +1575,7 @@ namespace PuntoVentaCasaCeja
 
         private void ListaClientes_Click_1(object sender, EventArgs e)
         {
+            data.folioCorte = folioCorte;
             data.totalcarrito = totalcarrito;
             sucursalName = localDM.getSucursalname(idsucursal);
             sucursalDir = localDM.getSucursalAddr(idsucursal);
