@@ -6,6 +6,7 @@ using System.Data;
 using Newtonsoft.Json;
 using System;
 using System.Windows.Forms;
+using System.Threading.Tasks;
 
 namespace PuntoVentaCasaCeja
 {
@@ -2645,7 +2646,7 @@ FROM usuarios";
             command.Parameters.AddWithValue("@setId", id);
             command.ExecuteScalar();
         }
-        public void changeEstadoCorte(int id, int estado, string detalles)
+        public async Task changeEstadoCorte(int id, int estado, string detalles)
         {
             SQLiteCommand command = connection.CreateCommand();
             command.CommandText = "UPDATE cortes SET estado = @setEstado, detalles = @setDetalles WHERE id = @setId";
@@ -2929,7 +2930,7 @@ FROM usuarios";
             DateTime localDate = DateTime.Now;
             int id;
             SQLiteCommand command = connection.CreateCommand();
-            command.CommandText = "INSERT INTO cortes (fondo_apertura, total_efectivo, total_tarjetas_debito, total_tarjetas_credito, total_cheques, total_transferencias, efectivo_apartados, efectivo_creditos, gastos, ingresos, sobrante, fecha_apertura_caja, estado, detalles, created_at, updated_at) " +
+            command.CommandText = "INSERT INTO cortes (fondo_apertura, total_efectivo, total_tarjetas_debito, total_tarjetas_credito, total_cheques, total_transferencias, efectivo_apartados, efectivo_creditos, gastos, ingresos, sobrante, fecha_apertura_caja, estado, detalles, created_at, updated_at)" +
                 "values(@setApertura, 0, 0, 0, 0, 0, 0, 0, '{}', '{}', 0, @setFecha, 0, 'Abierta', @setFechaActual, @setFechaActual)";
             command.Parameters.AddWithValue("setApertura", apertura);
             command.Parameters.AddWithValue("setFecha", localDate.ToString("yyyy-MM-dd"));

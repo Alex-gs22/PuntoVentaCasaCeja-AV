@@ -103,14 +103,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PuntoVentaCasaCeja.exe" size="647168">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PuntoVentaCasaCeja.exe" size="647680">
       <assemblyIdentity name="PuntoVentaCasaCeja" version="1.0.0.1" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Qa04pdLkf5h2NDqNn9nluGFrxTQFElUGtMCkIHUzmmI=</dsig:DigestValue>
+        <dsig:DigestValue>7Iox4UPMSN4Ac/rQ9Fm1jkCXF1KXk1hhotJDYQzp93A=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
