@@ -56,13 +56,13 @@ namespace PuntoVentaCasaCeja
                 command.ExecuteNonQuery();
                 command.CommandText = "CREATE TABLE 'creditos_temporal' (    'id'    INTEGER,	'productos' TEXT,	'total' REAL,	'total_pagado'  REAL,	'fecha_de_credito'  TEXT,	'folio' TEXT,	'estado'    INTEGER,	'cliente_creditos_id'   INTEGER,	'id_cajero_registro'    INTEGER,	'sucursal_id'   INTEGER,	'temporal'  INTEGER,	'observaciones' TEXT,	FOREIGN KEY('id_cajero_registro') REFERENCES 'usuarios'('id'),	FOREIGN KEY('sucursal_id') REFERENCES 'sucursales'('id'),	PRIMARY KEY('id' AUTOINCREMENT))";
                 command.ExecuteNonQuery();
-                command.CommandText = "CREATE TABLE 'entradas' (    'id'    INTEGER NOT NULL,	'fecha_factura' TEXT,	'total_factura' REAL,	'folio_factura' TEXT,	'usuario_id'    INTEGER,	'sucursal_id'   INTEGER,	'proveedor_id'  INTEGER,	'cancelacion'   INTEGER,	'estado'    INTEGER,	'detalles'  TEXT,	PRIMARY KEY('id' AUTOINCREMENT))";
+                command.CommandText = "CREATE TABLE 'entradas' (    'id'    INTEGER NOT NULL,	'fecha_factura' TEXT,	'total_factura' REAL,	'folio_factura' TEXT,	'usuario_id'    INTEGER,	'sucursal_id'   INTEGER,	'proveedor_id'  INTEGER,	'cancelacion'   INTEGER,	'estado'    INTEGER,	'detalles'  TEXT, 'created_at'    TEXT, 'updated_at'    TEXT,	PRIMARY KEY('id' AUTOINCREMENT))";
                 command.ExecuteNonQuery();
                 command.CommandText = "CREATE TABLE 'medidas' (    'id'    INTEGER NOT NULL,	'nombre'    TEXT,	'activo'    INTEGER,	'created_at'    TEXT,	'updated_at'    TEXT,	PRIMARY KEY('id'))";
                 command.ExecuteNonQuery();
                 command.CommandText = "CREATE TABLE 'operaciones' (    'id'    INTEGER NOT NULL,	'accion'    TEXT,	'confirmar' INTEGER,	'created_at'    TEXT,	'updated_at'    TEXT,	'producto_id'   INTEGER,	'usuario_id'    INTEGER,	PRIMARY KEY('id'))";
                 command.ExecuteNonQuery();
-                command.CommandText = "CREATE TABLE 'producto_entrada' (    'id'    INTEGER NOT NULL,	'entrada_id'    INTEGER,	'producto_id'   INTEGER,	'codigo'    INTEGER,	'cantidad'  INTEGER,	'costo' REAL,	'estado'    INTEGER,	'detalles'  TEXT,	PRIMARY KEY('id' AUTOINCREMENT))";
+                command.CommandText = "CREATE TABLE 'producto_entrada' (    'id'    INTEGER NOT NULL,	'entrada_id'    INTEGER,	'producto_id'   INTEGER,	'codigo'    INTEGER,	'cantidad'  INTEGER,	'costo' REAL,	'estado'    INTEGER,	'detalles'  TEXT, 'created_at'    TEXT, 'updated_at'    TEXT,	PRIMARY KEY('id' AUTOINCREMENT))";
                 command.ExecuteNonQuery();
                 command.CommandText = "CREATE TABLE 'producto_venta' (    'id'    INTEGER NOT NULL,	'venta_id'  INTEGER,	'producto_id'   INTEGER,	'codigo'    TEXT,	'cantidad'  INTEGER,	'precio_venta'  REAL,	'estado'    INTEGER,	'detalles'  TEXT,	PRIMARY KEY('id' AUTOINCREMENT),	FOREIGN KEY('producto_id') REFERENCES 'productos'('id'),	FOREIGN KEY('venta_id') REFERENCES 'ventas'('id'))";
                 command.ExecuteNonQuery();
@@ -70,7 +70,7 @@ namespace PuntoVentaCasaCeja
                 command.ExecuteNonQuery();
                 command.CommandText = "CREATE TABLE 'proveedores' (    'id'    INTEGER NOT NULL,	'nombre'    TEXT,	'direccion' TEXT,	'correo'    TEXT,	'telefono'  TEXT,	'descripcion'   TEXT,	'activo'    INTEGER,	'created_at'    TEXT,	'updated_at'    TEXT,	PRIMARY KEY('id'))";
                 command.ExecuteNonQuery();
-                command.CommandText = "CREATE TABLE 'salidas_temporal' (    'id'    INTEGER NOT NULL,	'id_sucursal_origen'    INTEGER,	'id_sucursal_destino'   INTEGER,	'productos' TEXT,	'folio' TEXT,	'fecha_salida'  TEXT,	'usuario_id'    INTEGER,	'total_importe' REAL,	'estado'    INTEGER,	PRIMARY KEY('id' AUTOINCREMENT))";
+                command.CommandText = "CREATE TABLE 'salidas_temporal' (    'id'    INTEGER NOT NULL,	'id_sucursal_origen'    INTEGER,	'id_sucursal_destino'   INTEGER,	'productos' TEXT,	'folio' TEXT,	'fecha_salida'  TEXT,	'usuario_id'    INTEGER,	'total_importe' REAL,	'estado'    INTEGER, 'created_at'    TEXT, 'updated_at'    TEXT,	PRIMARY KEY('id' AUTOINCREMENT))";
                 command.ExecuteNonQuery();
                 command.CommandText = "CREATE TABLE 'sucursales' (    'id'    INTEGER NOT NULL,	'puerta_enlace1'    TEXT,	'puerta_enlace2'    TEXT,	'puerta_enlace3'    TEXT,	'puerta_enlace4'    TEXT,	'razon_social'  TEXT,	'direccion' TEXT,	'correo'    TEXT,	'activo'    INTEGER,	'created_at'    TEXT,	'updated_at'    TEXT,	PRIMARY KEY('id' AUTOINCREMENT))";
                 command.ExecuteNonQuery();
