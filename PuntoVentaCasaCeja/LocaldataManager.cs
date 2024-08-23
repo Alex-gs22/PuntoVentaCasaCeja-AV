@@ -2646,15 +2646,14 @@ FROM usuarios";
             command.Parameters.AddWithValue("@setId", id);
             command.ExecuteScalar();
         }
-        public async Task changeEstadoCorte(int id, int estado, string detalles)
+        public void changeEstadoCorte(int id, int estado, string detalles)
         {
             SQLiteCommand command = connection.CreateCommand();
             command.CommandText = "UPDATE cortes SET estado = @setEstado, detalles = @setDetalles WHERE id = @setId";
             command.Parameters.AddWithValue("setEstado", estado);
             command.Parameters.AddWithValue("setDetalles", detalles);
-            command.Parameters.AddWithValue("@setId", id);
+            command.Parameters.AddWithValue("setId", id);
             command.ExecuteScalar();
-
         }
         public void changeEstadoEntrada(int id, int estado, string detalles)
         {

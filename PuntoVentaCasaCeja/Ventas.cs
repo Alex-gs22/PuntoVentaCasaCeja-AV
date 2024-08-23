@@ -984,7 +984,7 @@ namespace PuntoVentaCasaCeja
             var (success, message) = await webDM.SendCorte(data);
             if (success)
             {
-                await localDM.changeEstadoCorte(id, 1, "Enviado");
+                localDM.changeEstadoCorte(id, 1, "Enviado");
                 MessageBox.Show("Corte guardado con éxito");
             }
             else
@@ -1048,9 +1048,7 @@ namespace PuntoVentaCasaCeja
                         imprimirCorte(corte);
                     }
                 }
-
-                await enviarCorte(idcorte, corte); // Espera a que enviarCorte termine
-
+                await enviarCorte(idcorte, corte);
                 idcorte = -1;
                 apertura = 0;
                 cajero = null;
