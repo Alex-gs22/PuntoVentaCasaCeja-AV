@@ -2989,6 +2989,8 @@ FROM usuarios";
                 data["fecha_corte_caja"] = result.IsDBNull(14) ? "-" : result.GetString(14);
                 data["sucursal_id"] = result.IsDBNull(15) ? "-" : result.GetInt32(15).ToString();
                 data["usuario_id"] = result.IsDBNull(16) ? "-" : result.GetInt32(16).ToString();
+                data["estado"] = result.GetInt32(17).ToString();
+                data["detalles"] = "Enviado";
                 return data;
             }
             return null;

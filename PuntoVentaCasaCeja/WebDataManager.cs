@@ -1274,6 +1274,7 @@ namespace PuntoVentaCasaCeja
         {
             try
             {
+
                 HttpResponseMessage response = await client.PostAsJsonAsync($"{url}api/cortes", data);
                 string res = await response.Content.ReadAsStringAsync();
 
