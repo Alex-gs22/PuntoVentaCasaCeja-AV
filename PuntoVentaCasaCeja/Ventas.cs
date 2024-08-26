@@ -543,7 +543,7 @@ namespace PuntoVentaCasaCeja
             venta["total"] = totalcarrito.ToString("0.00");
             venta["folio"] = folio;
             venta["folio_corte"] = folioCorte;
-            venta["fecha_venta"] = localDate.ToString("yyyy-MM-dd HH:mm:ss.fff"); // Formato para la ruta
+            venta["fecha_venta"] = localDate.ToString("yyyy-MM-dd HH:mm:ss.fff");
             venta["metodo_pago"] = JsonConvert.SerializeObject(pagos);
             venta["tipo"] = 1.ToString();
             venta["sucursal_id"] = idsucursal.ToString();
@@ -1027,6 +1027,7 @@ namespace PuntoVentaCasaCeja
             Dictionary<string, string> d = localDM.getCorte(idcorte);
             d["total_apartados"] = localDM.getTotalApartados(folioCorte).ToString("0.00");
             d["total_creditos"] = localDM.getTotalCreditos(folioCorte).ToString("0.00");
+            Console.WriteLine(d.ToString());
             VerCorte vc = new VerCorte(d, idsucursal, cajero.id, idcorte, idcaja, localDM);
             DialogResult response = vc.ShowDialog();
             if (response == DialogResult.Yes)
