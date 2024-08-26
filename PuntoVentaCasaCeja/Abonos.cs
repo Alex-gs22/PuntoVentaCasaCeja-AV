@@ -382,6 +382,7 @@ namespace PuntoVentaCasaCeja
             abonado += cantidad;
             txtabonado.Text = abonado.ToString("0.00");
             txtporpagar.Text = (total - pagado - abonado).ToString("0.00");
+            porpagar = total - pagado - abonado;
         }
         private void cargarTicketCarta(string fecha, string folioAbono)
         {

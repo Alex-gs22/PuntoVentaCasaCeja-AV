@@ -36,7 +36,9 @@ namespace PuntoVentaCasaCeja
             estados.AddRange(range);
             BoxEstado.DataSource = estados;
             BoxEstado.SelectedIndex = 0;
-            tablaCreditosApartados.DataSource = localDM.GetCreditosDataTable(data.idSucursal);
+            DataTable dataTable = localDM.GetCreditosDataTable(data.idSucursal);
+            dataTable.DefaultView.Sort = "Fecha DESC";
+            tablaCreditosApartados.DataSource = dataTable;
         }
 
         protected override bool ProcessDialogKey(Keys keyData)
@@ -175,7 +177,7 @@ namespace PuntoVentaCasaCeja
             {
                 dataTable.DefaultView.RowFilter = string.Empty; // Si es "TODOS" no se filtra.
             }
-
+            dataTable.DefaultView.Sort = "Fecha DESC"; // Ordena la tabla por fecha descendente.
             DataTable paginatedTable = dataTable.Clone(); // Clona la estructura de la tabla original.
             for (int i = offset; i < offset + rowsPerPage && i < dataTable.DefaultView.Count; i++) // Llena la tabla clonada con los datos de la tabla original.
             {

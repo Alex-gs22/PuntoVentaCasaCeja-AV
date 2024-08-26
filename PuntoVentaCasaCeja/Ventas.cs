@@ -1039,13 +1039,20 @@ namespace PuntoVentaCasaCeja
                 }
                 else
                 {
-                    if (printerType == 1)
+                    try
                     {
-                        printPreviewControl1.Document.Print();
+                        if (printerType == 1)
+                        {
+                            printPreviewControl1.Document.Print();
+                        }
+                        else
+                        {
+                            imprimirCorte(corte);
+                        }
                     }
-                    else
+                    catch (System.ComponentModel.Win32Exception)
                     {
-                        imprimirCorte(corte);
+                        MessageBox.Show("Ya se encuentra abierto un documento con el mismo nombre", "Error");
                     }
                 }
                 await enviarCorte(idcorte, corte);

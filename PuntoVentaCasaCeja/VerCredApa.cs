@@ -309,6 +309,10 @@ namespace PuntoVentaCasaCeja
         {
             Abonos ab = new Abonos(tipo, data, folio, idOperacion, totalcarrito, totalpagado, refresh);
             DialogResult result=ab.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                cargarTicketCarta();
+            }
         }
         private void calculateMaxPages(int rowCount)
         {
