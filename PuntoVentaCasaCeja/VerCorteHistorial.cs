@@ -125,6 +125,7 @@ namespace PuntoVentaCasaCeja
                 return;
             }
             Dictionary<string, string> corte = localDM.getCorte(selectedRowIndex);
+            try {
             if (corte != null)
             {
                 imprimirCorte(corte);
@@ -132,6 +133,11 @@ namespace PuntoVentaCasaCeja
             else
             {
                 MessageBox.Show("No se pudo obtener la información del corte.", "Error");
+            }
+            }
+            catch (System.ComponentModel.Win32Exception)
+            {
+                MessageBox.Show("No se guardo el PDF, ya se encuentra abierto un documento con el mismo nombre.", "Error");
             }
         }
 

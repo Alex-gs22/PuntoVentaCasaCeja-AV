@@ -438,19 +438,25 @@ namespace PuntoVentaCasaCeja
         {
             if (isValidTicket)
             {
-                if (printerType == 1)
-                    printPreviewControl1.Document.Print();
-                else
+                try
                 {
-                    Dictionary<string, string> venta = new Dictionary<string, string>();
-                    venta["fecha_venta"] = fecha;
-                    venta["folio"] = folio;
-                    venta["total"] = total;
-                    localDM.imprimirTicket(venta, productos, pagos, cajero, sucursalName, sucursalDir, true
-                        );
+                    if (printerType == 1)
+                        printPreviewControl1.Document.Print();
+                    else
+                    {
+                        Dictionary<string, string> venta = new Dictionary<string, string>();
+                        venta["fecha_venta"] = fecha;
+                        venta["folio"] = folio;
+                        venta["total"] = total;
+                        localDM.imprimirTicket(venta, productos, pagos, cajero, sucursalName, sucursalDir, true
+                            );
+                    }
+                }
+                catch (System.ComponentModel.Win32Exception)
+                {
+                    MessageBox.Show("No se guardo el PDF, ya se encuentra abierto un documento con el mismo nombre.", "Error");
                 }
             }
-            
         }
     }
 }

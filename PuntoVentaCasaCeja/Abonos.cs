@@ -164,26 +164,33 @@ namespace PuntoVentaCasaCeja
                 }
                 else
                 {
-                    if (data.printerType == 1)
+                    try
                     {
-                        printPreviewControl1.Document.Print();
-                        if (reprint)
+                        if (data.printerType == 1)
                         {
                             printPreviewControl1.Document.Print();
+                            if (reprint)
+                            {
+                                printPreviewControl1.Document.Print();
+                            }
                         }
-                    }
-                    else
-                    {
-                        data.webDM.localDM.imprimirAbono(tipo, pagos, data.webDM.activeUser.nombre, data.sucursalName, data.sucursalDir, localDate.ToString("dd/MM/yyyy hh:mm tt"), abonado, porpagar, folioabono, folio);
-                        if (reprint)
+                        else
                         {
                             data.webDM.localDM.imprimirAbono(tipo, pagos, data.webDM.activeUser.nombre, data.sucursalName, data.sucursalDir, localDate.ToString("dd/MM/yyyy hh:mm tt"), abonado, porpagar, folioabono, folio);
+                            if (reprint)
+                            {
+                                data.webDM.localDM.imprimirAbono(tipo, pagos, data.webDM.activeUser.nombre, data.sucursalName, data.sucursalDir, localDate.ToString("dd/MM/yyyy hh:mm tt"), abonado, porpagar, folioabono, folio);
+                            }
                         }
                     }
-                }
 
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                    catch (System.ComponentModel.Win32Exception)
+                    {
+                        MessageBox.Show("No se guardo el PDF, ya se encuentra abierto un documento con el mismo nombre.", "Error");
+                    }
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
             }
             else
             {

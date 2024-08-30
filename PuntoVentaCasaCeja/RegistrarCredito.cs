@@ -135,6 +135,7 @@ namespace PuntoVentaCasaCeja
                 }
                 else
                 {
+                    try {
                     if (printerType == 1)
                     {
                         printPreviewControl1.Document.Print();
@@ -152,6 +153,11 @@ namespace PuntoVentaCasaCeja
                         {
                             localDM.imprimirCredito(nc, carrito, pagos, cajero.nombre, sucursalName, sucursalDir, txtfecha.Text);
                         }
+                    }
+                    }
+                    catch (System.ComponentModel.Win32Exception)
+                    {
+                        MessageBox.Show("No se guardo el PDF, ya se encuentra abierto un documento con el mismo nombre.", "Error");
                     }
                 }
                 await send(nc);

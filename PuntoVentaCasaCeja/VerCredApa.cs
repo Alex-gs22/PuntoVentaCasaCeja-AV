@@ -350,20 +350,27 @@ namespace PuntoVentaCasaCeja
         {
             if (isValidTicket)
             {
-                if (data.printerType == 1)
-                    documento.Document.Print();
-                else
+                try
                 {
-                    if (tipo == 0)
-                    {
-                        Credito selCred = currentCred[tabla.SelectedRows[0].Index + offset];
-                        data.webDM.localDM.reimprimirAbonosCredito(selCred, data.sucursalName, data.sucursalDir, webDM.activeUser.nombre);
-                    }
+                    if (data.printerType == 1)
+                        documento.Document.Print();
                     else
                     {
-                        Apartado selApa = currentApa[tabla.SelectedRows[0].Index + offset];
-                        data.webDM.localDM.reimprimirAbonosApartado(selApa, data.sucursalName, data.sucursalDir, webDM.activeUser.nombre);
+                        if (tipo == 0)
+                        {
+                            Credito selCred = currentCred[tabla.SelectedRows[0].Index + offset];
+                            data.webDM.localDM.reimprimirAbonosCredito(selCred, data.sucursalName, data.sucursalDir, webDM.activeUser.nombre);
+                        }
+                        else
+                        {
+                            Apartado selApa = currentApa[tabla.SelectedRows[0].Index + offset];
+                            data.webDM.localDM.reimprimirAbonosApartado(selApa, data.sucursalName, data.sucursalDir, webDM.activeUser.nombre);
+                        }
                     }
+                }
+                catch (System.ComponentModel.Win32Exception)
+                {
+                    MessageBox.Show("No se guardo el PDF, ya se encuentra abierto un documento con el mismo nombre.", "Error");
                 }
             }
         }
