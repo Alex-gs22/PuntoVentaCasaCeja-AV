@@ -13,11 +13,12 @@ namespace PuntoVentaCasaCeja
         public double total { get; set; }
         public double total_pagado { get; set; }
         public string fecha_de_apartado { get; set; }
+
         public string folio { get; set; }
+        public string folio_corte { get; set; }
         public string fecha_entrega { get; set; }
         public int estado { get; set; }
         public int cliente_creditos_id { get; set; }
-
         public int id_cajero_registro { get; set; }
         public string id_cajero_entrega { get; set; }
         public int sucursal_id { get; set; }

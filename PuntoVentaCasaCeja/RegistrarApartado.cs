@@ -90,7 +90,7 @@ namespace PuntoVentaCasaCeja
                     productos = JsonConvert.SerializeObject(carrito),
                     total = data.totalcarrito,
                     total_pagado = totalpagado,
-                    folio = this.folio,
+                    folio_corte = this.folio,
                     fecha_de_apartado = localDate.ToString("yyyy-MM-dd HH:mm:ss"),
                     estado = 0,
                     cliente_creditos_id = cliente.id,
@@ -106,7 +106,7 @@ namespace PuntoVentaCasaCeja
                
                 int id = localDM.apartadoTemporal(na);
                 this.folio += id.ToString().PadLeft(4, '0');
-                na.folio = folio;
+                na.folio_corte = folio;
                 na.abonos = new List<AbonoApartado>();
                 if (pagos.Count > 0)
                 {
@@ -114,7 +114,7 @@ namespace PuntoVentaCasaCeja
                     {
                         fecha = localDate.ToString("yyyy-MM-dd HH:mm:ss"),
                         folio = idsucursal.ToString().PadLeft(2, '0') + idcaja.ToString().PadLeft(2, '0') + localDate.Day.ToString().PadLeft(2, '0') + localDate.Month.ToString().PadLeft(2, '0') + localDate.Year + "AA",
-                        folio_corte = foliocorte,
+                        folio_corte =  na.folio_corte,
                         apartado_id = 0,
                         usuario_id = webDM.activeUser.id,
                         folio_apartado = folio,
@@ -124,12 +124,10 @@ namespace PuntoVentaCasaCeja
                    
                     int ida = localDM.abonoApartadoTemporal(abono);                    
                     na.abonos.Add(abono);
+
                     localDM.acumularPagos(pagos, idcorte);
-                    if (pagos.ContainsKey("efectivo"))
-                    {
-                        localDM.acumularEfectivoApartado(pagos["efectivo"], idcorte);
-                    }
-                    
+                    //Console.WriteLine("RA ID CORTE :"+idcorte+" EFECTIVO: " + pagos["efectivo"]);
+                    localDM.acumularEfectivoApartado(pagos["efectivo"], idcorte);
                 }
                 txtfolio.Text = folio;
                 imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));

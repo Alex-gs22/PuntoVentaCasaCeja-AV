@@ -36,9 +36,9 @@ namespace PuntoVentaCasaCeja
         int fontSize, printerType, idcorte;
         Dictionary<int, float[]> tabs;
         PrintPreviewControl printPreviewControl1;
-        private System.Drawing.Printing.PrintDocument docToPrint =
-    new System.Drawing.Printing.PrintDocument();
+        private System.Drawing.Printing.PrintDocument docToPrint = new System.Drawing.Printing.PrintDocument();
         CurrentData data;
+
         public RegistrarCredito(CurrentData data)
         {
             InitializeComponent();
@@ -62,7 +62,7 @@ namespace PuntoVentaCasaCeja
             this.cajero = webDM.activeUser;
             printPreviewControl1 = new PrintPreviewControl();
             this.folio = idsucursal.ToString().PadLeft(2, '0') + idcaja.ToString().PadLeft(2, '0') + localDate.Day.ToString().PadLeft(2, '0') + localDate.Month.ToString().PadLeft(2, '0') + localDate.Year + "A";
-            
+
             this.tabs = new Dictionary<int, float[]>()
             {
                 {5, new float[]{ 110, 30, 50, 50 } },
@@ -87,7 +87,7 @@ namespace PuntoVentaCasaCeja
             }
             else
             {
-                Credito nc = new Credito 
+                Credito nc = new Credito
                 {
                     productos = JsonConvert.SerializeObject(carrito),
                     total = totalcarrito,
@@ -101,14 +101,15 @@ namespace PuntoVentaCasaCeja
                     sucursal_id = idsucursal,
                     observaciones = txtobservaciones.Text,
                 };
-                    
+
                 int id = localDM.creditoTemporal(nc);
                 this.folio += id.ToString().PadLeft(4, '0');
                 nc.folio = folio;
                 nc.abonos = new List<AbonoCredito>();
                 if (pagos.Count > 0)
                 {
-                    AbonoCredito abono = new AbonoCredito {
+                    AbonoCredito abono = new AbonoCredito
+                    {
                         fecha = localDate.ToString("yyyy-MM-dd HH:mm:ss"),
                         folio = idsucursal.ToString().PadLeft(2, '0') + idcaja.ToString().PadLeft(2, '0') + localDate.Day.ToString().PadLeft(2, '0') + localDate.Month.ToString().PadLeft(2, '0') + localDate.Year + "AA",
                         folio_corte = foliocorte,
@@ -117,87 +118,85 @@ namespace PuntoVentaCasaCeja
                         metodo_pago = JsonConvert.SerializeObject(pagos),
                         total_abonado = totalpagado,
                         credito_id = 0
-                };                    
-                    int ida = localDM.abonoCreditoTemporal(abono);                    
+                    };
+                    int ida = localDM.abonoCreditoTemporal(abono);
                     nc.abonos.Add(abono);
+                    
                     localDM.acumularPagos(pagos, idcorte);
-                    if (pagos.ContainsKey("efectivo"))
+
+                    //Console.WriteLine("RC ID CORTE :" + data.idCorte + " EFECTIVO: " + pagos["efectivo"]);
+                    localDM.acumularEfectivoCredito(pagos["efectivo"], data.idCorte);
+
+                    txtfolio.Text = folio;
+                    imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
+                    imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
+                    if (localDM.impresora.Equals(""))
                     {
-                        localDM.acumularEfectivoCredito(pagos["efectivo"], idcorte);
+                        MessageBox.Show("No se ha establecido una impresora", "Advertencia");
                     }
+                    else
+                    {
+                        try
+                        {
+                            if (printerType == 1)
+                            {
+                                printPreviewControl1.Document.Print();
+                                if (reprint)
+                                {
+                                    printPreviewControl1.Document.Print();
+                                }
+                            }
+                            else
+                            {
+                                localDM.imprimirCredito(nc, carrito, pagos, cajero.nombre, sucursalName, sucursalDir, txtfecha.Text);
+                                localDM.imprimirCredito(nc, carrito, pagos, cajero.nombre, sucursalName, sucursalDir, txtfecha.Text);
+                                if (reprint)
+                                {
+                                    localDM.imprimirCredito(nc, carrito, pagos, cajero.nombre, sucursalName, sucursalDir, txtfecha.Text);
+                                }
+                            }
+                        }
+                        catch (System.ComponentModel.Win32Exception)
+                        {
+                            MessageBox.Show("No se guardo el PDF, ya se encuentra abierto un documento con el mismo nombre.", "Error");
+                        }
+                    }
+                    await send(nc);
+                    this.DialogResult = DialogResult.Yes;
+                    this.Close();
                 }
-                txtfolio.Text = folio;
-                imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
-                imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
-                if (localDM.impresora.Equals(""))
+            }
+
+            async Task send(Credito credito)
+            {
+                Dictionary<string, string> result = await webDM.SendcreditoAsync(credito);
+                MessageBox.Show(result["message"], "Estado: " + result["status"]);
+
+                if (result["status"] == "success")
                 {
-                    MessageBox.Show("No se ha establecido una impresora", "Advertencia");
+                    List<ProductoVenta> productos = carrito;
+
+                    if (productos == null || productos.Count == 0)
+                    {
+                        MessageBox.Show("El carrito está vacío", "Error");
+                        return;
+                    }
+
+                    foreach (ProductoVenta p in productos)
+                    {
+                        await webDM.restarExistencia(idsucursal, p.id, p.cantidad);
+                    }
+                    data.totalcarrito = 0;
                 }
                 else
                 {
-                    try {
-                    if (printerType == 1)
-                    {
-                        printPreviewControl1.Document.Print();
-                        if (reprint)
-                        {
-                            printPreviewControl1.Document.Print();
-                        }
-                    }
-
-                    else
-                    {
-                        localDM.imprimirCredito(nc, carrito, pagos, cajero.nombre, sucursalName, sucursalDir, txtfecha.Text);
-                        localDM.imprimirCredito(nc, carrito, pagos, cajero.nombre, sucursalName, sucursalDir, txtfecha.Text);
-                        if (reprint)
-                        {
-                            localDM.imprimirCredito(nc, carrito, pagos, cajero.nombre, sucursalName, sucursalDir, txtfecha.Text);
-                        }
-                    }
-                    }
-                    catch (System.ComponentModel.Win32Exception)
-                    {
-                        MessageBox.Show("No se guardo el PDF, ya se encuentra abierto un documento con el mismo nombre.", "Error");
-                    }
+                    MessageBox.Show("No es posible realizar esta operacion ahora", "Error");
                 }
-                await send(nc);
-                this.DialogResult = DialogResult.Yes;
-                this.Close();
-            }
-
-        }
-        async Task send(Credito credito)
-        {
-            Dictionary<string, string> result = await webDM.SendcreditoAsync(credito);
-            MessageBox.Show(result["message"], "Estado: " + result["status"]);
-
-            if (result["status"] == "success")
-            {
-                List<ProductoVenta> productos = carrito;
-
-                if (productos == null || productos.Count == 0)
-                {
-                    MessageBox.Show("El carrito está vacío", "Error");
-                    return;
-                }
-
-                foreach (ProductoVenta p in productos)
-                {
-                    //Console.WriteLine($"Restando existencia para producto ID: {p.id}, cantidad: {p.cantidad}");
-                    await webDM.restarExistencia(idsucursal, p.id, p.cantidad);
-                }
-                data.totalcarrito = 0;
-            }
-            else
-            {
-                MessageBox.Show("No es posible realizar esta operacion ahora", "Error");
             }
         }
-
 
         private void RegistrarApartado_Load(object sender, EventArgs e)
         {
-
             folio = idsucursal.ToString().PadLeft(2, '0') + idcaja.ToString().PadLeft(2, '0') + localDate.Day.ToString().PadLeft(2, '0') + localDate.Month.ToString().PadLeft(2, '0') + localDate.Year + "A";
             txtfolio.Text = folio;
             txtnombre.Text = cliente.nombre;
@@ -222,6 +221,7 @@ namespace PuntoVentaCasaCeja
                 e.Handled = true;
             }
         }
+
         void abono(int tipo, double cantidad)
         {
             switch (tipo)
@@ -325,6 +325,7 @@ namespace PuntoVentaCasaCeja
             }
             return base.ProcessDialogKey(keyData);
         }
+
         private void imprimirTicketCarta(string fecha)
         {
             ticket = "";
@@ -379,22 +380,16 @@ namespace PuntoVentaCasaCeja
                 "POR PAGAR $\t------>\t\t" + (totalcarrito - totalpagado).ToString("0.00") + "\n\n" +
                  "LE ATENDIO: " + cajero.nombre.ToUpper() + "\n" +
                  "NO DE ARTICULOS: " + carrito.Count.ToString().PadLeft(5, '0') + "\n" +
-                 "FECHA DE VENCIMIENTO:\n" + txtfecha.Text + "\n"+
+                 "FECHA DE VENCIMIENTO:\n" + txtfecha.Text + "\n" +
                 "CLIENTE:\n" + cliente.nombre + "\n" +
                 "NUMERO DE CELULAR:\n" + cliente.telefono + "\n";
             createdoc();
         }
+
         private void createdoc()
         {
-
             string path = Path.Combine(ApplicationData.Current.LocalFolder.Path, "test.txt");
-            // Construct the PrintPreviewControl.
 
-            //// Set location, name, and dock style for printPreviewControl1.
-            //this.printPreviewControl1.Name = "printPreviewControl1";
-
-            // Set the Document property to the PrintDocument 
-            // for which the PrintPage event has been handled.
             this.printPreviewControl1.Document = docToPrint;
             this.printPreviewControl1.Zoom = 2;
             if (fontSize > 6)
@@ -403,57 +398,28 @@ namespace PuntoVentaCasaCeja
                 this.printPreviewControl1.Zoom = 1.1;
             if (fontSize > 13)
                 this.printPreviewControl1.Zoom = 1.0;
-            // Set the document name. This will show be displayed when 
-            // the document is loading into the control.
+
             this.printPreviewControl1.Document.DocumentName = path;
             this.printPreviewControl1.Document.PrinterSettings.PrinterName = localDM.impresora;
 
-            // Set the UseAntiAlias property to true so fonts are smoothed
-            // by the operating system.
             this.printPreviewControl1.UseAntiAlias = true;
-            // Add the control to the form.
 
-            // Associate the event-handling method with the
-            // document's PrintPage event.
-            this.docToPrint.PrintPage +=
-                new System.Drawing.Printing.PrintPageEventHandler(
-                docToPrint_PrintPage);
+            this.docToPrint.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(docToPrint_PrintPage);
         }
-        private void docToPrint_PrintPage(
-    object sender, System.Drawing.Printing.PrintPageEventArgs e)
+
+        private void docToPrint_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
-
-            // Insert code to render the page here.
-            // This code will be called when the control is drawn.
-
-            // The following code will render a simple
-            // message on the document in the control.
             string text1 = ticket;
-            //StringFormat format = new StringFormat(StringFormatFlags.NoClip);
-            //format.Alignment = StringAlignment.Center;
-            //System.Drawing.Font printFont =
-            //    new Font(fontName, fontSize, FontStyle.Regular);
-
-            //e.Graphics.DrawString(text1, printFont,
-            //    Brushes.Black, 50, 50);
 
             FontFamily fontFamily = new FontFamily(fontName);
-            Font font = new Font(
-               fontFamily,
-               fontSize,
-               FontStyle.Regular,
-               GraphicsUnit.Point);
+            Font font = new Font(fontFamily, fontSize, FontStyle.Regular, GraphicsUnit.Point);
             Rectangle rect = new Rectangle(50, 50, 750, 1000);
             StringFormat stringFormat = new StringFormat();
             SolidBrush solidBrush = new SolidBrush(Color.FromArgb(255, 0, 0, 0));
 
-
             stringFormat.SetTabStops(0, tabs[fontSize]);
 
             e.Graphics.DrawString(text1, font, solidBrush, rect, stringFormat);
-
-            //Pen pen = Pens.Black;
-            //e.Graphics.DrawRectangle(pen, rect);
         }
     }
 }

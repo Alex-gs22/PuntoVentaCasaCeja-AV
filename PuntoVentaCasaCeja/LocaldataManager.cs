@@ -40,9 +40,9 @@ namespace PuntoVentaCasaCeja
                 command.ExecuteNonQuery();
                 command.CommandText = "CREATE TABLE 'alta_temporal' (    'id'    INTEGER NOT NULL,	'codigo'    TEXT,	'nombre'    TEXT,	'presentacion'  TEXT,	'menudeo'   REAL,	'mayoreo'   REAL,	'cantidad_mayoreo'  INTEGER,	'especial'  REAL,	'vendedor'  REAL,	'medida_id' INTEGER,	'categoria_id'  INTEGER,	'estado'    INTEGER,	'detalles'  TEXT,	FOREIGN KEY('medida_id') REFERENCES 'medidas'('id'),	PRIMARY KEY('id' AUTOINCREMENT),	FOREIGN KEY('categoria_id') REFERENCES 'categorias'('id'))";
                 command.ExecuteNonQuery();
-                command.CommandText = "CREATE TABLE 'apartados' (    'id'    INTEGER,	'productos' TEXT,	'total' REAL,	'total_pagado'  REAL,	'fecha_apartado'    TEXT,	'folio' TEXT,	'fecha_entrega' TEXT,	'estado'    INTEGER,	'cliente_creditos_id'   INTEGER,	'id_cajero_registro'    INTEGER,	'id_cejero_entrega' INTEGER,	'sucursal_id'   INTEGER,	'observaciones' TEXT,	'created_at'    TEXT,	'updated_at'    TEXT,	FOREIGN KEY('id_cajero_registro') REFERENCES 'usuarios'('id'),	FOREIGN KEY('id_cejero_entrega') REFERENCES 'usuarios'('id'),	PRIMARY KEY('id' AUTOINCREMENT))";
+                command.CommandText = "CREATE TABLE 'apartados' (    'id'    INTEGER,	'productos' TEXT,	'total' REAL,	'total_pagado'  REAL,	'fecha_apartado'    TEXT,	'folio_corte' TEXT,	'fecha_entrega' TEXT,	'estado'    INTEGER,	'cliente_creditos_id'   INTEGER,	'id_cajero_registro'    INTEGER,	'id_cejero_entrega' INTEGER,	'sucursal_id'   INTEGER,	'observaciones' TEXT,	'created_at'    TEXT,	'updated_at'    TEXT,	FOREIGN KEY('id_cajero_registro') REFERENCES 'usuarios'('id'),	FOREIGN KEY('id_cejero_entrega') REFERENCES 'usuarios'('id'),	PRIMARY KEY('id' AUTOINCREMENT))";
                 command.ExecuteNonQuery();
-                command.CommandText = "CREATE TABLE 'apartados_temporal' (    'id'    INTEGER,	'productos' TEXT,	'total' REAL,	'total_pagado'  REAL,	'fecha_apartado'    TEXT,	'folio' TEXT,	'fecha_entrega' TEXT,	'estado'    INTEGER,	'cliente_creditos_id'   INTEGER,	'id_cajero_registro'    INTEGER,	'id_cajero_entrega' INTEGER,	'sucursal_id'   INTEGER,	'temporal'  INTEGER,	'observaciones' TEXT,	PRIMARY KEY('id' AUTOINCREMENT),	FOREIGN KEY('id_cajero_entrega') REFERENCES 'usuarios'('id'),	FOREIGN KEY('sucursal_id') REFERENCES 'sucursales'('id'),	FOREIGN KEY('id_cajero_registro') REFERENCES 'usuarios'('id'))";
+                command.CommandText = "CREATE TABLE 'apartados_temporal' (    'id'    INTEGER,	'productos' TEXT,	'total' REAL,	'total_pagado'  REAL,	'fecha_apartado'    TEXT,	'folio_corte' TEXT,	'fecha_entrega' TEXT,	'estado'    INTEGER,	'cliente_creditos_id'   INTEGER,	'id_cajero_registro'    INTEGER,	'id_cajero_entrega' INTEGER,	'sucursal_id'   INTEGER,	'temporal'  INTEGER,	'observaciones' TEXT,	PRIMARY KEY('id' AUTOINCREMENT),	FOREIGN KEY('id_cajero_entrega') REFERENCES 'usuarios'('id'),	FOREIGN KEY('sucursal_id') REFERENCES 'sucursales'('id'),	FOREIGN KEY('id_cajero_registro') REFERENCES 'usuarios'('id'))";
                 command.ExecuteNonQuery();
                 command.CommandText = "CREATE TABLE 'categorias' (    'id'    INTEGER NOT NULL,	'nombre'    TEXT,	'activo'    INTEGER,	'created_at'    TEXT,	'updated_at'    TEXT,	PRIMARY KEY('id'))";
                 command.ExecuteNonQuery();
@@ -586,7 +586,7 @@ namespace PuntoVentaCasaCeja
             apartadosTable.Columns.Add("Sucursal", typeof(string));
 
             SQLiteCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT folio, cliente_creditos_id, total, total_pagado, fecha_apartado, estado FROM apartados";
+            command.CommandText = "SELECT folio_corte, cliente_creditos_id, total, total_pagado, fecha_apartado, estado FROM apartados";
 
             using (SQLiteDataReader result = command.ExecuteReader())
             {
@@ -706,7 +706,7 @@ namespace PuntoVentaCasaCeja
                     total = result.GetDouble(2),
                     total_pagado = result.GetDouble(3),
                     fecha_de_apartado = result.GetString(4),
-                    folio = result.GetString(5),
+                    folio_corte = result.GetString(5),
                     fecha_entrega = result.IsDBNull(6) ? "" : result.GetString(6),
                     estado = result.GetInt32(7),
                     cliente_creditos_id = result.GetInt32(8),
@@ -775,7 +775,7 @@ namespace PuntoVentaCasaCeja
                     total = result.GetDouble(2),
                     total_pagado = result.GetDouble(3),
                     fecha_de_apartado = result.GetString(4),
-                    folio = result.GetString(5),
+                    folio_corte = result.GetString(5),
                     fecha_entrega = result.IsDBNull(6) ? "" : result.GetString(6),
                     estado = result.GetInt32(7),
                     cliente_creditos_id = result.GetInt32(8),
@@ -788,7 +788,7 @@ namespace PuntoVentaCasaCeja
                 apartado.abonos = new List<AbonoApartado>();
                 SQLiteCommand subcommand = connection.CreateCommand();
                 subcommand.CommandText = "SELECT * FROM abonos_apartado_temporal WHERE folio_apartado = @setFolioc";
-                subcommand.Parameters.AddWithValue("setFolioc", apartado.folio);
+                subcommand.Parameters.AddWithValue("setFolioc", apartado.folio_corte);
                 SQLiteDataReader subresult = subcommand.ExecuteReader();
                 while (subresult.Read())
                 {
@@ -1244,7 +1244,7 @@ namespace PuntoVentaCasaCeja
                 command.Parameters.AddWithValue("setTotal", apartado.total);
                 command.Parameters.AddWithValue("setPagado", apartado.total_pagado);
                 command.Parameters.AddWithValue("setFapart", apartado.fecha_de_apartado);
-                command.Parameters.AddWithValue("setFolio", apartado.folio);
+                command.Parameters.AddWithValue("setFolio", apartado.folio_corte);
                 command.Parameters.AddWithValue("setFentr", apartado.fecha_entrega);
                 command.Parameters.AddWithValue("setEstado", apartado.estado);
                 command.Parameters.AddWithValue("setCliente", apartado.cliente_creditos_id);
@@ -1673,13 +1673,13 @@ namespace PuntoVentaCasaCeja
         {
             int id = -1;
             SQLiteCommand command = connection.CreateCommand();
-            command.CommandText = "INSERT INTO apartados_temporal (productos, total, total_pagado, fecha_apartado, folio, fecha_entrega, estado, cliente_creditos_id, id_cajero_registro, id_cajero_entrega, sucursal_id, temporal, observaciones)" +
-                "VALUES (@setProductos, @setTotal, @setPagado, @setFapar, @setFolio, @setFentr, @setEstado, @setCliente, @setIdregistro, @setIdentrega, @setSucursal, @setTemporal, @setObser)";
+            command.CommandText = "INSERT INTO apartados_temporal (productos, total, total_pagado, fecha_apartado, folio_corte, fecha_entrega, estado, cliente_creditos_id, id_cajero_registro, id_cajero_entrega, sucursal_id, temporal, observaciones)" +
+                "VALUES (@setProductos, @setTotal, @setPagado, @setFapar, @setFolioCorte, @setFentr, @setEstado, @setCliente, @setIdregistro, @setIdentrega, @setSucursal, @setTemporal, @setObser)";
             command.Parameters.AddWithValue("setProductos", apartado.productos);
             command.Parameters.AddWithValue("setTotal", apartado.total);
             command.Parameters.AddWithValue("setPagado", apartado.total_pagado);
             command.Parameters.AddWithValue("setFapar", apartado.fecha_de_apartado);
-            command.Parameters.AddWithValue("setFolio", apartado.folio);
+            command.Parameters.AddWithValue("setFolioCorte", apartado.folio_corte);
             command.Parameters.AddWithValue("setFentr", apartado.fecha_entrega);
             command.Parameters.AddWithValue("setEstado", apartado.estado);
             command.Parameters.AddWithValue("setCliente", apartado.cliente_creditos_id);
@@ -1692,10 +1692,10 @@ namespace PuntoVentaCasaCeja
             command.CommandText = "select last_insert_rowid()";
             Int64 LastRowID64 = (Int64)command.ExecuteScalar();
             id = (int)LastRowID64;
-            apartado.folio += id.ToString().PadLeft(4, '0');
+            apartado.folio_corte += id.ToString().PadLeft(4, '0');
             command.Reset();
-            command.CommandText = "UPDATE apartados_temporal SET folio = @setFolio WHERE id = @setId";
-            command.Parameters.AddWithValue("setFolio", apartado.folio);
+            command.CommandText = "UPDATE apartados_temporal SET folio_corte = @setFolioCorte WHERE id = @setId";
+            command.Parameters.AddWithValue("setFolioCorte", apartado.folio_corte);
             command.Parameters.AddWithValue("setId", id);
             command.ExecuteNonQuery();
             return id;
@@ -2186,7 +2186,7 @@ FROM usuarios";
                     total = result.GetDouble(2),
                     total_pagado = result.GetDouble(3),
                     fecha_de_apartado = result.GetString(4),
-                    folio = result.GetString(5),
+                    folio_corte = result.GetString(5),
                     fecha_entrega = result.IsDBNull(6) ? "" : result.GetString(6),
                     estado = result.GetInt32(7),
                     cliente_creditos_id = result.GetInt32(8),
@@ -2232,52 +2232,63 @@ FROM usuarios";
         {
             List<Apartado> apartados = new List<Apartado>();
 
-            SQLiteCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM apartados_temporal";
-            SQLiteDataReader result = command.ExecuteReader();
-            while (result.Read())
+            using (SQLiteCommand command = connection.CreateCommand())
             {
-                Apartado apartaddo = new Apartado
+                command.CommandText = "SELECT * FROM apartados_temporal";
+                using (SQLiteDataReader result = command.ExecuteReader())
                 {
-
-                    productos = result.GetString(1),
-                    total = result.GetDouble(2),
-                    total_pagado = result.GetDouble(3),
-                    fecha_de_apartado = result.GetString(4),
-                    folio = result.GetString(5),
-                    fecha_entrega = result.IsDBNull(6) ? null : result.GetString(6),
-                    estado = result.GetInt32(7),
-                    cliente_creditos_id = result.GetInt32(8),
-                    id_cajero_registro = result.GetInt32(9),
-                    id_cajero_entrega = result.IsDBNull(10) ? null : result.GetInt32(10).ToString(),
-                    sucursal_id = result.GetInt32(11),
-                    temporal = result.GetInt32(12),
-                    observaciones = result.GetString(13)
-                };
-                SQLiteCommand subcomm = connection.CreateCommand();
-                subcomm.CommandText = "SELECT * FROM abonos_apartado_temporal WHERE folio_apartado = @setFolio";
-                subcomm.Parameters.AddWithValue("setFolio", apartaddo.folio);
-                SQLiteDataReader reader = subcomm.ExecuteReader();
-                apartaddo.abonos = new List<AbonoApartado>();
-                while (reader.Read())
-                {
-                    apartaddo.abonos.Add(new AbonoApartado
+                    while (result.Read())
                     {
-                        folio = reader.GetString(1),
-                        metodo_pago = reader.GetString(2),
-                        total_abonado = reader.GetDouble(3),
-                        fecha = reader.GetString(4),
-                        folio_apartado = reader.GetString(5),
-                        apartado_id = reader.GetInt32(6),
-                        folio_corte = reader.GetString(7),
-                        usuario_id = reader.GetInt32(8)
-                    });
-                }
-                apartados.Add(apartaddo);
+                        Apartado apartado = new Apartado
+                        {
+                            productos = result.IsDBNull(1) ? null : result.GetString(1),
+                            total = result.IsDBNull(2) ? 0.0 : result.GetDouble(2),
+                            total_pagado = result.IsDBNull(3) ? 0.0 : result.GetDouble(3),
+                            fecha_de_apartado = result.IsDBNull(4) ? null : result.GetString(4),
+                            folio_corte = result.IsDBNull(5) ? null : result.GetString(5),
+                            fecha_entrega = result.IsDBNull(6) ? null : result.GetString(6),
+                            estado = result.IsDBNull(7) ? 0 : result.GetInt32(7),
+                            cliente_creditos_id = result.IsDBNull(8) ? 0 : result.GetInt32(8),
+                            id_cajero_registro = result.IsDBNull(9) ? 0 : result.GetInt32(9),
+                            id_cajero_entrega = result.IsDBNull(10) ? null : result.GetInt32(10).ToString(),
+                            sucursal_id = result.IsDBNull(11) ? 0 : result.GetInt32(11),
+                            temporal = result.IsDBNull(12) ? 0 : result.GetInt32(12),
+                            observaciones = result.IsDBNull(13) ? null : result.GetString(13)
+                        };
 
+                        // Cargar los abonos para este apartado
+                        using (SQLiteCommand subcomm = connection.CreateCommand())
+                        {
+                            subcomm.CommandText = "SELECT * FROM abonos_apartado_temporal WHERE folio_apartado = @setFolio";
+                            subcomm.Parameters.AddWithValue("setFolio", apartado.folio_corte);
+
+                            using (SQLiteDataReader reader = subcomm.ExecuteReader())
+                            {
+                                apartado.abonos = new List<AbonoApartado>();
+                                while (reader.Read())
+                                {
+                                    apartado.abonos.Add(new AbonoApartado
+                                    {
+                                        folio = reader.IsDBNull(1) ? null : reader.GetString(1),
+                                        metodo_pago = reader.IsDBNull(2) ? null : reader.GetString(2),
+                                        total_abonado = reader.IsDBNull(3) ? 0.0 : reader.GetDouble(3),
+                                        fecha = reader.IsDBNull(4) ? null : reader.GetString(4),
+                                        folio_apartado = reader.IsDBNull(5) ? null : reader.GetString(5),
+                                        apartado_id = reader.IsDBNull(6) ? 0 : reader.GetInt32(6),
+                                        folio_corte = reader.IsDBNull(7) ? null : reader.GetString(7),
+                                        usuario_id = reader.IsDBNull(8) ? 0 : reader.GetInt32(8)
+                                    });
+                                }
+                            }
+                        }
+
+                        apartados.Add(apartado);
+                    }
+                }
             }
             return apartados;
         }
+
         public Apartado GetApartadoTemporal(string folio)
         {
             Apartado apartado = new Apartado();
@@ -2295,7 +2306,7 @@ FROM usuarios";
                     total = result.GetDouble(2),
                     total_pagado = result.GetDouble(3),
                     fecha_de_apartado = result.GetString(4),
-                    folio = result.GetString(5),
+                    folio_corte = result.GetString(5),
                     fecha_entrega = result.IsDBNull(6) ? null : result.GetString(6),
                     estado = result.GetInt32(7),
                     cliente_creditos_id = result.GetInt32(8),
@@ -2307,7 +2318,7 @@ FROM usuarios";
                 };
                 SQLiteCommand subcomm = connection.CreateCommand();
                 subcomm.CommandText = "SELECT * FROM abonos_apartado_temporal WHERE folio_apartado = @setFolio";
-                subcomm.Parameters.AddWithValue("setFolio", apartado.folio);
+                subcomm.Parameters.AddWithValue("setFolio", apartado.folio_corte);
                 SQLiteDataReader reader = subcomm.ExecuteReader();
                 apartado.abonos = new List<AbonoApartado>();
                 while (reader.Read())
@@ -2513,19 +2524,19 @@ FROM usuarios";
                 {
                     SQLiteCommand command = connection.CreateCommand();
                     command.CommandText = "SELECT id FROM apartados WHERE folio = @setFolio";
-                    command.Parameters.AddWithValue("setFolio", apartado.folio);
+                    command.Parameters.AddWithValue("setFolio", apartado.folio_corte);
                     SQLiteDataReader result = command.ExecuteReader();
                     if (result.Read())
                     {
                         int id = result.GetInt32(0);
                         command.Reset();
                         command.CommandText = "DELETE FROM apartados_temporal WHERE folio = @setFolio";
-                        command.Parameters.AddWithValue("setFolio", apartado.folio);
+                        command.Parameters.AddWithValue("setFolio", apartado.folio_corte);
                         command.ExecuteNonQuery();
                         command.Reset();
                         command.CommandText = "UPDATE abonos_apartado_temporal SET id_apartado = @setId WHERE folio_apartado = @setFolio";
                         command.Parameters.AddWithValue("setId", id);
-                        command.Parameters.AddWithValue("setFolio", apartado.folio);
+                        command.Parameters.AddWithValue("setFolio", apartado.folio_corte);
                         command.ExecuteNonQuery();
                     }
                 }
@@ -3098,6 +3109,7 @@ FROM usuarios";
         }
         public void acumularEfectivoApartado(double efectivo, int idcorte)
         {
+            //Console.WriteLine("Metodo acumular Efecivo A:" + efectivo);
             SQLiteCommand command = connection.CreateCommand();
             command.CommandText = "UPDATE cortes SET efectivo_apartados = efectivo_apartados + @setEfectivo WHERE id = @setId";
             command.Parameters.AddWithValue("setId", idcorte);
@@ -3106,6 +3118,7 @@ FROM usuarios";
         }
         public void acumularEfectivoCredito(double efectivo, int idcorte)
         {
+            //Console.WriteLine("Metodo acumular Efecivo C:" + efectivo);
             SQLiteCommand command = connection.CreateCommand();
             command.CommandText = "UPDATE cortes SET efectivo_creditos = efectivo_creditos + @setEfectivo WHERE id = @setId";
             command.Parameters.AddWithValue("setId", idcorte);
@@ -3314,7 +3327,7 @@ FROM usuarios";
                 Ticket1.TextoCentro("Sucursal: " + sucursalName.ToUpper());
                 Ticket1.TextoCentro(sucursalDir.ToUpper());
                 Ticket1.TextoCentro(apartado.fecha_de_apartado);
-                Ticket1.TextoCentro("FOLIO: " + apartado.folio);
+                Ticket1.TextoCentro("FOLIO: " + apartado.folio_corte);
                 Ticket1.TextoCentro(" ");
                 Ticket1.TextoCentro("TICKET DE APARTADO");
                 Ticket1.EncabezadoVenta();
@@ -3563,7 +3576,7 @@ FROM usuarios";
                 List<ProductoVenta> carrito = JsonConvert.DeserializeObject<List<ProductoVenta>>(selApa.productos);
                 double totalcarrito = selApa.total;
                 double totalpagado = selApa.total_pagado;
-                string folio = selApa.folio;
+                string folio = selApa.folio_corte;
                 int idOperacion = selApa.id;
                 int art = 0;
                 if (!impresora.Equals(""))
@@ -3575,7 +3588,7 @@ FROM usuarios";
                     Ticket1.TextoCentro("Sucursal: " + sucursalName.ToUpper());
                     Ticket1.TextoCentro(sucursalDir.ToUpper());
                     Ticket1.TextoCentro(selApa.fecha_de_apartado);
-                    Ticket1.TextoCentro("FOLIO: " + selApa.folio);
+                    Ticket1.TextoCentro("FOLIO: " + selApa.folio_corte);
                     Ticket1.TextoCentro(" ");
                     Ticket1.TextoCentro("TICKET DE APARTADO");
                     Ticket1.EncabezadoVenta();

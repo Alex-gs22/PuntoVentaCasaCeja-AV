@@ -269,7 +269,7 @@ namespace PuntoVentaCasaCeja
                         {
                             foreach (Apartado c in entry.Value)
                             {
-                                if (c.folio.Contains(txtbuscar.Text))
+                                if (c.folio_corte.Contains(txtbuscar.Text))
                                 {
                                     currentApa.Add(c);
                                 }
@@ -287,7 +287,7 @@ namespace PuntoVentaCasaCeja
                     tabInfo tempinfo = new tabInfo
                     {
                         ESTADO = estados[currentApa[i].estado],
-                        FOLIO = currentApa[i].folio,
+                        FOLIO = currentApa[i].folio_corte,
                         FECHA = currentApa[i].fecha_de_apartado,
                         TOTAL = currentApa[i].total.ToString("0.00")
                     };
@@ -491,7 +491,7 @@ namespace PuntoVentaCasaCeja
                         carrito = JsonConvert.DeserializeObject<List<ProductoVenta>>(selApa.productos);
                         totalcarrito = selApa.total;
                         totalpagado = selApa.total_pagado;
-                        folio = selApa.folio;
+                        folio = selApa.folio_corte;
                         idOperacion = selApa.id;
                         ticket += "CASA CEJA\n" +
                         "SUCURSAL: " + data.sucursalName + "\n" +

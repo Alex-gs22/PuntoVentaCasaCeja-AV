@@ -121,17 +121,18 @@ namespace PuntoVentaCasaCeja
 
                 data.webDM.localDM.acumularPagos(pagos, data.idCorte);
 
-                if (pagos.ContainsKey("efectivo"))
-                {
                     if (tipo == 0)
                     {
-                        data.webDM.localDM.acumularEfectivoCredito(pagos["efectivo"], data.idCorte);
+
+                    Console.WriteLine("AEC EFECTIVO: " + pagos["efectivo"]);
+                    data.webDM.localDM.acumularEfectivoCredito(pagos["efectivo"], data.idCorte);
                     }
                     else
                     {
-                        data.webDM.localDM.acumularEfectivoApartado(pagos["efectivo"], data.idCorte);
+                    Console.WriteLine("AEA EFECTIVO: " + pagos["efectivo"]);
+                    data.webDM.localDM.acumularEfectivoApartado(pagos["efectivo"], data.idCorte);
                     }
-                }
+                
 
                 if (id == 0)
                 {

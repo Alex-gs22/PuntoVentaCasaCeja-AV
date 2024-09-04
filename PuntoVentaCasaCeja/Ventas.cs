@@ -1527,18 +1527,18 @@ namespace PuntoVentaCasaCeja
         {   
             data.folioCorte = folioCorte;
             data.totalcarrito = totalcarrito;
+            data.idCorte = idcorte;
             sucursalName = localDM.getSucursalname(idsucursal);
             sucursalDir = localDM.getSucursalAddr(idsucursal);
             CredApartSel CredApar = new CredApartSel(data);
             DialogResult response = CredApar.ShowDialog();
             if (response == DialogResult.Yes)
                 {
-                MessageBox.Show("", "Apartado"); 
-                resetVenta();
+                MessageBox.Show("", "Apartado");
+                if (data.totalcarrito == 0)
+                {
+                    //resetVenta();
                 }
-            if(data.totalcarrito == 0)
-            {
-                resetVenta();
             }
             }
 

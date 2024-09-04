@@ -911,18 +911,14 @@ namespace PuntoVentaCasaCeja
                         //refreshData(3);
                     }
                     else
-                    {
-                        methodResponse["status"] = "error";
+                    {   
+                        
+                        methodResponse["status"] = "error GRANDE";
                         if (result.ContainsKey("data"))
                             methodResponse["message"] = result["data"].ToString();
                         else
                             methodResponse["message"] = res;
                     }
-                    //}
-                    //else
-                    //{
-                    //    MessageBox.Show("No se recibió success", "Error");
-                    //}
                 }
                 catch (Exception e)
                 {
