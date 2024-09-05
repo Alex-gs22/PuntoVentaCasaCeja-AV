@@ -1247,41 +1247,6 @@ namespace PuntoVentaCasaCeja
             Console.WriteLine(ticket);
             createdoc();
     }
-        /*private void imprimirCorteCarta(Dictionary<string, string> corte)
-        {
-            ticket = "";
-            Dictionary<string, string> gastos = JsonConvert.DeserializeObject<Dictionary<string, string>>(corte["gastos"]);
-            Dictionary<string, string> ingresos = JsonConvert.DeserializeObject<Dictionary<string, string>>(corte["ingresos"]);
-            string nc = localDM.getNombreUsuario(int.Parse(corte["usuario_id"]));
-            string caj = cajero.nombre;
-            double cambio = totalcarrito;
-            ticket += "CASA CEJA S.A. de C.V.\n" +
-                "SUCURSAL: " + sucursalName + "\n" +
-                "Folio:  " + corte["folio_corte"] + "\n" +
-                "Fecha de apertura: " + corte["fecha_apertura_caja"] + "\n" +
-                "Fecha de corte: " + corte["fecha_corte_caja"] + "\n" +
-                "Fondo de apertura: " + corte["fondo_apertura"] + "\n" +
-                "Efectivo de créditos: " + corte["efectivo_creditos"] + "\n" +
-                "Efectivo de apartados: " + corte["efectivo_apartados"] + "\n" +
-                "Total efectivo: " + corte["total_efectivo"] + "\n" +
-               "Total T. Débito: " + corte["total_tarjetas_debito"] + "\n" +
-               "Total T. Crédito: " + corte["total_tarjetas_credito"] + "\n" +
-               "Total cheques: " + corte["total_cheques"] + "\n" +
-               "Total transferencias: " + corte["total_transferencias"] + "\n" +
-               "Sobrante: " + corte["sobrante"] + "\n" +
-               "Cajero: " + nc + "\n" +
-               "Gastos: \n";
-            foreach (var x in gastos)
-            {
-                ticket+=(x.Key + " : " + x.Value)+"\n";
-            }
-            ticket += "Ingresos:\n";
-            foreach (var x in ingresos)
-            {
-                ticket += (x.Key + " : " + x.Value) + "\n";
-            }
-            createdoc();
-        }*/
         private void createdoc()
         {
 
@@ -1317,41 +1282,46 @@ namespace PuntoVentaCasaCeja
                 new System.Drawing.Printing.PrintPageEventHandler(
                 docToPrint_PrintPage);
         }
-        private void docToPrint_PrintPage(
-    object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        private void docToPrint_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
-
-            // Insert code to render the page here.
-            // This code will be called when the control is drawn.
-
-            // The following code will render a simple
-            // message on the document in the control.
+            // Insertar código para renderizar el texto del ticket.
             string text1 = ticket;
-            //StringFormat format = new StringFormat(StringFormatFlags.NoClip);
-            //format.Alignment = StringAlignment.Center;
-            //System.Drawing.Font printFont =
-            //    new Font(fontName, fontSize, FontStyle.Regular);
 
-            //e.Graphics.DrawString(text1, printFont,
-            //    Brushes.Black, 50, 50);
-
+            // Fuente y formato para el texto
             FontFamily fontFamily = new FontFamily(fontName);
             Font font = new Font(
-               fontFamily,
-               fontSize,
-               FontStyle.Regular,
-               GraphicsUnit.Point);
-            Rectangle rect = new Rectangle(50, 50, 750, 1000);
+                fontFamily,
+                fontSize,
+                FontStyle.Regular,
+                GraphicsUnit.Point);
+            Rectangle rect = new Rectangle(50, 50, 750, 700);  // Mantener el área de impresión del texto
             StringFormat stringFormat = new StringFormat();
             SolidBrush solidBrush = new SolidBrush(Color.FromArgb(255, 0, 0, 0));
-
 
             stringFormat.SetTabStops(0, tabs[fontSize]);
 
             e.Graphics.DrawString(text1, font, solidBrush, rect, stringFormat);
 
-            //Pen pen = Pens.Black;
-            //e.Graphics.DrawRectangle(pen, rect);
+           /* try
+            {
+                string basePath = AppDomain.CurrentDomain.BaseDirectory;
+                string qrPath = Path.Combine(basePath, "qr_facturacion.png");
+                Image qrImage = Image.FromFile(qrPath);
+
+                int qrWidth = 200; // Tamaño del código QR
+                int qrHeight = 200;
+
+                // Calcular la posición centrada en el ancho del área de impresión
+                int qrX = (rect.Width - qrWidth) / 2 + rect.X;
+                int qrY = rect.Y + rect.Height + 20; // Justo debajo del área de texto, ajustado con un margen de 20
+
+                // Dibujar la imagen QR centrada
+                e.Graphics.DrawImage(qrImage, qrX, qrY, qrWidth, qrHeight);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al cargar la imagen del QR: " + ex.Message);
+            }*/
         }
 
         private void createdocz()
