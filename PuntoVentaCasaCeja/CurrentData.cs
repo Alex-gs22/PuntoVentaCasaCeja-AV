@@ -19,6 +19,7 @@ namespace PuntoVentaCasaCeja
         public int idSucursal { get; set; }
         public int fontSize { get; set; }
         public int idCorte { get; set; }
+        public bool successful { get; set; }
         public int printerType { get; set; }
         public string fontName { get; set; }
 

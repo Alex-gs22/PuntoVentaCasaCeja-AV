@@ -84,7 +84,7 @@ namespace PuntoVentaCasaCeja
             webDM.sucursal_id = idsucursal;
             (printPreview as Form).WindowState = FormWindowState.Maximized;
             data = new CurrentData
-            {
+            {   
                 webDM = webDM,
                 sucursalDir = sucursalDir,
                 sucursalName = sucursalName,
@@ -96,7 +96,9 @@ namespace PuntoVentaCasaCeja
                 fontName = fontName,
                 fontSize = fontSize,
                 idCorte = idcorte,
-                printerType = printerType
+                printerType = printerType,
+                successful = false
+                
             };
         }
         void setInt(int x)
@@ -1532,15 +1534,14 @@ namespace PuntoVentaCasaCeja
             sucursalDir = localDM.getSucursalAddr(idsucursal);
             CredApartSel CredApar = new CredApartSel(data);
             DialogResult response = CredApar.ShowDialog();
-            if (response == DialogResult.Yes)
+            if (data.successful)
                 {
-                MessageBox.Show("", "Apartado");
-                if (data.totalcarrito == 0)
-                {
-                    //resetVenta();
-                }
+                resetVenta();
+                data.carrito.Clear();
+                data.totalcarrito = 0;
+                data.successful = false;
             }
-            }
+           }
 
         private void limpiarBDToolStripMenuItem_Click(object sender, EventArgs e)
         {

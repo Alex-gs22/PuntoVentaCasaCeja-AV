@@ -174,6 +174,7 @@ namespace PuntoVentaCasaCeja
 
                 if (result["status"] == "success")
                 {
+                    data.successful = true;
                     List<ProductoVenta> productos = carrito;
 
                     if (productos == null || productos.Count == 0)
@@ -181,12 +182,10 @@ namespace PuntoVentaCasaCeja
                         MessageBox.Show("El carrito está vacío", "Error");
                         return;
                     }
-
                     foreach (ProductoVenta p in productos)
                     {
                         await webDM.restarExistencia(idsucursal, p.id, p.cantidad);
                     }
-                    data.totalcarrito = 0;
                 }
                 else
                 {

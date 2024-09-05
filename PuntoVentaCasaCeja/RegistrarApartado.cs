@@ -175,7 +175,8 @@ namespace PuntoVentaCasaCeja
             MessageBox.Show(result["message"], "Estado: " + result["status"]);
 
             if (result["status"] == "success")
-            {
+            {   
+                data.successful = true;
                 List<ProductoVenta> productos = carrito;
 
                 if (productos == null || productos.Count == 0)
@@ -189,7 +190,6 @@ namespace PuntoVentaCasaCeja
                     //Console.WriteLine($"Restando existencia para producto ID: {p.id}, cantidad: {p.cantidad}");
                     await webDM.restarExistencia(idsucursal, p.id, p.cantidad);
                 }
-                data.totalcarrito = 0;
             }
             else
             {

@@ -26,7 +26,6 @@ namespace PuntoVentaCasaCeja
                 RegistrarCredito rc = new RegistrarCredito(data);
                 this.DialogResult = rc.ShowDialog(this);
                 this.Close();
-                data.carrito.Clear();
             }
             else
             {
