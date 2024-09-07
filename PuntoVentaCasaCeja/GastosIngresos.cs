@@ -74,34 +74,40 @@ namespace PuntoVentaCasaCeja
         private void accept_Click(object sender, EventArgs e)
         {
             bool res = true;
-            if(txtconcepto.Equals("") || txtmonto.Equals("") || txtmonto.Equals("."))
+            if (string.IsNullOrWhiteSpace(txtconcepto.Text) || string.IsNullOrWhiteSpace(txtmonto.Text) || txtmonto.Text.Equals("."))
             {
                 MessageBox.Show("Favor de completar todos los datos", "Advertencia");
             }
             else
             {
-                double m = double.Parse(txtmonto.Text);
-                string c = txtconcepto.Text;
-                if ( tipo == 1)
+                if (double.TryParse(txtmonto.Text, out double m))
                 {
-                    localDM.registrarIngreso(c, m, idcorte);
-                    MessageBox.Show(spanlabel + " registrado", "Éxito");
-                    this.Close();
-                }
-                else if(tipo == 2)
-                {
-                    double total = localDM.getEfectivoCaja(idcorte);
-                    if (m > total)
+                    string c = txtconcepto.Text;
+                    if (tipo == 1)
                     {
-                        MessageBox.Show("No hay suficiente efectivo", "Advertencia");
-                        res = false;
-                    }
-                    else
-                    {
-                        localDM.registrarGasto(c, m, idcorte);
+                        localDM.registrarIngreso(c, m, idcorte);
                         MessageBox.Show(spanlabel + " registrado", "Éxito");
                         this.Close();
                     }
+                    else if (tipo == 2)
+                    {
+                        double total = localDM.getEfectivoCaja(idcorte);
+                        if (m > total)
+                        {
+                            MessageBox.Show("No hay suficiente efectivo", "Advertencia");
+                            res = false;
+                        }
+                        else
+                        {
+                            localDM.registrarGasto(c, m, idcorte);
+                            MessageBox.Show(spanlabel + " registrado", "Éxito");
+                            this.Close();
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Monto no válido", "Error");
                 }
             }
         }

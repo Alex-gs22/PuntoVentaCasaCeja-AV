@@ -129,6 +129,7 @@ namespace PuntoVentaCasaCeja
             // 
             this.txtprintername.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtprintername.Enabled = false;
             this.txtprintername.Location = new System.Drawing.Point(4, 41);
             this.txtprintername.Margin = new System.Windows.Forms.Padding(4);
             this.txtprintername.Name = "txtprintername";
