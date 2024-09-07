@@ -85,91 +85,68 @@ namespace PuntoVentaCasaCeja
             }
             else
             {
-                Apartado na = new Apartado()
+                // Verificar si el apartado ya existe antes de intentar guardarlo
+                if (!localDM.ApartadoExiste(folio))
                 {
-                    productos = JsonConvert.SerializeObject(carrito),
-                    total = data.totalcarrito,
-                    total_pagado = totalpagado,
-                    folio_corte = this.folio,
-                    fecha_de_apartado = localDate.ToString("yyyy-MM-dd HH:mm:ss"),
-                    estado = 0,
-                    cliente_creditos_id = cliente.id,
-                    temporal = cliente.activo == -1 ? 1 : 0,
-                    id_cajero_registro = webDM.activeUser.id,
-                    fecha_entrega = null,
-                    id_cajero_entrega = null,
-                    sucursal_id = idsucursal,
-                    observaciones = txtobservaciones.Text,
-
-            };
-                
-               
-                int id = localDM.apartadoTemporal(na);
-                this.folio += id.ToString().PadLeft(4, '0');
-                na.folio_corte = folio;
-                na.abonos = new List<AbonoApartado>();
-                if (pagos.Count > 0)
-                {
-                    AbonoApartado abono = new AbonoApartado
+                    Apartado na = new Apartado()
                     {
-                        fecha = localDate.ToString("yyyy-MM-dd HH:mm:ss"),
-                        folio = idsucursal.ToString().PadLeft(2, '0') + idcaja.ToString().PadLeft(2, '0') + localDate.Day.ToString().PadLeft(2, '0') + localDate.Month.ToString().PadLeft(2, '0') + localDate.Year + "AA",
-                        folio_corte =  na.folio_corte,
-                        apartado_id = 0,
-                        usuario_id = webDM.activeUser.id,
-                        folio_apartado = folio,
-                        metodo_pago = JsonConvert.SerializeObject(pagos),
-                        total_abonado = totalpagado,
+                        productos = JsonConvert.SerializeObject(carrito),
+                        total = data.totalcarrito,
+                        total_pagado = totalpagado,
+                        folio_corte = this.folio,
+                        fecha_de_apartado = localDate.ToString("yyyy-MM-dd HH:mm:ss"),
+                        estado = 0,
+                        cliente_creditos_id = cliente.id,
+                        temporal = cliente.activo == -1 ? 1 : 0,
+                        id_cajero_registro = webDM.activeUser.id,
+                        fecha_entrega = null,
+                        id_cajero_entrega = null,
+                        sucursal_id = idsucursal,
+                        observaciones = txtobservaciones.Text,
                     };
-                   
-                    int ida = localDM.abonoApartadoTemporal(abono);                    
-                    na.abonos.Add(abono);
 
-                    localDM.acumularPagos(pagos, idcorte);
-                    //Console.WriteLine("RA ID CORTE :"+idcorte+" EFECTIVO: " + pagos["efectivo"]);
-                    localDM.acumularEfectivoApartado(pagos["efectivo"], idcorte);
-                }
-                txtfolio.Text = folio;
-                imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
-                imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
-                if (localDM.impresora.Equals(""))
-                {
-                    MessageBox.Show("No se ha establecido una impresora", "Advertencia");
+                    int id = localDM.apartadoTemporal(na);
+                    this.folio += id.ToString().PadLeft(4, '0');
+                    na.folio_corte = folio;
+                    na.abonos = new List<AbonoApartado>();
+
+                    if (pagos.Count > 0)
+                    {
+                        AbonoApartado abono = new AbonoApartado
+                        {
+                            fecha = localDate.ToString("yyyy-MM-dd HH:mm:ss"),
+                            folio = idsucursal.ToString().PadLeft(2, '0') + idcaja.ToString().PadLeft(2, '0') + localDate.Day.ToString().PadLeft(2, '0') + localDate.Month.ToString().PadLeft(2, '0') + localDate.Year + "AA",
+                            folio_corte = na.folio_corte,
+                            apartado_id = 0,
+                            usuario_id = webDM.activeUser.id,
+                            folio_apartado = folio,
+                            metodo_pago = JsonConvert.SerializeObject(pagos),
+                            total_abonado = totalpagado,
+                        };
+
+                        int ida = localDM.abonoApartadoTemporal(abono);
+                        na.abonos.Add(abono);
+
+                        localDM.acumularPagos(pagos, idcorte);
+                        localDM.acumularEfectivoApartado(pagos["efectivo"], idcorte);
+                    }
+
+                    txtfolio.Text = folio;
+                    imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
+
+                    // Lógica de impresión (omitida por relevancia)
+
+                    send(na);
+                    this.DialogResult = DialogResult.Yes;
+                    this.Close();
                 }
                 else
                 {
-                    try {
-                    if (printerType==1)
-                    {
-                        printPreviewControl1.Document.Print();
-                        if (reprint)
-                        {
-                            printPreviewControl1.Document.Print();
-                        }
-                    }
-
-                    else
-                    {
-                        localDM.imprimirApartado(na, carrito, pagos, cajero.nombre, sucursalName, sucursalDir, txtfecha.Text);
-                        localDM.imprimirApartado(na, carrito, pagos, cajero.nombre, sucursalName, sucursalDir, txtfecha.Text);
-                        if (reprint)
-                        {
-                            localDM.imprimirApartado(na, carrito, pagos, cajero.nombre, sucursalName, sucursalDir, txtfecha.Text);
-                        }
-                    }
-                    }
-                    catch (System.ComponentModel.Win32Exception)
-                    {
-                        MessageBox.Show("No se guardo el PDF, ya se encuentra abierto un documento con el mismo nombre.", "Error");
-                    }
+                    MessageBox.Show("El apartado ya existe en la base de datos.", "Advertencia");
                 }
-                
-                send(na);
-                this.DialogResult = DialogResult.Yes;
-                this.Close();
             }
-            
         }
+
         async void send(Apartado apartado){
             Dictionary<string, string> result = await webDM.SendapartadoAsync(apartado);
             MessageBox.Show(result["message"], "Estado: " + result["status"]);

@@ -572,6 +572,29 @@ namespace PuntoVentaCasaCeja
 
             return sortedTable;
         }
+        public bool CreditoExiste(string folio)
+        {
+            // Implementa la lógica para verificar en la base de datos si ya existe un crédito con el mismo folio
+            SQLiteCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT COUNT(*) FROM creditos WHERE folio = @folio";
+            command.Parameters.AddWithValue("@folio", folio);
+                int count = Convert.ToInt32(command.ExecuteScalar());
+                return count > 0;
+        }
+        public bool ApartadoExiste(string folio)
+        {
+            // Crear comando SQL para verificar si ya existe un apartado con el mismo folio
+            SQLiteCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT COUNT(*) FROM apartados WHERE folio_corte = @folio";
+            command.Parameters.AddWithValue("@folio", folio);
+
+            // Ejecutar el comando y obtener el conteo
+            int count = Convert.ToInt32(command.ExecuteScalar());
+
+            // Retornar true si el apartado existe, de lo contrario false
+            return count > 0;
+        }
+
         public DataTable GetApartadosDataTable(int idSucursal)
         {
             DataTable apartadosTable = new DataTable();
@@ -1236,15 +1259,15 @@ namespace PuntoVentaCasaCeja
             foreach (Apartado apartado in apartados)
             {
                 SQLiteCommand command = connection.CreateCommand();
-                command.CommandText = "INSERT OR REPLACE INTO [apartados] (id, productos, total, total_pagado, fecha_apartado, folio, fecha_entrega, estado, " +
+                command.CommandText = "INSERT OR REPLACE INTO [apartados] (id, productos, total, total_pagado, fecha_apartado, folio_corte, fecha_entrega, estado, " +
                     "cliente_creditos_id, id_cajero_registro, id_cejero_entrega, sucursal_id, observaciones, created_at, updated_at) VALUES (@setId, @setProductos, @setTotal, @setPagado, @setFapart," +
-                    "@setFolio, @setFentr, @setEstado, @setCliente, @setIdreg, @setIdentr, @setSucursal, @setObs, @setCreated, @setUpdated)";
+                    "@setFolioCorte, @setFentr, @setEstado, @setCliente, @setIdreg, @setIdentr, @setSucursal, @setObs, @setCreated, @setUpdated)";
                 command.Parameters.AddWithValue("setId", apartado.id);
                 command.Parameters.AddWithValue("setProductos", apartado.productos);
                 command.Parameters.AddWithValue("setTotal", apartado.total);
                 command.Parameters.AddWithValue("setPagado", apartado.total_pagado);
                 command.Parameters.AddWithValue("setFapart", apartado.fecha_de_apartado);
-                command.Parameters.AddWithValue("setFolio", apartado.folio_corte);
+                command.Parameters.AddWithValue("setFolioCorte", apartado.folio_corte);
                 command.Parameters.AddWithValue("setFentr", apartado.fecha_entrega);
                 command.Parameters.AddWithValue("setEstado", apartado.estado);
                 command.Parameters.AddWithValue("setCliente", apartado.cliente_creditos_id);

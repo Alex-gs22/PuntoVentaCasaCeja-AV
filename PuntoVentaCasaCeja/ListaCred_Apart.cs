@@ -1,41 +1,53 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Windows.ApplicationModel.Store;
 
 namespace PuntoVentaCasaCeja
 {
     public partial class ListaCred_Apart : Form
     {
-        int rowCount, maxPages, currentPage = 1, offset, idCliente, rowsPerPage = 10;
-        Action<Usuario> setUser;
-        Usuario usuario;
-        WebDataManager webDM;
-        LocaldataManager localDM;
-        CurrentData data;
-        List<string> tipo = new List<string>();
-        List<string> estados = new List<string>();
-        string[] rangeTipo = { "Creditos", "Apartados" };
-        string[] range = { "TODOS", "PENDIENTE", "EXPIRO", "CANCELADO", "PAGADO" };
-        
+        private int rowCount = 0;
+        private int maxPages = 0;
+        private int currentPage = 1;
+        private int offset = 0;
+        private int idCliente = 0;
+        private int rowsPerPage = 10;
+
+        private Usuario usuario;
+        private WebDataManager webDM;
+        private LocaldataManager localDM;
+        private CurrentData data;
+
+        private List<string> tipo = new List<string>();
+        private List<string> estados = new List<string>();
+
+        private readonly string[] rangeTipo = { "Creditos", "Apartados" };
+        private readonly string[] range = { "TODOS", "PENDIENTE", "EXPIRO", "CANCELADO", "PAGADO" };
+
         public ListaCred_Apart(CurrentData data)
         {
             InitializeComponent();
-            this.webDM = data.webDM;
             this.data = data;
+            this.webDM = data.webDM;
             this.localDM = webDM.localDM;
+
+            // Inicialización de ComboBoxes
             tipo.AddRange(rangeTipo);
             BoxTipo.DataSource = tipo;
             BoxTipo.SelectedIndex = 0;
+
             estados.AddRange(range);
             BoxEstado.DataSource = estados;
             BoxEstado.SelectedIndex = 0;
+
+            // Configuración inicial de la tabla
+            CargarDatosTabla();
+        }
+
+        private void CargarDatosTabla()
+        {
             DataTable dataTable = localDM.GetCreditosDataTable(data.idSucursal);
             dataTable.DefaultView.Sort = "Fecha DESC";
             tablaCreditosApartados.DataSource = dataTable;
@@ -51,15 +63,10 @@ namespace PuntoVentaCasaCeja
                         this.Close();
                         break;
                     case Keys.F1:
-                        BoxTipo.DroppedDown = true;
-                        BoxTipo.Focus();
+                        ShowDropDown(BoxTipo);
                         break;
                     case Keys.F2:
-                        BoxEstado.DroppedDown = true;
-                        BoxEstado.Focus();
-                        break;
-                    case Keys.Enter:
-                        //tablaCreditos_CellDoubleClick(tablaCreditosApartados, new DataGridViewCellEventArgs(tablaCreditosApartados.CurrentCell.ColumnIndex, tablaCreditosApartados.CurrentCell.RowIndex));
+                        ShowDropDown(BoxEstado);
                         break;
                     default:
                         return base.ProcessDialogKey(keyData);
@@ -69,6 +76,12 @@ namespace PuntoVentaCasaCeja
             return base.ProcessDialogKey(keyData);
         }
 
+        private void ShowDropDown(ComboBox comboBox)
+        {
+            comboBox.DroppedDown = true;
+            comboBox.Focus();
+        }
+
         private void exitButton_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -76,70 +89,51 @@ namespace PuntoVentaCasaCeja
 
         private void TablaCreditos_KeyDown(object sender, KeyEventArgs e)
         {
-            /*
-            if (e.KeyCode == Keys.Enter)
-            {
-                //verificar si hay una fila seleccionada
-                if (tablaCreditosApartados.CurrentCell == null)
-                {
-                    return;
-                }
-                DataGridViewCellEventArgs cellEventArgs = new DataGridViewCellEventArgs(tablaCreditosApartados.CurrentCell.ColumnIndex, tablaCreditosApartados.CurrentCell.RowIndex);
-                tablaCreditos_CellDoubleClick(sender, cellEventArgs);
-            }
-            */
             if (e.KeyCode == Keys.F1)
-            {
-                BoxTipo.DroppedDown = true;
-                BoxTipo.Focus();
-            }
+                ShowDropDown(BoxTipo);
             if (e.KeyCode == Keys.F2)
-            {
-                BoxEstado.DroppedDown = true;
-                BoxEstado.Focus();
-            }
+                ShowDropDown(BoxEstado);
         }
 
         private void tablaCreditos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
-                DataGridViewRow selectedRow = tablaCreditosApartados.Rows[e.RowIndex];
-                string clienteNombre = selectedRow.Cells["Cliente"].Value.ToString();
-
-                if (data.cliente == null)
+                try
                 {
-                    data.cliente = new Cliente();
-                }
+                    DataGridViewRow selectedRow = tablaCreditosApartados.Rows[e.RowIndex];
+                    string clienteNombre = selectedRow.Cells["Cliente"].Value.ToString();
 
-                int clienteId = localDM.GetCliente(clienteNombre);
+                    if (data.cliente == null)
+                        data.cliente = new Cliente();
 
-                if (clienteId != -1)
-                {
-                    data.cliente.id = clienteId;
-                    if (BoxTipo.SelectedIndex == 0)
+                    int clienteId = localDM.GetCliente(clienteNombre);
+
+                    if (clienteId != -1)
                     {
-                        VerCredApa vca = new VerCredApa(0, data);
+                        data.cliente.id = clienteId;
+                        VerCredApa vca = new VerCredApa(BoxTipo.SelectedIndex, data);
                         vca.ShowDialog();
                     }
                     else
                     {
-                        VerCredApa vca = new VerCredApa(1, data);
-                        vca.ShowDialog();
+                        MessageBox.Show("Cliente no encontrado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Cliente no encontrado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Error al procesar la acción: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
 
         private void BSelCliente_Click(object sender, EventArgs e)
-        {   
-            tablaCreditos_CellDoubleClick(tablaCreditosApartados, new DataGridViewCellEventArgs(tablaCreditosApartados.CurrentCell.ColumnIndex, tablaCreditosApartados.CurrentCell.RowIndex));
-            tablaCreditosApartados.Focus();
+        {
+            if (tablaCreditosApartados.CurrentCell != null)
+            {
+                tablaCreditos_CellDoubleClick(tablaCreditosApartados, new DataGridViewCellEventArgs(tablaCreditosApartados.CurrentCell.ColumnIndex, tablaCreditosApartados.CurrentCell.RowIndex));
+                tablaCreditosApartados.Focus();
+            }
         }
 
         private void BoxTipo_SelectedIndexChanged(object sender, EventArgs e)
@@ -158,42 +152,45 @@ namespace PuntoVentaCasaCeja
 
         private void FiltrarDatos()
         {
-            DataTable dataTable;
-            if (BoxTipo.SelectedIndex == 0) // muestra la tabla tal cual sin filtros
+            // Obtener los datos según el tipo seleccionado
+            DataTable dataTable = (BoxTipo.SelectedIndex == 0) ?
+                localDM.GetCreditosDataTable(data.idSucursal) :
+                localDM.GetApartadosDataTable(data.idSucursal);
+
+            // Aplicar filtro de estado si es necesario
+            if (BoxEstado.SelectedItem != null && BoxEstado.SelectedIndex != 0)
             {
-                dataTable = localDM.GetCreditosDataTable(data.idSucursal);
+                string estado = BoxEstado.SelectedItem.ToString();
+                dataTable.DefaultView.RowFilter = $"Estado = '{estado}'";
             }
             else
             {
-                dataTable = localDM.GetApartadosDataTable(data.idSucursal);
+                dataTable.DefaultView.RowFilter = string.Empty;
             }
+            dataTable.DefaultView.Sort = "Fecha DESC";
 
-            if (BoxEstado.SelectedItem != null && BoxEstado.SelectedIndex != 0) // Si no es "TODOS"
+            // Verificar que haya datos antes de paginar
+            if (dataTable.DefaultView.Count > 0)
             {
-                string estado = BoxEstado.SelectedItem.ToString(); // obtiene el estado seleccionado y lo convierte a string.
-                dataTable.DefaultView.RowFilter = $"Estado = '{estado}'"; // Filtra la tabla por el estado seleccionado (es dinamico).
+                var paginatedRows = dataTable.DefaultView.ToTable().AsEnumerable()
+                    .Skip(offset).Take(rowsPerPage);
+
+                DataTable paginatedTable = paginatedRows.Any() ? paginatedRows.CopyToDataTable() : dataTable.Clone();
+
+                tablaCreditosApartados.DataSource = paginatedTable;
             }
             else
             {
-                dataTable.DefaultView.RowFilter = string.Empty; // Si es "TODOS" no se filtra.
-            }
-            dataTable.DefaultView.Sort = "Fecha DESC"; // Ordena la tabla por fecha descendente.
-            DataTable paginatedTable = dataTable.Clone(); // Clona la estructura de la tabla original.
-            for (int i = offset; i < offset + rowsPerPage && i < dataTable.DefaultView.Count; i++) // Llena la tabla clonada con los datos de la tabla original.
-            {
-                paginatedTable.ImportRow(dataTable.DefaultView[i].Row); // Importa la fila de la tabla original a la tabla clonada.
+                tablaCreditosApartados.DataSource = dataTable.Clone(); // Vacío si no hay datos
             }
 
-            tablaCreditosApartados.DataSource = paginatedTable;
-            calculateMaxPages(dataTable.DefaultView.Count);
+            CalculateMaxPages(dataTable.DefaultView.Count);
         }
 
-
-        private void calculateMaxPages(int rowCount)
+        private void CalculateMaxPages(int rowCount)
         {
-            maxPages = (rowCount + rowsPerPage - 1) / rowsPerPage; // Divisón entera redondeando hacia arriba
-            if (maxPages == 0)
-                maxPages = 1;
+            maxPages = (rowCount + rowsPerPage - 1) / rowsPerPage;
+            if (maxPages == 0) maxPages = 1;
             if (maxPages < currentPage)
             {
                 currentPage = maxPages;
