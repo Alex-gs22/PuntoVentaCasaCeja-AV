@@ -299,6 +299,7 @@ namespace PuntoVentaCasaCeja
                         localDM.saveApartados(apartados);
                         localDM.AnalizarApartadosTemporales();
                         apartados_lastupdate = localDM.getTableLastUpdate("apartados");
+                        Console.WriteLine("Ultima fecha de apartados "+apartados_lastupdate);
                         return true;
                     }
                     else

@@ -140,10 +140,6 @@ namespace PuntoVentaCasaCeja
                 await webDM.enviarApartadosTemporal();
                 lw.setData(63, "Sincronizando datos desde el servidor...");
                 await webDM.enviarCreditosTemporal();
-                lw.setData(70, "Sincronizando datos desde el servidor...");
-                await webDM.GetApartados();
-                lw.setData(77, "Sincronizando datos desde el servidor...");
-                await webDM.GetCreditos();
                 lw.setData(84, "Sincronizando datos desde el servidor...");
                 await webDM.GetAbonosApartado();
                 lw.setData(100, "Sincronizando datos desde el servidor...");
@@ -199,10 +195,6 @@ namespace PuntoVentaCasaCeja
                         await webDM.enviarApartadosTemporal();
                         lw.setData(63, "Sincronizando datos desde el servidor...");
                         await webDM.enviarCreditosTemporal();
-                        lw.setData(70, "Sincronizando datos desde el servidor...");
-                        await webDM.GetApartados();
-                        lw.setData(77, "Sincronizando datos desde el servidor...");
-                        await webDM.GetCreditos();
                         lw.setData(84, "Sincronizando datos desde el servidor...");
                         await webDM.GetAbonosApartado();
                         lw.setData(100, "Sincronizando datos desde el servidor...");
@@ -1510,6 +1502,7 @@ namespace PuntoVentaCasaCeja
                 data.carrito.Clear();
                 data.totalcarrito = 0;
                 data.successful = false;
+                refreshFolio();
             }
            }
 

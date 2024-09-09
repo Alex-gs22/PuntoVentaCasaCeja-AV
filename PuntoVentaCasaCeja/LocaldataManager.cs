@@ -2197,8 +2197,8 @@ FROM usuarios";
         {
             Apartado ap = null;
             SQLiteCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM apartados WHERE folio = @setFolio LIMIT 1";
-            command.Parameters.AddWithValue("setFolio", folio);
+            command.CommandText = "SELECT * FROM apartados WHERE folio_corte = @setFolioCorte LIMIT 1";
+            command.Parameters.AddWithValue("setFolioCorte", folio);
             SQLiteDataReader result = command.ExecuteReader();
             if (result.Read())
             {
@@ -2317,8 +2317,8 @@ FROM usuarios";
             Apartado apartado = new Apartado();
 
             SQLiteCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM apartados_temporal WHERE folio = @setFolio";
-            command.Parameters.AddWithValue("setFolio", folio);
+            command.CommandText = "SELECT * FROM apartados_temporal WHERE folio_corte = @setFolioCorte";
+            command.Parameters.AddWithValue("setFolioCorte", folio);
             SQLiteDataReader result = command.ExecuteReader();
             if (result.Read())
             {
@@ -2546,15 +2546,15 @@ FROM usuarios";
                 foreach (Apartado apartado in apartados)
                 {
                     SQLiteCommand command = connection.CreateCommand();
-                    command.CommandText = "SELECT id FROM apartados WHERE folio = @setFolio";
-                    command.Parameters.AddWithValue("setFolio", apartado.folio_corte);
+                    command.CommandText = "SELECT id FROM apartados WHERE folio_corte = @setFolioCorte";
+                    command.Parameters.AddWithValue("setFolioCorte", apartado.folio_corte);
                     SQLiteDataReader result = command.ExecuteReader();
                     if (result.Read())
                     {
                         int id = result.GetInt32(0);
                         command.Reset();
-                        command.CommandText = "DELETE FROM apartados_temporal WHERE folio = @setFolio";
-                        command.Parameters.AddWithValue("setFolio", apartado.folio_corte);
+                        command.CommandText = "DELETE FROM apartados_temporal WHERE folio_corte = @setFolioCorte";
+                        command.Parameters.AddWithValue("setFolioCorte", apartado.folio_corte);
                         command.ExecuteNonQuery();
                         command.Reset();
                         command.CommandText = "UPDATE abonos_apartado_temporal SET id_apartado = @setId WHERE folio_apartado = @setFolio";
