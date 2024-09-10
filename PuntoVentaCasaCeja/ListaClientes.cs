@@ -148,6 +148,7 @@ namespace PuntoVentaCasaCeja
         {
             if (e.KeyCode == Keys.Enter)
             {
+                e.Handled = true;
                 seleccion_KeyDown(sender, e);
             }
         }
