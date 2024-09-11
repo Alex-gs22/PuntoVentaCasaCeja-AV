@@ -1021,11 +1021,11 @@ namespace PuntoVentaCasaCeja
         }
 
         private async void cortep_Click(object sender, EventArgs e)
-        {
+        {   
             sucursalName = localDM.getSucursalname(idsucursal);
             sucursalDir = localDM.getSucursalAddr(idsucursal);
             Dictionary<string, string> d = localDM.getCorte(idcorte);
-            d["total_apartados"] = localDM.getTotalApartados(folioCorte).ToString("0.00");
+            d["total_apartados"] = localDM.getTotalApartados(data.folioCorte).ToString("0.00");
             d["total_creditos"] = localDM.getTotalCreditos(folioCorte).ToString("0.00");
             Console.WriteLine(d.ToString());
             VerCorte vc = new VerCorte(d, idsucursal, cajero.id, idcorte, idcaja, localDM);
@@ -1583,6 +1583,11 @@ namespace PuntoVentaCasaCeja
         {
             Usuarios usuarios = new Usuarios(data);
             usuarios.ShowDialog();
+        }
+
+        private void opcionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

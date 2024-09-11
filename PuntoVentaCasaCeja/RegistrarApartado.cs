@@ -137,7 +137,6 @@ namespace PuntoVentaCasaCeja
                     txtfolio.Text = folio;
                     imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
 
-                    // Lógica de impresión (omitida por relevancia)
 
                     send(na);
                     this.DialogResult = DialogResult.Yes;

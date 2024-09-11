@@ -3073,27 +3073,42 @@ FROM usuarios";
         }
 
         public double getTotalApartados(string foliocorte)
-        {
-            double res = 0;
+{
+    double res = 0;
 
-            SQLiteCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT total_abonado FROM abonos_apartado WHERE folio_corte = @setFolio";
-            command.Parameters.AddWithValue("setFolio", foliocorte);
-            SQLiteDataReader result = command.ExecuteReader();
+    // Primer comando para obtener datos de la tabla abonos_apartado
+    using (SQLiteCommand command = new SQLiteCommand(connection))
+    {
+        command.CommandText = "SELECT total_abonado FROM abonos_apartado WHERE folio_corte = @setFolioCorte";
+        command.Parameters.AddWithValue("@setFolioCorte", foliocorte);
+
+        using (SQLiteDataReader result = command.ExecuteReader())
+        {
             while (result.Read())
             {
                 res += result.GetDouble(0);
             }
-            command.Reset();
-            command.CommandText = "SELECT total_abonado FROM abonos_apartado_temporal WHERE folio_corte = @setFolio";
-            command.Parameters.AddWithValue("setFolio", foliocorte);
-            result = command.ExecuteReader();
+        }
+    }
+
+    // Segundo comando para obtener datos de la tabla abonos_apartado_temporal
+    using (SQLiteCommand command = new SQLiteCommand(connection))
+    {
+        command.CommandText = "SELECT total_abonado FROM abonos_apartado_temporal WHERE folio_corte = @setFolioCorte";
+        command.Parameters.AddWithValue("@setFolioCorte", foliocorte);
+
+        using (SQLiteDataReader result = command.ExecuteReader())
+        {
             while (result.Read())
             {
-             //   res += result.GetDouble(0);
+                res += result.GetDouble(0);
             }
-            return res;
         }
+    }
+
+    return res;
+}
+
         public double getTotalCreditos(string foliocorte)
         {
             double res = 0;
