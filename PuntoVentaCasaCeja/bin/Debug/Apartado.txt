@@ -1,0 +1,23 @@
+CASA CEJA
+SUCURSAL: CASA CEJA CARRANZA
+CARRANZA
+11/09/2024 04:50 p. m.
+FOLIO: 010111092024A0013
+TICKET DE APARTADO
+
+DESCRIPCION	CANT	P. UNIT	P. TOTAL
+ABACO KOALA CHICO	1	32.00	32.00
+----------------------------------------------------------------------------------
+TOTAL $	------>		32.00
+----------------------------------------------------------------------------------
+POR PAGAR $	------>		32.00
+
+LE ATENDIO: ADMIN
+NO DE ARTICULOS: 00001
+FECHA DE VENCIMIENTO:
+13/09/2024
+CLIENTE:
+VEGA
+NUMERO DE CELULAR:
+8333934430
+

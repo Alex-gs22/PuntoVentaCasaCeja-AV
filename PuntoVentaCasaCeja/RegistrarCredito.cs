@@ -137,7 +137,8 @@ namespace PuntoVentaCasaCeja
                     }
 
                     txtfolio.Text = folio;
-
+                    imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
+                    imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
                     // Lógica de impresión (omitida por relevancia)
 
                     await send(nc);
@@ -368,28 +369,63 @@ namespace PuntoVentaCasaCeja
                  "FECHA DE VENCIMIENTO:\n" + txtfecha.Text + "\n" +
                 "CLIENTE:\n" + cliente.nombre + "\n" +
                 "NUMERO DE CELULAR:\n" + cliente.telefono + "\n";
+
+            //Console.WriteLine("ticket" + ticket);
             createdoc();
         }
 
         private void createdoc()
         {
-            string path = Path.Combine(ApplicationData.Current.LocalFolder.Path, "test.txt");
+            // Ruta para guardar el archivo de texto con el ticket
+            string path = Path.Combine(Application.StartupPath, "Credito.txt");
 
+            // Guardar el contenido del ticket en el archivo
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(path))
+                {
+                    sw.WriteLine(ticket);  // Escribe el contenido del ticket en el archivo
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al guardar el archivo: " + ex.Message);
+                return; // Salir del método si ocurre un error al guardar el archivo
+            }
+
+            // Configuración de PrintPreviewControl (opcional)
             this.printPreviewControl1.Document = docToPrint;
             this.printPreviewControl1.Zoom = 2;
-            if (fontSize > 6)
-                this.printPreviewControl1.Zoom = 1.5;
-            if (fontSize > 10)
-                this.printPreviewControl1.Zoom = 1.1;
-            if (fontSize > 13)
-                this.printPreviewControl1.Zoom = 1.0;
+            if (fontSize > 6) this.printPreviewControl1.Zoom = 1.5;
+            if (fontSize > 10) this.printPreviewControl1.Zoom = 1.1;
+            if (fontSize > 13) this.printPreviewControl1.Zoom = 1.0;
 
-            this.printPreviewControl1.Document.DocumentName = path;
-            this.printPreviewControl1.Document.PrinterSettings.PrinterName = localDM.impresora;
+            // Asignar el nombre del documento y configurar la impresora
+            this.docToPrint.DocumentName = path;
+            this.docToPrint.PrinterSettings.PrinterName = localDM.impresora;
 
+            // Verificar si el nombre de la impresora es válido
+            if (string.IsNullOrEmpty(this.docToPrint.PrinterSettings.PrinterName))
+            {
+                MessageBox.Show("No se ha configurado una impresora válida.");
+                return;
+            }
+
+            // Habilitar anti-aliasing en la vista previa
             this.printPreviewControl1.UseAntiAlias = true;
 
+            // Asociar el evento de impresión con el controlador de impresión
             this.docToPrint.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(docToPrint_PrintPage);
+
+            // Intentar imprimir el documento
+            try
+            {
+                this.docToPrint.Print();  // Enviar el documento a la impresora
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al intentar imprimir el documento: " + ex.Message);
+            }
         }
 
         private void docToPrint_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)

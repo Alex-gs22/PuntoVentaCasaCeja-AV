@@ -450,7 +450,7 @@ namespace PuntoVentaCasaCeja
         private void createdoc()
         {
 
-            string path = Path.Combine(ApplicationData.Current.LocalFolder.Path, "test.txt");
+            string path = Path.Combine(ApplicationData.Current.LocalFolder.Path, "Abono.txt");
             // Construct the PrintPreviewControl.
 
             //// Set location, name, and dock style for printPreviewControl1.
