@@ -61,7 +61,7 @@ namespace PuntoVentaCasaCeja
             pagos = new Dictionary<string, double>();
             this.cajero = webDM.activeUser;
             printPreviewControl1 = new PrintPreviewControl();
-            this.folio = idsucursal.ToString().PadLeft(2, '0') + idcaja.ToString().PadLeft(2, '0') + localDate.Hour.ToString().PadLeft(2, '0') + localDate.Day.ToString().PadLeft(2, '0') + localDate.Month.ToString().PadLeft(2, '0') + localDate.Year + "A";
+            this.folio = idsucursal.ToString().PadLeft(2, '0') + idcaja.ToString().PadLeft(2, '0') + localDate.Second.ToString().PadLeft(2, '0') + localDate.Day.ToString().PadLeft(2, '0') + localDate.Month.ToString().PadLeft(2, '0') + localDate.Year + "A";
 
             this.tabs = new Dictionary<int, float[]>()
             {
@@ -117,7 +117,7 @@ namespace PuntoVentaCasaCeja
                         AbonoCredito abono = new AbonoCredito
                         {
                             fecha = localDate.ToString("yyyy-MM-dd HH:mm:ss"),
-                            folio = idsucursal.ToString().PadLeft(2, '0') + idcaja.ToString().PadLeft(2, '0') + localDate.Hour.ToString().PadLeft(2, '0')+ localDate.Day.ToString().PadLeft(2, '0') + localDate.Month.ToString().PadLeft(2, '0') + localDate.Year + "AA",
+                            folio = idsucursal.ToString().PadLeft(2, '0') + idcaja.ToString().PadLeft(2, '0') + localDate.Second.ToString().PadLeft(2, '0')+ localDate.Day.ToString().PadLeft(2, '0') + localDate.Month.ToString().PadLeft(2, '0') + localDate.Year + "AA",
                             folio_corte = foliocorte,
                             usuario_id = webDM.activeUser.id,
                             folio_credito = folio,
@@ -183,7 +183,7 @@ namespace PuntoVentaCasaCeja
         }
         private void RegistrarApartado_Load(object sender, EventArgs e)
         {
-            folio = idsucursal.ToString().PadLeft(2, '0') + idcaja.ToString().PadLeft(2, '0') + localDate.Hour.ToString().PadLeft(2, '0') + localDate.Day.ToString().PadLeft(2, '0') + localDate.Month.ToString().PadLeft(2, '0') + localDate.Year + "A";
+            folio = idsucursal.ToString().PadLeft(2, '0') + idcaja.ToString().PadLeft(2, '0') + localDate.Second.ToString().PadLeft(2, '0') + localDate.Day.ToString().PadLeft(2, '0') + localDate.Month.ToString().PadLeft(2, '0') + localDate.Year + "A";
             txtfolio.Text = folio;
             txtnombre.Text = cliente.nombre;
             txttel.Text = cliente.telefono;
