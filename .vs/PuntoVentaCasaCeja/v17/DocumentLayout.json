@@ -3,20 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Alex_\\OneDrive\\Documentos\\Visual Studio 2022\\PuntoVentaCasaCeja-AV\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9139B20E-4F0B-4242-BB74-85D8C316A06B}|PuntoVentaCasaCeja\\PuntoVentaCasaCeja.csproj|C:\\Users\\Alex_\\OneDrive\\Documentos\\Visual Studio 2022\\PuntoVentaCasaCeja-AV\\puntoventacasaceja\\localdatamanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9139B20E-4F0B-4242-BB74-85D8C316A06B}|PuntoVentaCasaCeja\\PuntoVentaCasaCeja.csproj|solutionrelative:puntoventacasaceja\\localdatamanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{9139B20E-4F0B-4242-BB74-85D8C316A06B}|PuntoVentaCasaCeja\\PuntoVentaCasaCeja.csproj|C:\\Users\\Alex_\\OneDrive\\Documentos\\Visual Studio 2022\\PuntoVentaCasaCeja-AV\\puntoventacasaceja\\ventas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9139B20E-4F0B-4242-BB74-85D8C316A06B}|PuntoVentaCasaCeja\\PuntoVentaCasaCeja.csproj|solutionrelative:puntoventacasaceja\\ventas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9139B20E-4F0B-4242-BB74-85D8C316A06B}|PuntoVentaCasaCeja\\PuntoVentaCasaCeja.csproj|c:\\users\\alex_\\onedrive\\documentos\\visual studio 2022\\puntoventacasaceja-av\\puntoventacasaceja\\vercorte.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9139B20E-4F0B-4242-BB74-85D8C316A06B}|PuntoVentaCasaCeja\\PuntoVentaCasaCeja.csproj|solutionrelative:puntoventacasaceja\\vercorte.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9139B20E-4F0B-4242-BB74-85D8C316A06B}|PuntoVentaCasaCeja\\PuntoVentaCasaCeja.csproj|C:\\Users\\Alex_\\OneDrive\\Documentos\\Visual Studio 2022\\PuntoVentaCasaCeja-AV\\puntoventacasaceja\\webdatamanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9139B20E-4F0B-4242-BB74-85D8C316A06B}|PuntoVentaCasaCeja\\PuntoVentaCasaCeja.csproj|solutionrelative:puntoventacasaceja\\webdatamanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9139B20E-4F0B-4242-BB74-85D8C316A06B}|PuntoVentaCasaCeja\\PuntoVentaCasaCeja.csproj|c:\\users\\alex_\\onedrive\\documentos\\visual studio 2022\\puntoventacasaceja-av\\puntoventacasaceja\\localdatamanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9139B20E-4F0B-4242-BB74-85D8C316A06B}|PuntoVentaCasaCeja\\PuntoVentaCasaCeja.csproj|solutionrelative:puntoventacasaceja\\localdatamanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,8 +18,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 3,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "LocaldataManager.cs",
+              "DocumentMoniker": "C:\\Users\\Alex_\\OneDrive\\Documentos\\Visual Studio 2022\\PuntoVentaCasaCeja-AV\\PuntoVentaCasaCeja\\LocaldataManager.cs",
+              "RelativeDocumentMoniker": "PuntoVentaCasaCeja\\LocaldataManager.cs",
+              "ToolTip": "C:\\Users\\Alex_\\OneDrive\\Documentos\\Visual Studio 2022\\PuntoVentaCasaCeja-AV\\PuntoVentaCasaCeja\\LocaldataManager.cs",
+              "RelativeToolTip": "PuntoVentaCasaCeja\\LocaldataManager.cs",
+              "ViewState": "AQIAAGYLAAAAAAAAAAAowHILAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-11T20:50:50.883Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
@@ -38,54 +43,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Ventas.cs",
               "DocumentMoniker": "C:\\Users\\Alex_\\OneDrive\\Documentos\\Visual Studio 2022\\PuntoVentaCasaCeja-AV\\PuntoVentaCasaCeja\\Ventas.cs",
               "RelativeDocumentMoniker": "PuntoVentaCasaCeja\\Ventas.cs",
               "ToolTip": "C:\\Users\\Alex_\\OneDrive\\Documentos\\Visual Studio 2022\\PuntoVentaCasaCeja-AV\\PuntoVentaCasaCeja\\Ventas.cs",
               "RelativeToolTip": "PuntoVentaCasaCeja\\Ventas.cs",
-              "ViewState": "AQIAAPwDAAAAAAAAAAAYwAMEAAA8AAAA",
+              "ViewState": "AQIAABEAAAAAAAAAAAAowB0AAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-05T21:59:14.51Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "VerCorte.cs",
-              "DocumentMoniker": "C:\\Users\\Alex_\\OneDrive\\Documentos\\Visual Studio 2022\\PuntoVentaCasaCeja-AV\\PuntoVentaCasaCeja\\VerCorte.cs",
-              "RelativeDocumentMoniker": "PuntoVentaCasaCeja\\VerCorte.cs",
-              "ToolTip": "C:\\Users\\Alex_\\OneDrive\\Documentos\\Visual Studio 2022\\PuntoVentaCasaCeja-AV\\PuntoVentaCasaCeja\\VerCorte.cs",
-              "RelativeToolTip": "PuntoVentaCasaCeja\\VerCorte.cs",
-              "ViewState": "AQIAACwAAAAAAAAAAAAgwD4AAABSAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-10T23:19:09.512Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "LocaldataManager.cs",
-              "DocumentMoniker": "C:\\Users\\Alex_\\OneDrive\\Documentos\\Visual Studio 2022\\PuntoVentaCasaCeja-AV\\PuntoVentaCasaCeja\\LocaldataManager.cs",
-              "RelativeDocumentMoniker": "PuntoVentaCasaCeja\\LocaldataManager.cs",
-              "ToolTip": "C:\\Users\\Alex_\\OneDrive\\Documentos\\Visual Studio 2022\\PuntoVentaCasaCeja-AV\\PuntoVentaCasaCeja\\LocaldataManager.cs",
-              "RelativeToolTip": "PuntoVentaCasaCeja\\LocaldataManager.cs",
-              "ViewState": "AQIAAJcIAAAAAAAAAAAcwMkIAAASAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T13:49:44.499Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "WebDataManager.cs",
-              "DocumentMoniker": "C:\\Users\\Alex_\\OneDrive\\Documentos\\Visual Studio 2022\\PuntoVentaCasaCeja-AV\\PuntoVentaCasaCeja\\WebDataManager.cs",
-              "RelativeDocumentMoniker": "PuntoVentaCasaCeja\\WebDataManager.cs",
-              "ToolTip": "C:\\Users\\Alex_\\OneDrive\\Documentos\\Visual Studio 2022\\PuntoVentaCasaCeja-AV\\PuntoVentaCasaCeja\\WebDataManager.cs",
-              "RelativeToolTip": "PuntoVentaCasaCeja\\WebDataManager.cs",
-              "ViewState": "AQIAABEBAAAAAAAAAAAowCoBAAAtAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T13:49:16.51Z"
             }
           ]
         }

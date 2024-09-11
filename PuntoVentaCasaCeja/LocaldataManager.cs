@@ -2974,8 +2974,10 @@ FROM usuarios";
             Int64 LastRowID64 = (Int64)command.ExecuteScalar();
             id = (int)LastRowID64;
 
-            string folio = idsucursal.ToString().PadLeft(2, '0') + localDate.Day.ToString().PadLeft(2, '0') + localDate.Month.ToString().PadLeft(2, '0') + localDate.Year + id.ToString().PadLeft(4, '0');
+            string folio = idsucursal.ToString().PadLeft(2, '0') + localDate.ToString("yyyyMMddHm") + id.ToString().PadLeft(4, '0');
+
             command.CommandText = "UPDATE cortes SET folio_corte = @setFolio WHERE id = @setId";
+            command.Parameters.Clear();
             command.Parameters.AddWithValue("setId", id);
             command.Parameters.AddWithValue("setFolio", folio);
             command.ExecuteNonQuery();
