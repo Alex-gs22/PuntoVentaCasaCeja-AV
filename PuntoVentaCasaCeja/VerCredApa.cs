@@ -311,6 +311,7 @@ namespace PuntoVentaCasaCeja
             DialogResult result=ab.ShowDialog();
             if (result == DialogResult.OK)
             {
+                MessageBox.Show("Ticket Actualizado", "Éxito");
                 cargarTicketCarta();
             }
         }

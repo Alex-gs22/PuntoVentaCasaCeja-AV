@@ -130,7 +130,10 @@ namespace PuntoVentaCasaCeja
                         nc.abonos.Add(abono);
 
                         localDM.acumularPagos(pagos, idcorte);
-                        localDM.acumularEfectivoCredito(pagos["efectivo"], data.idCorte);
+                        if (pagos.ContainsKey("efectivo"))
+                        {
+                            localDM.acumularEfectivoApartado(pagos["efectivo"], idcorte);
+                        }
                     }
 
                     txtfolio.Text = folio;
