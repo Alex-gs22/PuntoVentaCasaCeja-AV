@@ -97,7 +97,8 @@ namespace PuntoVentaCasaCeja
                 fontSize = fontSize,
                 idCorte = idcorte,
                 printerType = printerType,
-                successful = false
+                successful = false,
+                usuario = cajero
                 
             };
         }
@@ -1550,6 +1551,7 @@ namespace PuntoVentaCasaCeja
 
         private void ListaClientes_Click_1(object sender, EventArgs e)
         {
+            data.usuario = cajero;
             data.folioCorte = folioCorte;
             data.totalcarrito = totalcarrito;
             sucursalName = localDM.getSucursalname(idsucursal);

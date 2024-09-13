@@ -146,6 +146,11 @@ namespace PuntoVentaCasaCeja
                 MessageBox.Show("Numero de Telefono ya registrado");
                 temporal = false;
             }
+            else
+            {
+                MessageBox.Show("Cliente Registrado con exito");
+                this.Close();
+            }
         }
         void ClearAllText(Control con)
         {
