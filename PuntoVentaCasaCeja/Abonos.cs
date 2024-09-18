@@ -212,6 +212,7 @@ namespace PuntoVentaCasaCeja
                 if (result)
                 {
                     MessageBox.Show("Abono registrado con éxito", "Éxito");
+                    data.successful = true;
                 }
                 else
                 {
@@ -233,6 +234,7 @@ namespace PuntoVentaCasaCeja
                 if (result)
                 {
                     MessageBox.Show("Abono registrado con éxito", "Éxito");
+                    data.successful = true;
                 }
                 else
                 {
@@ -254,6 +256,7 @@ namespace PuntoVentaCasaCeja
                 if (result)
                 {
                     MessageBox.Show("Abono registrado con éxito", "Éxito");
+                    data.successful = true;
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
@@ -277,6 +280,7 @@ namespace PuntoVentaCasaCeja
                 if (result)
                 {
                     MessageBox.Show("Abono registrado con éxito", "Éxito");
+                    data.successful = true;
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }

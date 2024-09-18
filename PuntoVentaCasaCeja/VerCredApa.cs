@@ -309,8 +309,9 @@ namespace PuntoVentaCasaCeja
         {
             Abonos ab = new Abonos(tipo, data, folio, idOperacion, totalcarrito, totalpagado, refresh);
             DialogResult result=ab.ShowDialog();
-            if (result == DialogResult.OK)
-            {
+            if (data.successful)
+            {   
+                data.successful = false;
                 MessageBox.Show("Ticket Actualizado", "Éxito");
                 cargarTicketCarta();
             }
