@@ -1241,7 +1241,7 @@ namespace PuntoVentaCasaCeja
         private void createdoc()
         {
 
-            string path = Path.Combine(ApplicationData.Current.LocalFolder.Path, "test.txt");
+            string path = Path.Combine(ApplicationData.Current.LocalFolder.Path, "Venta.txt");
             // Construct the PrintPreviewControl.
 
             //// Set location, name, and dock style for printPreviewControl1.
@@ -1318,7 +1318,7 @@ namespace PuntoVentaCasaCeja
         private void createdocz()
         {
 
-            string path = Path.Combine(ApplicationData.Current.LocalFolder.Path, "test.txt");
+            string path = Path.Combine(ApplicationData.Current.LocalFolder.Path, "Corte.txt");
             // Construct the PrintPreviewControl.
 
             //// Set location, name, and dock style for printPreviewControl1.
@@ -1552,6 +1552,7 @@ namespace PuntoVentaCasaCeja
         {
             data.folioCorte = folioCorte;
             data.totalcarrito = totalcarrito;
+            
             sucursalName = localDM.getSucursalname(idsucursal);
             sucursalDir = localDM.getSucursalAddr(idsucursal);
             ListaClientes listaCl = new ListaClientes(data);
