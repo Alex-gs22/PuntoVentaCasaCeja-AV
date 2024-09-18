@@ -315,7 +315,7 @@ namespace PuntoVentaCasaCeja
         private void imprimirTicketCarta(string fecha)
         {
             ticket = "";
-            string caj = cajero.nombre;
+            string caj = data.usuario.nombre;
             ticket += "CASA CEJA\n" +
                 "SUCURSAL: " + sucursalName.ToUpper() + "\n" +
                 "" + sucursalDir.ToUpper() + "\n" +
@@ -364,7 +364,7 @@ namespace PuntoVentaCasaCeja
                 ticket += "--------------------";
             ticket += "--------------------------------------------------------------\n" +
                 "POR PAGAR $\t------>\t\t" + (totalcarrito - totalpagado).ToString("0.00") + "\n\n" +
-                 "LE ATENDIO: " + cajero.nombre.ToUpper() + "\n" +
+                 "LE ATENDIO: " + data.usuario.nombre.ToUpper() + "\n" +
                  "NO DE ARTICULOS: " + carrito.Count.ToString().PadLeft(5, '0') + "\n" +
                  "FECHA DE VENCIMIENTO:\n" + txtfecha.Text + "\n" +
                 "CLIENTE:\n" + cliente.nombre + "\n" +

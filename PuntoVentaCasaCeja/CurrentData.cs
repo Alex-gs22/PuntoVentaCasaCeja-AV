@@ -22,6 +22,7 @@ namespace PuntoVentaCasaCeja
         public bool successful { get; set; }
         public int printerType { get; set; }
         public string fontName { get; set; }
+        public Usuario usuario { get; set; }
 
     }
 }

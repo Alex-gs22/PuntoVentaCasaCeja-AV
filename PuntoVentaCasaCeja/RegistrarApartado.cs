@@ -115,9 +115,7 @@ namespace PuntoVentaCasaCeja
                         AbonoApartado abono = new AbonoApartado
                         {
                             fecha = localDate.ToString("yyyy-MM-dd HH:mm:ss"),
-                            folio = idsucursal.ToString().PadLeft(2, '0') + idcaja.ToString().PadLeft(2, '0') +
-                            localDate.Second.ToString().PadLeft(2, '0') + localDate.Day.ToString().PadLeft(2, '0') + 
-                            localDate.Month.ToString().PadLeft(2, '0') + localDate.Year + "A",
+                            folio = idsucursal.ToString().PadLeft(2, '0') + idcaja.ToString().PadLeft(2, '0') + localDate.Second.ToString().PadLeft(2, '0') + localDate.Day.ToString().PadLeft(2, '0') + localDate.Month.ToString().PadLeft(2, '0') + localDate.Year + "A",            
                             folio_corte = na.folio_corte,
                             apartado_id = 0,
                             usuario_id = webDM.activeUser.id,
@@ -317,7 +315,7 @@ namespace PuntoVentaCasaCeja
         private void imprimirTicketCarta(string fecha)
         {
             ticket = "";
-            string caj = cajero.nombre;
+            string caj = data.usuario.nombre;
             ticket += "CASA CEJA\n" +
                 "SUCURSAL: " + sucursalName.ToUpper() + "\n" +
                 "" + sucursalDir.ToUpper() + "\n" +
@@ -366,7 +364,7 @@ namespace PuntoVentaCasaCeja
                 ticket += "--------------------";
             ticket += "--------------------------------------------------------------\n" +
                 "POR PAGAR $\t------>\t\t" + (totalcarrito - totalpagado).ToString("0.00") + "\n\n" +
-                 "LE ATENDIO: " + cajero.nombre.ToUpper() + "\n" +
+                 "LE ATENDIO: " + data.usuario.nombre.ToUpper() + "\n" +
                  "NO DE ARTICULOS: " + carrito.Count.ToString().PadLeft(5, '0') + "\n" +
                  "FECHA DE VENCIMIENTO:\n"+txtfecha.Text+"\n"+
                  "CLIENTE:\n"+cliente.nombre+"\n"+
