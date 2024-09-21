@@ -311,9 +311,9 @@ namespace PuntoVentaCasaCeja
             DialogResult result=ab.ShowDialog();
             if (data.successful)
             {   
-                data.successful = false;
-                MessageBox.Show("Ticket Actualizado", "Éxito");
                 cargarTicketCarta();
+                data.successful = false;
+                MessageBox.Show("Ticket Actualizado", "Éxito");               
             }
         }
         private void calculateMaxPages(int rowCount)

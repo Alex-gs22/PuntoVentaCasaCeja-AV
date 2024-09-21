@@ -33,25 +33,26 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.exitButton = new System.Windows.Forms.Button();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.prev = new System.Windows.Forms.Button();
+            this.next = new System.Windows.Forms.Button();
+            this.pageLabel = new System.Windows.Forms.Label();
             this.clientinfo = new System.Windows.Forms.TableLayoutPanel();
             this.tablaCreditosApartados = new System.Windows.Forms.DataGridView();
+            this.exitButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.BoxTipo = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.BoxEstado = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.prev = new System.Windows.Forms.Button();
-            this.next = new System.Windows.Forms.Button();
-            this.pageLabel = new System.Windows.Forms.Label();
+            this.BcrearExcel = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
             this.clientinfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tablaCreditosApartados)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -89,20 +90,73 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(1443, 735);
             this.tableLayoutPanel3.TabIndex = 2;
             // 
-            // exitButton
+            // tableLayoutPanel6
             // 
-            this.exitButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tableLayoutPanel6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.exitButton.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
-            this.exitButton.Location = new System.Drawing.Point(768, 37);
-            this.exitButton.Margin = new System.Windows.Forms.Padding(4);
-            this.exitButton.Name = "exitButton";
-            this.exitButton.Size = new System.Drawing.Size(197, 49);
-            this.exitButton.TabIndex = 5;
-            this.exitButton.Text = "SALIR (Esc)";
-            this.exitButton.UseVisualStyleBackColor = true;
-            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
+            this.tableLayoutPanel6.ColumnCount = 5;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 87F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 160F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 87F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel6.Controls.Add(this.prev, 1, 0);
+            this.tableLayoutPanel6.Controls.Add(this.next, 3, 0);
+            this.tableLayoutPanel6.Controls.Add(this.pageLabel, 2, 0);
+            this.tableLayoutPanel6.Controls.Add(this.BcrearExcel, 4, 0);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(4, 659);
+            this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(4);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel6.RowCount = 1;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(1435, 72);
+            this.tableLayoutPanel6.TabIndex = 6;
+            // 
+            // prev
+            // 
+            this.prev.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.prev.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.prev.Location = new System.Drawing.Point(554, 4);
+            this.prev.Margin = new System.Windows.Forms.Padding(4);
+            this.prev.Name = "prev";
+            this.prev.Size = new System.Drawing.Size(79, 64);
+            this.prev.TabIndex = 6;
+            this.prev.Text = "<";
+            this.prev.UseVisualStyleBackColor = true;
+            this.prev.Click += new System.EventHandler(this.prev_Click);
+            // 
+            // next
+            // 
+            this.next.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.next.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.next.Location = new System.Drawing.Point(801, 4);
+            this.next.Margin = new System.Windows.Forms.Padding(4);
+            this.next.Name = "next";
+            this.next.Size = new System.Drawing.Size(79, 64);
+            this.next.TabIndex = 7;
+            this.next.Text = ">";
+            this.next.UseVisualStyleBackColor = true;
+            this.next.Click += new System.EventHandler(this.next_Click);
+            // 
+            // pageLabel
+            // 
+            this.pageLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pageLabel.AutoSize = true;
+            this.pageLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold);
+            this.pageLabel.Location = new System.Drawing.Point(641, 0);
+            this.pageLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.pageLabel.Name = "pageLabel";
+            this.pageLabel.Size = new System.Drawing.Size(152, 72);
+            this.pageLabel.TabIndex = 2;
+            this.pageLabel.Text = "Página 1/1";
+            this.pageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // clientinfo
             // 
@@ -175,6 +229,21 @@
             this.tablaCreditosApartados.TabIndex = 0;
             this.tablaCreditosApartados.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TablaCreditos_KeyDown);
             // 
+            // exitButton
+            // 
+            this.exitButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.exitButton.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
+            this.exitButton.Location = new System.Drawing.Point(767, 37);
+            this.exitButton.Margin = new System.Windows.Forms.Padding(4);
+            this.exitButton.Name = "exitButton";
+            this.exitButton.Size = new System.Drawing.Size(198, 49);
+            this.exitButton.TabIndex = 5;
+            this.exitButton.Text = "SALIR (Esc)";
+            this.exitButton.UseVisualStyleBackColor = true;
+            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
+            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -184,7 +253,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 298F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 16F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 204F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 205F));
             this.tableLayoutPanel1.Controls.Add(this.exitButton, 5, 1);
             this.tableLayoutPanel1.Controls.Add(this.label2, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.BoxTipo, 0, 1);
@@ -208,7 +277,7 @@
             this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 13F, System.Drawing.FontStyle.Bold);
             this.label2.Location = new System.Drawing.Point(222, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(205, 33);
+            this.label2.Size = new System.Drawing.Size(204, 33);
             this.label2.TabIndex = 7;
             this.label2.Text = "TIPO (F1)";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -222,7 +291,7 @@
             this.BoxTipo.FormattingEnabled = true;
             this.BoxTipo.Location = new System.Drawing.Point(222, 36);
             this.BoxTipo.Name = "BoxTipo";
-            this.BoxTipo.Size = new System.Drawing.Size(205, 49);
+            this.BoxTipo.Size = new System.Drawing.Size(204, 49);
             this.BoxTipo.TabIndex = 2;
             this.BoxTipo.SelectedIndexChanged += new System.EventHandler(this.BoxTipo_SelectedIndexChanged);
             // 
@@ -247,7 +316,7 @@
             this.BoxEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.BoxEstado.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
             this.BoxEstado.FormattingEnabled = true;
-            this.BoxEstado.Location = new System.Drawing.Point(453, 36);
+            this.BoxEstado.Location = new System.Drawing.Point(452, 36);
             this.BoxEstado.Name = "BoxEstado";
             this.BoxEstado.Size = new System.Drawing.Size(292, 49);
             this.BoxEstado.TabIndex = 1;
@@ -260,79 +329,24 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 13F, System.Drawing.FontStyle.Bold);
-            this.label3.Location = new System.Drawing.Point(453, 0);
+            this.label3.Location = new System.Drawing.Point(452, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(292, 33);
             this.label3.TabIndex = 8;
             this.label3.Text = "ESTADO (F2)";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // tableLayoutPanel6
+            // BcrearExcel
             // 
-            this.tableLayoutPanel6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel6.ColumnCount = 5;
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 87F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 160F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 87F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel6.Controls.Add(this.prev, 1, 0);
-            this.tableLayoutPanel6.Controls.Add(this.next, 3, 0);
-            this.tableLayoutPanel6.Controls.Add(this.pageLabel, 2, 0);
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(4, 659);
-            this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(4);
-            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            this.tableLayoutPanel6.RowCount = 1;
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(1435, 72);
-            this.tableLayoutPanel6.TabIndex = 6;
-            // 
-            // prev
-            // 
-            this.prev.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.prev.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.prev.Location = new System.Drawing.Point(554, 4);
-            this.prev.Margin = new System.Windows.Forms.Padding(4);
-            this.prev.Name = "prev";
-            this.prev.Size = new System.Drawing.Size(79, 64);
-            this.prev.TabIndex = 6;
-            this.prev.Text = "<";
-            this.prev.UseVisualStyleBackColor = true;
-            this.prev.Click += new System.EventHandler(this.prev_Click);
-            // 
-            // next
-            // 
-            this.next.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.next.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.next.Location = new System.Drawing.Point(801, 4);
-            this.next.Margin = new System.Windows.Forms.Padding(4);
-            this.next.Name = "next";
-            this.next.Size = new System.Drawing.Size(79, 64);
-            this.next.TabIndex = 7;
-            this.next.Text = ">";
-            this.next.UseVisualStyleBackColor = true;
-            this.next.Click += new System.EventHandler(this.next_Click);
-            // 
-            // pageLabel
-            // 
-            this.pageLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pageLabel.AutoSize = true;
-            this.pageLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold);
-            this.pageLabel.Location = new System.Drawing.Point(641, 0);
-            this.pageLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.pageLabel.Name = "pageLabel";
-            this.pageLabel.Size = new System.Drawing.Size(152, 72);
-            this.pageLabel.TabIndex = 2;
-            this.pageLabel.Text = "Página 1/1";
-            this.pageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.BcrearExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BcrearExcel.Font = new System.Drawing.Font("Segoe UI Semibold", 20F, System.Drawing.FontStyle.Bold);
+            this.BcrearExcel.Location = new System.Drawing.Point(1053, 3);
+            this.BcrearExcel.Name = "BcrearExcel";
+            this.BcrearExcel.Size = new System.Drawing.Size(379, 66);
+            this.BcrearExcel.TabIndex = 8;
+            this.BcrearExcel.Text = "GENERAR EXCEL (F3)";
+            this.BcrearExcel.UseVisualStyleBackColor = true;
+            this.BcrearExcel.Click += new System.EventHandler(this.Bimprimir_Click);
             // 
             // ListaCred_Apart
             // 
@@ -347,12 +361,12 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel6.ResumeLayout(false);
+            this.tableLayoutPanel6.PerformLayout();
             this.clientinfo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tablaCreditosApartados)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.tableLayoutPanel6.ResumeLayout(false);
-            this.tableLayoutPanel6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -374,5 +388,6 @@
         private System.Windows.Forms.Button prev;
         private System.Windows.Forms.Button next;
         private System.Windows.Forms.Label pageLabel;
+        private System.Windows.Forms.Button BcrearExcel;
     }
 }

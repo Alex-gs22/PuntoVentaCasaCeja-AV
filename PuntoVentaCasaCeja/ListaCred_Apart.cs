@@ -1,6 +1,8 @@
-﻿using System;
+﻿using OfficeOpenXml;
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -14,7 +16,7 @@ namespace PuntoVentaCasaCeja
         private int offset = 0;
         private int idCliente = 0;
         private int rowsPerPage = 10;
-
+        public int opc = -1;
         private Usuario usuario;
         private WebDataManager webDM;
         private LocaldataManager localDM;
@@ -68,6 +70,9 @@ namespace PuntoVentaCasaCeja
                     case Keys.F2:
                         ShowDropDown(BoxEstado);
                         break;
+                    case Keys.F3:
+                        BcrearExcel.PerformClick();
+                        break;
                     default:
                         return base.ProcessDialogKey(keyData);
                 }
@@ -93,6 +98,8 @@ namespace PuntoVentaCasaCeja
                 ShowDropDown(BoxTipo);
             if (e.KeyCode == Keys.F2)
                 ShowDropDown(BoxEstado);
+            if (e.KeyCode == Keys.F3)
+                BcrearExcel.PerformClick();
         }
 
         private void tablaCreditos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -216,6 +223,143 @@ namespace PuntoVentaCasaCeja
                 offset += rowsPerPage;
                 currentPage++;
                 FiltrarDatos();
+            }
+        }
+
+        private void Bimprimir_Click(object sender, EventArgs e)
+        {
+            PrintxlsxSel printxlsxSel = new PrintxlsxSel();
+            DialogResult result = printxlsxSel.ShowDialog();
+
+            if (result == DialogResult.OK && printxlsxSel.SelectedOption.HasValue)  // Solo continuar si se seleccionó algo
+            {
+                int opc = printxlsxSel.SelectedOption.Value;  // Obtener la opción seleccionada
+                GenerarExcel(opc);        // Llamar al método que genera el Excel
+            }
+        }
+
+
+            private void GenerarExcel(int opc)
+        {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            int idSucursal = data.idSucursal;
+            DataTable creditosTable = localDM.GetCreditosDataTable(idSucursal);
+            DataTable apartadosTable = localDM.GetApartadosDataTable(idSucursal);
+            DateTime localDate = DateTime.Now;
+            string fecha = localDate.ToString("dd-MM-yyyy");
+
+            if (creditosTable.Rows.Count == 0)
+            {
+                MessageBox.Show("No hay creditos disponibles para la sucursal actual.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if (apartadosTable.Rows.Count == 0)
+            {
+                MessageBox.Show("No hay apartados disponibles para la sucursal actual.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if (creditosTable.Rows.Count == 0 && apartadosTable.Rows.Count == 0)
+            {
+                MessageBox.Show("No hay informacion disponibles para la sucursal actual.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Especificar la carpeta y el nombre del archivo
+            string carpeta = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CasaCejaDocs");
+            string nombre = "";
+            if (opc == 0)
+            {
+                nombre = "ListaCreditos ";
+            }
+            else if (opc == 1)
+            {
+                nombre = "ListaApartados ";
+            }
+            else if (opc == 2)
+            {
+                nombre = "ListaCreditosyApartados ";
+            }
+            string nombreArchivo = nombre + fecha + ".xlsx";
+            string rutaArchivo = Path.Combine(carpeta, nombreArchivo);
+
+            // Verificar si la carpeta existe, si no, crearla
+            if (!Directory.Exists(carpeta))
+            {
+                Directory.CreateDirectory(carpeta);
+            }
+
+            // Verificar si el archivo ya existe
+            if (File.Exists(rutaArchivo))
+            {
+                DialogResult dialogResult = MessageBox.Show("El archivo ya existe. ¿Deseas sobrescribirlo?", "Archivo Existente", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dialogResult == DialogResult.No)
+                {
+                    return;
+                }
+            }
+
+            // Generar el archivo Excel
+            try
+            {
+                using (ExcelPackage paquete = new ExcelPackage())
+                {
+                    if (opc == 0 || opc == 2)
+                    {
+                        // Crear la hoja para los créditos
+                        ExcelWorksheet hojaCreditos = paquete.Workbook.Worksheets.Add("ListadoCréditos " + fecha);
+
+                        // Agregar los encabezados de las columnas
+                        for (int i = 0; i < creditosTable.Columns.Count; i++)
+                        {
+                            hojaCreditos.Cells[1, i + 1].Value = creditosTable.Columns[i].ColumnName;
+                            hojaCreditos.Cells[1, i + 1].Style.Font.Bold = true;
+                            hojaCreditos.Cells[1, i + 1].Style.Font.Size = 14;
+                        }
+
+                        // Agregar los datos de las filas
+                        for (int fila = 0; fila < creditosTable.Rows.Count; fila++)
+                        {
+                            for (int col = 0; col < creditosTable.Columns.Count; col++)
+                            {
+                                hojaCreditos.Cells[fila + 2, col + 1].Value = creditosTable.Rows[fila][col].ToString();
+                            }
+                        }
+                    }
+
+                    if (opc == 1 || opc == 2)
+                    {
+                        // Crear la hoja para los apartados
+                        ExcelWorksheet hojaApartados = paquete.Workbook.Worksheets.Add("ListadoApartados " + fecha);
+
+                        // Agregar los encabezados de las columnas
+                        for (int i = 0; i < apartadosTable.Columns.Count; i++)
+                        {
+                            hojaApartados.Cells[1, i + 1].Value = apartadosTable.Columns[i].ColumnName;
+                            hojaApartados.Cells[1, i + 1].Style.Font.Bold = true;
+                            hojaApartados.Cells[1, i + 1].Style.Font.Size = 14;
+                        }
+
+                        // Agregar los datos de las filas
+                        for (int fila = 0; fila < apartadosTable.Rows.Count; fila++)
+                        {
+                            for (int col = 0; col < apartadosTable.Columns.Count; col++)
+                            {
+                                hojaApartados.Cells[fila + 2, col + 1].Value = apartadosTable.Rows[fila][col].ToString();
+                            }
+                        }
+                    }
+
+                    // Guardar el archivo en la ruta especificada
+                    FileInfo archivo = new FileInfo(rutaArchivo);
+                    paquete.SaveAs(archivo);
+
+                    // Mostrar mensaje de éxito si se ha creado correctamente
+                    MessageBox.Show(nombre + fecha + ".xlsx" + " se generó correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error al generar el archivo: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
