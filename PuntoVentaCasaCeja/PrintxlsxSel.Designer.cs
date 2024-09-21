@@ -142,6 +142,7 @@
             this.Bcancelar.TabIndex = 8;
             this.Bcancelar.Text = "CANCELAR (Esc)";
             this.Bcancelar.UseVisualStyleBackColor = true;
+            this.Bcancelar.Click += new System.EventHandler(this.Bcancelar_Click);
             // 
             // PrintxlsxSel
             // 

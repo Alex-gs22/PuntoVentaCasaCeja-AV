@@ -248,17 +248,17 @@ namespace PuntoVentaCasaCeja
             DateTime localDate = DateTime.Now;
             string fecha = localDate.ToString("dd-MM-yyyy");
 
-            if (creditosTable.Rows.Count == 0)
+            if (creditosTable.Rows.Count == 0 && opc == 0)
             {
                 MessageBox.Show("No hay creditos disponibles para la sucursal actual.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            else if (apartadosTable.Rows.Count == 0)
+            else if (apartadosTable.Rows.Count == 0 && opc == 1)
             {
                 MessageBox.Show("No hay apartados disponibles para la sucursal actual.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            else if (creditosTable.Rows.Count == 0 && apartadosTable.Rows.Count == 0)
+            else if (creditosTable.Rows.Count == 0 && apartadosTable.Rows.Count == 0 && opc == 2)
             {
                 MessageBox.Show("No hay informacion disponibles para la sucursal actual.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
