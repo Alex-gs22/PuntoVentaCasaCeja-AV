@@ -98,7 +98,7 @@ namespace PuntoVentaCasaCeja
                 idCorte = idcorte,
                 printerType = printerType,
                 successful = false,
-                usuario = cajero
+                usuario = null,
                 
             };
         }
@@ -334,6 +334,7 @@ namespace PuntoVentaCasaCeja
                     adminUsuariosToolStripMenuItem.Enabled = false;
                 }
             }
+            data.usuario = cajero;
         }
         System.Windows.Forms.Timer t = null;
         private void StartTimer()
@@ -1024,10 +1025,7 @@ namespace PuntoVentaCasaCeja
         {   
             sucursalName = localDM.getSucursalname(idsucursal);
             sucursalDir = localDM.getSucursalAddr(idsucursal);
-            Dictionary<string, string> d = localDM.getCorte(idcorte);
-            d["total_apartados"] = localDM.getTotalApartados(folioCorte).ToString("0.00");
-            d["total_creditos"] = localDM.getTotalCreditos(folioCorte).ToString("0.00");
-            Console.WriteLine(d.ToString());
+            Dictionary<string, string> d = localDM.getCorte2(idcorte);
             VerCorte vc = new VerCorte(d, idsucursal, cajero.id, idcorte, idcaja, localDM);
             DialogResult response = vc.ShowDialog();
             if (response == DialogResult.Yes)
@@ -1489,9 +1487,10 @@ namespace PuntoVentaCasaCeja
 
         private void apartados_Click(object sender, EventArgs e)
         {   
-            data.folioCorte = folioCorte;
+            data.folioCorte = localDM.getFolioCorte(idcorte);
             data.totalcarrito = totalcarrito;
             data.idCorte = idcorte;
+            data.usuario.nombre = cajero.nombre;
             sucursalName = localDM.getSucursalname(idsucursal);
             sucursalDir = localDM.getSucursalAddr(idsucursal);
             CredApartSel CredApar = new CredApartSel(data);

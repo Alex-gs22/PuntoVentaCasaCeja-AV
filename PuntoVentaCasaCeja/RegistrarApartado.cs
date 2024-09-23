@@ -93,7 +93,7 @@ namespace PuntoVentaCasaCeja
                         productos = JsonConvert.SerializeObject(carrito),
                         total = data.totalcarrito,
                         total_pagado = totalpagado,
-                        folio_corte = this.folio,
+                        folio_corte = data.folioCorte,
                         fecha_de_apartado = localDate.ToString("yyyy-MM-dd HH:mm:ss"),
                         estado = 0,
                         cliente_creditos_id = cliente.id,
@@ -104,19 +104,17 @@ namespace PuntoVentaCasaCeja
                         sucursal_id = idsucursal,
                         observaciones = txtobservaciones.Text,
                     };
-
-                    int id = localDM.apartadoTemporal(na);
-                    this.folio += id.ToString().PadLeft(4, '0');
-                    na.folio_corte = folio;
                     na.abonos = new List<AbonoApartado>();
 
                     if (pagos.Count > 0)
                     {
+
+                        Console.WriteLine("RegistarApartado: " + data.folioCorte);
                         AbonoApartado abono = new AbonoApartado
                         {
                             fecha = localDate.ToString("yyyy-MM-dd HH:mm:ss"),
                             folio = idsucursal.ToString().PadLeft(2, '0') + idcaja.ToString().PadLeft(2, '0') + localDate.Second.ToString().PadLeft(2, '0') + localDate.Day.ToString().PadLeft(2, '0') + localDate.Month.ToString().PadLeft(2, '0') + localDate.Year + "A",            
-                            folio_corte = na.folio_corte,
+                            folio_corte = data.folioCorte,
                             apartado_id = 0,
                             usuario_id = webDM.activeUser.id,
                             folio_apartado = folio,

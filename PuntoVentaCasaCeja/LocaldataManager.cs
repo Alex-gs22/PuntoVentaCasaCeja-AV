@@ -3029,6 +3029,58 @@ FROM usuarios";
             }
             return null;
         }
+        public Dictionary<string, string> getCorte2(int id)
+        {
+            SQLiteCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM cortes WHERE id = @setId";
+            command.Parameters.AddWithValue("setId", id);
+            SQLiteDataReader result = command.ExecuteReader();
+
+            if (result.Read())
+            {
+                Dictionary<string, string> data = new Dictionary<string, string>();
+
+                // Cargar datos de la tabla "cortes"
+                data["fondo_apertura"] = result.GetDouble(2).ToString("0.00");
+                data["total_efectivo"] = result.GetDouble(3).ToString("0.00");
+                data["folio_corte"] = result.IsDBNull(1) ? "-" : result.GetString(1);
+                data["total_tarjetas_debito"] = result.GetDouble(4).ToString("0.00");
+                data["total_tarjetas_credito"] = result.GetDouble(5).ToString("0.00");
+                data["total_cheques"] = result.GetDouble(6).ToString("0.00");
+                data["total_transferencias"] = result.GetDouble(7).ToString("0.00");
+                data["efectivo_apartados"] = result.GetDouble(8).ToString("0.00");
+                data["efectivo_creditos"] = result.GetDouble(9).ToString("0.00");
+                data["gastos"] = result.GetString(10);
+                data["ingresos"] = result.GetString(11);
+                data["sobrante"] = result.GetDouble(12).ToString("0.00");
+                data["fecha_apertura_caja"] = result.GetString(13);
+                data["fecha_corte_caja"] = result.IsDBNull(14) ? "-" : result.GetString(14);
+                data["sucursal_id"] = result.IsDBNull(15) ? "-" : result.GetInt32(15).ToString();
+                data["usuario_id"] = result.IsDBNull(16) ? "-" : result.GetInt32(16).ToString();
+                data["estado"] = result.GetInt32(17).ToString();
+                data["detalles"] = "Enviado";
+
+                result.Close();  // Cerrar el lector antes de hacer nuevas consultas.
+
+                // Obtener la suma de total_abonado de la tabla abonos_apartado
+                command.CommandText = "SELECT SUM(total_abonado) FROM abonos_apartado WHERE folio_corte = @setFolioCorte";
+                command.Parameters.AddWithValue("@setFolioCorte", data["folio_corte"]);  // Aquí usas el folio_corte
+                object resultApartados = command.ExecuteScalar();
+                double totalApartados = (resultApartados == DBNull.Value || resultApartados == null) ? 0 : Convert.ToDouble(resultApartados);
+                data["total_apartados"] = totalApartados.ToString("0.00");
+
+                // Obtener la suma de total_abonado de la tabla abonos_credito
+                command.CommandText = "SELECT SUM(total_abonado) FROM abonos_credito WHERE folio_corte = @setFolioCorte";
+                object resultCreditos = command.ExecuteScalar();
+                double totalCreditos = (resultCreditos == DBNull.Value || resultCreditos == null) ? 0 : Convert.ToDouble(resultCreditos);
+                data["total_creditos"] = totalCreditos.ToString("0.00");
+
+                return data;
+            }
+
+            return null;
+        }
+
         public List<Dictionary<string, string>> GetPendingCortes()
         {
             List<Dictionary<string, string>> cortes = new List<Dictionary<string, string>>();

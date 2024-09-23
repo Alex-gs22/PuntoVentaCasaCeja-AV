@@ -102,8 +102,6 @@ namespace PuntoVentaCasaCeja
                     sucursal_id = idsucursal,
                     observaciones = txtobservaciones.Text,
                 };
-
-                // Verificar si el crédito ya existe antes de guardarlo
                 if (!localDM.CreditoExiste(nc.folio))
                 {
                     Console.WriteLine("Guardando crédito temporal...");
@@ -114,6 +112,8 @@ namespace PuntoVentaCasaCeja
 
                     if (pagos.Count > 0)
                     {
+
+                        Console.WriteLine("RegistarCredito: "+foliocorte);
                         AbonoCredito abono = new AbonoCredito
                         {
                             fecha = localDate.ToString("yyyy-MM-dd HH:mm:ss"),
@@ -132,7 +132,7 @@ namespace PuntoVentaCasaCeja
                         localDM.acumularPagos(pagos, idcorte);
                         if (pagos.ContainsKey("efectivo"))
                         {
-                            localDM.acumularEfectivoApartado(pagos["efectivo"], idcorte);
+                            localDM.acumularEfectivoCredito(pagos["efectivo"], idcorte);
                         }
                     }
 

@@ -33,6 +33,8 @@ namespace PuntoVentaCasaCeja
             this.KeyPreview = true;
             this.tipo = tipo;
             this.data = data;
+
+            Console.WriteLine("abono clase abonos: " + data.folioCorte);
             this.folio = folio;
             this.id = idOperacion;
             this.total = total;

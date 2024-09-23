@@ -60,7 +60,6 @@ namespace PuntoVentaCasaCeja
             txttransferencias.Text = data["total_transferencias"];
             txtfechapertura.Text = data["fecha_apertura_caja"];
             txttotapa.Text = data["total_apartados"];
-            Console.WriteLine("esto es total apartados "+data["total_apartados"]);
             txttotcred.Text = data["total_creditos"];
             txtfechcorte.Text = localDate.ToString("yyyy-MM-dd");
             var ingresos = JsonConvert.DeserializeObject<Dictionary<string, double>>(data["ingresos"]);
