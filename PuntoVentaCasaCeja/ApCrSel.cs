@@ -24,14 +24,15 @@ namespace PuntoVentaCasaCeja
             if (data.carrito.Count > 0)
             {
                 RegistrarCredito rc = new RegistrarCredito(data);
-                this.DialogResult = rc.ShowDialog(this);
-                this.Close();
+                if (rc.ShowDialog(this) == DialogResult.OK)
+                {
+                    this.Close();
+                }
             }
             else
             {
                 MessageBox.Show("Favor de agregar productos al carrito", "Advertencia");
             }
-            
         }
 
         private void apartado_Click(object sender, EventArgs e)
@@ -39,15 +40,17 @@ namespace PuntoVentaCasaCeja
             if (data.carrito.Count > 0)
             {
                 RegistrarApartado ra = new RegistrarApartado(data);
-            this.DialogResult = ra.ShowDialog(this);
-            this.Close();
-            
+                if (ra.ShowDialog(this) == DialogResult.OK)
+                {
+                    this.Close();
+                }
             }
             else
             {
                 MessageBox.Show("Favor de agregar productos al carrito", "Advertencia");
             }
         }
+
         protected override bool ProcessDialogKey(Keys keyData)
         {
             if (Form.ModifierKeys == Keys.None)

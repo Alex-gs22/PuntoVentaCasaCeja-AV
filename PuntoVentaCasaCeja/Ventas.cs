@@ -1486,24 +1486,30 @@ namespace PuntoVentaCasaCeja
         }
 
         private void apartados_Click(object sender, EventArgs e)
-        {   
+        {
             data.folioCorte = localDM.getFolioCorte(idcorte);
             data.totalcarrito = totalcarrito;
             data.idCorte = idcorte;
             data.usuario.nombre = cajero.nombre;
+
             sucursalName = localDM.getSucursalname(idsucursal);
             sucursalDir = localDM.getSucursalAddr(idsucursal);
+
             CredApartSel CredApar = new CredApartSel(data);
+
+            // Mostrar el diálogo y verificar el resultado
             DialogResult response = CredApar.ShowDialog();
-            if (data.successful)
-                {
+
+            if (response == DialogResult.OK && data.successful)
+            {
                 resetVenta();
                 data.carrito.Clear();
                 data.totalcarrito = 0;
                 data.successful = false;
                 refreshFolio();
             }
-           }
+        }
+
 
         private void limpiarBDToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1553,12 +1559,15 @@ namespace PuntoVentaCasaCeja
             data.usuario = cajero;
             data.folioCorte = folioCorte;
             data.totalcarrito = totalcarrito;
-            
+
             sucursalName = localDM.getSucursalname(idsucursal);
             sucursalDir = localDM.getSucursalAddr(idsucursal);
             ListaClientes listaCl = new ListaClientes(data);
+
+            // Mostrar el diálogo y verificar el resultado
             DialogResult response = listaCl.ShowDialog();
-            if (data.successful)
+
+            if (response == DialogResult.OK && data.successful)
             {
                 resetVenta();
                 data.carrito.Clear();
@@ -1567,6 +1576,7 @@ namespace PuntoVentaCasaCeja
                 refreshFolio();
             }
         }
+
         public async Task SyncPendingCortes()
         {
             bool result = await webDM.SendPendingCortes();

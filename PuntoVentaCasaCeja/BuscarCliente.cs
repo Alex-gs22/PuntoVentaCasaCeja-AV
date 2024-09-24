@@ -70,60 +70,64 @@ namespace PuntoVentaCasaCeja
         {
             if (cliente != null && buscar.Text == "CONTINUAR (F5)")
             {
-                
                 data.cliente = cliente;
                 ApCrSel sel = new ApCrSel(data);
-                this.DialogResult = sel.ShowDialog(this);
+                // Mostrar el diálogo y verificar el resultado antes de cerrar el formulario
+                if (sel.ShowDialog(this) == DialogResult.OK)
+                {
+                    this.Close(); // Cerrar solo si el resultado fue OK
+                }
             }
             if (encontrado)
+            {
+                if (!txttel.Text.Equals(""))
                 {
-                    if (!txttel.Text.Equals(""))
-                    {
-                        cliente = localDM.buscarCliente(txttel.Text);
-                    }
-                    else if (!txtcorreo.Text.Equals(""))
-                    {
-                        cliente = localDM.buscarCliente(txtcorreo.Text);
-                    }
-                    else if (!txtnombre.Text.Equals(""))
-                    {
-                        cliente = localDM.buscarCliente(txtnombre.Text);
-                    }
-                    if (cliente != null)
-                    {
-                        if (cliente.activo != -1)
-                            temporal = false;
-                        encontrado = false;
-                        buscar.Text = "CONTINUAR (F5)";
-                        txtnombre.Text = cliente.nombre;
-                        txtrfc.Text = cliente.rfc;
-                        txttel.Text = cliente.telefono;
-                        txtcalle.Text = cliente.calle;
-                        txtcorreo.Text = cliente.correo;
-                        txtnoext.Text = cliente.numero_exterior;
-                        txtnoint.Text = cliente.numero_interior;
-                        txtcolonia.Text = cliente.colonia;
-                        txtpostal.Text = cliente.codigo_postal;
-                        txtciudad.Text = cliente.ciudad;
-
-                        txtnombre.Enabled = false;
-                        txtrfc.Enabled = false;
-                        txttel.Enabled = false;
-                        txtcalle.Enabled = false;
-                        txtcorreo.Enabled = false;
-                        txtnoext.Enabled = false;
-                        txtnoint.Enabled = false;
-                        txtcolonia.Enabled = false;
-                        txtpostal.Enabled = false;
-                        txtciudad.Enabled = false;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Cliente no encontrado", "Advertencia");
-                        txttel.Text = "";
-                        txttel.Focus();
-                    }
+                    cliente = localDM.buscarCliente(txttel.Text);
                 }
+                else if (!txtcorreo.Text.Equals(""))
+                {
+                    cliente = localDM.buscarCliente(txtcorreo.Text);
+                }
+                else if (!txtnombre.Text.Equals(""))
+                {
+                    cliente = localDM.buscarCliente(txtnombre.Text);
+                }
+                if (cliente != null)
+                {
+                    if (cliente.activo != -1)
+                        temporal = false;
+                    encontrado = false;
+                    buscar.Text = "CONTINUAR (F5)";
+                    txtnombre.Text = cliente.nombre;
+                    txtrfc.Text = cliente.rfc;
+                    txttel.Text = cliente.telefono;
+                    txtcalle.Text = cliente.calle;
+                    txtcorreo.Text = cliente.correo;
+                    txtnoext.Text = cliente.numero_exterior;
+                    txtnoint.Text = cliente.numero_interior;
+                    txtcolonia.Text = cliente.colonia;
+                    txtpostal.Text = cliente.codigo_postal;
+                    txtciudad.Text = cliente.ciudad;
+
+                    // Desactivar campos de entrada
+                    txtnombre.Enabled = false;
+                    txtrfc.Enabled = false;
+                    txttel.Enabled = false;
+                    txtcalle.Enabled = false;
+                    txtcorreo.Enabled = false;
+                    txtnoext.Enabled = false;
+                    txtnoint.Enabled = false;
+                    txtcolonia.Enabled = false;
+                    txtpostal.Enabled = false;
+                    txtciudad.Enabled = false;
+                }
+                else
+                {
+                    MessageBox.Show("Cliente no encontrado", "Advertencia");
+                    txttel.Text = "";
+                    txttel.Focus();
+                }
+            }
             else
             {
                 encontrado = true;
@@ -139,6 +143,8 @@ namespace PuntoVentaCasaCeja
                 txtcolonia.Text = "";
                 txtpostal.Text = "";
                 txtciudad.Text = "";
+
+                // Activar campos de entrada
                 txtnombre.Enabled = true;
                 txtrfc.Enabled = true;
                 txttel.Enabled = true;
@@ -152,6 +158,7 @@ namespace PuntoVentaCasaCeja
                 txttel.Focus();
             }
         }
+
 
         private void otroCliente_Click(object sender, EventArgs e)
         {

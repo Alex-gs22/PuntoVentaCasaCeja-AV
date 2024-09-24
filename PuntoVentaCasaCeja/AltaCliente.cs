@@ -131,11 +131,13 @@ namespace PuntoVentaCasaCeja
         {
             data.cliente = cliente;
             ApCrSel sel = new ApCrSel(data);
-            //this.DialogResult = sel.ShowDialog(this);
-            sel.ShowDialog();
-            this.Close();
-            
+            // Mostrar el diálogo y verificar el resultado antes de cerrar el formulario
+            if (sel.ShowDialog() == DialogResult.OK)
+            {
+                this.Close(); // Cerrar solo si el resultado fue OK
+            }
         }
+
         async void send(NuevoCliente cliente)
         {
             Dictionary<string, string> result = await webDM.SendClienteAsync(cliente);
