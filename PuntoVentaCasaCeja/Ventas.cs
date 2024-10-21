@@ -709,9 +709,6 @@ namespace PuntoVentaCasaCeja
                     case Keys.F8:
                         reimprimirTicketF6ToolStripMenuItem.PerformClick();
                         break;
-                    case Keys.F9:
-                       //administrarCatálogoToolStripMenuItem.PerformClick();
-                       ListaClientes.PerformClick();
                         break;
                     case Keys.F10:
                         establecerImpresoraToolStripMenuItem.PerformClick();

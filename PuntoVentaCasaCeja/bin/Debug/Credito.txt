@@ -1,22 +1,21 @@
 CASA CEJA
 SUCURSAL: CASA CEJA CARRANZA
 CARRANZA
-23/09/2024 05:36 p. m.
-FOLIO: 01012623092024A0003
+20/10/2024 08:16 p. m.
+FOLIO: 01014320102024A0002
 TICKET DE CREDITO
 
 DESCRIPCION	CANT	P. UNIT	P. TOTAL
 VENTILADOR DE PEDE	1	1195.00	1195.00
 ----------------------------------------------------------------------------------
 TOTAL $	------>		1195.00
-EFECTIVO ENTREGADO	------>		300.00
 ----------------------------------------------------------------------------------
-POR PAGAR $	------>		895.00
+POR PAGAR $	------>		1195.00
 
 LE ATENDIO: ADMIN
 NO DE ARTICULOS: 00001
 FECHA DE VENCIMIENTO:
-23/12/2024
+20/12/2024
 CLIENTE:
 ALEX
 NUMERO DE CELULAR:

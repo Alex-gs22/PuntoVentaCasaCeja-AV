@@ -45,12 +45,21 @@ namespace PuntoVentaCasaCeja
                     case Keys.F2:
                         BuscarCliente.PerformClick();
                         break;
+                    case Keys.F3:
+                        Bclientes.PerformClick();
+                        break;
                     default:
                         return base.ProcessDialogKey(keyData);
                 }
                 return true;
             }
             return base.ProcessDialogKey(keyData);
+        }
+
+        private void Bclientes_Click(object sender, EventArgs e)
+        {
+            ListaClientes listaCl = new ListaClientes(data);
+            listaCl.ShowDialog();
         }
     }
 }
