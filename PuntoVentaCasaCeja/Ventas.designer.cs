@@ -59,7 +59,6 @@ namespace PuntoVentaCasaCeja
             this.logout = new System.Windows.Forms.Button();
             this.apartados = new System.Windows.Forms.Button();
             this.eliminarCarrito_button = new System.Windows.Forms.Button();
-            this.ListaClientes = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tabla)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -351,22 +350,11 @@ namespace PuntoVentaCasaCeja
             this.eliminarCarrito_button.UseVisualStyleBackColor = false;
             this.eliminarCarrito_button.Click += new System.EventHandler(this.eliminarCarrito_button_Click);
             // 
-            // ListaClientes
-            // 
-            resources.ApplyResources(this.ListaClientes, "ListaClientes");
-            this.ListaClientes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(166)))), ((int)(((byte)(64)))));
-            this.ListaClientes.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.ListaClientes.FlatAppearance.BorderSize = 0;
-            this.ListaClientes.Name = "ListaClientes";
-            this.ListaClientes.UseVisualStyleBackColor = false;
-            this.ListaClientes.Click += new System.EventHandler(this.ListaClientes_Click_1);
-            // 
             // Ventas
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.Controls.Add(this.ListaClientes);
             this.Controls.Add(this.eliminarCarrito_button);
             this.Controls.Add(this.apartados);
             this.Controls.Add(this.logout);
@@ -429,7 +417,6 @@ namespace PuntoVentaCasaCeja
         private ToolStripMenuItem actualizarBaseDeDatosToolStripMenuItem;
         private Button eliminarCarrito_button;
         private ToolStripMenuItem historialDeCortesToolStripMenuItem;
-        private Button ListaClientes;
         private ToolStripMenuItem adminUsuariosToolStripMenuItem;
     }
 }

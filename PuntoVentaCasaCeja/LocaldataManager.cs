@@ -595,6 +595,8 @@ namespace PuntoVentaCasaCeja
             return count > 0;
         }
 
+        //Metodo anterior, filtra deacuerdo al folio de la sucursal y no al de la sucrusal id, ESTA MAL
+        /*
         public DataTable GetApartadosDataTable(int idSucursal)
         {
             DataTable apartadosTable = new DataTable();
@@ -641,8 +643,73 @@ namespace PuntoVentaCasaCeja
 
             sortedTable.Columns.Remove("Orden");
 
+            // Imprimir en consola cada fila
+            foreach (DataRow row in sortedTable.Rows)
+            {
+                Console.WriteLine($"Folio: {row["Folio"]}, Cliente: {row["Cliente"]}, Total: {row["Total"]}, Pagado: {row["Pagado"]}, Fecha: {row["Fecha"]}, Estado: {row["Estado"]}, Sucursal: {row["Sucursal"]}");
+            }
+
             return sortedTable;
         }
+        */
+
+        public DataTable GetApartadosDataTable(int idSucursal)
+        {
+            DataTable apartadosTable = new DataTable();
+
+            apartadosTable.Columns.Add("Folio", typeof(string));
+            apartadosTable.Columns.Add("Cliente", typeof(string));
+            apartadosTable.Columns.Add("Total", typeof(double));
+            apartadosTable.Columns.Add("Pagado", typeof(double));
+            apartadosTable.Columns.Add("Fecha", typeof(string));
+            apartadosTable.Columns.Add("Estado", typeof(string));
+            apartadosTable.Columns.Add("Orden", typeof(int));
+            apartadosTable.Columns.Add("Sucursal", typeof(string));
+
+            SQLiteCommand command = connection.CreateCommand();
+
+            // Ajustar la consulta para filtrar directamente por el idSucursal.
+            command.CommandText = "SELECT folio_corte, cliente_creditos_id, total, total_pagado, fecha_apartado, estado " +
+                                  "FROM apartados WHERE sucursal_id = @idSucursal";
+            command.Parameters.AddWithValue("@idSucursal", idSucursal);
+
+            using (SQLiteDataReader result = command.ExecuteReader())
+            {
+                while (result.Read())
+                {
+                    string folio = result.GetString(0);
+                    int clienteId = result.GetInt32(1);
+                    double total = result.GetDouble(2);
+                    double totalPagado = result.GetDouble(3);
+                    string fechaApartado = result.GetString(4);
+                    int estado = result.GetInt32(5);
+
+                    string estadoString = GetEstadoString(estado);
+                    int orden = GetEstadoOrden(estado);
+
+                    string clienteNombre = GetClienteNombre(clienteId);
+                    string razonSocial = GetRazonSocial(idSucursal);
+
+                    // Añadir fila solo si el idSucursal coincide (aunque ya lo estamos filtrando en SQL)
+                    apartadosTable.Rows.Add(folio, clienteNombre, total, totalPagado, fechaApartado, estadoString, orden, razonSocial);
+                }
+            }
+
+            DataView dv = apartadosTable.DefaultView;
+            dv.Sort = "Orden ASC";
+            DataTable sortedTable = dv.ToTable();
+
+            sortedTable.Columns.Remove("Orden");
+
+            Console.WriteLine(idSucursal);
+            // Imprimir en consola para depuración
+            foreach (DataRow row in sortedTable.Rows)
+            {
+                Console.WriteLine($"Folio: {row["Folio"]}, Cliente: {row["Cliente"]}, Total: {row["Total"]}, Pagado: {row["Pagado"]}, Fecha: {row["Fecha"]}, Estado: {row["Estado"]}, Sucursal: {row["Sucursal"]}");
+            }
+
+            return sortedTable;
+        }        
 
         private int ExtractSucursalIdFromFolio(string folio)
         {
@@ -1279,6 +1346,7 @@ namespace PuntoVentaCasaCeja
                 command.Parameters.AddWithValue("setUpdated", apartado.updated_at);
                 command.ExecuteNonQuery();
             }
+            
         }
         public void saveCortes(List<Corte> cortes)
         {

@@ -146,6 +146,12 @@ namespace PuntoVentaCasaCeja
                     boxestado.DroppedDown = true;
                     boxestado.Focus();
                     break;
+                case Keys.F5:
+                    abonarbtn.PerformClick();
+                    break;
+                case Keys.F6:
+                    reprint.PerformClick();
+                    break;
             }
         }
 
@@ -661,6 +667,9 @@ namespace PuntoVentaCasaCeja
                     case Keys.F5:
                         abonarbtn.PerformClick();
                         break;
+                    case Keys.F6:
+                        reprint.PerformClick();
+                        break;
                     case Keys.Down:
                         tabla.Focus();
                         SendKeys.Send("{DOWN}");
@@ -685,3 +694,4 @@ namespace PuntoVentaCasaCeja
         public string TOTAL { get; set; }
     }
 }
+
