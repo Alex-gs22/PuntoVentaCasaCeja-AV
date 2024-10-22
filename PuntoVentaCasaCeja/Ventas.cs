@@ -773,32 +773,43 @@ namespace PuntoVentaCasaCeja
 
         private void tabla_KeyDown(object sender, KeyEventArgs e)
         {
-        
-            if (e.KeyData == Keys.Right)
-            { 
-             int selectedIndex = tabla.SelectedCells[0].RowIndex;
-             if (selectedIndex >= 0 && selectedIndex < carrito.Count)
-             {
-                carrito[selectedIndex].cantidad++;
-                tabla.Rows[selectedIndex].Cells["Cantidad"].Value = carrito[selectedIndex].cantidad;
-                modCant(selectedIndex, carrito[selectedIndex].cantidad);
-                actualizarTotalCarrito();
+            try
+            {
+                if (tabla.SelectedCells.Count > 0)
+                {
+                    int selectedIndex = tabla.SelectedCells[0].RowIndex;
+
+                    if (e.KeyData == Keys.Right)
+                    {
+                        if (selectedIndex >= 0 && selectedIndex < carrito.Count)
+                        {
+                            carrito[selectedIndex].cantidad++;
+                            tabla.Rows[selectedIndex].Cells["Cantidad"].Value = carrito[selectedIndex].cantidad;
+                            modCant(selectedIndex, carrito[selectedIndex].cantidad);
+                            actualizarTotalCarrito();
+                        }
+                    }
+                    if (e.KeyData == Keys.Left)
+                    {
+                        if (selectedIndex >= 0 && selectedIndex < carrito.Count)
+                        {
+                            if (carrito[selectedIndex].cantidad > 1)
+                            {
+                                carrito[selectedIndex].cantidad--;
+                                tabla.Rows[selectedIndex].Cells["Cantidad"].Value = carrito[selectedIndex].cantidad;
+                                modCant(selectedIndex, carrito[selectedIndex].cantidad);
+                                actualizarTotalCarrito();
+                            }
+                        }
+                    }
                 }
             }
-            if (e.KeyData == Keys.Left)
+            catch (ArgumentOutOfRangeException ex)
             {
-             int selectedIndex = tabla.SelectedCells[0].RowIndex;
-             if (selectedIndex >= 0 && selectedIndex < carrito.Count)
-             {
-                    if (carrito[selectedIndex].cantidad > 1)
-                    {
-                        carrito[selectedIndex].cantidad--;
-                        tabla.Rows[selectedIndex].Cells["Cantidad"].Value = carrito[selectedIndex].cantidad;
-                        modCant(selectedIndex, carrito[selectedIndex].cantidad);
-                        actualizarTotalCarrito();
-                    }
-             }
+                // Manejo de la excepción, por ejemplo, mostrar un mensaje de error
+                MessageBox.Show("Error: No se pudo acceder a la celda seleccionada. " + ex.Message);
             }
+
             if (e.KeyData == Keys.F2)
             {
                 modcant.PerformClick();
@@ -1494,16 +1505,16 @@ namespace PuntoVentaCasaCeja
 
             CredApartSel CredApar = new CredApartSel(data);
 
-            // Mostrar el diálogo y verificar el resultado
             DialogResult response = CredApar.ShowDialog();
 
-            if (response == DialogResult.OK && data.successful)
+            if (data.successful)
             {
                 resetVenta();
                 data.carrito.Clear();
                 data.totalcarrito = 0;
                 data.successful = false;
                 refreshFolio();
+                CredApar.Close();
             }
         }
 

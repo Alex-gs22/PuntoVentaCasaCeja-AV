@@ -126,15 +126,22 @@ namespace PuntoVentaCasaCeja
                 data.cliente = cliente;
                     this.Close();
             }
+            if (data.successful)
+            {
+                this.Close();
+            }
         }
         public void clienteSeleccionado(Cliente cliente)
         {
             data.cliente = cliente;
             ApCrSel sel = new ApCrSel(data);
-            // Mostrar el diálogo y verificar el resultado antes de cerrar el formulario
             if (sel.ShowDialog() == DialogResult.OK)
             {
-                this.Close(); // Cerrar solo si el resultado fue OK
+                this.Close(); 
+            }
+            if (data.successful)
+            {
+                this.Close();
             }
         }
 

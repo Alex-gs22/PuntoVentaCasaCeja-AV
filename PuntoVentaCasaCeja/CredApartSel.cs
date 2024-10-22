@@ -23,11 +23,18 @@ namespace PuntoVentaCasaCeja
         {
             ListaCred_Apart listaCr = new ListaCred_Apart(data);
             listaCr.ShowDialog();
+            if(data.successful)
+            {
+                this.Close();
+            }
         }
         private void BuscarCliente_Click(object sender, EventArgs e)
         {
             BuscarCliente buscarCl = new BuscarCliente(data);
             buscarCl.ShowDialog();
+            if(data.successful) {
+                this.Close();
+            }
         }
 
         protected override bool ProcessDialogKey(Keys keyData)
@@ -60,6 +67,10 @@ namespace PuntoVentaCasaCeja
         {
             ListaClientes listaCl = new ListaClientes(data);
             listaCl.ShowDialog();
+            if (data.successful)
+            {
+                this.Close();
+            }
         }
     }
 }

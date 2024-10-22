@@ -13,10 +13,34 @@ namespace PuntoVentaCasaCeja
     public partial class ApCrSel : Form
     {
         CurrentData data;
-        public ApCrSel( CurrentData data )
+        Timer checkSuccessTimer;
+
+        public ApCrSel(CurrentData data)
         {
             InitializeComponent();
             this.data = data;
+
+            // Configuración del Timer
+            checkSuccessTimer = new Timer();
+            checkSuccessTimer.Interval = 500; // 500ms (medio segundo)
+            checkSuccessTimer.Tick += CheckSuccess;
+            checkSuccessTimer.Start();
+
+            // Revisión inicial
+            if (data.successful)
+            {
+                this.Close();
+            }
+        }
+
+        // Método que se ejecuta periódicamente para comprobar si data.successful es true
+        private void CheckSuccess(object sender, EventArgs e)
+        {
+            if (data.successful)
+            {
+                checkSuccessTimer.Stop(); // Detenemos el timer para evitar ejecuciones repetidas
+                this.Close(); // Cerramos la ventana
+            }
         }
 
         private void credito_Click(object sender, EventArgs e)
@@ -24,10 +48,9 @@ namespace PuntoVentaCasaCeja
             if (data.carrito.Count > 0)
             {
                 RegistrarCredito rc = new RegistrarCredito(data);
-                if (rc.ShowDialog(this) == DialogResult.OK)
-                {
-                    this.Close();
-                }
+                rc.ShowDialog(this); // Muestra el diálogo
+
+                // El Timer manejará el cierre si data.successful es true
             }
             else
             {
@@ -40,10 +63,9 @@ namespace PuntoVentaCasaCeja
             if (data.carrito.Count > 0)
             {
                 RegistrarApartado ra = new RegistrarApartado(data);
-                if (ra.ShowDialog(this) == DialogResult.OK)
-                {
-                    this.Close();
-                }
+                ra.ShowDialog(this); // Muestra el diálogo
+
+                // El Timer manejará el cierre si data.successful es true
             }
             else
             {
@@ -84,12 +106,14 @@ namespace PuntoVentaCasaCeja
         {
             VerCredApa vca = new VerCredApa(0, data);
             vca.ShowDialog();
+            // El Timer manejará el cierre si data.successful es true
         }
 
         private void verApa_Click(object sender, EventArgs e)
         {
             VerCredApa vca = new VerCredApa(1, data);
             vca.ShowDialog();
+            // El Timer manejará el cierre si data.successful es true
         }
     }
 }

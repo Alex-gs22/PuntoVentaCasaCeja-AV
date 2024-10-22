@@ -132,8 +132,11 @@ namespace PuntoVentaCasaCeja
                 int id = Convert.ToInt32(tablaClientes.SelectedRows[0].Cells[0].Value); 
                 Cliente cliente = localDM.getCliente(id);
                 altaCliente.clienteSeleccionado(cliente);
+                if (data.successful)
+                {
+                    this.Close();
+                }
             }
-            //this.Close();
         }
 
         private void seleccion_KeyDown(object sender, KeyEventArgs e)
