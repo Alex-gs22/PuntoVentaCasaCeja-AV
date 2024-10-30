@@ -536,7 +536,7 @@ namespace PuntoVentaCasaCeja
 
             Dictionary<string, string> venta = new Dictionary<string, string>();
             venta["total"] = totalcarrito.ToString("0.00");
-            venta["descuento"] = 10.ToString(); //descuento.ToString();
+            venta["descuento"] = 0.ToString(); //descuento.ToString();
             venta["folio"] = folio;
             venta["folio_corte"] = folioCorte;
             venta["fecha_venta"] = localDate.ToString("yyyy-MM-dd HH:mm:ss.fff");
