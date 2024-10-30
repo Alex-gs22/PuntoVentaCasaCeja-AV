@@ -31,8 +31,8 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.ListacreditosApartados = new System.Windows.Forms.Button();
             this.BuscarCliente = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.Bclientes = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -51,7 +51,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 246F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 21F));
             this.tableLayoutPanel1.Controls.Add(this.ListacreditosApartados, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.BuscarCliente, 5, 2);
             this.tableLayoutPanel1.Controls.Add(this.Bclientes, 7, 2);
@@ -83,7 +83,7 @@
             this.ListacreditosApartados.Location = new System.Drawing.Point(30, 16);
             this.ListacreditosApartados.Margin = new System.Windows.Forms.Padding(4);
             this.ListacreditosApartados.Name = "ListacreditosApartados";
-            this.ListacreditosApartados.Size = new System.Drawing.Size(252, 235);
+            this.ListacreditosApartados.Size = new System.Drawing.Size(251, 235);
             this.ListacreditosApartados.TabIndex = 5;
             this.ListacreditosApartados.Text = "LISTA CREDITOS Y APARTADOS (F1)";
             this.ListacreditosApartados.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -101,15 +101,36 @@
             this.BuscarCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BuscarCliente.Font = new System.Drawing.Font("Segoe UI Semibold", 19F, System.Drawing.FontStyle.Bold);
             this.BuscarCliente.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BuscarCliente.Location = new System.Drawing.Point(316, 16);
+            this.BuscarCliente.Location = new System.Drawing.Point(314, 16);
             this.BuscarCliente.Margin = new System.Windows.Forms.Padding(4);
             this.BuscarCliente.Name = "BuscarCliente";
             this.BuscarCliente.Size = new System.Drawing.Size(238, 235);
             this.BuscarCliente.TabIndex = 6;
-            this.BuscarCliente.Text = "BUSCAR CLIENTE (F2)";
+            this.BuscarCliente.Text = "ABONOS O NUEVOS (F2)";
             this.BuscarCliente.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.BuscarCliente.UseVisualStyleBackColor = false;
             this.BuscarCliente.Click += new System.EventHandler(this.BuscarCliente_Click);
+            // 
+            // Bclientes
+            // 
+            this.Bclientes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Bclientes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(166)))), ((int)(((byte)(64)))));
+            this.Bclientes.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.Bclientes.FlatAppearance.BorderSize = 0;
+            this.Bclientes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Bclientes.Font = new System.Drawing.Font("Segoe UI Semibold", 19F, System.Drawing.FontStyle.Bold);
+            this.Bclientes.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.Bclientes.Location = new System.Drawing.Point(587, 16);
+            this.Bclientes.Margin = new System.Windows.Forms.Padding(4);
+            this.Bclientes.Name = "Bclientes";
+            this.Bclientes.Size = new System.Drawing.Size(242, 235);
+            this.Bclientes.TabIndex = 7;
+            this.Bclientes.Text = "LISTA DE CLIENTES (F3)";
+            this.Bclientes.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.Bclientes.UseVisualStyleBackColor = false;
+            this.Bclientes.Click += new System.EventHandler(this.Bclientes_Click);
             // 
             // groupBox1
             // 
@@ -126,27 +147,6 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "CREDITOS Y APARTADOS";
-            // 
-            // Bclientes
-            // 
-            this.Bclientes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Bclientes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(166)))), ((int)(((byte)(64)))));
-            this.Bclientes.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.Bclientes.FlatAppearance.BorderSize = 0;
-            this.Bclientes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Bclientes.Font = new System.Drawing.Font("Segoe UI Semibold", 19F, System.Drawing.FontStyle.Bold);
-            this.Bclientes.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.Bclientes.Location = new System.Drawing.Point(589, 16);
-            this.Bclientes.Margin = new System.Windows.Forms.Padding(4);
-            this.Bclientes.Name = "Bclientes";
-            this.Bclientes.Size = new System.Drawing.Size(242, 235);
-            this.Bclientes.TabIndex = 7;
-            this.Bclientes.Text = "LISTA DE CLIENTES (F3)";
-            this.Bclientes.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.Bclientes.UseVisualStyleBackColor = false;
-            this.Bclientes.Click += new System.EventHandler(this.Bclientes_Click);
             // 
             // CredApartSel
             // 

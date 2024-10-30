@@ -174,7 +174,7 @@ namespace PuntoVentaCasaCeja
                 total = tabla.SelectedRows[0].Cells[1].Value.ToString();
                 cambio = double.Parse(total);
                 totalformat = double.Parse(total);
-                pagos = JsonConvert.DeserializeObject<Dictionary<string, double>>(tabla.SelectedRows[0].Cells[5].Value.ToString());
+                pagos = JsonConvert.DeserializeObject<Dictionary<string, double>>(tabla.SelectedRows[0].Cells[6].Value.ToString());
                 ticket += "CASA CEJA\n" +
                     "SUCURSAL: " + sucursalName.ToUpper() + "\n" +
                     "" + sucursalDir.ToUpper() + "\n" +

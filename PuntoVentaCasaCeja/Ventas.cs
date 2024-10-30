@@ -536,6 +536,7 @@ namespace PuntoVentaCasaCeja
 
             Dictionary<string, string> venta = new Dictionary<string, string>();
             venta["total"] = totalcarrito.ToString("0.00");
+            venta["descuento"] = 10.ToString(); //descuento.ToString();
             venta["folio"] = folio;
             venta["folio_corte"] = folioCorte;
             venta["fecha_venta"] = localDate.ToString("yyyy-MM-dd HH:mm:ss.fff");
@@ -910,10 +911,12 @@ namespace PuntoVentaCasaCeja
                 {
                     double cambio = totalpagado - totalcarrito;
                     txttotal.Text = "Cambio MXN: $" + cambio.ToString("0.00");
-                    MessageBox.Show("Cambio MXN: $" + cambio.ToString("0.00"), "Cambio");
+                    //MessageBox.Show("Cambio MXN: $" + cambio.ToString("0.00"), "Cambio");
                     Dictionary<string, double> data = new Dictionary<string, double>();
                     data["efectivo"] = -cambio;
                     localDM.acumularPagos(data, idcorte);
+                    CambioForm cf = new CambioForm(cambio);
+                    cf.ShowDialog();
                     completarVenta();
                 }
                 else

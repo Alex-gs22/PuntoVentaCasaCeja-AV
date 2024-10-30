@@ -76,7 +76,7 @@ namespace PuntoVentaCasaCeja
                 command.ExecuteNonQuery();
                 command.CommandText = "CREATE TABLE 'usuarios' (    'id'    INTEGER NOT NULL,	'nombre'    TEXT,	'correo'    TEXT,	'confirmacion'  INTEGER,	'telefono'  TEXT,	'imagen'    TEXT,	'usuario'   TEXT,	'clave' TEXT,	'is_root'   INTEGER,	'activo'    INTEGER,	'created_at'    TEXT,	'updated_at'    TEXT,	PRIMARY KEY('id'))";
                 command.ExecuteNonQuery();
-                command.CommandText = "CREATE TABLE 'ventas' (    'id'    INTEGER NOT NULL,	'total' REAL,	'folio' TEXT,	'folio_corte'   TEXT,	'fecha_venta'   TEXT,	'metodo_pago'   TEXT,	'tipo'  INTEGER,	'sucursal_id'   INTEGER,	'usuario_id'    INTEGER,	'cancelacion'   TEXT,	'estado'    INTEGER,	'detalles'  TEXT,	FOREIGN KEY('usuario_id') REFERENCES 'usuarios'('id'),	FOREIGN KEY('sucursal_id') REFERENCES 'sucursales'('id'),	PRIMARY KEY('id' AUTOINCREMENT))";
+                command.CommandText = "CREATE TABLE 'ventas' (    'id'    INTEGER NOT NULL,	'total' REAL, 'descuento' REAL,	'folio' TEXT,	'folio_corte'   TEXT,	'fecha_venta'   TEXT,	'metodo_pago'   TEXT,	'tipo'  INTEGER,	'sucursal_id'   INTEGER,	'usuario_id'    INTEGER,	'cancelacion'   TEXT,	'estado'    INTEGER,	'detalles'  TEXT,	FOREIGN KEY('usuario_id') REFERENCES 'usuarios'('id'),	FOREIGN KEY('sucursal_id') REFERENCES 'sucursales'('id'),	PRIMARY KEY('id' AUTOINCREMENT))";
                 command.ExecuteNonQuery();
             }
             else
@@ -449,7 +449,7 @@ namespace PuntoVentaCasaCeja
         {
             DataTable dt = new DataTable();
             SQLiteCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT ventas.total AS total, ventas.folio AS folio, ventas.folio_corte AS folio_corte, ventas.fecha_venta AS 'fecha_venta', ventas.metodo_pago AS metodo_pago, ventas.tipo AS tipo, ventas.sucursal_id AS sucursal_id, ventas.usuario_id AS usuario_id, ventas.id AS id FROM ventas";
+            command.CommandText = "SELECT ventas.total AS total, ventas.descuento AS descuento, ventas.folio AS folio, ventas.folio_corte AS folio_corte, ventas.fecha_venta AS 'fecha_venta', ventas.metodo_pago AS metodo_pago, ventas.tipo AS tipo, ventas.sucursal_id AS sucursal_id, ventas.usuario_id AS usuario_id, ventas.id AS id FROM ventas";
             SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
             adapter.Fill(dt);
             return dt;
@@ -459,7 +459,7 @@ namespace PuntoVentaCasaCeja
         {
             DataTable dt = new DataTable();
             SQLiteCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT ventas.id AS ID, ventas.total AS TOTAL, ventas.folio AS FOLIO, ventas.fecha_venta AS 'FECHA DE VENTA', usuarios.nombre AS CAJERO, ventas.metodo_pago AS PAGOS FROM ventas INNER JOIN usuarios ON ventas.usuario_id=usuarios.id WHERE SUBSTR(ventas.fecha_venta, 1, 10) = @fecha";
+            command.CommandText = "SELECT ventas.id AS ID, ventas.total AS TOTAL, ventas.descuento AS DESCUENTO, ventas.folio AS FOLIO, ventas.fecha_venta AS 'FECHA DE VENTA', usuarios.nombre AS CAJERO, ventas.metodo_pago AS PAGOS FROM ventas INNER JOIN usuarios ON ventas.usuario_id=usuarios.id WHERE SUBSTR(ventas.fecha_venta, 1, 10) = @fecha";
             command.Parameters.AddWithValue("@fecha", fecha);
             SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
             adapter.Fill(dt);
@@ -1079,7 +1079,7 @@ namespace PuntoVentaCasaCeja
         {
             DataTable dt = new DataTable();
             SQLiteCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT ventas.id AS ID, ventas.total AS TOTAL, ventas.folio AS FOLIO, ventas.fecha_venta AS FECHA_DE_VENTA, usuarios.nombre AS CAJERO, ventas.metodo_pago AS PAGOS FROM ventas INNER JOIN usuarios ON ventas.usuario_id=usuarios.id WHERE folio LIKE @setFolio";
+            command.CommandText = "SELECT ventas.id AS ID, ventas.total AS TOTAL, ventas.descuento AS DESCUENTO, ventas.folio AS FOLIO, ventas.fecha_venta AS FECHA_DE_VENTA, usuarios.nombre AS CAJERO, ventas.metodo_pago AS PAGOS FROM ventas INNER JOIN usuarios ON ventas.usuario_id=usuarios.id WHERE folio LIKE @setFolio";
             command.Parameters.AddWithValue("setFolio", "%" + arg + "%");
             SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
             adapter.Fill(dt);
@@ -1515,8 +1515,9 @@ namespace PuntoVentaCasaCeja
         {
             int id = 0;
             SQLiteCommand command = connection.CreateCommand();
-            command.CommandText = "INSERT INTO ventas (total, folio, folio_corte, fecha_venta, metodo_pago, tipo, sucursal_id, usuario_id, cancelacion, estado, detalles) " +
-            "VALUES(@setTotal, @setFolio, @setCorte, @setFecha, @setMetodo, @setTipo, @setSucursal_id, @setUsuario_id, @setCancelacion, @setEstado, @setDetalles) ";
+            command.CommandText = "INSERT INTO ventas (total, folio, folio_corte, fecha_venta, metodo_pago, tipo, sucursal_id, usuario_id, cancelacion, estado, detalles, descuento) " +
+                                  "VALUES(@setTotal, @setFolio, @setCorte, @setFecha, @setMetodo, @setTipo, @setSucursal_id, @setUsuario_id, @setCancelacion, @setEstado, @setDetalles, @setDescuento)";
+
             command.Parameters.AddWithValue("setTotal", venta["total"]);
             command.Parameters.AddWithValue("setFolio", venta["folio"]);
             command.Parameters.AddWithValue("setCorte", venta["folio_corte"]);
@@ -1528,14 +1529,18 @@ namespace PuntoVentaCasaCeja
             command.Parameters.AddWithValue("setCancelacion", 0);
             command.Parameters.AddWithValue("setEstado", 1);
             command.Parameters.AddWithValue("setDetalles", "Pendiente de envío");
+            command.Parameters.AddWithValue("setDescuento", venta.ContainsKey("descuento") ? venta["descuento"] : "0"); // Valor predeterminado si no está en el diccionario
+
             command.ExecuteScalar();
+
             command.CommandText = "select last_insert_rowid()";
             Int64 LastRowID64 = (Int64)command.ExecuteScalar();
             id = (int)LastRowID64;
+
             foreach (ProductoVenta p in productos)
             {
                 command.CommandText = "INSERT INTO producto_venta (venta_id, producto_id, codigo, cantidad, precio_venta, estado, detalles)" +
-                    "VALUES (@setVenta, @setProducto, @setCodigo, @setCantidad, @setPrecio, @setEstado, @setDetalles)";
+                                      "VALUES (@setVenta, @setProducto, @setCodigo, @setCantidad, @setPrecio, @setEstado, @setDetalles)";
                 command.Parameters.AddWithValue("setVenta", id);
                 command.Parameters.AddWithValue("setProducto", p.id);
                 command.Parameters.AddWithValue("setCodigo", p.codigo);
@@ -1545,8 +1550,10 @@ namespace PuntoVentaCasaCeja
                 command.Parameters.AddWithValue("setDetalles", "Pendiente de envío");
                 command.ExecuteScalar();
             }
+
             return id;
         }
+
         public Cliente buscarCliente(string data)
         {
             Cliente cliente = null;
