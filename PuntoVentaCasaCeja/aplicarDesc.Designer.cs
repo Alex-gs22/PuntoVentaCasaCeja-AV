@@ -59,8 +59,8 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.47319F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.52681F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.58044F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.41956F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 263F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 22F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
@@ -87,10 +87,10 @@
             this.Bsalir.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Bsalir.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
-            this.Bsalir.Location = new System.Drawing.Point(324, 146);
+            this.Bsalir.Location = new System.Drawing.Point(312, 146);
             this.Bsalir.Margin = new System.Windows.Forms.Padding(4);
             this.Bsalir.Name = "Bsalir";
-            this.Bsalir.Size = new System.Drawing.Size(306, 60);
+            this.Bsalir.Size = new System.Drawing.Size(318, 60);
             this.Bsalir.TabIndex = 3;
             this.Bsalir.Text = "CANCELAR (Esc)";
             this.Bsalir.UseVisualStyleBackColor = true;
@@ -104,7 +104,7 @@
             this.aceptar.Location = new System.Drawing.Point(4, 146);
             this.aceptar.Margin = new System.Windows.Forms.Padding(4);
             this.aceptar.Name = "aceptar";
-            this.aceptar.Size = new System.Drawing.Size(312, 60);
+            this.aceptar.Size = new System.Drawing.Size(300, 60);
             this.aceptar.TabIndex = 2;
             this.aceptar.Text = "ACEPTAR (Enter)";
             this.aceptar.UseVisualStyleBackColor = true;
@@ -113,10 +113,10 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 17F, System.Drawing.FontStyle.Bold);
+            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
             this.label3.Location = new System.Drawing.Point(3, 19);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(130, 37);
+            this.label3.Size = new System.Drawing.Size(121, 37);
             this.label3.TabIndex = 8;
             this.label3.Text = "Tipo (F1)";
             // 
@@ -125,10 +125,10 @@
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 17F, System.Drawing.FontStyle.Bold);
-            this.label2.Location = new System.Drawing.Point(323, 19);
+            this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
+            this.label2.Location = new System.Drawing.Point(311, 19);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(308, 37);
+            this.label2.Size = new System.Drawing.Size(320, 37);
             this.label2.TabIndex = 7;
             this.label2.Text = "DESC. A APLICAR (F2)";
             // 
@@ -142,12 +142,12 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 85.32423F));
             this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.txtDescuento, 1, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(323, 59);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(311, 59);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 65.97938F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 34.02062F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(308, 63);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(320, 63);
             this.tableLayoutPanel2.TabIndex = 6;
             // 
             // label1
@@ -167,10 +167,12 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtDescuento.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
-            this.txtDescuento.Location = new System.Drawing.Point(48, 3);
+            this.txtDescuento.Location = new System.Drawing.Point(49, 3);
             this.txtDescuento.Name = "txtDescuento";
-            this.txtDescuento.Size = new System.Drawing.Size(257, 47);
+            this.txtDescuento.Size = new System.Drawing.Size(268, 47);
             this.txtDescuento.TabIndex = 1;
+            this.txtDescuento.Click += new System.EventHandler(this.txtDescuento_Click);
+            this.txtDescuento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericInput_KeyPress);
             // 
             // tableLayoutPanel3
             // 
@@ -186,7 +188,7 @@
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(314, 63);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(302, 63);
             this.tableLayoutPanel3.TabIndex = 7;
             // 
             // BoxTipo
@@ -199,7 +201,7 @@
             this.BoxTipo.FormattingEnabled = true;
             this.BoxTipo.Location = new System.Drawing.Point(3, 3);
             this.BoxTipo.Name = "BoxTipo";
-            this.BoxTipo.Size = new System.Drawing.Size(269, 49);
+            this.BoxTipo.Size = new System.Drawing.Size(258, 49);
             this.BoxTipo.TabIndex = 0;
             this.BoxTipo.SelectedIndexChanged += new System.EventHandler(this.BoxTipo_SelectedIndexChanged);
             // 
