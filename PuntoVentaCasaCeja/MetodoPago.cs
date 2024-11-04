@@ -14,20 +14,21 @@ namespace PuntoVentaCasaCeja
     {
         double total;
         Action<int, double> abonar;
-        double abonado = 0;       
+        double abonado;       
         CurrentData data;        
 
         public MetodoPago(double total, Action <int, double> Abonar, CurrentData data)
         {
-            InitializeComponent();            
+            InitializeComponent();  
+            this.abonado = data.totalabonado;
             this.total = total;
             this.abonar = Abonar;           
             this.data = data;            
         }
         private void MetodoPago_Load(object sender, EventArgs e)
-        {
-            lbltotal.Text =  total.ToString("0.00");
-            lblabonado.Text = "0.00";
+        {          
+            lbltotal.Text = total.ToString("0.00");
+            lblabonado.Text = abonado.ToString("0.00");
             lblfaltante.Text = total.ToString("0.00");
 
         }
@@ -42,12 +43,12 @@ namespace PuntoVentaCasaCeja
             }
         }
         void setTotal(double cant)
-        {
-            total -= cant;
-            abonado += cant;            
+        {            
+            total -= cant;            
+            abonado += cant;                                   
+            data.totalabonado = abonado;
             lblfaltante.Text =  total.ToString("0.00");
             lblabonado.Text = abonado.ToString("0.00");
-
         }
 
         private void debito_Click(object sender, EventArgs e)
@@ -124,18 +125,6 @@ namespace PuntoVentaCasaCeja
         private void exit_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void Bdescuento_Click(object sender, EventArgs e)
-        {
-            aplicarDesc ad = new aplicarDesc(total, data);
-            ad.ShowDialog();
-            if (data.esDescuento)
-            {
-                lbltotal.Text = total + " - " + data.descuento.ToString("0.00");
-                setTotal(data.descuento);   
-                Bdescuento.Enabled = false;
-            }            
-        }
+        }      
     }
 }

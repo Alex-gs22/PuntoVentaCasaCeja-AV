@@ -19,8 +19,7 @@ namespace PuntoVentaCasaCeja
         private readonly string[] rangeTipo = { "PORCENTAJE", "CANTIDAD" };   
         double total;        
         CurrentData data;
-        bool esDescuento;
-        double maxDescuento = 0;
+        bool esDescuento;       
         double descuento = 0;
 
         public aplicarDesc(double total, CurrentData data)
@@ -110,26 +109,17 @@ namespace PuntoVentaCasaCeja
         }
 
         private void calcularDesc(bool esDescuento)
-        {                      
-            maxDescuento = total * 0.50;       
-            if (double.TryParse(txtDescuento.Text, out double valordescuento))
-            {                
-                if (valordescuento > maxDescuento)
-                {
-                    MessageBox.Show("Se alcanzo el limite de descuento permitido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                if (BoxTipo.SelectedIndex == 0)
-                {
-                    descuento = total * (valordescuento / 100);                    
-                }
-                else
-                {                    
-                    descuento = valordescuento;
-                }
-            }
+        {
+         double maxDescuento = total * 0.30;          
+         double.TryParse(txtDescuento.Text, out double valordescuento);                           
+         descuento = (BoxTipo.SelectedIndex == 0) ? total * (valordescuento / 100) : valordescuento;              
+            if (descuento > maxDescuento)
+             {
+                MessageBox.Show("Se alcanzó el límite de descuento permitido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+             }
             data.esDescuento = true;
-            data.descuento = descuento;            
+            data.descuento = descuento;           
         }
 
         private void txtDescuento_Click(object sender, EventArgs e)

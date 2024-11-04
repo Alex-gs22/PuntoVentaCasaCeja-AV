@@ -15,10 +15,10 @@ namespace PuntoVentaCasaCeja
         int tipo;
         Action<int, double> abono;
         Action<double> setTotal;
-        double monto;
+        double monto;        
         public IngresarMonto(int tipo, Action<int, double> Abono, Action<double> SetTotal, double monto)
         {
-            InitializeComponent();
+            InitializeComponent();            
             this.tipo = tipo;
             this.abono = Abono;
             this.setTotal = SetTotal;

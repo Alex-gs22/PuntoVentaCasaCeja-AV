@@ -15,6 +15,7 @@ namespace PuntoVentaCasaCeja
         public string sucursalName { get; set; }
         public List<ProductoVenta> carrito { get; set; }
         public double totalcarrito { get; set; }
+        public double totalabonado { get; set; }
         public int idCaja { get; set; }
         public int idSucursal { get; set; }
         public int fontSize { get; set; }
