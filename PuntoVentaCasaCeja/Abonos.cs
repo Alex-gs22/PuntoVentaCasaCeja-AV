@@ -302,7 +302,7 @@ namespace PuntoVentaCasaCeja
 
         private void abonar_Click(object sender, EventArgs e)
         {
-            MetodoPago mp = new MetodoPago(porpagar, abono);
+            MetodoPago mp = new MetodoPago(porpagar, abono, data);
             mp.ShowDialog();
 
             if (total <= (pagado + abonado))

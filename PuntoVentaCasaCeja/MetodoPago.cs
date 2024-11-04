@@ -14,22 +14,23 @@ namespace PuntoVentaCasaCeja
     {
         double total;
         Action<int, double> abonar;
-        double abonado = 0, descuento = 0;
-        bool esDescuento;
-        
-        public MetodoPago(double total, Action <int, double> Abonar)
-        {
-            InitializeComponent();
-            this.total = total;
-            this.abonar = Abonar;
-            this.esDescuento = false;
-        }
+        double abonado;       
+        CurrentData data;        
 
-        private void MetodoPago_Load(object sender, EventArgs e)
+        public MetodoPago(double total, Action <int, double> Abonar, CurrentData data)
         {
-            lbltotal.Text =  total.ToString("0.00");
-            lblabonado.Text = "0.00";
+            InitializeComponent();  
+            this.abonado = data.totalabonado;
+            this.total = total;
+            this.abonar = Abonar;           
+            this.data = data;            
+        }
+        private void MetodoPago_Load(object sender, EventArgs e)
+        {          
+            lbltotal.Text = total.ToString("0.00");
+            lblabonado.Text = abonado.ToString("0.00");
             lblfaltante.Text = total.ToString("0.00");
+
         }
 
         private void efectivo_Click(object sender, EventArgs e)
@@ -42,17 +43,12 @@ namespace PuntoVentaCasaCeja
             }
         }
         void setTotal(double cant)
-        {
-            MessageBox.Show("clase metodopago "+esDescuento.ToString());
-            if (esDescuento)
-            {
-                lbltotal.Text = total + " - ";
-            }
-            total -= cant;
-            abonado += cant;
+        {            
+            total -= cant;            
+            abonado += cant;                                   
+            data.totalabonado = abonado;
             lblfaltante.Text =  total.ToString("0.00");
             lblabonado.Text = abonado.ToString("0.00");
-
         }
 
         private void debito_Click(object sender, EventArgs e)
@@ -129,12 +125,6 @@ namespace PuntoVentaCasaCeja
         private void exit_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void Bdescuento_Click(object sender, EventArgs e)
-        {
-            aplicarDesc ad = new aplicarDesc(setTotal, total, esDescuento);
-            ad.ShowDialog();
-        }
+        }      
     }
 }

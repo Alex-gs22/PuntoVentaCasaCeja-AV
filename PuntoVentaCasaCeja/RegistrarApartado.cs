@@ -268,7 +268,7 @@ namespace PuntoVentaCasaCeja
 
         private void abonar_Click(object sender, EventArgs e)
         {
-            MetodoPago mp = new MetodoPago(totalcarrito-totalpagado, abono);
+            MetodoPago mp = new MetodoPago(totalcarrito-totalpagado, abono, data);
             mp.ShowDialog();
         }
 

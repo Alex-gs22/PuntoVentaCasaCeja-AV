@@ -16,19 +16,20 @@ namespace PuntoVentaCasaCeja
     public partial class aplicarDesc : Form
     {
         private List<string> tipo = new List<string>();
-        private readonly string[] rangeTipo = { "PORCENTAJE", "CANTIDAD" };
-        private Action<double> setTotal;
-        double total;
-        bool esDescuento;
+        private readonly string[] rangeTipo = { "PORCENTAJE", "CANTIDAD" };   
+        double total;        
+        CurrentData data;
+        bool esDescuento;       
+        double descuento = 0;
 
-        public aplicarDesc(Action<double> setTotal, double total, bool esDescuento)
+        public aplicarDesc(double total, CurrentData data)
         {
             InitializeComponent();
-            this.total = total;
-            this.setTotal = setTotal;
+            this.data = data;
+            this.total = total;            
             txtDescuento.Text = "0.00";
             tipo.AddRange(rangeTipo);
-            BoxTipo.DataSource = tipo;
+            BoxTipo.DataSource = tipo;           
         }
 
         private void Bsalir_Click(object sender, EventArgs e)
@@ -67,7 +68,6 @@ namespace PuntoVentaCasaCeja
             }
             return base.ProcessDialogKey(keyData);
         }
-
         private void BoxTipo_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (BoxTipo.SelectedIndex == 0)
@@ -79,26 +79,52 @@ namespace PuntoVentaCasaCeja
                 label1.Text = "$";
             }
         }
+        private void numericInput_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            // Permitir teclas de control (como Backspace)
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+                return;
+            }
+
+            // Solo permite un punto decimal
+            if ((e.KeyChar == '.') && (textBox.Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+                return;
+            }
+
+            // Permite solo dos decimales como máximo
+            if (textBox.Text.Contains(".") && textBox.SelectionStart > textBox.Text.IndexOf('.'))
+            {
+                string[] partes = textBox.Text.Split('.');
+                if (partes.Length > 1 && partes[1].Length >= 2 && !char.IsControl(e.KeyChar))
+                {
+                    e.Handled = true;
+                }
+            }
+        }
 
         private void calcularDesc(bool esDescuento)
         {
-            double descuento = 0;
-            if (double.TryParse(txtDescuento.Text, out double valordescuento))
-            {
-                if (BoxTipo.SelectedIndex == 0)
-                {
-                    descuento = total * (valordescuento / 100);
-                    MessageBox.Show("porcentaje "+descuento.ToString());
-                }
-                else
-                {                    
-                    descuento = valordescuento;
-                    MessageBox.Show("cantidad "+descuento.ToString());
-                }
-                setTotal(descuento);
-            }
-            esDescuento = true;
-            MessageBox.Show("clase aplicar desc " + esDescuento);
+         double maxDescuento = total * 0.30;          
+         double.TryParse(txtDescuento.Text, out double valordescuento);                           
+         descuento = (BoxTipo.SelectedIndex == 0) ? total * (valordescuento / 100) : valordescuento;              
+            if (descuento > maxDescuento)
+             {
+                MessageBox.Show("Se alcanzó el límite de descuento permitido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+             }
+            data.esDescuento = true;
+            data.descuento = descuento;           
+        }
+
+        private void txtDescuento_Click(object sender, EventArgs e)
+        {
+            txtDescuento.SelectAll();
         }
     }
 }

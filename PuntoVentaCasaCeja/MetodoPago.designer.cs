@@ -30,7 +30,6 @@ namespace PuntoVentaCasaCeja
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.Bdescuento = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
@@ -57,7 +56,6 @@ namespace PuntoVentaCasaCeja
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.Bdescuento);
             this.groupBox1.Controls.Add(this.tableLayoutPanel1);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI Semibold", 24F, System.Drawing.FontStyle.Bold);
             this.groupBox1.Location = new System.Drawing.Point(16, 15);
@@ -68,18 +66,6 @@ namespace PuntoVentaCasaCeja
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "ELEGIR MÉTODO DE PAGO";
-            // 
-            // Bdescuento
-            // 
-            this.Bdescuento.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
-            this.Bdescuento.Location = new System.Drawing.Point(805, 0);
-            this.Bdescuento.Name = "Bdescuento";
-            this.Bdescuento.Size = new System.Drawing.Size(170, 53);
-            this.Bdescuento.TabIndex = 1;
-            this.Bdescuento.Text = "DESC. %";
-            this.Bdescuento.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.Bdescuento.UseVisualStyleBackColor = true;
-            this.Bdescuento.Click += new System.EventHandler(this.Bdescuento_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -397,6 +383,5 @@ namespace PuntoVentaCasaCeja
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button Bdescuento;
     }
 }

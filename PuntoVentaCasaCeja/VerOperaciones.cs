@@ -31,8 +31,9 @@ namespace PuntoVentaCasaCeja
         string cajero;
         string fecha;
         string folio;
-        string total ;
+        string total;
         double cambio;
+        double descuento;
         double totalformat;
         int printerType;
         int userlvl;
@@ -40,8 +41,8 @@ namespace PuntoVentaCasaCeja
         Dictionary<int, float[]> tabs;
         BindingSource source = new BindingSource();
         private System.Drawing.Printing.PrintDocument docToPrint =
-    new System.Drawing.Printing.PrintDocument();
-
+        new System.Drawing.Printing.PrintDocument();
+   
         public VerOperaciones(LocaldataManager localdata, int idcaja, string sucursalName, string sucursalDir, int userlvl)
         {
             InitializeComponent();
@@ -159,20 +160,38 @@ namespace PuntoVentaCasaCeja
             // Se comentó para que no se cargue el ticket automáticamente cuando el texto en buscar cambie
             // loadTicket();
         }
-
+        private void obtenerDescuento()
+        {
+            if (tabla.SelectedRows.Count > 0)
+            {
+                var selectedRow = tabla.SelectedRows[0];
+                var descuentoValue = selectedRow.Cells[2].Value;
+                if (double.TryParse(descuentoValue.ToString(), out double descuento))
+                {
+                    this.descuento = descuento;
+                }
+                else
+                {
+                    MessageBox.Show("El valor de la celda de descuento no es un número válido.", "Error de conversión");
+                    this.descuento = 0;
+                }
+            }
+        }
         private void loadTicket()
         {
+            obtenerDescuento();
             string piedeticket = Settings.Default["pieDeTicket"].ToString();
             ticket = "";
             isValidTicket = false;
             if (tabla.SelectedRows.Count > 0)
             {
                 isValidTicket = true;
-                cajero = tabla.SelectedRows[0].Cells[4].Value.ToString();
-                fecha = tabla.SelectedRows[0].Cells[3].Value.ToString();
-                folio = tabla.SelectedRows[0].Cells[2].Value.ToString();
+                cajero = tabla.SelectedRows[0].Cells[5].Value.ToString();
+                fecha = tabla.SelectedRows[0].Cells[4].Value.ToString();
+                folio = tabla.SelectedRows[0].Cells[3].Value.ToString();
                 total = tabla.SelectedRows[0].Cells[1].Value.ToString();
                 cambio = double.Parse(total);
+                cambio -= descuento;
                 totalformat = double.Parse(total);
                 pagos = JsonConvert.DeserializeObject<Dictionary<string, double>>(tabla.SelectedRows[0].Cells[6].Value.ToString());
                 ticket += "CASA CEJA\n" +
@@ -201,6 +220,10 @@ namespace PuntoVentaCasaCeja
                     ticket += "--------------------";
                 ticket += "--------------------------------------------------------------\n" +
                      "TOTAL $\t------>\t\t" + totalformat.ToString("0.00") + "\n";
+                if (descuento>0)                
+                {
+                    ticket += "SE APLICO DESCUENTO DE $\t------>\t\t" + descuento.ToString("0.00") + "\n";
+                }
                 if (pagos.ContainsKey("debito"))
                 {
                     ticket += "PAGO T. DEBITO\t------>\t\t" + pagos["debito"].ToString("0.00")+"\n";
@@ -251,7 +274,7 @@ namespace PuntoVentaCasaCeja
         private void createdoc()
         {
             
-            string path = Path.Combine(ApplicationData.Current.LocalFolder.Path, "test.txt");
+            string path = Path.Combine(ApplicationData.Current.LocalFolder.Path, "reimprimirVenta.txt");
             // Construct the PrintPreviewControl.
 
             //// Set location, name, and dock style for printPreviewControl1.
@@ -338,8 +361,8 @@ namespace PuntoVentaCasaCeja
         }
 
         private void tabla_MouseClick(object sender, MouseEventArgs e)
-        {
-            loadTicket(); // carga la vista previa del ticket al hacer click en la tabla de ventas.
+        {           
+            loadTicket(); // carga la vista previa del ticket al hacer click en la tabla de ventas.            
         }
         private void txtbuscar_KeyDown(object sender, KeyEventArgs e)
         {
@@ -458,5 +481,6 @@ namespace PuntoVentaCasaCeja
                 }
             }
         }
+      
     }
 }

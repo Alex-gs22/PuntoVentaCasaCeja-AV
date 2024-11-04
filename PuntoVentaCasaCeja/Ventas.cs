@@ -21,7 +21,7 @@ namespace PuntoVentaCasaCeja
         private bool mensajeMayoreoMostrado = false;
         bool hasTemporal;
         double totalcarrito = 0;
-        double totalpagado = 0;
+        double totalpagado = 0;        
         static double apertura = 0;
         static int idcorte = -1;
         static LocaldataManager localDM;
@@ -35,6 +35,7 @@ namespace PuntoVentaCasaCeja
         List<string> list = new List<string>();
         static Usuario activador = null;
         static Usuario cajero = null;
+        static Usuario admin = null;
         bool reprint = false;
         string folio;
         static bool loaded = false;
@@ -90,7 +91,7 @@ namespace PuntoVentaCasaCeja
                 sucursalName = sucursalName,
                 folioCorte = folioCorte,
                 carrito = carrito,
-                totalcarrito = totalcarrito,
+                totalcarrito = totalcarrito,               
                 idCaja = idcaja,
                 idSucursal = idsucursal,
                 fontName = fontName,
@@ -518,7 +519,7 @@ namespace PuntoVentaCasaCeja
                 list.Remove(list[index]);
                 carrito.Remove(carrito[index]);
                 tabla.Rows.Remove(tabla.SelectedRows[0]);
-                totalcarrito = GetTotal();
+                totalcarrito = GetTotal();                
                 txttotal.Text = "Por pagar MXN: $" + totalcarrito.ToString("0.00");
             }
             else
@@ -536,7 +537,7 @@ namespace PuntoVentaCasaCeja
 
             Dictionary<string, string> venta = new Dictionary<string, string>();
             venta["total"] = totalcarrito.ToString("0.00");
-            venta["descuento"] = 0.ToString(); //descuento.ToString();
+            venta["descuento"] = data.descuento.ToString();
             venta["folio"] = folio;
             venta["folio_corte"] = folioCorte;
             venta["fecha_venta"] = localDate.ToString("yyyy-MM-dd HH:mm:ss.fff");
@@ -586,6 +587,10 @@ namespace PuntoVentaCasaCeja
         {
             reprint = false;
             totalcarrito = 0;
+            data.esDescuento = false;
+            Bdescuento.Enabled = true;
+            data.descuento = 0;
+            data.totalabonado = 0;
             tabla.Rows.Clear();
             list.Clear();
             totalpagado = 0;
@@ -900,37 +905,39 @@ namespace PuntoVentaCasaCeja
             }
             base.Dispose(disposing);
         }
+      
+private void abonar_Click(object sender, EventArgs e)
+{
+    if (carrito.Count > 0)
+    {
+        MetodoPago mp = new MetodoPago(totalcarrito - totalpagado, abono, data);
+        mp.ShowDialog();
 
-        private void abonar_Click(object sender, EventArgs e)
+        if (totalcarrito <= totalpagado)
         {
-            if (carrito.Count > 0)
-            {
-                MetodoPago mp = new MetodoPago(totalcarrito-totalpagado, abono);
-                mp.ShowDialog();
-                if (totalcarrito <= totalpagado)
-                {
-                    double cambio = totalpagado - totalcarrito;
-                    txttotal.Text = "Cambio MXN: $" + cambio.ToString("0.00");
-                    //MessageBox.Show("Cambio MXN: $" + cambio.ToString("0.00"), "Cambio");
-                    Dictionary<string, double> data = new Dictionary<string, double>();
-                    data["efectivo"] = -cambio;
-                    localDM.acumularPagos(data, idcorte);
-                    CambioForm cf = new CambioForm(cambio);
-                    cf.ShowDialog();
-                    completarVenta();
-                }
-                else
-                {
-                    txttotal.Text = "Por pagar MXN: $" + (totalcarrito - totalpagado).ToString("0.00");
-                }
-            }
-            else
-            {
-                MessageBox.Show("Aún no hay productos en el carrito", "Advertencia");
-            }
+            double cambio = totalpagado - totalcarrito;
+            txttotal.Text = "Cambio MXN: $" + cambio.ToString("0.00");
+            Dictionary<string, double> datosPago = new Dictionary<string, double>();
+            datosPago["efectivo"] = -cambio;                 
+            localDM.acumularPagos(pagos, idcorte); // Actualizar los pagos totales
+            // Llamar a la ventana de cambio e imprimir el ticket
+            CambioForm cf = new CambioForm(cambio);
+            cf.ShowDialog();
+            completarVenta(); // Completar la venta e imprimir el ticket
         }
-        void abono(int tipo, double cantidad)
+        else
         {
+            txttotal.Text = "Por pagar MXN: $" + (totalcarrito - totalpagado).ToString("0.00");
+        }
+    }
+    else
+    {
+        MessageBox.Show("Aún no hay productos en el carrito", "Advertencia");
+    }
+}
+
+        void abono(int tipo, double cantidad)
+        {                              
             switch (tipo)
             {
                 case 1:
@@ -987,7 +994,7 @@ namespace PuntoVentaCasaCeja
                         reprint = true;
                     }
                     break;
-            }
+            }            
             totalpagado += cantidad;
         }
 
@@ -1176,7 +1183,7 @@ namespace PuntoVentaCasaCeja
             string piedeticket = Settings.Default["pieDeTicket"].ToString();
             ticket = "";
             string caj = cajero.nombre;
-            double cambio = totalcarrito;
+            double cambio = (totalcarrito - data.descuento);
             ticket += "CASA CEJA\n" +
                 "SUCURSAL: " + sucursalName.ToUpper() + "\n" +
                 "" + sucursalDir.ToUpper() + "\n" +
@@ -1200,6 +1207,10 @@ namespace PuntoVentaCasaCeja
                 ticket += "--------------------";
             ticket += "--------------------------------------------------------------\n" +
                  "TOTAL $\t------>\t\t" + totalcarrito.ToString("0.00") + "\n";
+            if (data.esDescuento)
+            {
+                ticket += "SE APLICO DESCUENTO DE $\t------>\t\t" + data.descuento.ToString("0.00") + "\n";
+            }
             if (pagos.ContainsKey("debito"))
             {
                 ticket += "PAGO T. DEBITO\t------>\t\t" + pagos["debito"].ToString("0.00") + "\n";
@@ -1245,7 +1256,6 @@ namespace PuntoVentaCasaCeja
             ticket += "SI DESEA FACTURAR ESTA COMPRA INGRESE A :\n" +
                  "https://cm-papeleria.com/public/facturacion";
 
-            Console.WriteLine(ticket);
             createdoc();
     }
         private void createdoc()
@@ -1610,6 +1620,38 @@ namespace PuntoVentaCasaCeja
         private void opcionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void Bdescuento_Click(object sender, EventArgs e)
+        {
+            UserLogin login = new UserLogin(localDM, setAdmin, true);
+            DialogResult resultLogin = login.ShowDialog();
+            if (resultLogin == DialogResult.Yes)
+            {
+                if ((tabla.Rows.Count > 0) && (totalcarrito > 0))
+                {
+                    aplicarDesc aplicDesc = new aplicarDesc(totalcarrito, data);
+                    aplicDesc.ShowDialog();
+                    if (data.esDescuento)
+                    {
+                        totalpagado += data.descuento;
+                        txttotal.Text = "Por pagar MXN: $" + (totalcarrito - totalpagado).ToString("0.00");
+                        Bdescuento.Enabled = false;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Aún no hay productos en el carrito", "Advertencia");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Autenticación Fallida");
+            }
+        }
+        void setAdmin(Usuario usuario)
+        {
+            admin = usuario;
         }
     }
 }

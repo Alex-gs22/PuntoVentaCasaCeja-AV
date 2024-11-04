@@ -459,12 +459,16 @@ namespace PuntoVentaCasaCeja
         {
             DataTable dt = new DataTable();
             SQLiteCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT ventas.id AS ID, ventas.total AS TOTAL, ventas.descuento AS DESCUENTO, ventas.folio AS FOLIO, ventas.fecha_venta AS 'FECHA DE VENTA', usuarios.nombre AS CAJERO, ventas.metodo_pago AS PAGOS FROM ventas INNER JOIN usuarios ON ventas.usuario_id=usuarios.id WHERE SUBSTR(ventas.fecha_venta, 1, 10) = @fecha";
+            command.CommandText = "SELECT ventas.id AS ID, ventas.total AS TOTAL, ventas.descuento AS DESCUENTO, ventas.folio AS FOLIO, ventas.fecha_venta AS 'FECHA DE VENTA', usuarios.nombre AS CAJERO, ventas.metodo_pago AS PAGOS " +
+                                  "FROM ventas INNER JOIN usuarios ON ventas.usuario_id = usuarios.id " +
+                                  "WHERE SUBSTR(ventas.fecha_venta, 1, 10) = @fecha " +
+                                  "ORDER BY ventas.fecha_venta DESC";
             command.Parameters.AddWithValue("@fecha", fecha);
             SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
             adapter.Fill(dt);
             return dt;
         }
+
         public int GetCliente(string nombre)
         {
             SQLiteCommand command = connection.CreateCommand();
