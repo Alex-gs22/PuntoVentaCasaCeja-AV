@@ -1117,15 +1117,14 @@ private void abonar_Click(object sender, EventArgs e)
 
             Ticket1.TextoExtremos("FONDO DE APERTURA:", corte["fondo_apertura"]);
             Ticket1.TextoCentro(" ");
+            Ticket1.TextoExtremos("TOTAL CZ:", totalCZ.ToString("0.00"));            
 
             Ticket1.LineasGuion();
             Ticket1.TextoExtremos("EFECTIVO DE CREDITOS:", corte["efectivo_creditos"]);
             Ticket1.TextoExtremos("EFECTIVO DE APARTADOS:", corte["efectivo_apartados"]);
             Ticket1.TextoExtremos("EFECTIVO DIRECTO: ", efedir.ToString("0.00"));
             Ticket1.LineasGuion();
-            Ticket1.TextoCentro(" ");
-            Ticket1.TextoExtremos("EFECTIVO TOTAL: ", corte["total_efectivo"]);
-            Ticket1.TextoCentro(" ");
+            Ticket1.TextoCentro(" ");            
             Ticket1.LineasGuion();
             Ticket1.TextoExtremos("TOTAL T. DEBITO", corte["total_tarjetas_debito"]);
             Ticket1.TextoExtremos("TOTAL T. CREDITO", corte["total_tarjetas_credito"]);
@@ -1137,9 +1136,9 @@ private void abonar_Click(object sender, EventArgs e)
             Ticket1.TextoExtremos("SOBRANTE:", corte["sobrante"]);
             Ticket1.TextoExtremos("GASTOS:", tgastos.ToString("0.00"));
             Ticket1.TextoExtremos("INGRESOS:", tingresos.ToString("0.00"));
+            Ticket1.TextoExtremos("EFECTIVO TOTAL: ", corte["total_efectivo"]);          
             Ticket1.LineasGuion();
-            Ticket1.TextoCentro(" ");
-            Ticket1.TextoExtremos("TOTAL CZ:", totalCZ.ToString("0.00"));
+            Ticket1.TextoCentro(" ");            
             Ticket1.TextoCentro(" ");
             Ticket1.TextoCentro(" ");
             Ticket1.TextoCentro(" ");
@@ -1438,18 +1437,19 @@ private void abonar_Click(object sender, EventArgs e)
             e.Graphics.DrawString("FONDO DE APERTURA:", font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 7), rect.Width - (horizontalPadding * 2), rect.Height), leftMiddle);
             e.Graphics.DrawString("$ "+corte["fondo_apertura"], font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 7), rect.Width - (horizontalPadding * 2), rect.Height), rightMiddle);
 
-            e.Graphics.DrawString("EFECTIVO DE CREDITOS:", font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 9), rect.Width - (horizontalPadding * 2), rect.Height), leftMiddle);
-            e.Graphics.DrawString("$ " + corte["efectivo_creditos"], font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 9), rect.Width - (horizontalPadding * 2), rect.Height), rightMiddle);
+            e.Graphics.DrawString("TOTAL CZ:", font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 9), rect.Width - (horizontalPadding * 2), rect.Height), leftMiddle);
+            e.Graphics.DrawString("$ " + totalCZ.ToString("0.00"), font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 9), rect.Width - (horizontalPadding * 2), rect.Height), rightMiddle);
 
-            e.Graphics.DrawString("EFECTIVO DE APARTADOS:", font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 10), rect.Width - (horizontalPadding * 2), rect.Height), leftMiddle);
-            e.Graphics.DrawString("$ " + corte["efectivo_apartados"], font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 10), rect.Width - (horizontalPadding * 2), rect.Height), rightMiddle);
+            e.Graphics.DrawString("EFECTIVO DE CREDITOS:", font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 10), rect.Width - (horizontalPadding * 2), rect.Height), leftMiddle);
+            e.Graphics.DrawString("$ " + corte["efectivo_creditos"], font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 10), rect.Width - (horizontalPadding * 2), rect.Height), rightMiddle);
 
-            e.Graphics.DrawString("EFECTIVO DIRECTO:", font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 11), rect.Width - (horizontalPadding * 2), rect.Height), leftMiddle);
-            e.Graphics.DrawString("$ " + efedir.ToString("0.00"), font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 11), rect.Width - (horizontalPadding * 2), rect.Height), rightMiddle);
+            e.Graphics.DrawString("EFECTIVO DE APARTADOS:", font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 11), rect.Width - (horizontalPadding * 2), rect.Height), leftMiddle);
+            e.Graphics.DrawString("$ " + corte["efectivo_apartados"], font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 11), rect.Width - (horizontalPadding * 2), rect.Height), rightMiddle);
 
-            e.Graphics.DrawString("EFECTIVO TOTAL:", font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 13), rect.Width - (horizontalPadding * 2), rect.Height), leftMiddle);
-            e.Graphics.DrawString("$ " + corte["total_efectivo"], font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 13), rect.Width - (horizontalPadding * 2), rect.Height), rightMiddle);
+            e.Graphics.DrawString("EFECTIVO DIRECTO:", font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 13), rect.Width - (horizontalPadding * 2), rect.Height), leftMiddle);
+            e.Graphics.DrawString("$ " + efedir.ToString("0.00"), font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 13), rect.Width - (horizontalPadding * 2), rect.Height), rightMiddle);
 
+          
 
             e.Graphics.DrawString("TOTAL T. DEBITO:", font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 16), rect.Width - (horizontalPadding * 2), rect.Height), leftMiddle);
             e.Graphics.DrawString("$ " + corte["total_tarjetas_debito"], font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 16), rect.Width - (horizontalPadding * 2), rect.Height), rightMiddle);
@@ -1473,9 +1473,9 @@ private void abonar_Click(object sender, EventArgs e)
             e.Graphics.DrawString("INGRESOS:", font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 23), rect.Width - (horizontalPadding * 2), rect.Height), leftMiddle);
             e.Graphics.DrawString("$ " + tingresos.ToString("0.00"), font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 23), rect.Width - (horizontalPadding * 2), rect.Height), rightMiddle);
 
+            e.Graphics.DrawString("EFECTIVO TOTAL:", font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 25), rect.Width - (horizontalPadding * 2), rect.Height), leftMiddle);
+            e.Graphics.DrawString("$ " + corte["total_efectivo"], font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 25), rect.Width - (horizontalPadding * 2), rect.Height), rightMiddle);
 
-            e.Graphics.DrawString("TOTAL CZ:", font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 25), rect.Width - (horizontalPadding * 2), rect.Height), leftMiddle);
-            e.Graphics.DrawString("$ " + totalCZ.ToString("0.00"), font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 25), rect.Width - (horizontalPadding * 2), rect.Height), rightMiddle);
 
 
             e.Graphics.DrawString("FIRMA", font, opacityBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 28), rect.Width - (horizontalPadding * 2), rect.Height), centerMiddle);
