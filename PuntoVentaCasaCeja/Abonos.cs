@@ -33,6 +33,7 @@ namespace PuntoVentaCasaCeja
             this.KeyPreview = true;
             this.tipo = tipo;
             this.data = data;
+            this.data.esDescuento = false;
 
             Console.WriteLine("abono clase abonos: " + data.folioCorte);
             this.folio = folio;
@@ -198,6 +199,7 @@ namespace PuntoVentaCasaCeja
                     }
                     this.DialogResult = DialogResult.OK;
                     this.Close();
+                    data.descuento = 0;                  
                 }
             }
             else
