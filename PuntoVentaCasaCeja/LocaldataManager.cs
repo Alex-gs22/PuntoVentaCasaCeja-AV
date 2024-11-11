@@ -1521,7 +1521,6 @@ namespace PuntoVentaCasaCeja
             SQLiteCommand command = connection.CreateCommand();
             command.CommandText = "INSERT INTO ventas (total, folio, folio_corte, fecha_venta, metodo_pago, tipo, sucursal_id, usuario_id, cancelacion, estado, detalles, descuento) " +
                                   "VALUES(@setTotal, @setFolio, @setCorte, @setFecha, @setMetodo, @setTipo, @setSucursal_id, @setUsuario_id, @setCancelacion, @setEstado, @setDetalles, @setDescuento)";
-
             command.Parameters.AddWithValue("setTotal", venta["total"]);
             command.Parameters.AddWithValue("setFolio", venta["folio"]);
             command.Parameters.AddWithValue("setCorte", venta["folio_corte"]);

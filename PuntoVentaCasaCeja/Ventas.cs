@@ -918,12 +918,10 @@ private void abonar_Click(object sender, EventArgs e)
             double cambio = totalpagado - totalcarrito;
             txttotal.Text = "Cambio MXN: $" + cambio.ToString("0.00");
             Dictionary<string, double> datosPago = new Dictionary<string, double>();
-            datosPago["efectivo"] = -cambio;                 
-            localDM.acumularPagos(pagos, idcorte); // Actualizar los pagos totales
-            // Llamar a la ventana de cambio e imprimir el ticket
+            datosPago["efectivo"] = -cambio;   
             CambioForm cf = new CambioForm(cambio);
             cf.ShowDialog();
-            completarVenta(); // Completar la venta e imprimir el ticket
+            completarVenta();
         }
         else
         {

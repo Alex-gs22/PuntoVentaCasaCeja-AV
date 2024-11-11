@@ -14,7 +14,11 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+<<<<<<< HEAD
         <dsig:DigestValue>YRuU/i+7DYyi1jqPBfZMhdPYkGvGdwGOHpdkBC45E5I=</dsig:DigestValue>
+=======
+        <dsig:DigestValue>6hRljv/wTnq/5AyLApUzO6wbD0eSdaYhGWAcP38lEMw=</dsig:DigestValue>
+>>>>>>> ERROR DE VEGA
       </hash>
     </dependentAssembly>
   </dependency>
