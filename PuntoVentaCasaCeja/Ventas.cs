@@ -1445,9 +1445,7 @@ private void abonar_Click(object sender, EventArgs e)
             e.Graphics.DrawString("$ " + corte["efectivo_apartados"], font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 11), rect.Width - (horizontalPadding * 2), rect.Height), rightMiddle);
 
             e.Graphics.DrawString("EFECTIVO DIRECTO:", font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 13), rect.Width - (horizontalPadding * 2), rect.Height), leftMiddle);
-            e.Graphics.DrawString("$ " + efedir.ToString("0.00"), font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 13), rect.Width - (horizontalPadding * 2), rect.Height), rightMiddle);
-
-          
+            e.Graphics.DrawString("$ " + efedir.ToString("0.00"), font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 13), rect.Width - (horizontalPadding * 2), rect.Height), rightMiddle);          
 
             e.Graphics.DrawString("TOTAL T. DEBITO:", font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 16), rect.Width - (horizontalPadding * 2), rect.Height), leftMiddle);
             e.Graphics.DrawString("$ " + corte["total_tarjetas_debito"], font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 16), rect.Width - (horizontalPadding * 2), rect.Height), rightMiddle);
@@ -1461,7 +1459,6 @@ private void abonar_Click(object sender, EventArgs e)
             e.Graphics.DrawString("TOTAL TRANSFERENCIAS:", font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 19), rect.Width - (horizontalPadding * 2), rect.Height), leftMiddle);
             e.Graphics.DrawString("$ " + corte["total_transferencias"], font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 19), rect.Width - (horizontalPadding * 2), rect.Height), rightMiddle);
 
-
             e.Graphics.DrawString("SOBRANTE:", font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 21), rect.Width - (horizontalPadding * 2), rect.Height), leftMiddle);
             e.Graphics.DrawString("$ " + corte["sobrante"], font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 21), rect.Width - (horizontalPadding * 2), rect.Height), rightMiddle);
 
@@ -1474,11 +1471,8 @@ private void abonar_Click(object sender, EventArgs e)
             e.Graphics.DrawString("EFECTIVO TOTAL:", font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 25), rect.Width - (horizontalPadding * 2), rect.Height), leftMiddle);
             e.Graphics.DrawString("$ " + corte["total_efectivo"], font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 25), rect.Width - (horizontalPadding * 2), rect.Height), rightMiddle);
 
-
-
             e.Graphics.DrawString("FIRMA", font, opacityBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 28), rect.Width - (horizontalPadding * 2), rect.Height), centerMiddle);
             e.Graphics.DrawString("CAJERO: "+ cajero.nombre.ToUpper(), font, solidBrush, new Rectangle(rect.X + horizontalPadding, rect.Y + (rect.Height * 29), rect.Width - (horizontalPadding * 2), rect.Height), centerMiddle);
-
 
             Pen pen = Pens.Black;
             e.Graphics.DrawRectangle(pen, new Rectangle(rect.X, rect.Y + (rect.Height * 4), rect.Width, rect.Height));

@@ -33,6 +33,7 @@ namespace PuntoVentaCasaCeja
             this.KeyPreview = true;
             this.tipo = tipo;
             this.data = data;
+            this.data.esDescuento = false;
 
             Console.WriteLine("abono clase abonos: " + data.folioCorte);
             this.folio = folio;
@@ -76,6 +77,11 @@ namespace PuntoVentaCasaCeja
             }
         }
         private void aceptar_Click(object sender, EventArgs e)
+        {
+          ProcesarPagoCompleto();
+        }
+
+        private void ProcesarPagoCompleto()
         {
             DateTime localDate = DateTime.Now;
             string folioabono;
@@ -139,8 +145,6 @@ namespace PuntoVentaCasaCeja
                     Console.WriteLine("La clave 'efectivo' no se encontró en el diccionario 'pagos'.");
                 }
 
-
-
                 if (id == 0)
                 {
                     if (tipo == 0)
@@ -191,13 +195,13 @@ namespace PuntoVentaCasaCeja
                             }
                         }
                     }
-
                     catch (System.ComponentModel.Win32Exception)
                     {
                         MessageBox.Show("No se guardo el PDF, ya se encuentra abierto un documento con el mismo nombre.", "Error");
                     }
                     this.DialogResult = DialogResult.OK;
                     this.Close();
+                    data.descuento = 0;
                 }
             }
             else
@@ -205,6 +209,7 @@ namespace PuntoVentaCasaCeja
                 MessageBox.Show("Favor de hacer un abono antes de continuar", "Advertencia");
             }
         }
+
 
         private async void sendAbonoCredito(AbonoCredito datos)
         {
@@ -322,9 +327,10 @@ namespace PuntoVentaCasaCeja
                 abonado -= cambio;
                 txtporpagar.Text = "0.00";
                 data.webDM.localDM.acumularPagos(info, data.idCorte);
+     
+                ProcesarPagoCompleto();
             }
         }
-
 
         private void cancelar_Click(object sender, EventArgs e)
         {

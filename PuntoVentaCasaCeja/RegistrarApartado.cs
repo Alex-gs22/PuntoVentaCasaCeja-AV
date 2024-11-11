@@ -147,6 +147,34 @@ namespace PuntoVentaCasaCeja
             }
         }
 
+        async void send(Apartado apartado) //se hizo para probar una excepcion, si jala dejarlo, sino regresar al comentado
+        {
+            Dictionary<string, string> result = await webDM.SendapartadoAsync(apartado);
+            MessageBox.Show(result["message"], "Estado: " + result["status"]);
+
+            if (result["status"] == "success")
+            {
+                data.successful = true;
+                List<ProductoVenta> productos = new List<ProductoVenta>(carrito);
+
+                if (productos == null || productos.Count == 0)
+                {
+                    MessageBox.Show("El carrito está vacío", "Error");
+                    return;
+                }
+
+                foreach (ProductoVenta p in productos)
+                {
+                    await webDM.restarExistencia(idsucursal, p.id, p.cantidad);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No es posible realizar esta operacion ahora", "Error");
+            }
+        }
+
+        /*
         async void send(Apartado apartado){
             Dictionary<string, string> result = await webDM.SendapartadoAsync(apartado);
             MessageBox.Show(result["message"], "Estado: " + result["status"]);
@@ -173,7 +201,7 @@ namespace PuntoVentaCasaCeja
                 MessageBox.Show("No es posible realizar esta operacion ahora", "Error");
             }
         }
-
+        */
 
         private void RegistrarApartado_Load(object sender, EventArgs e)
         {

@@ -79,6 +79,7 @@ namespace PuntoVentaCasaCeja
         private void VerOperaciones_Load(object sender, EventArgs e)
         {
             loadData();
+            loadTicket();
         }
 
         private void loadData()
@@ -108,7 +109,7 @@ namespace PuntoVentaCasaCeja
 
             txtbuscar.Focus();
             // Se comentó para que no se cargue el ticket automáticamente al cargar la ventana
-            // loadTicket();
+             loadTicket();
         }
 
 
@@ -379,9 +380,7 @@ namespace PuntoVentaCasaCeja
             }
             if (e.KeyData == Keys.Enter)
             {
-                loadTicket(); // carga la vista previa del ticket al hacer Enter en el buscador.
-                //print.PerformClick();
-                // se comento para que no se imprima automaticamente al hacer enter en el buscador.
+                loadTicket(); // carga la vista previa del ticket al hacer Enter en el buscador.               
                 e.Handled = true;
                 e.SuppressKeyPress = true;
             }

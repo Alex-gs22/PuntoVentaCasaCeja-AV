@@ -20,7 +20,7 @@ namespace PuntoVentaCasaCeja
         public MetodoPago(double total, Action <int, double> Abonar, CurrentData data)
         {
             InitializeComponent();  
-            this.abonado = data.totalabonado;
+            //this.abonado = data.totalabonado;
             this.total = total;
             this.abonar = Abonar;           
             this.data = data;            
