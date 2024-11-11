@@ -3384,6 +3384,7 @@ FROM usuarios";
                 command.Parameters.AddWithValue("setId", idcorte);
                 command.Parameters.AddWithValue("setGastos", JsonConvert.SerializeObject(temp));
                 command.ExecuteNonQuery();
+                MessageBox.Show(total_efectivo.ToString()+ " " + monto);
             }
         }
 

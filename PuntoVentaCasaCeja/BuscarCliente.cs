@@ -37,13 +37,13 @@ namespace PuntoVentaCasaCeja
                         this.Close();
                         break;
                     case Keys.Enter:
-                        if (buscar.Focused || cancelar.Focused || buscar.Focused)
+                      buscar.PerformClick();
+                        /* 
+                       if (buscar.Focused || cancelar.Focused || buscar.Focused)
                             return base.ProcessDialogKey(keyData);
                         SendKeys.Send("{TAB}");
-                        break;
-                    case Keys.F5:
-                        buscar.PerformClick();
-                        break;
+                      */
+                        break;                    
                     case Keys.F6:
                         otroCliente.PerformClick();
                         break;
@@ -68,7 +68,7 @@ namespace PuntoVentaCasaCeja
 
         private void buscar_Click(object sender, EventArgs e)
         {
-            if (cliente != null && buscar.Text == "CONTINUAR (F5)")
+            if (cliente != null && buscar.Text == "CONTINUAR (ENTER)")
             {
                 data.cliente = cliente;
                 ApCrSel sel = new ApCrSel(data);
@@ -97,7 +97,7 @@ namespace PuntoVentaCasaCeja
                     if (cliente.activo != -1)
                         temporal = false;
                     encontrado = false;
-                    buscar.Text = "CONTINUAR (F5)";
+                    buscar.Text = "CONTINUAR (ENTER)";
                     txtnombre.Text = cliente.nombre;
                     txtrfc.Text = cliente.rfc;
                     txttel.Text = cliente.telefono;
@@ -186,7 +186,7 @@ namespace PuntoVentaCasaCeja
             txtpostal.Enabled = true;
             txtciudad.Enabled = true;
             txttel.Focus();
-            buscar.Text = "BUSCAR (F5)";
+            buscar.Text = "BUSCAR (ENTER)";
         }
 
         private void cancelar_Click(object sender, EventArgs e)

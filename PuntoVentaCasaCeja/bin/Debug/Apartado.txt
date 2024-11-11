@@ -1,22 +1,22 @@
 CASA CEJA
 SUCURSAL: OBREGON
 OBREGON #408
-08/11/2024 01:56 p. m.
-FOLIO: 03010908112024A
+08/11/2024 08:55 p. m.
+FOLIO: 03011108112024A
 TICKET DE APARTADO
 
 DESCRIPCION	CANT	P. UNIT	P. TOTAL
 VENTILADOR DE PEDE	1	1195.00	1195.00
 ----------------------------------------------------------------------------------
 TOTAL $	------>		1195.00
-EFECTIVO ENTREGADO	------>		200.00
+EFECTIVO ENTREGADO	------>		195.00
 ----------------------------------------------------------------------------------
-POR PAGAR $	------>		995.00
+POR PAGAR $	------>		1000.00
 
 LE ATENDIO: ADMIN
 NO DE ARTICULOS: 00001
 FECHA DE VENCIMIENTO:
-26/11/2024
+09/11/2024
 CLIENTE:
 LESLY GOMEZ
 NUMERO DE CELULAR:

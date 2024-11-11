@@ -35,10 +35,6 @@
             this.buscar = new System.Windows.Forms.Button();
             this.cancelar = new System.Windows.Forms.Button();
             this.clientinfo = new System.Windows.Forms.TableLayoutPanel();
-            this.txtnombre = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txttel = new System.Windows.Forms.TextBox();
             this.txtcorreo = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.txtciudad = new System.Windows.Forms.TextBox();
@@ -55,6 +51,10 @@
             this.txtrfc = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtcalle = new System.Windows.Forms.TextBox();
+            this.txttel = new System.Windows.Forms.TextBox();
+            this.txtnombre = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -102,9 +102,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel2.ColumnCount = 3;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 46.57534F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 53.42466F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 385F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 53.64706F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 46.35294F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 337F));
             this.tableLayoutPanel2.Controls.Add(this.otroCliente, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.buscar, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.cancelar, 2, 0);
@@ -121,11 +121,11 @@
             this.otroCliente.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.otroCliente.Font = new System.Drawing.Font("Segoe UI Semibold", 22F, System.Drawing.FontStyle.Bold);
-            this.otroCliente.Location = new System.Drawing.Point(378, 4);
+            this.otroCliente.Font = new System.Drawing.Font("Segoe UI Semibold", 21F, System.Drawing.FontStyle.Bold);
+            this.otroCliente.Location = new System.Drawing.Point(460, 4);
             this.otroCliente.Margin = new System.Windows.Forms.Padding(4);
             this.otroCliente.Name = "otroCliente";
-            this.otroCliente.Size = new System.Drawing.Size(421, 64);
+            this.otroCliente.Size = new System.Drawing.Size(386, 64);
             this.otroCliente.TabIndex = 11;
             this.otroCliente.Text = "OTRO CLIENTE (F6)";
             this.otroCliente.UseVisualStyleBackColor = true;
@@ -136,13 +136,13 @@
             this.buscar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.buscar.Font = new System.Drawing.Font("Segoe UI Semibold", 22F, System.Drawing.FontStyle.Bold);
+            this.buscar.Font = new System.Drawing.Font("Segoe UI Semibold", 21F, System.Drawing.FontStyle.Bold);
             this.buscar.Location = new System.Drawing.Point(4, 4);
             this.buscar.Margin = new System.Windows.Forms.Padding(4);
             this.buscar.Name = "buscar";
-            this.buscar.Size = new System.Drawing.Size(366, 64);
+            this.buscar.Size = new System.Drawing.Size(448, 64);
             this.buscar.TabIndex = 10;
-            this.buscar.Text = "BUSCAR (F5)";
+            this.buscar.Text = "BUSCAR (ENTER)";
             this.buscar.UseVisualStyleBackColor = true;
             this.buscar.Click += new System.EventHandler(this.buscar_Click);
             // 
@@ -151,11 +151,11 @@
             this.cancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cancelar.Font = new System.Drawing.Font("Segoe UI Semibold", 22F, System.Drawing.FontStyle.Bold);
-            this.cancelar.Location = new System.Drawing.Point(807, 4);
+            this.cancelar.Font = new System.Drawing.Font("Segoe UI Semibold", 21F, System.Drawing.FontStyle.Bold);
+            this.cancelar.Location = new System.Drawing.Point(854, 4);
             this.cancelar.Margin = new System.Windows.Forms.Padding(4);
             this.cancelar.Name = "cancelar";
-            this.cancelar.Size = new System.Drawing.Size(377, 64);
+            this.cancelar.Size = new System.Drawing.Size(330, 64);
             this.cancelar.TabIndex = 12;
             this.cancelar.Text = "CANCELAR (Esc)";
             this.cancelar.UseVisualStyleBackColor = true;
@@ -213,51 +213,6 @@
             this.clientinfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66767F));
             this.clientinfo.Size = new System.Drawing.Size(1188, 665);
             this.clientinfo.TabIndex = 0;
-            // 
-            // txtnombre
-            // 
-            this.txtnombre.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtnombre.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtnombre.Location = new System.Drawing.Point(598, 41);
-            this.txtnombre.Margin = new System.Windows.Forms.Padding(4);
-            this.txtnombre.Name = "txtnombre";
-            this.txtnombre.Size = new System.Drawing.Size(586, 61);
-            this.txtnombre.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(598, 0);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(142, 37);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "NOMBRE*";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label6.Location = new System.Drawing.Point(4, 0);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(160, 37);
-            this.label6.TabIndex = 12;
-            this.label6.Text = "TELEFONO*";
-            // 
-            // txttel
-            // 
-            this.txttel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txttel.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txttel.Location = new System.Drawing.Point(4, 41);
-            this.txttel.Margin = new System.Windows.Forms.Padding(4);
-            this.txttel.Name = "txttel";
-            this.txttel.Size = new System.Drawing.Size(586, 61);
-            this.txttel.TabIndex = 0;
-            this.txttel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.integerInput_KeyPress);
             // 
             // txtcorreo
             // 
@@ -437,6 +392,51 @@
             this.txtcalle.Name = "txtcalle";
             this.txtcalle.Size = new System.Drawing.Size(586, 61);
             this.txtcalle.TabIndex = 9;
+            // 
+            // txttel
+            // 
+            this.txttel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txttel.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txttel.Location = new System.Drawing.Point(4, 41);
+            this.txttel.Margin = new System.Windows.Forms.Padding(4);
+            this.txttel.Name = "txttel";
+            this.txttel.Size = new System.Drawing.Size(586, 61);
+            this.txttel.TabIndex = 0;
+            this.txttel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.integerInput_KeyPress);
+            // 
+            // txtnombre
+            // 
+            this.txtnombre.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtnombre.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtnombre.Location = new System.Drawing.Point(598, 41);
+            this.txtnombre.Margin = new System.Windows.Forms.Padding(4);
+            this.txtnombre.Name = "txtnombre";
+            this.txtnombre.Size = new System.Drawing.Size(586, 61);
+            this.txtnombre.TabIndex = 1;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
+            this.label6.Location = new System.Drawing.Point(4, 0);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(160, 37);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "TELEFONO*";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
+            this.label1.Location = new System.Drawing.Point(598, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(142, 37);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "NOMBRE*";
             // 
             // BuscarCliente
             // 
