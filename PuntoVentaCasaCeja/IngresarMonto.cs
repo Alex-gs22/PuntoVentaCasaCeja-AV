@@ -50,11 +50,20 @@ namespace PuntoVentaCasaCeja
                 double m = double.Parse(txtcantidad.Text);
                 if (m > 0)
                 {
-                    if(tipo != 0)
-                    abono(tipo, m);
-                    setTotal(m);
-                    this.DialogResult = DialogResult.Yes;
-                    this.Close();
+                    if (tipo != 1 && tipo!= 0)
+                    {
+                        if (m > monto)
+                        {
+                            MessageBox.Show("El monto ingresado es mayor al total", "Error");
+                            return;
+                        }
+                    }
+                        if (tipo != 0)
+                            abono(tipo, m);
+                        setTotal(m);
+                        this.DialogResult = DialogResult.Yes;
+                        this.Close();
+                    
                 }
                 else
                 {

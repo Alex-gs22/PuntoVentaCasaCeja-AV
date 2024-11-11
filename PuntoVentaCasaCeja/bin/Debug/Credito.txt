@@ -1,23 +1,24 @@
 CASA CEJA
 SUCURSAL: OBREGON
 OBREGON #408
-08/11/2024 09:10 p. m.
-FOLIO: 03010608112024A0004
+11/11/2024 04:56 p. m.
+FOLIO: 03015811112024A0005
 TICKET DE CREDITO
 
 DESCRIPCION	CANT	P. UNIT	P. TOTAL
 ABACO KOALA CHICO	1	32.00	32.00
 ----------------------------------------------------------------------------------
 TOTAL $	------>		32.00
+PAGO T. DEBITO	------>		2.00
 ----------------------------------------------------------------------------------
-POR PAGAR $	------>		32.00
+POR PAGAR $	------>		30.00
 
 LE ATENDIO: ADMIN
 NO DE ARTICULOS: 00001
 FECHA DE VENCIMIENTO:
-08/12/2024
+11/12/2024
 CLIENTE:
-LESLY GOMEZ
+ALEX
 NUMERO DE CELULAR:
-9241796471
+8334505543
 

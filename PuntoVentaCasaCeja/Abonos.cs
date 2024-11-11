@@ -14,7 +14,7 @@ using Windows.Storage;
 namespace PuntoVentaCasaCeja
 {
     public partial class Abonos : Form
-    {
+    {       
         int tipo;
         CurrentData data;
         string folio, ticket;
@@ -78,7 +78,7 @@ namespace PuntoVentaCasaCeja
         }
         private void aceptar_Click(object sender, EventArgs e)
         {
-          ProcesarPagoCompleto();
+            ProcesarPagoCompleto();
         }
 
         private void ProcesarPagoCompleto()
@@ -324,10 +324,10 @@ namespace PuntoVentaCasaCeja
                     pagos["efectivo"] = Math.Round((pagos["efectivo"] - cambio), 2);
                 }
 
-                abonado -= cambio;
+                abonado -= cambio;              
                 txtporpagar.Text = "0.00";
                 data.webDM.localDM.acumularPagos(info, data.idCorte);
-     
+
                 ProcesarPagoCompleto();
             }
         }
@@ -417,16 +417,16 @@ namespace PuntoVentaCasaCeja
             "" + data.sucursalDir.ToUpper() + "\n" +
             "" + fecha + "\n" +
             "FOLIO: " + folioAbono + "\n";
-            ticket+= "TICKET DE ABONO\n\nCONCEPTO:\n";
+            ticket += "TICKET DE ABONO\n\nCONCEPTO:\n";
             if (tipo == 0)
                 ticket += "CREDITO ";
-            if(tipo == 1)
+            if (tipo == 1)
                 ticket += "APARTADO ";
             ticket += "CON FOLIO: " + folio + "\n";
             if (!data.fontName.Equals("Consolas"))
                 ticket += "--------------------";
             ticket += "--------------------------------------------------------------\n";
-            
+
             if (pagos.ContainsKey("debito"))
             {
                 ticket += "PAGO T. DEBITO\t------>\t\t" + pagos["debito"].ToString("0.00") + "\n";
@@ -453,7 +453,12 @@ namespace PuntoVentaCasaCeja
             ticket += "TOTAL ABONADO\t------>\t\t" + abonado.ToString("0.00") + "\n";
             if (!data.fontName.Equals("Consolas"))
                 ticket += "--------------------";
-            ticket += "--------------------------------------------------------------\n";
+            ticket += "--------------------------------------------------------------\n";         
+            if (porpagar < 0)
+            {     
+                ticket += "SU CAMBIO\t------>\t\t" + Math.Abs(porpagar).ToString("0.00") + "\n";
+            }
+            else
             ticket += "POR PAGAR\t------>\t\t" + porpagar.ToString("0.00") + "\n\n"+
             "LE ATENDIO: " + data.webDM.activeUser.nombre.ToUpper() + "\n"+
             "GRACIAS POR SU PREFERENCIA\n";                            
