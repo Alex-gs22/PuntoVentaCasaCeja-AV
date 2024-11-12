@@ -66,10 +66,10 @@ namespace PuntoVentaCasaCeja
             }
 
             int idCorte = Convert.ToInt32(tablaCortesZ.Rows[selectedRowIndex].Cells["id"].Value);
-            Dictionary<string, string> corteData = localDM.getCorte(idCorte);
+            Dictionary<string, string> corteData = localDM.getCorte2(idCorte);
             if (corteData != null)
             {
-                VerCorteHistorial verCorte = new VerCorteHistorial(corteData, data);
+                VerCorteHistorial verCorte = new VerCorteHistorial(corteData, data, idCorte);
                 verCorte.ShowDialog();
             }
             else
