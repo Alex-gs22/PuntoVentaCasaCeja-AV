@@ -3262,18 +3262,48 @@ FROM usuarios";
             return res;
         }
         public void acumularPagos(Dictionary<string, double> pagos, int idcorte)
-        {
-            SQLiteCommand command = connection.CreateCommand();
-            command.CommandText = "UPDATE cortes SET total_efectivo = total_efectivo + @setEfectivo, total_tarjetas_debito = total_tarjetas_debito + @setDebito, total_tarjetas_credito = total_tarjetas_credito + @setCredito," +
-                "total_cheques = total_cheques + @setCheques, total_transferencias = total_transferencias + @setTransferencias WHERE id = @setId";
-            command.Parameters.AddWithValue("setId", idcorte);
-            command.Parameters.AddWithValue("setEfectivo", pagos.ContainsKey("efectivo") ? pagos["efectivo"] : 0);
-            command.Parameters.AddWithValue("setDebito", pagos.ContainsKey("debito") ? pagos["debito"] : 0);
-            command.Parameters.AddWithValue("setCredito", pagos.ContainsKey("credito") ? pagos["credito"] : 0);
-            command.Parameters.AddWithValue("setCheques", pagos.ContainsKey("cheque") ? pagos["cheque"] : 0);
-            command.Parameters.AddWithValue("setTransferencias", pagos.ContainsKey("transferencia") ? pagos["transferencia"] : 0);
-            command.ExecuteNonQuery();
+        {   
+            Console.WriteLine(idcorte.ToString());
+            foreach (var pago in pagos)
+            {
+                Console.WriteLine($"{pago.Key}: {pago.Value}");
+            }
+
+            try
+            {
+                using (SQLiteCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = "UPDATE cortes SET total_efectivo = total_efectivo + @setEfectivo, " +
+                        "total_tarjetas_debito = total_tarjetas_debito + @setDebito, " +
+                        "total_tarjetas_credito = total_tarjetas_credito + @setCredito, " +
+                        "total_cheques = total_cheques + @setCheques, " +
+                        "total_transferencias = total_transferencias + @setTransferencias WHERE id = @setId";
+
+                    command.Parameters.AddWithValue("@setId", idcorte);
+                    command.Parameters.AddWithValue("@setEfectivo", pagos.ContainsKey("efectivo") ? pagos["efectivo"] : 0);
+                    command.Parameters.AddWithValue("@setDebito", pagos.ContainsKey("debito") ? pagos["debito"] : 0);
+                    command.Parameters.AddWithValue("@setCredito", pagos.ContainsKey("credito") ? pagos["credito"] : 0);
+                    command.Parameters.AddWithValue("@setCheques", pagos.ContainsKey("cheque") ? pagos["cheque"] : 0);
+                    command.Parameters.AddWithValue("@setTransferencias", pagos.ContainsKey("transferencia") ? pagos["transferencia"] : 0);
+
+                    int rowsAffected = command.ExecuteNonQuery();
+
+                    if (rowsAffected == 0)
+                    {
+                        Console.WriteLine("No se actualizó ningún registro. Verifica el idcorte.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Registro actualizado correctamente.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al actualizar pagos: " + ex.Message);
+            }
         }
+
         public void acumularEfectivoApartado(double efectivo, int idcorte)
         {
             //Console.WriteLine("Metodo acumular Efecivo A:" + efectivo);

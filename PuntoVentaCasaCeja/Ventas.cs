@@ -916,7 +916,10 @@ namespace PuntoVentaCasaCeja
                 {
                     double cambio = totalpagado - totalcarrito;
                     txttotal.Text = "Cambio MXN: $" + cambio.ToString("0.00");
-
+                    foreach (var entry in pagos)
+                    {
+                        Console.WriteLine($"{entry.Key}: {entry.Value}");
+                    }
                     localDM.acumularPagos(pagos, idcorte);
 
                     CambioForm cf = new CambioForm(cambio);
