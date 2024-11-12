@@ -1532,8 +1532,7 @@ namespace PuntoVentaCasaCeja
             command.Parameters.AddWithValue("setCancelacion", 0);
             command.Parameters.AddWithValue("setEstado", 1);
             command.Parameters.AddWithValue("setDetalles", "Pendiente de envío");
-            command.Parameters.AddWithValue("setDescuento", venta.ContainsKey("descuento") ? venta["descuento"] : "0"); // Valor predeterminado si no está en el diccionario
-
+            command.Parameters.AddWithValue("setDescuento", venta.ContainsKey("descuento") ? venta["descuento"] : "0");
             command.ExecuteScalar();
 
             command.CommandText = "select last_insert_rowid()";
