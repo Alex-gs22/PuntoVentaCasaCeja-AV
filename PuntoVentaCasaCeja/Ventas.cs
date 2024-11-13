@@ -915,13 +915,20 @@ namespace PuntoVentaCasaCeja
 
                 if (totalpagado >= totalcarrito)
                 {
-                    double cambio = totalpagado - totalcarrito;                
-                    Dictionary<string, double> datosPago = new Dictionary<string, double>();
-                    datosPago["efectivo"] = totalcarrito;
+                    double cambio = totalpagado - totalcarrito;
+                    datosPago["efectivo"] = totalcarrito;  // Solo registramos el total de la cuenta, no el cambio
+                    foreach (var entry in pagos)
+                    {
+                        Console.WriteLine($"{entry.Key}: {entry.Value}");
+                    }
+                    localDM.acumularPagos(pagos, idcorte);
+
+                    datosPago["efectivo"] = totalcarrito;  // Solo registramos el total de la cuenta, no el cambio
 
                     txttotal.Text = "Cambio MXN: $" + cambio.ToString("0.00");
-                    localDM.acumularPagos(datosPago, idcorte);
-                                                               
+                    localDM.acumularPagos(datosPago, idcorte); // Solo el monto exacto se acumula
+
+                    // Muestra el formulario de cambio al usuario
                     CambioForm cf = new CambioForm(cambio);
                     cf.ShowDialog();
                     completarVenta();
@@ -931,12 +938,13 @@ namespace PuntoVentaCasaCeja
                     txttotal.Text = "Por pagar MXN: $" + (totalcarrito - totalpagado).ToString("0.00");
                 }
             }
-            else
-            {
-                MessageBox.Show("Aún no hay productos en el carrito", "Advertencia");
-            }
-        }
 
+    else
+    {
+        MessageBox.Show("Aún no hay productos en el carrito", "Advertencia");
+    }
+}
+        */
         void abono(int tipo, double cantidad)
         {                              
             switch (tipo)

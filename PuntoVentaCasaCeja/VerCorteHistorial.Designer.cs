@@ -540,6 +540,7 @@
             this.listagastos.Name = "listagastos";
             this.listagastos.Size = new System.Drawing.Size(854, 54);
             this.listagastos.TabIndex = 24;
+            this.listagastos.SelectedIndexChanged += new System.EventHandler(this.listagastos_SelectedIndexChanged);
             // 
             // Bimprimir
             // 
