@@ -3263,13 +3263,7 @@ FROM usuarios";
             return res;
         }
         public void acumularPagos(Dictionary<string, double> pagos, int idcorte)
-        {   
-            Console.WriteLine(idcorte.ToString());
-            foreach (var pago in pagos)
-            {
-                Console.WriteLine($"{pago.Key}: {pago.Value}");
-            }
-
+        {
             try
             {
                 using (SQLiteCommand command = connection.CreateCommand())
@@ -3304,6 +3298,7 @@ FROM usuarios";
                 Console.WriteLine("Error al actualizar pagos: " + ex.Message);
             }
         }
+
 
         public void acumularEfectivoApartado(double efectivo, int idcorte)
         {
