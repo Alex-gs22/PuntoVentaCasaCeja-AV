@@ -74,6 +74,7 @@ namespace PuntoVentaCasaCeja
             boxestado.DataSource = estados;
             boxestado.SelectedIndex = 0;
             this.cajero = webDM.activeUser;
+            cargarTicketCarta();
             this.tabs = new Dictionary<int, float[]>()
             {
                 {5, new float[]{ 110, 30, 50, 50 } },
@@ -93,7 +94,7 @@ namespace PuntoVentaCasaCeja
 
         private void boxestado_SelectedIndexChanged(object sender, EventArgs e)
         {
-            loadData();
+            loadData();            
         }
 
         private void boxestado_KeyDown(object sender, KeyEventArgs e)
@@ -181,9 +182,9 @@ namespace PuntoVentaCasaCeja
             if (tipo == 1)
             {
                 apartados = localDM.getApartadosCliente(idCliente);
-            }
-            
+            }            
             loadData();
+            cargarTicketCarta();
         }
         void loadData()
         {
@@ -314,13 +315,7 @@ namespace PuntoVentaCasaCeja
         private void abonarbtn_Click(object sender, EventArgs e)
         {
             Abonos ab = new Abonos(tipo, data, folio, idOperacion, totalcarrito, totalpagado, refresh);
-            DialogResult result=ab.ShowDialog();
-            if (data.successful)
-            {   
-                cargarTicketCarta();
-                data.successful = false;
-                MessageBox.Show("Ticket Actualizado", "Éxito");               
-            }
+            DialogResult result=ab.ShowDialog();           
         }
         private void calculateMaxPages(int rowCount)
         {

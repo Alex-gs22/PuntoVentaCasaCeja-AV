@@ -567,7 +567,8 @@ namespace PuntoVentaCasaCeja
                 else
                 {
                     localDM.imprimirTicket(venta, carrito, pagos, cajero.nombre, sucursalName, sucursalDir, false);
-                    if (reprint)
+                    localDM.imprimirTicket(venta, carrito, pagos, cajero.nombre, sucursalName, sucursalDir, false);
+                        if (reprint)
                     {
                         localDM.imprimirTicket(venta, carrito, pagos, cajero.nombre, sucursalName, sucursalDir, false);
                     }
@@ -914,16 +915,13 @@ namespace PuntoVentaCasaCeja
 
                 if (totalpagado >= totalcarrito)
                 {
-                    double cambio = totalpagado - totalcarrito;
-
-                    // Ajusta el valor de `pagos` para reflejar solo el monto necesario (totalcarrito)
+                    double cambio = totalpagado - totalcarrito;                
                     Dictionary<string, double> datosPago = new Dictionary<string, double>();
-                    datosPago["efectivo"] = totalcarrito;  // Solo registramos el total de la cuenta, no el cambio
+                    datosPago["efectivo"] = totalcarrito;
 
                     txttotal.Text = "Cambio MXN: $" + cambio.ToString("0.00");
-                    localDM.acumularPagos(datosPago, idcorte); // Solo el monto exacto se acumula
-
-                    // Muestra el formulario de cambio al usuario
+                    localDM.acumularPagos(datosPago, idcorte);
+                                                               
                     CambioForm cf = new CambioForm(cambio);
                     cf.ShowDialog();
                     completarVenta();
@@ -939,36 +937,6 @@ namespace PuntoVentaCasaCeja
             }
         }
 
-        /*
-private void abonar_Click(object sender, EventArgs e)
-{
-    if (carrito.Count > 0)
-    {
-        MetodoPago mp = new MetodoPago(totalcarrito - totalpagado, abono, data);
-        mp.ShowDialog();
-
-        if (totalcarrito <= totalpagado)
-        {
-            double cambio = totalpagado - totalcarrito;
-            txttotal.Text = "Cambio MXN: $" + cambio.ToString("0.00");
-            Dictionary<string, double> datosPago = new Dictionary<string, double>();
-            datosPago["efectivo"] = -cambio;                    
-            localDM.acumularPagos(pagos, idcorte);
-            CambioForm cf = new CambioForm(cambio);
-            cf.ShowDialog();
-            completarVenta();
-        }
-        else
-        {
-            txttotal.Text = "Por pagar MXN: $" + (totalcarrito - totalpagado).ToString("0.00");
-        }
-    }
-    else
-    {
-        MessageBox.Show("Aún no hay productos en el carrito", "Advertencia");
-    }
-}
-        */
         void abono(int tipo, double cantidad)
         {                              
             switch (tipo)

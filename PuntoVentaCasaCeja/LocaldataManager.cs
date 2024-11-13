@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System;
 using System.Windows.Forms;
 using System.Threading.Tasks;
+using PuntoVentaCasaCeja.Properties;
 
 namespace PuntoVentaCasaCeja
 {
@@ -3382,8 +3383,7 @@ FROM usuarios";
                 command.Parameters.AddWithValue("setTotalEfectivo", total_efectivo - monto);
                 command.Parameters.AddWithValue("setId", idcorte);
                 command.Parameters.AddWithValue("setGastos", JsonConvert.SerializeObject(temp));
-                command.ExecuteNonQuery();
-                MessageBox.Show(total_efectivo.ToString()+ " " + monto);
+                command.ExecuteNonQuery();                
             }
         }
 
@@ -3421,13 +3421,16 @@ FROM usuarios";
             double cambio = double.Parse(venta["total"].ToString());
             bool state = false;
             int art = 0;
+
             if (!impresora.Equals(""))
             {
                 state = true;
                 CreaTicket Ticket1 = new CreaTicket();
                 Ticket1.impresora = impresora;
-                if(!re)
-                Ticket1.AbreCajon();
+
+                if (!re)
+                    Ticket1.AbreCajon();
+
                 Ticket1.TextoCentro("CASA CEJA");
                 Ticket1.TextoCentro("Sucursal: " + sucursalName.ToUpper());
                 Ticket1.TextoCentro(sucursalDir.ToUpper());
@@ -3435,13 +3438,16 @@ FROM usuarios";
                 Ticket1.TextoCentro("FOLIO: " + venta["folio"]);
                 Ticket1.TextoCentro(" ");
                 Ticket1.EncabezadoVenta();
+
                 foreach (ProductoVenta p in productos)
                 {
                     art++;
                     Ticket1.AgregaArticulo(p.nombre, p.cantidad, p.precio_venta, p.cantidad * p.precio_venta);
                 }
+
                 Ticket1.LineasGuion();
                 Ticket1.AgregaTotales("Total", total);
+
                 if (pagos.ContainsKey("debito"))
                 {
                     Ticket1.AgregaTotales("PAGO T. DEBITO", double.Parse(pagos["debito"].ToString()));
@@ -3467,6 +3473,7 @@ FROM usuarios";
                     Ticket1.AgregaTotales("EFECTIVO ENTREGADO", double.Parse(pagos["efectivo"].ToString()));
                     cambio -= pagos["efectivo"];
                 }
+
                 Ticket1.AgregaTotales("SU CAMBIO $", cambio * -1);
                 Ticket1.LineasGuion();
                 Ticket1.TextoCentro(" ");
@@ -3474,13 +3481,30 @@ FROM usuarios";
                 Ticket1.TextoCentro("NO DE ARTICULOS: " + art.ToString().PadLeft(5, '0'));
                 Ticket1.TextoCentro("GRACIAS POR SU COMPRA");
                 Ticket1.TextoCentro(" ");
+
+                // Agregar el texto adicional
+                Ticket1.TextoCentro("ANTONIO CEJA MARON");
+                Ticket1.TextoCentro("RFC: CEMA-721020-NM5");
+                Ticket1.TextoCentro(" ");
+
+                // Agregar el pie de ticket si está disponible
+                string piedeticket = Settings.Default["pieDeTicket"].ToString();
+                if (!string.IsNullOrEmpty(piedeticket))
+                {
+                    Ticket1.LineasGuion();
+                    Ticket1.TextoCentro(piedeticket);
+                    Ticket1.LineasGuion();
+                }
+
                 Ticket1.TextoCentro("SI DESEA FACTURAR ESTA COMPRA INGRESE A");
                 Ticket1.TextoCentro("https://cm-papeleria.com/public/facturacion");
-                Ticket1.CortaTicket(); // corta el ticket
 
+                Ticket1.CortaTicket(); // corta el ticket
             }
+
             return state;
         }
+
         public bool imprimirApartado(Apartado apartado, List<ProductoVenta> productos, Dictionary<string, double> pagos, string cajero, string sucursalName, string sucursalDir, string fechavencimiento)
         {
             double total = (double)apartado.total;

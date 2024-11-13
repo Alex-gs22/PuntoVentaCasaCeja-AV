@@ -132,7 +132,7 @@ namespace PuntoVentaCasaCeja
                         }
                     }
 
-                    txtfolio.Text = folio;
+                    txtfolio.Text = folio;                    
                     imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
                     imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
 
@@ -289,7 +289,7 @@ namespace PuntoVentaCasaCeja
                     }
                     break;
             }
-            totalpagado += cantidad;
+            totalpagado += cantidad;            
             txtabonado.Text = totalpagado.ToString("0.00");
             txtpagoentrega.Text = (totalcarrito - totalpagado).ToString("0.00");
         }
@@ -339,7 +339,7 @@ namespace PuntoVentaCasaCeja
             return base.ProcessDialogKey(keyData);
         }
         private void imprimirTicketCarta(string fecha)
-        {
+        {   
             ticket = "";
             string caj = data.usuario.nombre;
             ticket += "CASA CEJA\n" +
@@ -365,31 +365,31 @@ namespace PuntoVentaCasaCeja
             if (!fontName.Equals("Consolas"))
                 ticket += "--------------------";
             ticket += "--------------------------------------------------------------\n" +
-                 "TOTAL $\t------>\t\t" + totalcarrito.ToString("0.00") + "\n";
+                 "TOTAL $\t------>\t" + totalcarrito.ToString("0.00") + "\n";
             if (pagos.ContainsKey("debito"))
             {
-                ticket += "PAGO T. DEBITO\t------>\t\t" + pagos["debito"].ToString("0.00") + "\n";
+                ticket += "PAGO T. DEBITO\t------>\t" + pagos["debito"].ToString("0.00") + "\n";
             }
             if (pagos.ContainsKey("credito"))
             {
-                ticket += "PAGO T. CREDITO\t------>\t\t" + pagos["credito"].ToString("0.00") + "\n";
+                ticket += "PAGO T. CREDITO\t------>\t" + pagos["credito"].ToString("0.00") + "\n";
             }
             if (pagos.ContainsKey("cheque"))
             {
-                ticket += "PAGO CHEQUES\t------>\t\t" + pagos["cheque"].ToString("0.00") + "\n";
+                ticket += "PAGO CHEQUES\t------>\t" + pagos["cheque"].ToString("0.00") + "\n";
             }
             if (pagos.ContainsKey("transferencia"))
             {
-                ticket += "PAGO TRANSFERENCIA\t------>\t\t" + pagos["transferencia"].ToString("0.00") + "\n";
+                ticket += "PAGO TRANSFERENCIA\t------>\t" + pagos["transferencia"].ToString("0.00") + "\n";
             }
             if (pagos.ContainsKey("efectivo"))
             {
-                ticket += "EFECTIVO ENTREGADO\t------>\t\t" + pagos["efectivo"].ToString("0.00") + "\n";
+                ticket += "EFECTIVO ENTREGADO\t------>\t" + pagos["efectivo"].ToString("0.00") + "\n";
             }
             if (!fontName.Equals("Consolas"))
                 ticket += "--------------------";
             ticket += "--------------------------------------------------------------\n" +
-                "POR PAGAR $\t------>\t\t" + (totalcarrito - totalpagado).ToString("0.00") + "\n\n" +
+                "POR PAGAR $\t------>\t" + (totalcarrito - totalpagado).ToString("0.00") + "\n\n" +
                  "LE ATENDIO: " + data.usuario.nombre.ToUpper() + "\n" +
                  "NO DE ARTICULOS: " + carrito.Count.ToString().PadLeft(5, '0') + "\n" +
                  "FECHA DE VENCIMIENTO:\n"+txtfecha.Text+"\n"+
@@ -451,41 +451,34 @@ namespace PuntoVentaCasaCeja
                 MessageBox.Show("Error al intentar imprimir el documento: " + ex.Message);
             }
         }
-        private void docToPrint_PrintPage(
-    object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        private void docToPrint_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
-
-            // Insert code to render the page here.
-            // This code will be called when the control is drawn.
-
-            // The following code will render a simple
-            // message on the document in the control.
             string text1 = ticket;
-            //StringFormat format = new StringFormat(StringFormatFlags.NoClip);
-            //format.Alignment = StringAlignment.Center;
-            //System.Drawing.Font printFont =
-            //    new Font(fontName, fontSize, FontStyle.Regular);
 
-            //e.Graphics.DrawString(text1, printFont,
-            //    Brushes.Black, 50, 50);
-
+            // Fuente y formato para el texto
             FontFamily fontFamily = new FontFamily(fontName);
             Font font = new Font(
-               fontFamily,
-               fontSize,
-               FontStyle.Regular,
-               GraphicsUnit.Point);
-            Rectangle rect = new Rectangle(50, 50, 750, 1000);
-            StringFormat stringFormat = new StringFormat();
-            SolidBrush solidBrush = new SolidBrush(Color.FromArgb(255, 0, 0, 0));
+                fontFamily,
+                fontSize,
+                FontStyle.Regular,
+                GraphicsUnit.Point);
 
+            // Ajusta el rectángulo de impresión para una impresora térmica de 80 mm
+            Rectangle rect = new Rectangle(10, 10, 350, 1200); // El ancho de 350 es adecuado para 80 mm
+            StringFormat stringFormat = new StringFormat();
+            SolidBrush solidBrush = new SolidBrush(Color.Black);
 
             stringFormat.SetTabStops(0, tabs[fontSize]);
 
+            // Dibuja el texto dentro del área ajustada
             e.Graphics.DrawString(text1, font, solidBrush, rect, stringFormat);
 
-            //Pen pen = Pens.Black;
-            //e.Graphics.DrawRectangle(pen, rect);
+            // Asegúrate de que el tamaño de la fuente no exceda el ancho disponible
+            if (fontSize > 12)
+            {
+                e.Graphics.DrawString("Ajuste el tamaño de fuente", font, solidBrush, rect, stringFormat);
+            }
         }
+
     }
 }
