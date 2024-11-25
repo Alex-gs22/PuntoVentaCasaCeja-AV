@@ -3397,14 +3397,8 @@ FROM usuarios";
             if (result.Read())
             {
                 var temp = JsonConvert.DeserializeObject<Dictionary<string, double>>(result.GetString(0));
-                double total_efectivo = result.GetDouble(1);
-                if (temp.ContainsKey(concepto))
-                    temp[concepto] += monto;
-                else
-                    temp.Add(concepto, monto);
-                command.Reset();
-                command.CommandText = "UPDATE cortes SET total_efectivo = @setTotalEfectivo, gastos = @setGastos WHERE id = @setId";
-                command.Parameters.AddWithValue("setTotalEfectivo", total_efectivo - monto);
+                command.CommandText = "UPDATE cortes SET gastos = @setGastos WHERE id = @setId";
+                
                 command.Parameters.AddWithValue("setId", idcorte);
                 command.Parameters.AddWithValue("setGastos", JsonConvert.SerializeObject(temp));
                 command.ExecuteNonQuery();                
