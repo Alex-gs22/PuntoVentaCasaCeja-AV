@@ -11,6 +11,7 @@ namespace PuntoVentaCasaCeja
         bool temporal = true;
         Cliente cliente;
         CurrentData data;
+        Timer checkSuccessTimer;
 
         public BuscarCliente(CurrentData data)
         {
@@ -18,6 +19,28 @@ namespace PuntoVentaCasaCeja
             this.webDM = data.webDM;
             this.data = data;
             this.localDM = webDM.localDM;
+
+            // Configuración del Timer
+            checkSuccessTimer = new Timer();
+            checkSuccessTimer.Interval = 500; // 500ms (medio segundo)
+            checkSuccessTimer.Tick += CheckSuccess;
+            checkSuccessTimer.Start();
+
+            // Revisión inicial
+            if (data.successful)
+            {
+                this.Close();
+            }
+        }
+
+        // Método que se ejecuta periódicamente para comprobar si data.successful es true
+        private void CheckSuccess(object sender, EventArgs e)
+        {
+            if (data.successful)
+            {
+                checkSuccessTimer.Stop(); // Detenemos el timer para evitar ejecuciones repetidas
+                this.Close(); // Cerramos la ventana
+            }
         }
       
         private void integerInput_KeyPress(object sender, KeyPressEventArgs e)
