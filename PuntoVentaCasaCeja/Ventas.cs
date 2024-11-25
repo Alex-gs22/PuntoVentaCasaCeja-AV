@@ -536,6 +536,7 @@ namespace PuntoVentaCasaCeja
             string fechaVentaImpresion = localDate.ToString("dd/MM/yyyy hh:mm tt");
 
             Dictionary<string, string> venta = new Dictionary<string, string>();
+            //Console.WriteLine("total: " + totalcarrito.ToString("0.00")); se envia bien
             venta["total"] = totalcarrito.ToString("0.00");
             venta["descuento"] = data.descuento.ToString();
             venta["folio"] = folio;
@@ -917,11 +918,13 @@ namespace PuntoVentaCasaCeja
                 {
                     double cambio = totalpagado - totalcarrito;
                     txttotal.Text = "Cambio MXN: $" + cambio.ToString("0.00");
+                    localDM.acumularPagos(pagos, idcorte, cambio);
+                    if (cambio > 0)
+                    {
+                        CambioForm cf = new CambioForm(cambio);
 
-                    localDM.acumularPagos(pagos, idcorte);
-
-                    CambioForm cf = new CambioForm(cambio);
-                    cf.ShowDialog();
+                        cf.ShowDialog();
+                    }
                     completarVenta();
                 }
                 else
@@ -1406,7 +1409,6 @@ namespace PuntoVentaCasaCeja
             SolidBrush opacityBrush = new SolidBrush(Color.FromArgb(90, 0, 0, 0));
 
 
-            double efedir = double.Parse(corte["total_efectivo"]) - double.Parse(corte["efectivo_apartados"]) - double.Parse(corte["efectivo_creditos"]);
             double tgastos = 0;
             double tingresos = 0;
 
@@ -1420,6 +1422,9 @@ namespace PuntoVentaCasaCeja
             {
                 tingresos += x.Value;
             }
+
+            double efedir = double.Parse(corte["total_efectivo"]) - tgastos;
+
 
             double totalCZ = double.Parse(corte["total_efectivo"]) + double.Parse(corte["total_tarjetas_debito"]) + double.Parse(corte["total_tarjetas_credito"]) + double.Parse(corte["total_cheques"]) + double.Parse(corte["total_transferencias"]) + double.Parse(corte["sobrante"]);
 

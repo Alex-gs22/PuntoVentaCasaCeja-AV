@@ -125,7 +125,7 @@ namespace PuntoVentaCasaCeja
                         int ida = localDM.abonoApartadoTemporal(abono);
                         na.abonos.Add(abono);
 
-                        localDM.acumularPagos(pagos, idcorte);
+                        localDM.acumularPagos(pagos, idcorte, 0);
                         if (pagos.ContainsKey("efectivo"))
                         {
                             localDM.acumularEfectivoApartado(pagos["efectivo"], idcorte);

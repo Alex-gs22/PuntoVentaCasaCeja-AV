@@ -3262,17 +3262,18 @@ FROM usuarios";
 
             return res;
         }
-        public void acumularPagos(Dictionary<string, double> pagos, int idcorte)
+        public void acumularPagos(Dictionary<string, double> pagos, int idcorte, double cambio)
         {
             try
             {
                 using (SQLiteCommand command = connection.CreateCommand())
                 {
-                    command.CommandText = "UPDATE cortes SET total_efectivo = total_efectivo + @setEfectivo, " +
+                    command.CommandText = "UPDATE cortes SET total_efectivo = total_efectivo + @setEfectivo - @setCambio, " +
                         "total_tarjetas_debito = total_tarjetas_debito + @setDebito, " +
                         "total_tarjetas_credito = total_tarjetas_credito + @setCredito, " +
                         "total_cheques = total_cheques + @setCheques, " +
-                        "total_transferencias = total_transferencias + @setTransferencias WHERE id = @setId";
+                        "total_transferencias = total_transferencias + @setTransferencias " +
+                        "WHERE id = @setId";
 
                     command.Parameters.AddWithValue("@setId", idcorte);
                     command.Parameters.AddWithValue("@setEfectivo", pagos.ContainsKey("efectivo") ? pagos["efectivo"] : 0);
@@ -3280,6 +3281,7 @@ FROM usuarios";
                     command.Parameters.AddWithValue("@setCredito", pagos.ContainsKey("credito") ? pagos["credito"] : 0);
                     command.Parameters.AddWithValue("@setCheques", pagos.ContainsKey("cheque") ? pagos["cheque"] : 0);
                     command.Parameters.AddWithValue("@setTransferencias", pagos.ContainsKey("transferencia") ? pagos["transferencia"] : 0);
+                    command.Parameters.AddWithValue("@setCambio", cambio);
 
                     int rowsAffected = command.ExecuteNonQuery();
 
@@ -3298,6 +3300,7 @@ FROM usuarios";
                 Console.WriteLine("Error al actualizar pagos: " + ex.Message);
             }
         }
+
 
 
         public void acumularEfectivoApartado(double efectivo, int idcorte)

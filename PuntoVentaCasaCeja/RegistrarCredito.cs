@@ -129,7 +129,7 @@ namespace PuntoVentaCasaCeja
                         int ida = localDM.abonoCreditoTemporal(abono);
                         nc.abonos.Add(abono);
 
-                        localDM.acumularPagos(pagos, idcorte);
+                        localDM.acumularPagos(pagos, idcorte, 0);
                         if (pagos.ContainsKey("efectivo"))
                         {
                             localDM.acumularEfectivoCredito(pagos["efectivo"], idcorte);

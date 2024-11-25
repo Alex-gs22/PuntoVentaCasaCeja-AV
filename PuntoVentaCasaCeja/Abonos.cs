@@ -127,7 +127,7 @@ namespace PuntoVentaCasaCeja
                     folioabono = abonoApartado.folio;
                 }
 
-                data.webDM.localDM.acumularPagos(pagos, data.idCorte);
+                data.webDM.localDM.acumularPagos(pagos, data.idCorte, 0);
 
                 if (pagos.ContainsKey("efectivo"))
                 {
@@ -326,7 +326,7 @@ namespace PuntoVentaCasaCeja
 
                 abonado -= cambio;              
                 txtporpagar.Text = "0.00";
-                data.webDM.localDM.acumularPagos(info, data.idCorte);
+                data.webDM.localDM.acumularPagos(info, data.idCorte, 0);
 
                 ProcesarPagoCompleto();
             }
