@@ -1081,7 +1081,6 @@ namespace PuntoVentaCasaCeja
 
         void imprimirCorte(Dictionary<string, string> corte)
         {
-            double efedir = double.Parse(corte["total_efectivo"]) - double.Parse(corte["efectivo_apartados"]) - double.Parse(corte["efectivo_creditos"]);
             double tgastos = 0;
             double tingresos = 0;
 
@@ -1095,6 +1094,9 @@ namespace PuntoVentaCasaCeja
             {
                 tingresos += x.Value;
             }
+
+            double efedir = double.Parse(corte["total_efectivo"]) - tgastos;
+
 
             double totalCZ = double.Parse(corte["total_efectivo"]) + double.Parse(corte["total_tarjetas_debito"]) + double.Parse(corte["total_tarjetas_credito"]) + double.Parse(corte["total_cheques"]) + double.Parse(corte["total_transferencias"]) + double.Parse(corte["sobrante"]);
             string nc = localDM.getNombreUsuario(int.Parse(corte["usuario_id"]));
