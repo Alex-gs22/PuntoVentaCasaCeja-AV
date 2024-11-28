@@ -8,6 +8,7 @@ using System;
 using System.Windows.Forms;
 using System.Threading.Tasks;
 using PuntoVentaCasaCeja.Properties;
+using System.Windows.Markup;
 
 namespace PuntoVentaCasaCeja
 {
@@ -3436,10 +3437,10 @@ FROM usuarios";
         //    connection.Close();
         //}
 
-        public bool imprimirTicket(Dictionary<string, string> venta, List<ProductoVenta> productos, Dictionary<string, double> pagos, string cajero, string sucursalName, string sucursalDir, bool re)
+        public bool imprimirTicket(Dictionary<string, string> venta, List<ProductoVenta> productos, Dictionary<string, double> pagos,
+            string cajero, string sucursalName, string sucursalDir, bool re, double cambio, bool esDescuento, double descuento)
         {
             double total = double.Parse(venta["total"].ToString());
-            double cambio = double.Parse(venta["total"].ToString());
             bool state = false;
             int art = 0;
 
@@ -3469,29 +3470,34 @@ FROM usuarios";
                 Ticket1.LineasGuion();
                 Ticket1.AgregaTotales("Total", total);
 
+                if (esDescuento)
+                {
+                    Ticket1.AgregaTotales("SE APLICO DESCUENTO DE $", descuento);
+                }
+
                 if (pagos.ContainsKey("debito"))
                 {
-                    Ticket1.AgregaTotales("PAGO T. DEBITO", double.Parse(pagos["debito"].ToString()));
+                    Ticket1.AgregaTotales("PAGO T. DEBITO", pagos["debito"]);
                     cambio -= pagos["debito"];
                 }
                 if (pagos.ContainsKey("credito"))
                 {
-                    Ticket1.AgregaTotales("PAGO T.CREDITO", double.Parse(pagos["credito"].ToString()));
+                    Ticket1.AgregaTotales("PAGO T.CREDITO", pagos["credito"]);
                     cambio -= pagos["credito"];
                 }
                 if (pagos.ContainsKey("cheque"))
                 {
-                    Ticket1.AgregaTotales("PAGO CHEQUES", double.Parse(pagos["cheque"].ToString()));
+                    Ticket1.AgregaTotales("PAGO CHEQUES", pagos["cheque"]);
                     cambio -= pagos["cheque"];
                 }
                 if (pagos.ContainsKey("transferencia"))
                 {
-                    Ticket1.AgregaTotales("PAGO TRANSFERENCIA", double.Parse(pagos["transferencia"].ToString()));
+                    Ticket1.AgregaTotales("PAGO TRANSFERENCIA", pagos["transferencia"]);
                     cambio -= pagos["transferencia"];
                 }
                 if (pagos.ContainsKey("efectivo"))
                 {
-                    Ticket1.AgregaTotales("EFECTIVO ENTREGADO", double.Parse(pagos["efectivo"].ToString()));
+                    Ticket1.AgregaTotales("EFECTIVO ENTREGADO", pagos["efectivo"]);
                     cambio -= pagos["efectivo"];
                 }
 
@@ -3525,6 +3531,7 @@ FROM usuarios";
 
             return state;
         }
+
 
         public bool imprimirApartado(Apartado apartado, List<ProductoVenta> productos, Dictionary<string, double> pagos, string cajero, string sucursalName, string sucursalDir, string fechavencimiento)
         {

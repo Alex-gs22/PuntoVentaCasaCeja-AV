@@ -155,6 +155,7 @@ namespace PuntoVentaCasaCeja
             else
             {
                 data = localDM.getVentas(txtbuscar.Text);
+                data = localDM.getVentas(txtbuscar.Text);
             }
             tabla.DataSource = data;
             
@@ -191,6 +192,7 @@ namespace PuntoVentaCasaCeja
                 fecha = tabla.SelectedRows[0].Cells[4].Value.ToString();
                 folio = tabla.SelectedRows[0].Cells[3].Value.ToString();
                 total = tabla.SelectedRows[0].Cells[1].Value.ToString();
+
                 cambio = double.Parse(total);
                 cambio -= descuento;
                 totalformat = double.Parse(total);
@@ -466,12 +468,15 @@ namespace PuntoVentaCasaCeja
                         printPreviewControl1.Document.Print();
                     else
                     {
+                        double descuento = double.Parse(tabla.SelectedRows[0].Cells[2].Value.ToString());
+                        bool esDescuento = descuento > 0;
                         Dictionary<string, string> venta = new Dictionary<string, string>();
                         venta["fecha_venta"] = fecha;
                         venta["folio"] = folio;
                         venta["total"] = total;
-                        localDM.imprimirTicket(venta, productos, pagos, cajero, sucursalName, sucursalDir, true
-                            );
+                        cambio = double.Parse(total) - descuento;
+                        localDM.imprimirTicket(venta, productos, pagos, cajero, sucursalName, sucursalDir,
+                            true, cambio, esDescuento, descuento);
                     }
                 }
                 catch (System.ComponentModel.Win32Exception)

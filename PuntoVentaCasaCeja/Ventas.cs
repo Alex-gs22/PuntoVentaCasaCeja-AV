@@ -532,11 +532,11 @@ namespace PuntoVentaCasaCeja
             sucursalName = localDM.getSucursalname(idsucursal);
             sucursalDir = localDM.getSucursalAddr(idsucursal);
             DateTime localDate = DateTime.Now;
+            double cambio = (totalcarrito - data.descuento);
 
             string fechaVentaImpresion = localDate.ToString("dd/MM/yyyy hh:mm tt");
 
             Dictionary<string, string> venta = new Dictionary<string, string>();
-            //Console.WriteLine("total: " + totalcarrito.ToString("0.00")); se envia bien
             venta["total"] = totalcarrito.ToString("0.00");
             venta["descuento"] = data.descuento.ToString();
             venta["folio"] = folio;
@@ -547,7 +547,7 @@ namespace PuntoVentaCasaCeja
             venta["sucursal_id"] = idsucursal.ToString();
             venta["usuario_id"] = cajero.id.ToString();
 
-            int id = localDM.CrearVenta(venta, carrito);            
+            int id = localDM.CrearVenta(venta, carrito);
             imprimirTicketCarta(fechaVentaImpresion);
 
             if (localDM.impresora.Equals(""))
@@ -556,24 +556,27 @@ namespace PuntoVentaCasaCeja
             }
             else
             {
-                try {
-                if (printerType == 1)
+                try
                 {
-                    printPreviewControl1.Document.Print();
-                    if (reprint)
+                    if (printerType == 1)
                     {
                         printPreviewControl1.Document.Print();
+                        if (reprint)
+                        {
+                            printPreviewControl1.Document.Print();
+                        }
                     }
-                }
-                else
-                {
-                    localDM.imprimirTicket(venta, carrito, pagos, cajero.nombre, sucursalName, sucursalDir, false);
-                    localDM.imprimirTicket(venta, carrito, pagos, cajero.nombre, sucursalName, sucursalDir, false);
-                  /*if (reprint)
-                    {
-                        localDM.imprimirTicket(venta, carrito, pagos, cajero.nombre, sucursalName, sucursalDir, false);
-                    }*/
-                }
+                    else
+                    {                      
+                        localDM.imprimirTicket(venta, carrito, pagos, cajero.nombre, sucursalName, sucursalDir, false, cambio, data.esDescuento, data.descuento);
+                        localDM.imprimirTicket(venta, carrito, pagos, cajero.nombre, sucursalName, sucursalDir, false, cambio, data.esDescuento, data.descuento);
+                        /*
+                        if (reprint)
+                        {
+                            localDM.imprimirTicket(venta, carrito, pagos, cajero.nombre, sucursalName, sucursalDir, false, cambio, data.esDescuento, data.descuento);
+                        }
+                        */
+                    }
                 }
                 catch (System.ComponentModel.Win32Exception)
                 {
@@ -1211,8 +1214,8 @@ namespace PuntoVentaCasaCeja
                  "TOTAL $\t------>\t\t" + totalcarrito.ToString("0.00") + "\n";
             if (data.esDescuento)
             {
-                ticket += "SE APLICO DESCUENTO DE $\t------>\t\t" + data.descuento.ToString("0.00") + "\n";
-            }
+                ticket += "SE APLICO DESCUENTO DE $\t------>\t" + data.descuento.ToString("0.00") + "\n";
+            } 
             if (pagos.ContainsKey("debito"))
             {
                 ticket += "PAGO T. DEBITO\t------>\t\t" + pagos["debito"].ToString("0.00") + "\n";
