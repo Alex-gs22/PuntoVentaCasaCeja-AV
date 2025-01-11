@@ -102,8 +102,8 @@ namespace PuntoVentaCasaCeja
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel4.AutoScroll = true;
             this.tableLayoutPanel4.ColumnCount = 2;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 57.30742F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.69258F));
             this.tableLayoutPanel4.Controls.Add(this.tabla, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.documento, 1, 0);
             this.tableLayoutPanel4.Location = new System.Drawing.Point(4, 151);
@@ -134,7 +134,7 @@ namespace PuntoVentaCasaCeja
             this.tabla.RowHeadersVisible = false;
             this.tabla.RowHeadersWidth = 51;
             this.tabla.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.tabla.Size = new System.Drawing.Size(825, 553);
+            this.tabla.Size = new System.Drawing.Size(788, 553);
             this.tabla.StandardTab = true;
             this.tabla.TabIndex = 3;
             this.tabla.SelectionChanged += new System.EventHandler(this.tabla_SelectionChanged);
@@ -146,10 +146,10 @@ namespace PuntoVentaCasaCeja
             this.documento.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.documento.Location = new System.Drawing.Point(837, 4);
+            this.documento.Location = new System.Drawing.Point(800, 4);
             this.documento.Margin = new System.Windows.Forms.Padding(4);
             this.documento.Name = "documento";
-            this.documento.Size = new System.Drawing.Size(548, 553);
+            this.documento.Size = new System.Drawing.Size(585, 553);
             this.documento.TabIndex = 8;
             // 
             // tableLayoutPanel2

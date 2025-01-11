@@ -333,7 +333,7 @@ namespace PuntoVentaCasaCeja
                fontSize,
                FontStyle.Regular,
                GraphicsUnit.Point);
-            Rectangle rect = new Rectangle(50, 50, 750, 1000);
+            Rectangle rect = new Rectangle(10, 10, 750, 1000);
             StringFormat stringFormat = new StringFormat();
             SolidBrush solidBrush = new SolidBrush(Color.FromArgb(255, 0, 0, 0));
             
@@ -345,6 +345,7 @@ namespace PuntoVentaCasaCeja
             //Pen pen = Pens.Black;
             //e.Graphics.DrawRectangle(pen, rect);
         }
+
         private void tabla_KeyDown(object sender, KeyEventArgs e)
         {
             //loadTicket(); // carga la vista previa en automatico al moverse con las flechas.

@@ -631,7 +631,7 @@ namespace PuntoVentaCasaCeja
                data.fontSize,
                FontStyle.Regular,
                GraphicsUnit.Point);
-            Rectangle rect = new Rectangle(50, 50, 750, 1000);
+            Rectangle rect = new Rectangle(10, 10, 750, 1000);
             StringFormat stringFormat = new StringFormat();
             SolidBrush solidBrush = new SolidBrush(Color.FromArgb(255, 0, 0, 0));
 

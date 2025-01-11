@@ -232,8 +232,8 @@ namespace PuntoVentaCasaCeja
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel4.AutoScroll = true;
             this.tableLayoutPanel4.ColumnCount = 2;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 59.17926F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40.82074F));
             this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel6, 0, 1);
             this.tableLayoutPanel4.Controls.Add(this.tabla, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.printPreviewControl1, 1, 0);
@@ -271,7 +271,7 @@ namespace PuntoVentaCasaCeja
             this.tableLayoutPanel6.RowCount = 1;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(825, 57);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(814, 57);
             this.tableLayoutPanel6.TabIndex = 6;
             // 
             // prev
@@ -280,7 +280,7 @@ namespace PuntoVentaCasaCeja
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.prev.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.prev.Location = new System.Drawing.Point(249, 4);
+            this.prev.Location = new System.Drawing.Point(244, 4);
             this.prev.Margin = new System.Windows.Forms.Padding(4);
             this.prev.Name = "prev";
             this.prev.Size = new System.Drawing.Size(79, 49);
@@ -295,7 +295,7 @@ namespace PuntoVentaCasaCeja
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.next.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.next.Location = new System.Drawing.Point(496, 4);
+            this.next.Location = new System.Drawing.Point(491, 4);
             this.next.Margin = new System.Windows.Forms.Padding(4);
             this.next.Name = "next";
             this.next.Size = new System.Drawing.Size(79, 49);
@@ -311,7 +311,7 @@ namespace PuntoVentaCasaCeja
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pageLabel.AutoSize = true;
             this.pageLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold);
-            this.pageLabel.Location = new System.Drawing.Point(336, 0);
+            this.pageLabel.Location = new System.Drawing.Point(331, 0);
             this.pageLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.pageLabel.Name = "pageLabel";
             this.pageLabel.Size = new System.Drawing.Size(152, 57);
@@ -339,7 +339,7 @@ namespace PuntoVentaCasaCeja
             this.tabla.RowHeadersVisible = false;
             this.tabla.RowHeadersWidth = 51;
             this.tabla.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.tabla.Size = new System.Drawing.Size(825, 550);
+            this.tabla.Size = new System.Drawing.Size(814, 550);
             this.tabla.StandardTab = true;
             this.tabla.TabIndex = 2;
             this.tabla.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tabla_CellContentClick);
@@ -352,10 +352,10 @@ namespace PuntoVentaCasaCeja
             this.printPreviewControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.printPreviewControl1.Location = new System.Drawing.Point(837, 4);
+            this.printPreviewControl1.Location = new System.Drawing.Point(826, 4);
             this.printPreviewControl1.Margin = new System.Windows.Forms.Padding(4);
             this.printPreviewControl1.Name = "printPreviewControl1";
-            this.printPreviewControl1.Size = new System.Drawing.Size(548, 550);
+            this.printPreviewControl1.Size = new System.Drawing.Size(559, 550);
             this.printPreviewControl1.TabIndex = 3;
             // 
             // cancel
