@@ -1340,7 +1340,9 @@ namespace PuntoVentaCasaCeja
             adapter.Fill(dt);
             return dt;
         }
-        public DataTable getUsuariosCajero(string arg)
+
+        // este metodo no busca, por eso se reemplazo con el metodo de abajo.
+        public DataTable getUsuariosCajero2(string arg)
         {
             DataTable dt = new DataTable();
             SQLiteCommand command = connection.CreateCommand();
@@ -1350,6 +1352,31 @@ namespace PuntoVentaCasaCeja
             adapter.Fill(dt);
             return dt;
         }
+        public DataTable getUsuariosCajero(string searchTerm)
+        {
+            DataTable dt = new DataTable();
+            SQLiteCommand command = connection.CreateCommand();
+
+            // Comienza con la consulta base
+            string query = "SELECT id AS ID, nombre AS NOMBRE, usuario as USUARIO, clave AS CLAVE, is_root AS NIVEL, telefono AS TELEFONO, correo AS CORREO " +
+                           "FROM usuarios WHERE activo=1 AND is_root = 2";
+
+            // Si searchTerm no está vacío, añade un filtro para buscar por usuario o nombre
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                query += " AND (usuario LIKE @searchTerm OR nombre LIKE @searchTerm)";
+            }
+
+            command.CommandText = query;
+
+            // Usamos parámetros para evitar inyecciones SQL
+            command.Parameters.AddWithValue("@searchTerm", "%" + searchTerm + "%");
+
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
+            adapter.Fill(dt);
+            return dt;
+        }
+
 
         public DataTable getUsuarios(string arg)
         {
