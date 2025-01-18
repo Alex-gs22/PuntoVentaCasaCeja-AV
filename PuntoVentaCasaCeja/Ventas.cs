@@ -569,7 +569,7 @@ namespace PuntoVentaCasaCeja
                     else
                     {                      
                         localDM.imprimirTicket(venta, carrito, pagos, cajero.nombre, sucursalName, sucursalDir, false, cambio, data.esDescuento, data.descuento);
-                        localDM.imprimirTicket(venta, carrito, pagos, cajero.nombre, sucursalName, sucursalDir, false, cambio, data.esDescuento, data.descuento);
+                        //localDM.imprimirTicket(venta, carrito, pagos, cajero.nombre, sucursalName, sucursalDir, false, cambio, data.esDescuento, data.descuento);
                         /*
                         if (reprint)
                         {

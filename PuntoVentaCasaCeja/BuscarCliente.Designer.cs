@@ -67,12 +67,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.tableLayoutPanel3);
-            this.groupBox1.Font = new System.Drawing.Font("Segoe UI Semibold", 24F, System.Drawing.FontStyle.Bold);
-            this.groupBox1.Location = new System.Drawing.Point(16, 15);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Font = new System.Drawing.Font("Segoe UI Semibold", 22F, System.Drawing.FontStyle.Bold);
+            this.groupBox1.Location = new System.Drawing.Point(12, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(1213, 821);
+            this.groupBox1.Size = new System.Drawing.Size(910, 674);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "BUSCAR CLIENTE";
@@ -86,14 +84,13 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel2, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.clientinfo, 0, 0);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(9, 60);
-            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(4);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(7, 35);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 2;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(1196, 753);
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 16F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(897, 633);
             this.tableLayoutPanel3.TabIndex = 2;
             // 
             // tableLayoutPanel2
@@ -104,16 +101,15 @@
             this.tableLayoutPanel2.ColumnCount = 3;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 53.64706F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 46.35294F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 337F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 255F));
             this.tableLayoutPanel2.Controls.Add(this.otroCliente, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.buscar, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.cancelar, 2, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(4, 677);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 574);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1188, 72);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(891, 56);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
             // otroCliente
@@ -121,11 +117,10 @@
             this.otroCliente.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.otroCliente.Font = new System.Drawing.Font("Segoe UI Semibold", 21F, System.Drawing.FontStyle.Bold);
-            this.otroCliente.Location = new System.Drawing.Point(460, 4);
-            this.otroCliente.Margin = new System.Windows.Forms.Padding(4);
+            this.otroCliente.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
+            this.otroCliente.Location = new System.Drawing.Point(344, 3);
             this.otroCliente.Name = "otroCliente";
-            this.otroCliente.Size = new System.Drawing.Size(386, 64);
+            this.otroCliente.Size = new System.Drawing.Size(288, 50);
             this.otroCliente.TabIndex = 11;
             this.otroCliente.Text = "OTRO CLIENTE (F6)";
             this.otroCliente.UseVisualStyleBackColor = true;
@@ -136,11 +131,10 @@
             this.buscar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.buscar.Font = new System.Drawing.Font("Segoe UI Semibold", 21F, System.Drawing.FontStyle.Bold);
-            this.buscar.Location = new System.Drawing.Point(4, 4);
-            this.buscar.Margin = new System.Windows.Forms.Padding(4);
+            this.buscar.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
+            this.buscar.Location = new System.Drawing.Point(3, 3);
             this.buscar.Name = "buscar";
-            this.buscar.Size = new System.Drawing.Size(448, 64);
+            this.buscar.Size = new System.Drawing.Size(335, 50);
             this.buscar.TabIndex = 10;
             this.buscar.Text = "BUSCAR (ENTER)";
             this.buscar.UseVisualStyleBackColor = true;
@@ -151,11 +145,10 @@
             this.cancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cancelar.Font = new System.Drawing.Font("Segoe UI Semibold", 21F, System.Drawing.FontStyle.Bold);
-            this.cancelar.Location = new System.Drawing.Point(854, 4);
-            this.cancelar.Margin = new System.Windows.Forms.Padding(4);
+            this.cancelar.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
+            this.cancelar.Location = new System.Drawing.Point(638, 3);
             this.cancelar.Name = "cancelar";
-            this.cancelar.Size = new System.Drawing.Size(330, 64);
+            this.cancelar.Size = new System.Drawing.Size(250, 50);
             this.cancelar.TabIndex = 12;
             this.cancelar.Text = "CANCELAR (Esc)";
             this.cancelar.UseVisualStyleBackColor = true;
@@ -189,8 +182,7 @@
             this.clientinfo.Controls.Add(this.txtnombre, 1, 1);
             this.clientinfo.Controls.Add(this.label6, 0, 0);
             this.clientinfo.Controls.Add(this.label1, 1, 0);
-            this.clientinfo.Location = new System.Drawing.Point(4, 4);
-            this.clientinfo.Margin = new System.Windows.Forms.Padding(4);
+            this.clientinfo.Location = new System.Drawing.Point(3, 3);
             this.clientinfo.Name = "clientinfo";
             this.clientinfo.RowCount = 14;
             this.clientinfo.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -211,7 +203,7 @@
             this.clientinfo.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.clientinfo.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.clientinfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66767F));
-            this.clientinfo.Size = new System.Drawing.Size(1188, 665);
+            this.clientinfo.Size = new System.Drawing.Size(891, 565);
             this.clientinfo.TabIndex = 0;
             // 
             // txtcorreo
@@ -219,20 +211,19 @@
             this.txtcorreo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtcorreo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtcorreo.Location = new System.Drawing.Point(4, 180);
-            this.txtcorreo.Margin = new System.Windows.Forms.Padding(4);
+            this.txtcorreo.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
+            this.txtcorreo.Location = new System.Drawing.Point(3, 155);
             this.txtcorreo.Name = "txtcorreo";
-            this.txtcorreo.Size = new System.Drawing.Size(586, 61);
+            this.txtcorreo.Size = new System.Drawing.Size(439, 39);
             this.txtcorreo.TabIndex = 2;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label7.Location = new System.Drawing.Point(4, 139);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Location = new System.Drawing.Point(3, 122);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(134, 37);
+            this.label7.Size = new System.Drawing.Size(104, 30);
             this.label7.TabIndex = 15;
             this.label7.Text = "CORREO*";
             // 
@@ -241,20 +232,19 @@
             this.txtciudad.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtciudad.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtciudad.Location = new System.Drawing.Point(4, 597);
-            this.txtciudad.Margin = new System.Windows.Forms.Padding(4);
+            this.txtciudad.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
+            this.txtciudad.Location = new System.Drawing.Point(3, 521);
             this.txtciudad.Name = "txtciudad";
-            this.txtciudad.Size = new System.Drawing.Size(586, 61);
+            this.txtciudad.Size = new System.Drawing.Size(439, 39);
             this.txtciudad.TabIndex = 8;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label5.Location = new System.Drawing.Point(4, 556);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Location = new System.Drawing.Point(3, 488);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(117, 37);
+            this.label5.Size = new System.Drawing.Size(91, 30);
             this.label5.TabIndex = 11;
             this.label5.Text = "CIUDAD";
             // 
@@ -263,20 +253,19 @@
             this.txtcolonia.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtcolonia.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtcolonia.Location = new System.Drawing.Point(598, 458);
-            this.txtcolonia.Margin = new System.Windows.Forms.Padding(4);
+            this.txtcolonia.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
+            this.txtcolonia.Location = new System.Drawing.Point(448, 399);
             this.txtcolonia.Name = "txtcolonia";
-            this.txtcolonia.Size = new System.Drawing.Size(586, 61);
+            this.txtcolonia.Size = new System.Drawing.Size(440, 39);
             this.txtcolonia.TabIndex = 7;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label4.Location = new System.Drawing.Point(598, 417);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(448, 366);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(133, 37);
+            this.label4.Size = new System.Drawing.Size(103, 30);
             this.label4.TabIndex = 10;
             this.label4.Text = "COLONIA";
             // 
@@ -285,10 +274,10 @@
             this.txtpostal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtpostal.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtpostal.Location = new System.Drawing.Point(4, 458);
-            this.txtpostal.Margin = new System.Windows.Forms.Padding(4);
+            this.txtpostal.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
+            this.txtpostal.Location = new System.Drawing.Point(3, 399);
             this.txtpostal.Name = "txtpostal";
-            this.txtpostal.Size = new System.Drawing.Size(586, 61);
+            this.txtpostal.Size = new System.Drawing.Size(439, 39);
             this.txtpostal.TabIndex = 6;
             this.txtpostal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.integerInput_KeyPress);
             // 
@@ -296,10 +285,9 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label10.Location = new System.Drawing.Point(4, 417);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label10.Location = new System.Drawing.Point(3, 366);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(221, 37);
+            this.label10.Size = new System.Drawing.Size(172, 30);
             this.label10.TabIndex = 11;
             this.label10.Text = "CÓDIGO POSTAL";
             // 
@@ -308,10 +296,10 @@
             this.txtnoint.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtnoint.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtnoint.Location = new System.Drawing.Point(598, 319);
-            this.txtnoint.Margin = new System.Windows.Forms.Padding(4);
+            this.txtnoint.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
+            this.txtnoint.Location = new System.Drawing.Point(448, 277);
             this.txtnoint.Name = "txtnoint";
-            this.txtnoint.Size = new System.Drawing.Size(586, 61);
+            this.txtnoint.Size = new System.Drawing.Size(440, 39);
             this.txtnoint.TabIndex = 5;
             this.txtnoint.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.integerInput_KeyPress);
             // 
@@ -319,10 +307,9 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label9.Location = new System.Drawing.Point(598, 278);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Location = new System.Drawing.Point(448, 244);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(191, 37);
+            this.label9.Size = new System.Drawing.Size(148, 30);
             this.label9.TabIndex = 19;
             this.label9.Text = "NO. INTERIOR";
             // 
@@ -331,10 +318,10 @@
             this.txtnoext.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtnoext.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtnoext.Location = new System.Drawing.Point(4, 319);
-            this.txtnoext.Margin = new System.Windows.Forms.Padding(4);
+            this.txtnoext.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
+            this.txtnoext.Location = new System.Drawing.Point(3, 277);
             this.txtnoext.Name = "txtnoext";
-            this.txtnoext.Size = new System.Drawing.Size(586, 61);
+            this.txtnoext.Size = new System.Drawing.Size(439, 39);
             this.txtnoext.TabIndex = 4;
             this.txtnoext.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.integerInput_KeyPress);
             // 
@@ -342,10 +329,9 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label8.Location = new System.Drawing.Point(4, 278);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Location = new System.Drawing.Point(3, 244);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(193, 37);
+            this.label8.Size = new System.Drawing.Size(150, 30);
             this.label8.TabIndex = 18;
             this.label8.Text = "NO. EXTERIOR";
             // 
@@ -353,10 +339,9 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label2.Location = new System.Drawing.Point(598, 139);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(448, 122);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 37);
+            this.label2.Size = new System.Drawing.Size(50, 30);
             this.label2.TabIndex = 8;
             this.label2.Text = "RFC";
             // 
@@ -365,20 +350,19 @@
             this.txtrfc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtrfc.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtrfc.Location = new System.Drawing.Point(598, 180);
-            this.txtrfc.Margin = new System.Windows.Forms.Padding(4);
+            this.txtrfc.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
+            this.txtrfc.Location = new System.Drawing.Point(448, 155);
             this.txtrfc.Name = "txtrfc";
-            this.txtrfc.Size = new System.Drawing.Size(586, 61);
+            this.txtrfc.Size = new System.Drawing.Size(440, 39);
             this.txtrfc.TabIndex = 3;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label3.Location = new System.Drawing.Point(598, 556);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(448, 488);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(92, 37);
+            this.label3.Size = new System.Drawing.Size(71, 30);
             this.label3.TabIndex = 9;
             this.label3.Text = "CALLE";
             // 
@@ -387,10 +371,10 @@
             this.txtcalle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtcalle.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtcalle.Location = new System.Drawing.Point(598, 597);
-            this.txtcalle.Margin = new System.Windows.Forms.Padding(4);
+            this.txtcalle.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
+            this.txtcalle.Location = new System.Drawing.Point(448, 521);
             this.txtcalle.Name = "txtcalle";
-            this.txtcalle.Size = new System.Drawing.Size(586, 61);
+            this.txtcalle.Size = new System.Drawing.Size(440, 39);
             this.txtcalle.TabIndex = 9;
             // 
             // txttel
@@ -398,10 +382,10 @@
             this.txttel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txttel.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txttel.Location = new System.Drawing.Point(4, 41);
-            this.txttel.Margin = new System.Windows.Forms.Padding(4);
+            this.txttel.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
+            this.txttel.Location = new System.Drawing.Point(3, 33);
             this.txttel.Name = "txttel";
-            this.txttel.Size = new System.Drawing.Size(586, 61);
+            this.txttel.Size = new System.Drawing.Size(439, 39);
             this.txttel.TabIndex = 0;
             this.txttel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.integerInput_KeyPress);
             // 
@@ -410,20 +394,19 @@
             this.txtnombre.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtnombre.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtnombre.Location = new System.Drawing.Point(598, 41);
-            this.txtnombre.Margin = new System.Windows.Forms.Padding(4);
+            this.txtnombre.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
+            this.txtnombre.Location = new System.Drawing.Point(448, 33);
             this.txtnombre.Name = "txtnombre";
-            this.txtnombre.Size = new System.Drawing.Size(586, 61);
+            this.txtnombre.Size = new System.Drawing.Size(440, 39);
             this.txtnombre.TabIndex = 1;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label6.Location = new System.Drawing.Point(4, 0);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Location = new System.Drawing.Point(3, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(160, 37);
+            this.label6.Size = new System.Drawing.Size(125, 30);
             this.label6.TabIndex = 12;
             this.label6.Text = "TELEFONO*";
             // 
@@ -431,19 +414,19 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(598, 0);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(448, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(142, 37);
+            this.label1.Size = new System.Drawing.Size(110, 30);
             this.label1.TabIndex = 0;
             this.label1.Text = "NOMBRE*";
             // 
             // BuscarCliente
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1245, 850);
+            this.ClientSize = new System.Drawing.Size(934, 686);
             this.Controls.Add(this.groupBox1);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "BuscarCliente";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Buscar Cliente";

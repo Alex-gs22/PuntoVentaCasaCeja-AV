@@ -47,11 +47,11 @@ namespace PuntoVentaCasaCeja
         {
             id = row.Cells[0].Value.ToString();
             txtnombre.Text = row.Cells[1].Value.ToString();
-            txtcorreo.Text = row.Cells[2].Value.ToString();
-            txttelefono.Text = row.Cells[4].Value.ToString();
-            txtusuario.Text = row.Cells[6].Value.ToString();
-            txtclave.Text = row.Cells[7].Value.ToString();
-            boxtipo.SelectedIndex = int.Parse(row.Cells[8].Value.ToString()) - 1;
+            txtusuario.Text = row.Cells[2].Value.ToString();
+            txtclave.Text = row.Cells[3].Value.ToString();
+            boxtipo.SelectedIndex = int.Parse(row.Cells[4].Value.ToString()) - 1;
+            txtcorreo.Text = row.Cells[5].Value.ToString();
+            txttelefono.Text = row.Cells[6].Value.ToString();          
         }
 
         private async void disable()

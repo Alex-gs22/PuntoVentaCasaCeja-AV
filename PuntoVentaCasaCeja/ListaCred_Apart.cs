@@ -240,11 +240,11 @@ namespace PuntoVentaCasaCeja
 
 
             private void GenerarExcel(int opc)
-        {
+             {
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             int idSucursal = data.idSucursal;
             DataTable creditosTable = localDM.GetCreditosDataTable(idSucursal);
-            DataTable apartadosTable = localDM.GetApartadosDataTable(idSucursal);
+            DataTable apartadosTable = localDM.GetApartadosExcelDataTable(idSucursal);
             DateTime localDate = DateTime.Now;
             string fecha = localDate.ToString("dd-MM-yyyy");
 

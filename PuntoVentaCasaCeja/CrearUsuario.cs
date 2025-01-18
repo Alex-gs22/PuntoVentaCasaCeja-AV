@@ -64,7 +64,7 @@ namespace PuntoVentaCasaCeja
                         this.Close();
                         break;
                     case Keys.F5:
-                        
+                        accept.PerformClick();
                         break;
                     default:
                         return base.ProcessDialogKey(keyData);

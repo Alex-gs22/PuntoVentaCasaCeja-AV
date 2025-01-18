@@ -9,6 +9,9 @@ using System.Windows.Forms;
 using System.Threading.Tasks;
 using PuntoVentaCasaCeja.Properties;
 using System.Windows.Markup;
+using System.Linq;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 
 namespace PuntoVentaCasaCeja
 {
@@ -659,6 +662,7 @@ namespace PuntoVentaCasaCeja
         }
         */
 
+        // metodo original, se usaba en generar excel, no muestra productos en excel pero funciona bien.
         public DataTable GetApartadosDataTable(int idSucursal)
         {
             DataTable apartadosTable = new DataTable();
@@ -715,7 +719,159 @@ namespace PuntoVentaCasaCeja
             }
 
             return sortedTable;
-        }        
+        }
+
+        /* Método para obtener los apartados en formato DataTable para exportar a Excel, lo exporta en json, no es el metodo original.
+        public DataTable GetApartadosExcelDataTable2(int idSucursal)
+        {
+            DataTable apartadosTable = new DataTable();
+
+            apartadosTable.Columns.Add("Folio", typeof(string));
+            apartadosTable.Columns.Add("Cliente", typeof(string));
+            apartadosTable.Columns.Add("Total", typeof(double));
+            apartadosTable.Columns.Add("Pagado", typeof(double));
+            apartadosTable.Columns.Add("Fecha", typeof(string));
+            apartadosTable.Columns.Add("Estado", typeof(string));
+            apartadosTable.Columns.Add("Orden", typeof(int));
+            apartadosTable.Columns.Add("Sucursal", typeof(string));
+            apartadosTable.Columns.Add("Productos", typeof(string));
+            SQLiteCommand command = connection.CreateCommand();
+
+            // Ajustar la consulta para filtrar directamente por el idSucursal.
+            command.CommandText = "SELECT folio_corte, cliente_creditos_id, total, total_pagado, fecha_apartado, estado, productos " +
+                                  "FROM apartados WHERE sucursal_id = @idSucursal";
+            command.Parameters.AddWithValue("@idSucursal", idSucursal);
+
+            using (SQLiteDataReader result = command.ExecuteReader())
+            {
+                while (result.Read())
+                {
+                    string folio = result.GetString(0);
+                    int clienteId = result.GetInt32(1);
+                    double total = result.GetDouble(2);
+                    double totalPagado = result.GetDouble(3);
+                    string fechaApartado = result.GetString(4);
+                    int estado = result.GetInt32(5);
+                    string productos = result.GetString(6);
+
+                    string estadoString = GetEstadoString(estado);
+                    int orden = GetEstadoOrden(estado);
+
+                    string clienteNombre = GetClienteNombre(clienteId);
+                    string razonSocial = GetRazonSocial(idSucursal);
+
+                    // Añadir fila solo si el idSucursal coincide (aunque ya lo estamos filtrando en SQL)
+                    apartadosTable.Rows.Add(folio, clienteNombre, total, totalPagado, fechaApartado, estadoString, orden, razonSocial, productos);
+                }
+            }
+
+            DataView dv = apartadosTable.DefaultView;
+            dv.Sort = "Orden ASC";
+            DataTable sortedTable = dv.ToTable();
+
+            sortedTable.Columns.Remove("Orden");
+
+            Console.WriteLine(idSucursal);
+            // Imprimir en consola para depuración
+            foreach (DataRow row in sortedTable.Rows)
+            {
+                Console.WriteLine($"Folio: {row["Folio"]}, Cliente: {row["Cliente"]}, Total: {row["Total"]}," +
+                    $" Pagado: {row["Pagado"]}, Fecha: {row["Fecha"]}, Estado: {row["Estado"]}," +
+                    $" Sucursal: {row["Sucursal"]}, Productos: {row["Productos"]}");
+            }
+
+            return sortedTable;
+        }
+        */
+
+
+        // si hay problemas despues, quitar desde este punto y dejar el codigo (GetApartadosDataTable) anterior en
+        // el metodo para generar excel.
+        public DataTable GetApartadosExcelDataTable(int idSucursal)
+        {
+            DataTable apartadosTable = new DataTable();
+
+            apartadosTable.Columns.Add("Folio", typeof(string));
+            apartadosTable.Columns.Add("Cliente", typeof(string));
+            apartadosTable.Columns.Add("Total", typeof(double));
+            apartadosTable.Columns.Add("Pagado", typeof(double));
+            apartadosTable.Columns.Add("Fecha", typeof(string));
+            apartadosTable.Columns.Add("Estado", typeof(string));
+            apartadosTable.Columns.Add("Sucursal", typeof(string));
+            apartadosTable.Columns.Add("Productos", typeof(string));
+
+            SQLiteCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT folio_corte, cliente_creditos_id, total, total_pagado, fecha_apartado, estado, productos " +
+                                  "FROM apartados WHERE sucursal_id = @idSucursal";
+            command.Parameters.AddWithValue("@idSucursal", idSucursal);
+
+            using (SQLiteDataReader result = command.ExecuteReader())
+            {
+                while (result.Read())
+                {
+                    string folio = result.GetString(0);
+                    int clienteId = result.GetInt32(1);
+                    double total = result.GetDouble(2);
+                    double totalPagado = result.GetDouble(3);
+                    string fechaApartado = result.GetString(4);
+                    int estado = result.GetInt32(5);
+                    string productosJson = result.GetString(6);
+
+                    string estadoString = GetEstadoString(estado);
+                    string clienteNombre = GetClienteNombre(clienteId);
+                    string razonSocial = GetRazonSocial(idSucursal);
+
+                    // Convertir JSON a formato de texto
+                    string productosTexto = ConvertirProductos(productosJson);
+
+                    // Añadir fila a la tabla
+                    apartadosTable.Rows.Add(folio, clienteNombre, total, totalPagado, fechaApartado, estadoString, razonSocial, productosTexto);
+                }
+            }
+
+            DataView dv = apartadosTable.DefaultView;
+            dv.Sort = "Folio ASC"; // Ordenar si es necesario
+            DataTable sortedTable = dv.ToTable();
+
+            Console.WriteLine(idSucursal);
+            foreach (DataRow row in sortedTable.Rows)
+            {
+                Console.WriteLine($"Folio: {row["Folio"]}, Cliente: {row["Cliente"]}, Total: {row["Total"]}, Pagado: {row["Pagado"]}, Fecha: {row["Fecha"]}, Estado: {row["Estado"]}, Sucursal: {row["Sucursal"]}, Productos: {row["Productos"]}");
+            }
+
+            return sortedTable;
+        }
+
+        // Método para convertir JSON de productos a texto plano
+        private string ConvertirProductos(string productosJson)
+        {
+            try
+            {
+                var productos = System.Text.Json.JsonSerializer.Deserialize<List<productosJSON>>(productosJson);
+                if (productos != null)
+                {
+                    // Concatenamos solo el nombre del producto y la cantidad
+                    return string.Join("; ", productos.Select(p => $"{p.Nombre} (Cantidad: {p.Cantidad})"));
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al convertir productos: {ex.Message}");
+            }
+            return "Error al procesar productos";
+        }
+
+
+        // Clase productosJSON para deserializar el JSON
+        public class productosJSON
+        {
+            [JsonPropertyName("nombre")]
+            public string Nombre { get; set; }
+
+            [JsonPropertyName("cantidad")]
+            public int Cantidad { get; set; }
+            // eliminar hasta aqui.
+        }
 
         private int ExtractSucursalIdFromFolio(string folio)
         {
@@ -1175,8 +1331,11 @@ namespace PuntoVentaCasaCeja
         {
             DataTable dt = new DataTable();
             SQLiteCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT id AS ID, nombre AS NOMBRE, correo AS CORREO, confirmacion AS CONFIRMACION, telefono AS TELEFONO, imagen AS FOTOGRAFIA, usuario as USUARIO, clave AS CLAVE," +
-                "is_root AS NIVEL FROM usuarios WHERE activo=1 AND is_root = 2";
+            //command.CommandText = "SELECT id AS ID, nombre AS NOMBRE, correo AS CORREO, confirmacion AS CONFIRMACION, telefono AS TELEFONO, imagen AS FOTOGRAFIA, usuario as USUARIO, clave AS CLAVE," +
+              //  "is_root AS NIVEL FROM usuarios WHERE activo=1 AND is_root = 2";
+
+            command.CommandText = "SELECT id AS ID, nombre AS NOMBRE, usuario as USUARIO, clave AS CLAVE, is_root AS NIVEL, telefono AS TELEFONO, correo AS CORREO" +
+                " FROM usuarios WHERE activo=1 AND is_root = 2";
             SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
             adapter.Fill(dt);
             return dt;
