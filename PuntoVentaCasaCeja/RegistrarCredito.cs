@@ -430,6 +430,7 @@ namespace PuntoVentaCasaCeja
             string text1 = ticket;
 
             // Fuente y formato para el texto
+            int fontSize = 8;
             FontFamily fontFamily = new FontFamily(fontName);
             Font font = new Font(
                 fontFamily,

@@ -338,6 +338,7 @@ namespace PuntoVentaCasaCeja
             }
             return base.ProcessDialogKey(keyData);
         }
+       
         private void imprimirTicketCarta(string fecha)
         {   
             ticket = "";
@@ -395,6 +396,8 @@ namespace PuntoVentaCasaCeja
                  "FECHA DE VENCIMIENTO:\n"+txtfecha.Text+"\n"+
                  "CLIENTE:\n"+cliente.nombre+"\n"+
                  "NUMERO DE CELULAR:\n"+cliente.telefono+"\n";
+            
+            
             createdoc();
         }
 
@@ -451,12 +454,14 @@ namespace PuntoVentaCasaCeja
                 MessageBox.Show("Error al intentar imprimir el documento: " + ex.Message);
             }
         }
+        
         private void docToPrint_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
             string text1 = ticket;
 
             // Fuente y formato para el texto
             FontFamily fontFamily = new FontFamily(fontName);
+            int fontSize = 8;
             Font font = new Font(
                 fontFamily,
                 fontSize,
@@ -479,6 +484,6 @@ namespace PuntoVentaCasaCeja
                 e.Graphics.DrawString("Ajuste el tamaño de fuente", font, solidBrush, rect, stringFormat);
             }
         }
-
+       
     }
 }
