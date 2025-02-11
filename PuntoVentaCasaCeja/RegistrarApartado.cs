@@ -509,6 +509,32 @@ namespace PuntoVentaCasaCeja
                 e.Graphics.DrawString("Ajuste el tamaño de fuente", font, solidBrush, rect, stringFormat);
             }
         }
-       
+        private void numericInput_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            // Permitir teclas de control (como Backspace)
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+                return;
+            }
+
+            // Solo permite un punto decimal
+            if ((e.KeyChar == '.') && (textBox.Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+                return;
+            }
+
+            // Verificar si el valor ingresado es mayor a 100
+            string newText = textBox.Text.Insert(textBox.SelectionStart, e.KeyChar.ToString());
+            if (decimal.TryParse(newText, out decimal value) && value > 100)
+            {
+                e.Handled = true;
+                return;
+            }
+        }
+
     }
 }

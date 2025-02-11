@@ -31,7 +31,6 @@ namespace PuntoVentaCasaCeja
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.cancelar = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label8 = new System.Windows.Forms.Label();
@@ -56,10 +55,13 @@ namespace PuntoVentaCasaCeja
             this.label5 = new System.Windows.Forms.Label();
             this.txtpagoentrega = new System.Windows.Forms.TextBox();
             this.txtobservaciones = new System.Windows.Forms.TextBox();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtPorcentajeDesc = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -68,8 +70,8 @@ namespace PuntoVentaCasaCeja
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.tableLayoutPanel3);
-            this.groupBox1.Font = new System.Drawing.Font("Segoe UI Semibold", 24F, System.Drawing.FontStyle.Bold);
-            this.groupBox1.Location = new System.Drawing.Point(16, 15);
+            this.groupBox1.Font = new System.Drawing.Font("Segoe UI Semibold", 22F, System.Drawing.FontStyle.Bold);
+            this.groupBox1.Location = new System.Drawing.Point(13, 2);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
@@ -85,44 +87,27 @@ namespace PuntoVentaCasaCeja
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel3.ColumnCount = 1;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel2, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel1, 0, 0);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(8, 60);
+            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel2, 0, 1);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(8, 44);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 2;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(1425, 782);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(1425, 798);
             this.tableLayoutPanel3.TabIndex = 2;
-            // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel2.ColumnCount = 3;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel2.Controls.Add(this.cancelar, 1, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(4, 706);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1417, 72);
-            this.tableLayoutPanel2.TabIndex = 1;
             // 
             // cancelar
             // 
             this.cancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cancelar.Location = new System.Drawing.Point(358, 4);
+            this.cancelar.Font = new System.Drawing.Font("Segoe UI Semibold", 20F, System.Drawing.FontStyle.Bold);
+            this.cancelar.Location = new System.Drawing.Point(712, 634);
             this.cancelar.Margin = new System.Windows.Forms.Padding(4);
             this.cancelar.Name = "cancelar";
-            this.cancelar.Size = new System.Drawing.Size(700, 64);
+            this.cancelar.Size = new System.Drawing.Size(701, 72);
             this.cancelar.TabIndex = 11;
             this.cancelar.Text = "CANCELAR (Esc)";
             this.cancelar.UseVisualStyleBackColor = true;
@@ -136,8 +121,9 @@ namespace PuntoVentaCasaCeja
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.label11, 0, 14);
+            this.tableLayoutPanel1.Controls.Add(this.cancelar, 1, 15);
             this.tableLayoutPanel1.Controls.Add(this.label8, 1, 12);
-            this.tableLayoutPanel1.Controls.Add(this.aceptar, 0, 15);
             this.tableLayoutPanel1.Controls.Add(this.txtcorreo, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.label7, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.label6, 0, 3);
@@ -146,7 +132,6 @@ namespace PuntoVentaCasaCeja
             this.tableLayoutPanel1.Controls.Add(this.label1, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label9, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.txtfolio, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.abonar, 1, 15);
             this.tableLayoutPanel1.Controls.Add(this.txtdias, 0, 7);
             this.tableLayoutPanel1.Controls.Add(this.txtfecha, 1, 7);
             this.tableLayoutPanel1.Controls.Add(this.label10, 1, 6);
@@ -158,35 +143,36 @@ namespace PuntoVentaCasaCeja
             this.tableLayoutPanel1.Controls.Add(this.label5, 0, 12);
             this.tableLayoutPanel1.Controls.Add(this.txtpagoentrega, 0, 13);
             this.tableLayoutPanel1.Controls.Add(this.txtobservaciones, 1, 13);
+            this.tableLayoutPanel1.Controls.Add(this.txtPorcentajeDesc, 0, 15);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 4);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 16;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.57143F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.42857F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.57143F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.85185F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 34.81482F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 77F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1417, 694);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1417, 710);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label8.Location = new System.Drawing.Point(712, 488);
+            this.label8.Location = new System.Drawing.Point(712, 485);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(358, 37);
@@ -198,10 +184,11 @@ namespace PuntoVentaCasaCeja
             this.aceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.aceptar.Location = new System.Drawing.Point(4, 614);
+            this.aceptar.Font = new System.Drawing.Font("Segoe UI Semibold", 20F, System.Drawing.FontStyle.Bold);
+            this.aceptar.Location = new System.Drawing.Point(4, 4);
             this.aceptar.Margin = new System.Windows.Forms.Padding(4);
             this.aceptar.Name = "aceptar";
-            this.aceptar.Size = new System.Drawing.Size(700, 76);
+            this.aceptar.Size = new System.Drawing.Size(701, 66);
             this.aceptar.TabIndex = 9;
             this.aceptar.Text = "ACEPTAR (F5)";
             this.aceptar.UseVisualStyleBackColor = true;
@@ -213,17 +200,17 @@ namespace PuntoVentaCasaCeja
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtcorreo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtcorreo.Enabled = false;
-            this.txtcorreo.Location = new System.Drawing.Point(712, 163);
+            this.txtcorreo.Location = new System.Drawing.Point(712, 165);
             this.txtcorreo.Margin = new System.Windows.Forms.Padding(4);
             this.txtcorreo.Name = "txtcorreo";
-            this.txtcorreo.Size = new System.Drawing.Size(701, 61);
+            this.txtcorreo.Size = new System.Drawing.Size(701, 56);
             this.txtcorreo.TabIndex = 3;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label7.Location = new System.Drawing.Point(712, 122);
+            this.label7.Location = new System.Drawing.Point(712, 124);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(122, 37);
@@ -234,7 +221,7 @@ namespace PuntoVentaCasaCeja
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label6.Location = new System.Drawing.Point(4, 122);
+            this.label6.Location = new System.Drawing.Point(4, 124);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(148, 37);
@@ -247,10 +234,10 @@ namespace PuntoVentaCasaCeja
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txttel.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txttel.Enabled = false;
-            this.txttel.Location = new System.Drawing.Point(4, 163);
+            this.txttel.Location = new System.Drawing.Point(4, 165);
             this.txttel.Margin = new System.Windows.Forms.Padding(4);
             this.txttel.Name = "txttel";
-            this.txttel.Size = new System.Drawing.Size(700, 61);
+            this.txttel.Size = new System.Drawing.Size(700, 56);
             this.txttel.TabIndex = 2;
             // 
             // txtnombre
@@ -262,7 +249,7 @@ namespace PuntoVentaCasaCeja
             this.txtnombre.Location = new System.Drawing.Point(712, 41);
             this.txtnombre.Margin = new System.Windows.Forms.Padding(4);
             this.txtnombre.Name = "txtnombre";
-            this.txtnombre.Size = new System.Drawing.Size(701, 61);
+            this.txtnombre.Size = new System.Drawing.Size(701, 56);
             this.txtnombre.TabIndex = 1;
             // 
             // label1
@@ -296,7 +283,7 @@ namespace PuntoVentaCasaCeja
             this.txtfolio.Location = new System.Drawing.Point(4, 41);
             this.txtfolio.Margin = new System.Windows.Forms.Padding(4);
             this.txtfolio.Name = "txtfolio";
-            this.txtfolio.Size = new System.Drawing.Size(700, 61);
+            this.txtfolio.Size = new System.Drawing.Size(700, 56);
             this.txtfolio.TabIndex = 0;
             this.txtfolio.TextChanged += new System.EventHandler(this.txtfolio_TextChanged);
             // 
@@ -305,10 +292,11 @@ namespace PuntoVentaCasaCeja
             this.abonar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.abonar.Location = new System.Drawing.Point(712, 614);
+            this.abonar.Font = new System.Drawing.Font("Segoe UI Semibold", 20F, System.Drawing.FontStyle.Bold);
+            this.abonar.Location = new System.Drawing.Point(713, 4);
             this.abonar.Margin = new System.Windows.Forms.Padding(4);
             this.abonar.Name = "abonar";
-            this.abonar.Size = new System.Drawing.Size(701, 76);
+            this.abonar.Size = new System.Drawing.Size(702, 66);
             this.abonar.TabIndex = 10;
             this.abonar.Text = "ABONAR (F6)";
             this.abonar.UseVisualStyleBackColor = true;
@@ -319,10 +307,10 @@ namespace PuntoVentaCasaCeja
             this.txtdias.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtdias.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtdias.Location = new System.Drawing.Point(4, 285);
+            this.txtdias.Location = new System.Drawing.Point(4, 286);
             this.txtdias.Margin = new System.Windows.Forms.Padding(4);
             this.txtdias.Name = "txtdias";
-            this.txtdias.Size = new System.Drawing.Size(700, 61);
+            this.txtdias.Size = new System.Drawing.Size(700, 56);
             this.txtdias.TabIndex = 4;
             this.txtdias.TextChanged += new System.EventHandler(this.txtdias_TextChanged);
             this.txtdias.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.integerInput_KeyPress);
@@ -334,17 +322,17 @@ namespace PuntoVentaCasaCeja
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtfecha.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtfecha.Enabled = false;
-            this.txtfecha.Location = new System.Drawing.Point(712, 285);
+            this.txtfecha.Location = new System.Drawing.Point(712, 286);
             this.txtfecha.Margin = new System.Windows.Forms.Padding(4);
             this.txtfecha.Name = "txtfecha";
-            this.txtfecha.Size = new System.Drawing.Size(701, 61);
+            this.txtfecha.Size = new System.Drawing.Size(701, 56);
             this.txtfecha.TabIndex = 5;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label10.Location = new System.Drawing.Point(712, 244);
+            this.label10.Location = new System.Drawing.Point(712, 245);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(326, 37);
@@ -355,7 +343,7 @@ namespace PuntoVentaCasaCeja
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label4.Location = new System.Drawing.Point(4, 244);
+            this.label4.Location = new System.Drawing.Point(4, 245);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(256, 37);
@@ -368,17 +356,17 @@ namespace PuntoVentaCasaCeja
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtabonado.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtabonado.Enabled = false;
-            this.txtabonado.Location = new System.Drawing.Point(712, 407);
+            this.txtabonado.Location = new System.Drawing.Point(712, 410);
             this.txtabonado.Margin = new System.Windows.Forms.Padding(4);
             this.txtabonado.Name = "txtabonado";
-            this.txtabonado.Size = new System.Drawing.Size(701, 61);
+            this.txtabonado.Size = new System.Drawing.Size(701, 56);
             this.txtabonado.TabIndex = 7;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label2.Location = new System.Drawing.Point(712, 366);
+            this.label2.Location = new System.Drawing.Point(712, 369);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(233, 37);
@@ -389,7 +377,7 @@ namespace PuntoVentaCasaCeja
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label3.Location = new System.Drawing.Point(4, 366);
+            this.label3.Location = new System.Drawing.Point(4, 369);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(212, 37);
@@ -402,17 +390,17 @@ namespace PuntoVentaCasaCeja
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txttotal.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txttotal.Enabled = false;
-            this.txttotal.Location = new System.Drawing.Point(4, 407);
+            this.txttotal.Location = new System.Drawing.Point(4, 410);
             this.txttotal.Margin = new System.Windows.Forms.Padding(4);
             this.txttotal.Name = "txttotal";
-            this.txttotal.Size = new System.Drawing.Size(700, 61);
+            this.txttotal.Size = new System.Drawing.Size(700, 56);
             this.txttotal.TabIndex = 6;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label5.Location = new System.Drawing.Point(4, 488);
+            this.label5.Location = new System.Drawing.Point(4, 485);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(277, 37);
@@ -425,10 +413,10 @@ namespace PuntoVentaCasaCeja
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtpagoentrega.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtpagoentrega.Enabled = false;
-            this.txtpagoentrega.Location = new System.Drawing.Point(4, 529);
+            this.txtpagoentrega.Location = new System.Drawing.Point(4, 526);
             this.txtpagoentrega.Margin = new System.Windows.Forms.Padding(4);
             this.txtpagoentrega.Name = "txtpagoentrega";
-            this.txtpagoentrega.Size = new System.Drawing.Size(700, 61);
+            this.txtpagoentrega.Size = new System.Drawing.Size(700, 56);
             this.txtpagoentrega.TabIndex = 8;
             // 
             // txtobservaciones
@@ -436,11 +424,51 @@ namespace PuntoVentaCasaCeja
             this.txtobservaciones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtobservaciones.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtobservaciones.Location = new System.Drawing.Point(712, 529);
+            this.txtobservaciones.Location = new System.Drawing.Point(712, 526);
             this.txtobservaciones.Margin = new System.Windows.Forms.Padding(4);
             this.txtobservaciones.Name = "txtobservaciones";
-            this.txtobservaciones.Size = new System.Drawing.Size(701, 61);
+            this.txtobservaciones.Size = new System.Drawing.Size(701, 56);
             this.txtobservaciones.TabIndex = 25;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Controls.Add(this.abonar, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.aceptar, 0, 0);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 721);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1419, 74);
+            this.tableLayoutPanel2.TabIndex = 1;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
+            this.label11.Location = new System.Drawing.Point(4, 586);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(356, 37);
+            this.label11.TabIndex = 12;
+            this.label11.Text = "ABONAR POR PORCENTAJE";
+            // 
+            // txtPorcentajeDesc
+            // 
+            this.txtPorcentajeDesc.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPorcentajeDesc.Font = new System.Drawing.Font("Segoe UI Semibold", 26F, System.Drawing.FontStyle.Bold);
+            this.txtPorcentajeDesc.Location = new System.Drawing.Point(3, 633);
+            this.txtPorcentajeDesc.Name = "txtPorcentajeDesc";
+            this.txtPorcentajeDesc.Size = new System.Drawing.Size(702, 65);
+            this.txtPorcentajeDesc.TabIndex = 26;
+            this.txtPorcentajeDesc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericInput_KeyPress);
             // 
             // RegistrarApartado
             // 
@@ -456,9 +484,9 @@ namespace PuntoVentaCasaCeja
             this.Load += new System.EventHandler(this.RegistrarApartado_Load);
             this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -480,7 +508,6 @@ namespace PuntoVentaCasaCeja
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtfolio;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtabonado;
         private System.Windows.Forms.Button abonar;
@@ -492,5 +519,8 @@ namespace PuntoVentaCasaCeja
         private System.Windows.Forms.TextBox txtfecha;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.TextBox txtPorcentajeDesc;
     }
 }
