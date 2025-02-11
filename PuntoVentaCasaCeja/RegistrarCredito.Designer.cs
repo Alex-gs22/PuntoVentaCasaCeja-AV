@@ -70,9 +70,9 @@ namespace PuntoVentaCasaCeja
             this.groupBox1.Controls.Add(this.tableLayoutPanel3);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI Semibold", 24F, System.Drawing.FontStyle.Bold);
             this.groupBox1.Location = new System.Drawing.Point(16, 15);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(1451, 780);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
@@ -88,7 +88,7 @@ namespace PuntoVentaCasaCeja
             this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel2, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel1, 0, 0);
             this.tableLayoutPanel3.Location = new System.Drawing.Point(8, 60);
-            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 2;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -107,7 +107,7 @@ namespace PuntoVentaCasaCeja
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel2.Controls.Add(this.cancelar, 1, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(4, 637);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -120,7 +120,7 @@ namespace PuntoVentaCasaCeja
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cancelar.Location = new System.Drawing.Point(360, 4);
-            this.cancelar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cancelar.Margin = new System.Windows.Forms.Padding(4);
             this.cancelar.Name = "cancelar";
             this.cancelar.Size = new System.Drawing.Size(705, 64);
             this.cancelar.TabIndex = 11;
@@ -159,7 +159,7 @@ namespace PuntoVentaCasaCeja
             this.tableLayoutPanel1.Controls.Add(this.txtpagoentrega, 0, 13);
             this.tableLayoutPanel1.Controls.Add(this.txtobservaciones, 1, 13);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 4);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 16;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -199,7 +199,7 @@ namespace PuntoVentaCasaCeja
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.aceptar.Location = new System.Drawing.Point(4, 549);
-            this.aceptar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.aceptar.Margin = new System.Windows.Forms.Padding(4);
             this.aceptar.Name = "aceptar";
             this.aceptar.Size = new System.Drawing.Size(705, 72);
             this.aceptar.TabIndex = 9;
@@ -214,7 +214,7 @@ namespace PuntoVentaCasaCeja
             this.txtcorreo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtcorreo.Enabled = false;
             this.txtcorreo.Location = new System.Drawing.Point(717, 150);
-            this.txtcorreo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtcorreo.Margin = new System.Windows.Forms.Padding(4);
             this.txtcorreo.Name = "txtcorreo";
             this.txtcorreo.Size = new System.Drawing.Size(706, 61);
             this.txtcorreo.TabIndex = 3;
@@ -248,7 +248,7 @@ namespace PuntoVentaCasaCeja
             this.txttel.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txttel.Enabled = false;
             this.txttel.Location = new System.Drawing.Point(4, 150);
-            this.txttel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txttel.Margin = new System.Windows.Forms.Padding(4);
             this.txttel.Name = "txttel";
             this.txttel.Size = new System.Drawing.Size(705, 61);
             this.txttel.TabIndex = 2;
@@ -260,7 +260,7 @@ namespace PuntoVentaCasaCeja
             this.txtnombre.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtnombre.Enabled = false;
             this.txtnombre.Location = new System.Drawing.Point(717, 41);
-            this.txtnombre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtnombre.Margin = new System.Windows.Forms.Padding(4);
             this.txtnombre.Name = "txtnombre";
             this.txtnombre.Size = new System.Drawing.Size(706, 61);
             this.txtnombre.TabIndex = 1;
@@ -294,7 +294,7 @@ namespace PuntoVentaCasaCeja
             this.txtfolio.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtfolio.Enabled = false;
             this.txtfolio.Location = new System.Drawing.Point(4, 41);
-            this.txtfolio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtfolio.Margin = new System.Windows.Forms.Padding(4);
             this.txtfolio.Name = "txtfolio";
             this.txtfolio.Size = new System.Drawing.Size(705, 61);
             this.txtfolio.TabIndex = 0;
@@ -305,7 +305,7 @@ namespace PuntoVentaCasaCeja
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.abonar.Location = new System.Drawing.Point(717, 549);
-            this.abonar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.abonar.Margin = new System.Windows.Forms.Padding(4);
             this.abonar.Name = "abonar";
             this.abonar.Size = new System.Drawing.Size(706, 72);
             this.abonar.TabIndex = 10;
@@ -319,12 +319,13 @@ namespace PuntoVentaCasaCeja
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtdias.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtdias.Location = new System.Drawing.Point(4, 259);
-            this.txtdias.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtdias.Margin = new System.Windows.Forms.Padding(4);
             this.txtdias.Name = "txtdias";
             this.txtdias.Size = new System.Drawing.Size(705, 61);
             this.txtdias.TabIndex = 4;
             this.txtdias.TextChanged += new System.EventHandler(this.txtdias_TextChanged);
             this.txtdias.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.integerInput_KeyPress);
+            this.txtdias.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtdias_PreviewKeyDown);
             // 
             // txtfecha
             // 
@@ -333,7 +334,7 @@ namespace PuntoVentaCasaCeja
             this.txtfecha.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtfecha.Enabled = false;
             this.txtfecha.Location = new System.Drawing.Point(717, 259);
-            this.txtfecha.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtfecha.Margin = new System.Windows.Forms.Padding(4);
             this.txtfecha.Name = "txtfecha";
             this.txtfecha.Size = new System.Drawing.Size(706, 61);
             this.txtfecha.TabIndex = 5;
@@ -367,7 +368,7 @@ namespace PuntoVentaCasaCeja
             this.txtabonado.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtabonado.Enabled = false;
             this.txtabonado.Location = new System.Drawing.Point(717, 368);
-            this.txtabonado.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtabonado.Margin = new System.Windows.Forms.Padding(4);
             this.txtabonado.Name = "txtabonado";
             this.txtabonado.Size = new System.Drawing.Size(706, 61);
             this.txtabonado.TabIndex = 7;
@@ -401,7 +402,7 @@ namespace PuntoVentaCasaCeja
             this.txttotal.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txttotal.Enabled = false;
             this.txttotal.Location = new System.Drawing.Point(4, 368);
-            this.txttotal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txttotal.Margin = new System.Windows.Forms.Padding(4);
             this.txttotal.Name = "txttotal";
             this.txttotal.Size = new System.Drawing.Size(705, 61);
             this.txttotal.TabIndex = 6;
@@ -424,7 +425,7 @@ namespace PuntoVentaCasaCeja
             this.txtpagoentrega.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtpagoentrega.Enabled = false;
             this.txtpagoentrega.Location = new System.Drawing.Point(4, 477);
-            this.txtpagoentrega.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtpagoentrega.Margin = new System.Windows.Forms.Padding(4);
             this.txtpagoentrega.Name = "txtpagoentrega";
             this.txtpagoentrega.Size = new System.Drawing.Size(705, 61);
             this.txtpagoentrega.TabIndex = 8;
@@ -435,7 +436,7 @@ namespace PuntoVentaCasaCeja
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtobservaciones.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtobservaciones.Location = new System.Drawing.Point(717, 477);
-            this.txtobservaciones.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtobservaciones.Margin = new System.Windows.Forms.Padding(4);
             this.txtobservaciones.Name = "txtobservaciones";
             this.txtobservaciones.Size = new System.Drawing.Size(706, 61);
             this.txtobservaciones.TabIndex = 25;
@@ -446,7 +447,7 @@ namespace PuntoVentaCasaCeja
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1483, 810);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "RegistrarCredito";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RegistrarCredito";

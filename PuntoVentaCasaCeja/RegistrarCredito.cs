@@ -276,6 +276,22 @@ namespace PuntoVentaCasaCeja
         {
             MetodoPago mp = new MetodoPago(totalcarrito - totalpagado, abono, data);
             mp.ShowDialog();
+            aceptar.PerformClick();
+        }
+
+
+        private void txtdias_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) {
+                if (txtdias.Text.Equals(""))
+                {
+                    MessageBox.Show("Favor de completar los campos requeridos", "Advertencia");
+                }
+                else
+                {
+                    abonar.PerformClick();
+                }
+            }  
         }
 
         private void cancelar_Click(object sender, EventArgs e)
