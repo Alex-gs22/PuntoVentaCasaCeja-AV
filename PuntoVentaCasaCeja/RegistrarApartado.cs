@@ -79,6 +79,7 @@ namespace PuntoVentaCasaCeja
 
         private void aceptar_Click(object sender, EventArgs e)
         {
+            bool isOnlyEfective = false;
             if (txtnombre.Text.Equals("") || txtcorreo.Text.Equals("") || txttel.Text.Equals("") || txtdias.Text.Equals(""))
             {
                 MessageBox.Show("Favor de completar los campos requeridos", "Advertencia");
@@ -131,10 +132,18 @@ namespace PuntoVentaCasaCeja
                             localDM.acumularEfectivoApartado(pagos["efectivo"], idcorte);
                         }
                     }
+                    isOnlyEfective = (pagos.Count == 1 && pagos.ContainsKey("efectivo"));
 
-                    txtfolio.Text = folio;                    
-                    imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
-                    imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
+                    txtfolio.Text = folio;
+                    if (isOnlyEfective)
+                    {
+                        imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
+                    }
+                    else
+                    {
+                        imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
+                        imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
+                    }
 
                     send(na);
                     this.DialogResult = DialogResult.Yes;
@@ -298,11 +307,27 @@ namespace PuntoVentaCasaCeja
         {
             MetodoPago mp = new MetodoPago(totalcarrito-totalpagado, abono, data);
             mp.ShowDialog();
+            aceptar.PerformClick();
         }
 
         private void txtfolio_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void txtdias_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (txtdias.Text.Equals(""))
+                {
+                    MessageBox.Show("Favor de completar los campos requeridos", "Advertencia");
+                }
+                else
+                {
+                    abonar.PerformClick();
+                }
+            }
         }
 
         private void cancelar_Click(object sender, EventArgs e)

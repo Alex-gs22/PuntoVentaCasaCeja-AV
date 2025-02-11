@@ -81,6 +81,7 @@ namespace PuntoVentaCasaCeja
 
         private async void aceptar_Click(object sender, EventArgs e)
         {
+            bool isOnlyEfective = false;
             if (txtnombre.Text.Equals("") || txtcorreo.Text.Equals("") || txttel.Text.Equals("") || txtdias.Text.Equals(""))
             {
                 MessageBox.Show("Favor de completar los campos requeridos", "Advertencia");
@@ -125,7 +126,6 @@ namespace PuntoVentaCasaCeja
                             total_abonado = totalpagado,
                             credito_id = 0
                         };
-
                         int ida = localDM.abonoCreditoTemporal(abono);
                         nc.abonos.Add(abono);
 
@@ -136,9 +136,18 @@ namespace PuntoVentaCasaCeja
                         }
                     }
 
+                    isOnlyEfective = (pagos.Count == 1 && pagos.ContainsKey("efectivo"));
+
                     txtfolio.Text = folio;
-                    imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
-                    imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
+                    if (isOnlyEfective)
+                    {
+                        imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
+                    }
+                    else
+                    {
+                        imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
+                        imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt")); 
+                    }
                     // Lógica de impresión (omitida por relevancia)
 
                     await send(nc);
