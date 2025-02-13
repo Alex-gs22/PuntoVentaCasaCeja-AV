@@ -36,6 +36,29 @@ namespace PuntoVentaCasaCeja
             boxsucursal.DataSource = sucursales;
             listfont = new List<string>();
             listSizes = new List<int> { 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
+
+            txtid.TextChanged += new EventHandler(ValidateFields);
+            tamaños.SelectedIndexChanged += new EventHandler(ValidateFields);
+            fuentes.SelectedIndexChanged += new EventHandler(ValidateFields);
+            boxsucursal.SelectedIndexChanged += new EventHandler(ValidateFields);
+            txtprintername.TextChanged += new EventHandler(ValidateFields);
+            tipo.SelectedIndexChanged += new EventHandler(ValidateFields);
+
+            // Validar campos al inicio
+            ValidateFields(null, null);
+        }
+
+        // Método para validar los campos
+        private void ValidateFields(object sender, EventArgs e)
+        {
+            bool isValid = tamaños.SelectedIndex != -1 &&
+                           !string.IsNullOrEmpty(txtid.Text) &&
+                           fuentes.SelectedIndex != -1 &&
+                           boxsucursal.SelectedIndex != -1 &&
+                           !string.IsNullOrEmpty(txtprintername.Text) &&
+                           tipo.SelectedIndex != -1;
+
+            guardar.Enabled = isValid;
         }
 
         private void selectprinter_Click(object sender, EventArgs e)
