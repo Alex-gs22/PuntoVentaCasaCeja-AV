@@ -31,10 +31,10 @@ namespace PuntoVentaCasaCeja
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.cancelar = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.cancelar = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
-            this.aceptar = new System.Windows.Forms.Button();
             this.txtcorreo = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -43,7 +43,6 @@ namespace PuntoVentaCasaCeja
             this.label1 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.txtfolio = new System.Windows.Forms.TextBox();
-            this.abonar = new System.Windows.Forms.Button();
             this.txtdias = new System.Windows.Forms.TextBox();
             this.txtfecha = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -55,9 +54,10 @@ namespace PuntoVentaCasaCeja
             this.label5 = new System.Windows.Forms.Label();
             this.txtpagoentrega = new System.Windows.Forms.TextBox();
             this.txtobservaciones = new System.Windows.Forms.TextBox();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.label11 = new System.Windows.Forms.Label();
             this.txtPorcentajeDesc = new System.Windows.Forms.TextBox();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.abonar = new System.Windows.Forms.Button();
+            this.aceptar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -97,21 +97,6 @@ namespace PuntoVentaCasaCeja
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(1425, 798);
             this.tableLayoutPanel3.TabIndex = 2;
-            // 
-            // cancelar
-            // 
-            this.cancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cancelar.Font = new System.Drawing.Font("Segoe UI Semibold", 20F, System.Drawing.FontStyle.Bold);
-            this.cancelar.Location = new System.Drawing.Point(712, 634);
-            this.cancelar.Margin = new System.Windows.Forms.Padding(4);
-            this.cancelar.Name = "cancelar";
-            this.cancelar.Size = new System.Drawing.Size(701, 72);
-            this.cancelar.TabIndex = 11;
-            this.cancelar.Text = "CANCELAR (Esc)";
-            this.cancelar.UseVisualStyleBackColor = true;
-            this.cancelar.Click += new System.EventHandler(this.cancelar_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -168,6 +153,32 @@ namespace PuntoVentaCasaCeja
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1417, 710);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
+            this.label11.Location = new System.Drawing.Point(4, 586);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(356, 37);
+            this.label11.TabIndex = 12;
+            this.label11.Text = "ABONAR POR PORCENTAJE";
+            // 
+            // cancelar
+            // 
+            this.cancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cancelar.Font = new System.Drawing.Font("Segoe UI Semibold", 20F, System.Drawing.FontStyle.Bold);
+            this.cancelar.Location = new System.Drawing.Point(712, 634);
+            this.cancelar.Margin = new System.Windows.Forms.Padding(4);
+            this.cancelar.Name = "cancelar";
+            this.cancelar.Size = new System.Drawing.Size(701, 72);
+            this.cancelar.TabIndex = 11;
+            this.cancelar.Text = "CANCELAR (Esc)";
+            this.cancelar.UseVisualStyleBackColor = true;
+            this.cancelar.Click += new System.EventHandler(this.cancelar_Click);
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -178,21 +189,6 @@ namespace PuntoVentaCasaCeja
             this.label8.Size = new System.Drawing.Size(358, 37);
             this.label8.TabIndex = 11;
             this.label8.Text = "OBSERVACIONES (opcional)";
-            // 
-            // aceptar
-            // 
-            this.aceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.aceptar.Font = new System.Drawing.Font("Segoe UI Semibold", 20F, System.Drawing.FontStyle.Bold);
-            this.aceptar.Location = new System.Drawing.Point(4, 4);
-            this.aceptar.Margin = new System.Windows.Forms.Padding(4);
-            this.aceptar.Name = "aceptar";
-            this.aceptar.Size = new System.Drawing.Size(701, 66);
-            this.aceptar.TabIndex = 9;
-            this.aceptar.Text = "ACEPTAR (F5)";
-            this.aceptar.UseVisualStyleBackColor = true;
-            this.aceptar.Click += new System.EventHandler(this.aceptar_Click);
             // 
             // txtcorreo
             // 
@@ -286,21 +282,6 @@ namespace PuntoVentaCasaCeja
             this.txtfolio.Size = new System.Drawing.Size(700, 56);
             this.txtfolio.TabIndex = 0;
             this.txtfolio.TextChanged += new System.EventHandler(this.txtfolio_TextChanged);
-            // 
-            // abonar
-            // 
-            this.abonar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.abonar.Font = new System.Drawing.Font("Segoe UI Semibold", 20F, System.Drawing.FontStyle.Bold);
-            this.abonar.Location = new System.Drawing.Point(713, 4);
-            this.abonar.Margin = new System.Windows.Forms.Padding(4);
-            this.abonar.Name = "abonar";
-            this.abonar.Size = new System.Drawing.Size(702, 66);
-            this.abonar.TabIndex = 10;
-            this.abonar.Text = "ABONAR (F6)";
-            this.abonar.UseVisualStyleBackColor = true;
-            this.abonar.Click += new System.EventHandler(this.abonar_Click);
             // 
             // txtdias
             // 
@@ -430,6 +411,18 @@ namespace PuntoVentaCasaCeja
             this.txtobservaciones.Size = new System.Drawing.Size(701, 56);
             this.txtobservaciones.TabIndex = 25;
             // 
+            // txtPorcentajeDesc
+            // 
+            this.txtPorcentajeDesc.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPorcentajeDesc.Font = new System.Drawing.Font("Segoe UI Semibold", 26F, System.Drawing.FontStyle.Bold);
+            this.txtPorcentajeDesc.Location = new System.Drawing.Point(3, 633);
+            this.txtPorcentajeDesc.Name = "txtPorcentajeDesc";
+            this.txtPorcentajeDesc.Size = new System.Drawing.Size(702, 65);
+            this.txtPorcentajeDesc.TabIndex = 26;
+            this.txtPorcentajeDesc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericInput_KeyPress);
+            // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -447,28 +440,35 @@ namespace PuntoVentaCasaCeja
             this.tableLayoutPanel2.Size = new System.Drawing.Size(1419, 74);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
-            // label11
+            // abonar
             // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label11.Location = new System.Drawing.Point(4, 586);
-            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(356, 37);
-            this.label11.TabIndex = 12;
-            this.label11.Text = "ABONAR POR PORCENTAJE";
-            // 
-            // txtPorcentajeDesc
-            // 
-            this.txtPorcentajeDesc.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.abonar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPorcentajeDesc.Font = new System.Drawing.Font("Segoe UI Semibold", 26F, System.Drawing.FontStyle.Bold);
-            this.txtPorcentajeDesc.Location = new System.Drawing.Point(3, 633);
-            this.txtPorcentajeDesc.Name = "txtPorcentajeDesc";
-            this.txtPorcentajeDesc.Size = new System.Drawing.Size(702, 65);
-            this.txtPorcentajeDesc.TabIndex = 26;
-            this.txtPorcentajeDesc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericInput_KeyPress);
+            this.abonar.Font = new System.Drawing.Font("Segoe UI Semibold", 20F, System.Drawing.FontStyle.Bold);
+            this.abonar.Location = new System.Drawing.Point(713, 4);
+            this.abonar.Margin = new System.Windows.Forms.Padding(4);
+            this.abonar.Name = "abonar";
+            this.abonar.Size = new System.Drawing.Size(702, 66);
+            this.abonar.TabIndex = 10;
+            this.abonar.Text = "ABONAR (F6)";
+            this.abonar.UseVisualStyleBackColor = true;
+            this.abonar.Click += new System.EventHandler(this.abonar_Click);
+            // 
+            // aceptar
+            // 
+            this.aceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.aceptar.Font = new System.Drawing.Font("Segoe UI Semibold", 20F, System.Drawing.FontStyle.Bold);
+            this.aceptar.Location = new System.Drawing.Point(4, 4);
+            this.aceptar.Margin = new System.Windows.Forms.Padding(4);
+            this.aceptar.Name = "aceptar";
+            this.aceptar.Size = new System.Drawing.Size(701, 66);
+            this.aceptar.TabIndex = 9;
+            this.aceptar.Text = "ACEPTAR (F5)";
+            this.aceptar.UseVisualStyleBackColor = true;
+            this.aceptar.Click += new System.EventHandler(this.aceptar_Click);
             // 
             // RegistrarApartado
             // 

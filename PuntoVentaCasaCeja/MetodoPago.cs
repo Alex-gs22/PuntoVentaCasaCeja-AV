@@ -35,7 +35,8 @@ namespace PuntoVentaCasaCeja
 
         private void efectivo_Click(object sender, EventArgs e)
         {
-            IngresarMonto im = new IngresarMonto(1, abonar, setTotal, total);            
+            Console.WriteLine("Efectivo mp "+data.porcentajeDesc);
+            IngresarMonto im = new IngresarMonto(1, abonar, setTotal, total, data);            
             im.ShowDialog();
             if (total <= 0)
             {
@@ -43,17 +44,19 @@ namespace PuntoVentaCasaCeja
             }
         }
         void setTotal(double cant)
-        {            
-            total -= cant;            
-            abonado += cant;                                   
+        {
+            total -= cant;
+            abonado += cant;
             data.totalabonado = abonado;
-            lblfaltante.Text =  total.ToString("0.00");
+            lblfaltante.Text = total.ToString("0.00");
             lblabonado.Text = abonado.ToString("0.00");
         }
 
         private void debito_Click(object sender, EventArgs e)
         {
-            IngresarMonto im = new IngresarMonto(2, abonar, setTotal, total);
+
+            Console.WriteLine("debito mp " + data.porcentajeDesc);
+            IngresarMonto im = new IngresarMonto(2, abonar, setTotal, total, data);
             im.ShowDialog();
             if (total <= 0)
             {
@@ -63,7 +66,8 @@ namespace PuntoVentaCasaCeja
 
         private void credito_Click(object sender, EventArgs e)
         {
-            IngresarMonto im = new IngresarMonto(3, abonar, setTotal, total);
+            Console.WriteLine("credito mp " + data.porcentajeDesc);
+            IngresarMonto im = new IngresarMonto(3, abonar, setTotal, total, data);
             im.ShowDialog();
             if (total <= 0)
             {
@@ -73,7 +77,8 @@ namespace PuntoVentaCasaCeja
 
         private void cheque_Click(object sender, EventArgs e)
         {
-            IngresarMonto im = new IngresarMonto(4, abonar, setTotal, total);
+            Console.WriteLine("cheque mp " + data.porcentajeDesc);
+            IngresarMonto im = new IngresarMonto(4, abonar, setTotal, total, data);
             im.ShowDialog();
             if (total <= 0)
             {
@@ -83,7 +88,8 @@ namespace PuntoVentaCasaCeja
 
         private void transferencia_Click(object sender, EventArgs e)
         {
-            IngresarMonto im = new IngresarMonto(5, abonar, setTotal, total);
+            Console.WriteLine("transferencia mp " + data.porcentajeDesc);
+            IngresarMonto im = new IngresarMonto(5, abonar, setTotal, total, data);
             im.ShowDialog();
             if (total <= 0)
             {

@@ -394,7 +394,7 @@ namespace PuntoVentaCasaCeja
         }
         bool pedirApertura()
         {
-            IngresarMonto im = new IngresarMonto(0, abono, setApertura, 0);
+            IngresarMonto im = new IngresarMonto(0, abono, setApertura, 0, data);
             DialogResult response = im.ShowDialog();
             if (response == DialogResult.No)
             {

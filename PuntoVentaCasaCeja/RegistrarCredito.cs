@@ -285,7 +285,7 @@ namespace PuntoVentaCasaCeja
         {
             MetodoPago mp = new MetodoPago(totalcarrito - totalpagado, abono, data);
             mp.ShowDialog();
-            aceptar.PerformClick();
+            //aceptar.PerformClick();
         }
 
 

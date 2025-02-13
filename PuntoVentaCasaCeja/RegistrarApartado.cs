@@ -305,9 +305,18 @@ namespace PuntoVentaCasaCeja
 
         private void abonar_Click(object sender, EventArgs e)
         {
+            if (data.porcentajeDesc != -1)
+            {
+                double porcentajeDescuento = double.Parse(this.txtPorcentajeDesc.Text);
+
+                double descuentoPorcentaje = (porcentajeDescuento * this.totalcarrito) / 100;
+
+                data.porcentajeDesc = descuentoPorcentaje;
+            }
             MetodoPago mp = new MetodoPago(totalcarrito-totalpagado, abono, data);
             mp.ShowDialog();
-            aceptar.PerformClick();
+            this.txtPorcentajeDesc.Text = "0";
+            //aceptar.PerformClick();
         }
 
         private void txtfolio_TextChanged(object sender, EventArgs e)

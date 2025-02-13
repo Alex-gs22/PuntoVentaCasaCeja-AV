@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Markup;
 
 namespace PuntoVentaCasaCeja
 {
@@ -15,14 +16,16 @@ namespace PuntoVentaCasaCeja
         int tipo;
         Action<int, double> abono;
         Action<double> setTotal;
-        double monto;        
-        public IngresarMonto(int tipo, Action<int, double> Abono, Action<double> SetTotal, double monto)
+        double monto;
+        CurrentData data;
+        public IngresarMonto(int tipo, Action<int, double> Abono, Action<double> SetTotal, double monto, CurrentData data)
         {
             InitializeComponent();            
             this.tipo = tipo;
             this.abono = Abono;
             this.setTotal = SetTotal;
             this.monto = monto;
+            this.data = data;
         }
         private void numericInput_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -115,10 +118,25 @@ namespace PuntoVentaCasaCeja
             {
                 this.Text = "Ingresar monto de apertura";
                 groupBox1.Text = "MONTO DE APERTURA";
-            } else if (tipo > 0)
+            }
+            else if (tipo > 0)
             {
-                this.Text="Ingresar pago";
+                this.Text = "Ingresar pago";
                 groupBox1.Text = "INGRESAR PAGO (" + monto.ToString("0.00") + ")";
+            }
+            Console.WriteLine("Procentaje en ingresar monto " + data.porcentajeDesc);
+            if (data != null && data.porcentajeDesc > 0) // Simplificación de la condición y comparación directa con 0
+            {
+                Console.WriteLine("Procentaje en ingresar monto " + data.porcentajeDesc);
+                this.txtcantidad.Text = data.porcentajeDesc.ToString("N2"); // Mostrar mensaje descriptivo y formatear el descuento
+                this.txtcantidad.Enabled = false;
+                data.porcentajeDesc = -1;
+                // Resetear a 0 (valor numérico directamente)
+            }
+            else
+            {
+                txtcantidad.Text = "";
+                txtcantidad.Enabled = true;
             }
         }
     }
