@@ -955,14 +955,32 @@ apartados
   <data name="&gt;&gt;Bdescuento.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="BdescTemporada.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="BdescTemporada.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="BdescTemporada.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 12pt, style=Bold</value>
+  </data>
+  <data name="BdescTemporada.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="BdescTemporada.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1468, 787</value>
+    <value>1469, 787</value>
+  </data>
+  <data name="BdescTemporada.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="BdescTemporada.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 109</value>
+    <value>148, 108</value>
   </data>
   <data name="BdescTemporada.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>35</value>
+  </data>
+  <data name="BdescTemporada.Text" xml:space="preserve">
+    <value>Habilitar Desc. por Temporada</value>
   </data>
   <data name="&gt;&gt;BdescTemporada.Name" xml:space="preserve">
     <value>BdescTemporada</value>

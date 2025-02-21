@@ -1672,6 +1672,7 @@ namespace PuntoVentaCasaCeja
             {
                 data.desbloqDesc = true;
                 MessageBox.Show("Se aplicarán descuentos sin verificación de administrador hasta que se cierre la sesión.", "Aviso");
+                this.BdescTemporada.Enabled = false;
             }
             else
             {
