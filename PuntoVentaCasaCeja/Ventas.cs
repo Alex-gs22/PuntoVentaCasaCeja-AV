@@ -1053,7 +1053,8 @@ namespace PuntoVentaCasaCeja
             DialogResult response = vc.ShowDialog();
             if (response == DialogResult.Yes)
             {
-                corte = localDM.getCorte(idcorte);
+                //corte["total_apartados"] y corte["total_creditos"] se encuentran ya en el corte obtenido
+                corte = localDM.getCorte2(idcorte);
                 createdocz();
                 if (localDM.impresora.Equals(""))
                 {

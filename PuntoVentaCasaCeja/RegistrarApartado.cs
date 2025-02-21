@@ -109,12 +109,12 @@ namespace PuntoVentaCasaCeja
 
                     if (pagos.Count > 0)
                     {
-
                         Console.WriteLine("RegistarApartado: " + data.folioCorte);
+                        Console.Write(data.totalcarrito);
                         AbonoApartado abono = new AbonoApartado
                         {
                             fecha = localDate.ToString("yyyy-MM-dd HH:mm:ss"),
-                            folio = idsucursal.ToString().PadLeft(2, '0') + idcaja.ToString().PadLeft(2, '0') + localDate.Second.ToString().PadLeft(2, '0') + localDate.Day.ToString().PadLeft(2, '0') + localDate.Month.ToString().PadLeft(2, '0') + localDate.Year + "A",            
+                            folio = idsucursal.ToString().PadLeft(2, '0') + idcaja.ToString().PadLeft(2, '0') + localDate.Second.ToString().PadLeft(2, '0') + localDate.Day.ToString().PadLeft(2, '0') + localDate.Month.ToString().PadLeft(2, '0') + localDate.Year + "A",
                             folio_corte = data.folioCorte,
                             apartado_id = 0,
                             usuario_id = webDM.activeUser.id,
@@ -132,18 +132,33 @@ namespace PuntoVentaCasaCeja
                             localDM.acumularEfectivoApartado(pagos["efectivo"], idcorte);
                         }
                     }
-                    /*isOnlyEfective = (pagos.Count == 1 && pagos.ContainsKey("efectivo"));
 
-                    txtfolio.Text = folio;
-                    if (isOnlyEfective)
+                    // ************************************************************************
+                    // Aquí insertamos la llamada a actualizarTotalesCorte
+                    decimal totalCarritoDecimal;
+                    if (decimal.TryParse(data.totalcarrito.ToString(), out totalCarritoDecimal)) // Intenta convertir a decimal
                     {
-                        imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
+                        bool actualizado = localDM.actualizarTotalesCorte(idcorte, totalCarritoDecimal, true); // true porque es un apartado
+
+                        if (actualizado)
+                        {
+                            Console.WriteLine($"Total de apartados del corte {idcorte} actualizado correctamente.");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Error al actualizar el total de apartados del corte {idcorte}. Revisar logs.");
+                            // Considera agregar un MessageBox.Show para alertar al usuario de que no se actualizó el corte (opcional)
+                        }
                     }
                     else
                     {
-                        imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
-                        imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
-                    }*/
+                        Console.WriteLine($"Error al convertir data.totalcarrito a decimal. Valor: {data.totalcarrito}");
+                        // Manejar el error de conversión a decimal, quizás mostrar un mensaje al usuario o registrar el error.
+                        MessageBox.Show("Error interno: No se pudo procesar el total del carrito. Contacte a soporte técnico.", "Error");
+                        return; // Salir del método para evitar inconsistencias si no se puede procesar el total.
+                    }
+                    // ************************************************************************
+
 
                     imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
                     imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
@@ -158,7 +173,6 @@ namespace PuntoVentaCasaCeja
                 }
             }
         }
-
         async void send(Apartado apartado) //se hizo para probar una excepcion, si jala dejarlo, sino regresar al comentado
         {
             Dictionary<string, string> result = await webDM.SendapartadoAsync(apartado);
@@ -308,13 +322,15 @@ namespace PuntoVentaCasaCeja
 
         private void abonar_Click(object sender, EventArgs e)
         {
-            if (data.porcentajeDesc != -1)
-            {
-                double porcentajeDescuento = double.Parse(this.txtPorcentajeDesc.Text);
+            if (this.txtPorcentajeDesc.Text != "" && this.txtPorcentajeDesc.Text != null && this.txtPorcentajeDesc.Text != "0") {
+                if (data.porcentajeDesc != -1)
+                {
+                    double porcentajeDescuento = double.Parse(this.txtPorcentajeDesc.Text);
 
-                double descuentoPorcentaje = (porcentajeDescuento * this.totalcarrito) / 100;
+                    double descuentoPorcentaje = (porcentajeDescuento * this.totalcarrito) / 100;
 
-                data.porcentajeDesc = descuentoPorcentaje;
+                    data.porcentajeDesc = descuentoPorcentaje;
+                } 
             }
             MetodoPago mp = new MetodoPago(totalcarrito-totalpagado, abono, data);
             mp.ShowDialog();

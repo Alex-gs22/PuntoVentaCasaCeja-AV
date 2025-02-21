@@ -114,11 +114,11 @@ namespace PuntoVentaCasaCeja
                     if (pagos.Count > 0)
                     {
 
-                        Console.WriteLine("RegistarCredito: "+foliocorte);
+                        Console.WriteLine("RegistarCredito: " + foliocorte);
                         AbonoCredito abono = new AbonoCredito
                         {
                             fecha = localDate.ToString("yyyy-MM-dd HH:mm:ss"),
-                            folio = idsucursal.ToString().PadLeft(2, '0') + idcaja.ToString().PadLeft(2, '0') + localDate.Second.ToString().PadLeft(2, '0')+ localDate.Day.ToString().PadLeft(2, '0') + localDate.Month.ToString().PadLeft(2, '0') + localDate.Year + "AA",
+                            folio = idsucursal.ToString().PadLeft(2, '0') + idcaja.ToString().PadLeft(2, '0') + localDate.Second.ToString().PadLeft(2, '0') + localDate.Day.ToString().PadLeft(2, '0') + localDate.Month.ToString().PadLeft(2, '0') + localDate.Year + "AA",
                             folio_corte = foliocorte,
                             usuario_id = webDM.activeUser.id,
                             folio_credito = folio,
@@ -136,18 +136,32 @@ namespace PuntoVentaCasaCeja
                         }
                     }
 
-                    /*isOnlyEfective = (pagos.Count == 1 && pagos.ContainsKey("efectivo"));
-
-                    txtfolio.Text = folio;
-                    if (isOnlyEfective)
+                    // ************************************************************************
+                    // Insertar la llamada a actualizarTotalesCorte para Creditos
+                    decimal totalCarritoDecimal;
+                    if (decimal.TryParse(totalcarrito.ToString(), out totalCarritoDecimal)) // Intenta convertir totalcarrito a decimal
                     {
-                        imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
+                        bool actualizado = localDM.actualizarTotalesCorte(idcorte, totalCarritoDecimal, false); // false porque es credito
+
+                        if (actualizado)
+                        {
+                            Console.WriteLine($"Total de créditos del corte {idcorte} actualizado correctamente.");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Error al actualizar el total de créditos del corte {idcorte}. Revisar logs.");
+                            // Considera agregar un MessageBox.Show para alertar al usuario si falla la actualizacion (opcional)
+                        }
                     }
                     else
                     {
-                        imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
-                        imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
-                    }*/
+                        Console.WriteLine($"Error al convertir totalcarrito a decimal. Valor: {totalcarrito}");
+                        // Manejar el error de conversion a decimal, quizas un mensaje al usuario
+                        MessageBox.Show("Error interno: No se pudo procesar el total del carrito para crédito. Contacte a soporte técnico.", "Error");
+                        return; // Salir para evitar inconsistencia si el total no se puede procesar.
+                    }
+                    // ************************************************************************
+
 
                     imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
                     imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
@@ -161,8 +175,9 @@ namespace PuntoVentaCasaCeja
                     MessageBox.Show("El crédito ya existe en la base de datos.", "Advertencia");
                 }
             }
+        }
 
-            async Task send(Credito credito)
+        async Task send(Credito credito)
             {
                 // Verificar si el crédito ya ha sido enviado antes de enviarlo de nuevo
                     Console.WriteLine("Enviando crédito al servidor...");
@@ -191,7 +206,6 @@ namespace PuntoVentaCasaCeja
 
                 }
             }
-        }
         private void RegistrarApartado_Load(object sender, EventArgs e)
         {
             folio = idsucursal.ToString().PadLeft(2, '0') + idcaja.ToString().PadLeft(2, '0') + localDate.Second.ToString().PadLeft(2, '0') + localDate.Day.ToString().PadLeft(2, '0') + localDate.Month.ToString().PadLeft(2, '0') + localDate.Year + "A";
@@ -287,7 +301,6 @@ namespace PuntoVentaCasaCeja
         {
             MetodoPago mp = new MetodoPago(totalcarrito - totalpagado, abono, data);
             mp.ShowDialog();
-            //aceptar.PerformClick();
         }
 
 

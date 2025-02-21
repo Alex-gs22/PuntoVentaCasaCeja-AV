@@ -3249,7 +3249,7 @@ FROM usuarios";
             command.Parameters.AddWithValue("setFechaActual", localDate.ToString("yyyy-MM-dd HH:mm:ss"));
             command.ExecuteNonQuery();
         }
-
+        //Agregar los parametros de total_apartados y total_creditos
         public Dictionary<string, string> getCorte(int id)
         {
             SQLiteCommand command = connection.CreateCommand();
@@ -3281,7 +3281,7 @@ FROM usuarios";
             }
             return null;
         }
-        public Dictionary<string, string> getCorte2(int id)
+        /*public Dictionary<string, string> getCorte2(int id)
         {
             SQLiteCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM cortes WHERE id = @setId";
@@ -3331,8 +3331,91 @@ FROM usuarios";
             }
 
             return null;
-        }
+        }*/
+        public Dictionary<string, string> getCorte2(int id)
+        {
+            SQLiteCommand command = connection.CreateCommand();
+            // Modificación 1:  Añadir total_apartados y total_creditos al SELECT query
+            command.CommandText = "SELECT *, total_apartados, total_creditos FROM cortes WHERE id = @setId";
+            command.Parameters.AddWithValue("setId", id);
+            SQLiteDataReader result = command.ExecuteReader();
 
+            if (result.Read())
+            {
+                Dictionary<string, string> data = new Dictionary<string, string>();
+
+                // Cargar datos de la tabla "cortes"
+                data["fondo_apertura"] = result.GetDouble(2).ToString("0.00");
+                data["total_efectivo"] = result.GetDouble(3).ToString("0.00");
+                data["folio_corte"] = result.IsDBNull(1) ? "-" : result.GetString(1);
+                data["total_tarjetas_debito"] = result.GetDouble(4).ToString("0.00");
+                data["total_tarjetas_credito"] = result.GetDouble(5).ToString("0.00");
+                data["total_cheques"] = result.GetDouble(6).ToString("0.00");
+                data["total_transferencias"] = result.GetDouble(7).ToString("0.00");
+                data["efectivo_apartados"] = result.GetDouble(8).ToString("0.00");
+                data["efectivo_creditos"] = result.GetDouble(9).ToString("0.00");
+                data["gastos"] = result.GetString(10);
+                data["ingresos"] = result.GetString(11);
+                data["sobrante"] = result.GetDouble(12).ToString("0.00");
+                data["fecha_apertura_caja"] = result.GetString(13);
+                data["fecha_corte_caja"] = result.IsDBNull(14) ? "-" : result.GetString(14);
+                data["sucursal_id"] = result.IsDBNull(15) ? "-" : result.GetInt32(15).ToString();
+                data["usuario_id"] = result.IsDBNull(16) ? "-" : result.GetInt32(16).ToString();
+                data["estado"] = result.GetInt32(17).ToString();
+                data["detalles"] = "Enviado";
+
+
+                // Modificación 2: Obtener total_apartados y total_creditos directamente del resultado
+                // Contando las columnas antes de total_apartados y total_creditos en el CREATE TABLE,
+                // sabemos que total_apartados estará en el índice 21 y total_creditos en el índice 22
+                data["total_apartados"] = result.GetDouble(21).ToString("0.00"); // Índice 21 para total_apartados
+                data["total_creditos"] = result.GetDouble(22).ToString("0.00");  // Índice 22 para total_creditos
+
+                result.Close();  // Cerrar el lector
+
+                // Modificación 3: Eliminar las consultas extra a abonos_apartado y abonos_credito
+                // Ya no son necesarias porque total_apartados y total_creditos están en la tabla 'cortes'
+
+                return data;
+            }
+
+            return null;
+        }
+        public bool actualizarTotalesCorte(int idCorte, decimal cantidad, bool esApartado)
+        {
+
+            string columnaActualizar = "";
+            try
+            {
+                SQLiteCommand command = connection.CreateCommand();
+
+                if (esApartado)
+                {
+                    columnaActualizar = "total_apartados";
+                }
+                else
+                {
+                    columnaActualizar = "total_creditos";
+                }
+
+                // Utiliza parámetros para evitar inyección SQL y para trabajar con decimales correctamente
+                command.CommandText = $"UPDATE cortes SET {columnaActualizar} = {columnaActualizar} + @cantidad WHERE id = @idCorte";
+                command.Parameters.AddWithValue("@idCorte", idCorte);
+                command.Parameters.AddWithValue("@cantidad", cantidad); // Usar AddWithValue para decimal
+
+                int filasActualizadas = command.ExecuteNonQuery();
+
+                return filasActualizadas > 0; // Devuelve true si al menos una fila fue actualizada, false si no.
+
+            }
+            catch (Exception ex)
+            {
+                // En caso de error, puedes registrar el error o manejarlo de otra manera.
+                // Aquí simplemente devolvemos false y podrías, opcionalmente, registrar el error.
+                Console.WriteLine($"Error al actualizar {columnaActualizar} del corte con ID {idCorte}: {ex.Message}");
+                return false;
+            }
+        }
         public List<Dictionary<string, string>> GetPendingCortes()
         {
             List<Dictionary<string, string>> cortes = new List<Dictionary<string, string>>();
