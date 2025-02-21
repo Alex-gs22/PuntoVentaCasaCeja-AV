@@ -938,7 +938,7 @@ namespace PuntoVentaCasaCeja
             }
         }
 
-        public Dictionary<string, List<Apartado>> getApartadosCliente(int idCliente)
+        public Dictionary<string, List<Apartado>> getApartadosCliente(int idCliente, int idSucursal)
         {
             Dictionary<string, List<Apartado>> apartados = new Dictionary<string, List<Apartado>>();
             string[] range = { "PENDIENTE", "EXPIRO", "CANCELADO", "PAGADO", "ENTREGADO" };
@@ -947,9 +947,11 @@ namespace PuntoVentaCasaCeja
             apartados[range[2]] = new List<Apartado>();
             apartados[range[3]] = new List<Apartado>();
             apartados[range[4]] = new List<Apartado>();
+
             SQLiteCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM apartados WHERE cliente_creditos_id = @setId";
+            command.CommandText = "SELECT * FROM apartados WHERE cliente_creditos_id = @setId AND sucursal_id = @setSucursalId";
             command.Parameters.AddWithValue("setId", idCliente);
+            command.Parameters.AddWithValue("setSucursalId", idSucursal);
             SQLiteDataReader result = command.ExecuteReader();
             while (result.Read())
             {
@@ -1017,8 +1019,9 @@ namespace PuntoVentaCasaCeja
                 apartados[range[apartado.estado]].Add(apartado);
             }
             command.Reset();
-            command.CommandText = "SELECT * FROM apartados_temporal WHERE cliente_creditos_id = @setId";
+            command.CommandText = "SELECT * FROM apartados_temporal WHERE cliente_creditos_id = @setId AND sucursal_id = @setSucursalId";
             command.Parameters.AddWithValue("setId", idCliente);
+            command.Parameters.AddWithValue("setSucursalId", idSucursal);
             result = command.ExecuteReader();
             while (result.Read())
             {
@@ -1070,7 +1073,7 @@ namespace PuntoVentaCasaCeja
             return apartados;
         }
 
-        public Dictionary<string, List<Credito>> getCreditosCliente(int idCliente)
+        public Dictionary<string, List<Credito>> getCreditosCliente(int idCliente, int idSucursal)
         {
             Dictionary<string, List<Credito>> creditos = new Dictionary<string, List<Credito>>();
             string[] range = { "PENDIENTE", "EXPIRO", "CANCELADO", "PAGADO" };
@@ -1078,9 +1081,11 @@ namespace PuntoVentaCasaCeja
             creditos[range[1]] = new List<Credito>();
             creditos[range[2]] = new List<Credito>();
             creditos[range[3]] = new List<Credito>();
+
             SQLiteCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM creditos WHERE cliente_creditos_id = @setId";
+            command.CommandText = "SELECT * FROM creditos WHERE cliente_creditos_id = @setId AND sucursal_id = @setSucursalId";
             command.Parameters.AddWithValue("setId", idCliente);
+            command.Parameters.AddWithValue("setSucursalId", idSucursal);
             SQLiteDataReader result = command.ExecuteReader();
             while (result.Read())
             {
@@ -1124,60 +1129,39 @@ namespace PuntoVentaCasaCeja
                 subresult = subcommand.ExecuteReader();
                 while (subresult.Read())
                 {
-                    AbonoCredito abono= new AbonoCredito();
-                    try { 
-
-                    // 'id' se establece en 0 según tu código
-                    abono.id = 0;
-
-                    // 'folio' - Columna "folio"
-                    abono.folio = subresult["folio"] != DBNull.Value ? subresult["folio"].ToString() : string.Empty;
-
-                    // 'metodo_pago' - Columna "metodo_pago"
-                    abono.metodo_pago = subresult["metodo_pago"] != DBNull.Value ? subresult["metodo_pago"].ToString() : string.Empty;
-
-                    // 'total_abonado' - Columna "total_abonado"
-                    abono.total_abonado = subresult["total_abonado"] != DBNull.Value ? Convert.ToDouble(subresult["total_abonado"]) : 0.0;
-
-                    // 'fecha' - Columna "fecha"
-                    if (subresult["fecha"] != DBNull.Value)
+                    AbonoCredito abono = new AbonoCredito();
+                    try
                     {
-                        DateTime fechaValue;
-                        if (DateTime.TryParse(subresult["fecha"].ToString(), out fechaValue))
+                        abono.id = 0;
+                        abono.folio = subresult["folio"] != DBNull.Value ? subresult["folio"].ToString() : string.Empty;
+                        abono.metodo_pago = subresult["metodo_pago"] != DBNull.Value ? subresult["metodo_pago"].ToString() : string.Empty;
+                        abono.total_abonado = subresult["total_abonado"] != DBNull.Value ? Convert.ToDouble(subresult["total_abonado"]) : 0.0;
+                        if (subresult["fecha"] != DBNull.Value)
                         {
-                            abono.fecha = fechaValue.ToString("yyyy-MM-dd HH:mm:ss");
+                            DateTime fechaValue;
+                            if (DateTime.TryParse(subresult["fecha"].ToString(), out fechaValue))
+                            {
+                                abono.fecha = fechaValue.ToString("yyyy-MM-dd HH:mm:ss");
+                            }
+                            else
+                            {
+                                abono.fecha = string.Empty;
+                            }
                         }
                         else
                         {
-                            // Manejar si la conversión falla
                             abono.fecha = string.Empty;
                         }
+                        abono.folio_credito = subresult["folio_credito"] != DBNull.Value ? subresult["folio_credito"].ToString() : string.Empty;
+                        abono.credito_id = subresult["credito_id"] != DBNull.Value ? Convert.ToInt32(subresult["credito_id"]) : 0;
+                        abono.folio_corte = subresult["folio_corte"] != DBNull.Value ? subresult["folio_corte"].ToString() : string.Empty;
+                        abono.usuario_id = subresult["usuario_id"] != DBNull.Value ? Convert.ToInt32(subresult["usuario_id"]) : 0;
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        abono.fecha = string.Empty;
+                        Console.WriteLine($"Error al procesar el registro: {ex.Message}");
                     }
-
-                    // 'folio_credito' - Columna "folio_credito"
-                    abono.folio_credito = subresult["folio_credito"] != DBNull.Value ? subresult["folio_credito"].ToString() : string.Empty;
-
-                    // 'credito_id' - Columna "credito_id"
-                    abono.credito_id = subresult["credito_id"] != DBNull.Value ? Convert.ToInt32(subresult["credito_id"]) : 0;
-
-                    // 'folio_corte' - Columna "folio_corte"
-                    abono.folio_corte = subresult["folio_corte"] != DBNull.Value ? subresult["folio_corte"].ToString() : string.Empty;
-
-                    // 'usuario_id' - Columna "usuario_id"
-                    abono.usuario_id = subresult["usuario_id"] != DBNull.Value ? Convert.ToInt32(subresult["usuario_id"]) : 0;
-
-                    // Aquí puedes proceder con el objeto 'abono' según tus necesidades
-                }
-    catch (Exception ex)
-    {
-                    Console.WriteLine($"Error al procesar el registro: {ex.Message}");
-                    // Opcional: Puedes registrar más detalles o manejar la excepción según sea necesario
-                }
-                credito.abonos.Add(abono);
+                    credito.abonos.Add(abono);
                     credito.total_pagado += abono.total_abonado;
                     if (credito.total_pagado >= credito.total)
                     {
@@ -1187,8 +1171,9 @@ namespace PuntoVentaCasaCeja
                 creditos[range[credito.estado]].Add(credito);
             }
             command.Reset();
-            command.CommandText = "SELECT * FROM creditos_temporal WHERE cliente_creditos_id = @setId";
+            command.CommandText = "SELECT * FROM creditos_temporal WHERE cliente_creditos_id = @setId AND sucursal_id = @setSucursalId";
             command.Parameters.AddWithValue("setId", idCliente);
+            command.Parameters.AddWithValue("setSucursalId", idSucursal);
             result = command.ExecuteReader();
             while (result.Read())
             {

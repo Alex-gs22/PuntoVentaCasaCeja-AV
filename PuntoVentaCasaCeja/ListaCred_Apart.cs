@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -25,7 +26,7 @@ namespace PuntoVentaCasaCeja
         private List<string> tipo = new List<string>();
         private List<string> estados = new List<string>();
 
-        private readonly string[] rangeTipo = { "Creditos", "Apartados" };
+        private readonly string[] rangeTipo = {"Apartados", "Creditos" };
         private readonly string[] range = { "TODOS", "PENDIENTE", "EXPIRO", "CANCELADO", "PAGADO" };
 
         public ListaCred_Apart(CurrentData data)
@@ -46,11 +47,14 @@ namespace PuntoVentaCasaCeja
 
             // Configuración inicial de la tabla
             CargarDatosTabla();
+            
+            tablaCreditosApartados.ColumnHeadersDefaultCellStyle.Font = new Font(tablaCreditosApartados.Font.FontFamily, 16);
+
         }
 
         private void CargarDatosTabla()
         {
-            DataTable dataTable = localDM.GetCreditosDataTable(data.idSucursal);
+            DataTable dataTable = localDM.GetApartadosDataTable(data.idSucursal);
             dataTable.DefaultView.Sort = "Fecha DESC";
             tablaCreditosApartados.DataSource = dataTable;
         }
@@ -161,8 +165,8 @@ namespace PuntoVentaCasaCeja
         {
             // Obtener los datos según el tipo seleccionado
             DataTable dataTable = (BoxTipo.SelectedIndex == 0) ?
-                localDM.GetCreditosDataTable(data.idSucursal) :
-                localDM.GetApartadosDataTable(data.idSucursal);
+            localDM.GetApartadosDataTable(data.idSucursal) :
+            localDM.GetCreditosDataTable(data.idSucursal);               
 
             // Aplicar filtro de estado si es necesario
             if (BoxEstado.SelectedItem != null && BoxEstado.SelectedIndex != 0)

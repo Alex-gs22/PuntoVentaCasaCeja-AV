@@ -30,6 +30,7 @@ namespace PuntoVentaCasaCeja
             this.localDM = webDM.localDM;
             this.tablaClientes.DataSource = localDM.getClientes();
             this.altaCliente = new AltaCliente(data);
+            tablaClientes.ColumnHeadersDefaultCellStyle.Font = new Font(tablaClientes.Font.FontFamily, 14);
         }
 
         protected override bool ProcessDialogKey(Keys keyData)

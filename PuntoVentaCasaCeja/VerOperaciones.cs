@@ -46,6 +46,8 @@ namespace PuntoVentaCasaCeja
         public VerOperaciones(LocaldataManager localdata, int idcaja, string sucursalName, string sucursalDir, int userlvl)
         {
             InitializeComponent();
+            tabla.ColumnHeadersDefaultCellStyle.Font = new Font(tabla.Font.FontFamily, 18);
+            tabla.RowsDefaultCellStyle.Font = new Font(tabla.Font.FontFamily, 16);
             offset = 0;
             currentPage = 1;
             this.localDM = localdata;

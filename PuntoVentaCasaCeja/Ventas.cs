@@ -35,6 +35,7 @@ namespace PuntoVentaCasaCeja
         List<string> list = new List<string>();
         static Usuario activador = null;
         static Usuario cajero = null;
+        static bool desbloqDesc = false;
         static Usuario admin = null;
         bool reprint = false;
         string folio;
@@ -100,7 +101,7 @@ namespace PuntoVentaCasaCeja
                 printerType = printerType,
                 successful = false,
                 usuario = null,
-                
+                desbloqDesc = desbloqDesc,
             };
         }
         void setInt(int x)
@@ -1619,41 +1620,63 @@ namespace PuntoVentaCasaCeja
             usuarios.ShowDialog();
         }
 
-        private void opcionesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Bdescuento_Click(object sender, EventArgs e)
         {
-
+            if (data.desbloqDesc == true)
+            {
+                aplicarDescuento();
+            }
+            else
+            {
+                UserLogin login = new UserLogin(localDM, setAdmin, true);
+                DialogResult resultLogin = login.ShowDialog();
+                if (resultLogin == DialogResult.Yes)
+                {
+                    aplicarDescuento();
+                }
+                else
+                {
+                    MessageBox.Show("Autenticación Fallida");
+                }
+            }
+        }
+        void aplicarDescuento()
+        {
+            if ((tabla.Rows.Count > 0) && (totalcarrito > 0))
+            {
+                aplicarDesc aplicDesc = new aplicarDesc(totalcarrito, data);
+                aplicDesc.ShowDialog();
+                if (data.esDescuento)
+                {
+                    totalpagado += data.descuento;
+                    txttotal.Text = "Por pagar MXN: $" + (totalcarrito - totalpagado).ToString("0.00");
+                    Bdescuento.Enabled = false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Aún no hay productos en el carrito", "Advertencia");
+            }
         }
 
-        private void Bdescuento_Click(object sender, EventArgs e)
+        void setAdmin(Usuario usuario)
+        {
+            admin = usuario;
+        }
+
+        private void BdescTemporada_Click(object sender, EventArgs e)
         {
             UserLogin login = new UserLogin(localDM, setAdmin, true);
             DialogResult resultLogin = login.ShowDialog();
             if (resultLogin == DialogResult.Yes)
             {
-                if ((tabla.Rows.Count > 0) && (totalcarrito > 0))
-                {
-                    aplicarDesc aplicDesc = new aplicarDesc(totalcarrito, data);
-                    aplicDesc.ShowDialog();
-                    if (data.esDescuento)
-                    {
-                        totalpagado += data.descuento;
-                        txttotal.Text = "Por pagar MXN: $" + (totalcarrito - totalpagado).ToString("0.00");
-                        Bdescuento.Enabled = false;
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Aún no hay productos en el carrito", "Advertencia");
-                }
+                data.desbloqDesc = true;
+                MessageBox.Show("Se aplicarán descuentos sin verificación de administrador hasta que se cierre la sesión.", "Aviso");
             }
             else
             {
                 MessageBox.Show("Autenticación Fallida");
             }
-        }
-        void setAdmin(Usuario usuario)
-        {
-            admin = usuario;
         }
     }
 }

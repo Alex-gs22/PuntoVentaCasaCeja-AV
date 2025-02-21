@@ -26,7 +26,7 @@ namespace PuntoVentaCasaCeja
         public Usuario usuario { get; set; }
         public bool esDescuento { get; set; }
         public double descuento { get; set; }
-
+        public bool desbloqDesc { get; set; }
         public double porcentajeDesc { get; set; }
 
     }

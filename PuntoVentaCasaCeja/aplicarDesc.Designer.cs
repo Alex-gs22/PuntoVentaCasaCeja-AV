@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.Bsalir = new System.Windows.Forms.Button();
             this.aceptar = new System.Windows.Forms.Button();
@@ -39,25 +40,53 @@
             this.txtDescuento = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.BoxTipo = new System.Windows.Forms.ComboBox();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.Bdesc10 = new System.Windows.Forms.Button();
+            this.Bdesc5 = new System.Windows.Forms.Button();
+            this.Bdesc20 = new System.Windows.Forms.Button();
+            this.Bdesc15 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.tableLayoutPanel1);
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.tableLayoutPanel4);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI Semibold", 22F, System.Drawing.FontStyle.Bold);
             this.groupBox1.Location = new System.Drawing.Point(12, 5);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(646, 261);
+            this.groupBox1.Size = new System.Drawing.Size(877, 260);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "APLICAR DESCUENTO";
             // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 2;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.83812F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.16188F));
+            this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel1, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel6, 1, 0);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 45);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 1;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(871, 209);
+            this.tableLayoutPanel4.TabIndex = 11;
+            // 
             // tableLayoutPanel1
             // 
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.58044F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.41956F));
@@ -70,7 +99,7 @@
             this.tableLayoutPanel1.Controls.Add(this.label2, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 2);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 47);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 5;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 34.09091F));
@@ -79,7 +108,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 17F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 67F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(634, 210);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(611, 203);
             this.tableLayoutPanel1.TabIndex = 10;
             // 
             // Bsalir
@@ -87,10 +116,10 @@
             this.Bsalir.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Bsalir.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
-            this.Bsalir.Location = new System.Drawing.Point(312, 146);
+            this.Bsalir.Location = new System.Drawing.Point(300, 139);
             this.Bsalir.Margin = new System.Windows.Forms.Padding(4);
             this.Bsalir.Name = "Bsalir";
-            this.Bsalir.Size = new System.Drawing.Size(318, 60);
+            this.Bsalir.Size = new System.Drawing.Size(307, 60);
             this.Bsalir.TabIndex = 3;
             this.Bsalir.Text = "CANCELAR (Esc)";
             this.Bsalir.UseVisualStyleBackColor = true;
@@ -101,10 +130,10 @@
             this.aceptar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.aceptar.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
-            this.aceptar.Location = new System.Drawing.Point(4, 146);
+            this.aceptar.Location = new System.Drawing.Point(4, 139);
             this.aceptar.Margin = new System.Windows.Forms.Padding(4);
             this.aceptar.Name = "aceptar";
-            this.aceptar.Size = new System.Drawing.Size(300, 60);
+            this.aceptar.Size = new System.Drawing.Size(288, 60);
             this.aceptar.TabIndex = 2;
             this.aceptar.Text = "ACEPTAR (Enter)";
             this.aceptar.UseVisualStyleBackColor = true;
@@ -114,9 +143,9 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
-            this.label3.Location = new System.Drawing.Point(3, 19);
+            this.label3.Location = new System.Drawing.Point(3, 17);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(121, 37);
+            this.label3.Size = new System.Drawing.Size(121, 32);
             this.label3.TabIndex = 8;
             this.label3.Text = "Tipo (F1)";
             // 
@@ -126,9 +155,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
-            this.label2.Location = new System.Drawing.Point(311, 19);
+            this.label2.Location = new System.Drawing.Point(299, 17);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(320, 37);
+            this.label2.Size = new System.Drawing.Size(309, 32);
             this.label2.TabIndex = 7;
             this.label2.Text = "DESC. A APLICAR (F2)";
             // 
@@ -142,12 +171,12 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 85.32423F));
             this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.txtDescuento, 1, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(311, 59);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(299, 52);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 65.97938F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 34.02062F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(320, 63);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(309, 63);
             this.tableLayoutPanel2.TabIndex = 6;
             // 
             // label1
@@ -167,9 +196,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtDescuento.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
-            this.txtDescuento.Location = new System.Drawing.Point(49, 3);
+            this.txtDescuento.Location = new System.Drawing.Point(48, 3);
             this.txtDescuento.Name = "txtDescuento";
-            this.txtDescuento.Size = new System.Drawing.Size(268, 47);
+            this.txtDescuento.Size = new System.Drawing.Size(258, 47);
             this.txtDescuento.TabIndex = 1;
             this.txtDescuento.Click += new System.EventHandler(this.txtDescuento_Click);
             this.txtDescuento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericInput_KeyPress);
@@ -183,12 +212,12 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 87.68116F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.31884F));
             this.tableLayoutPanel3.Controls.Add(this.BoxTipo, 0, 0);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 59);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 52);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(302, 63);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(290, 63);
             this.tableLayoutPanel3.TabIndex = 7;
             // 
             // BoxTipo
@@ -201,26 +230,119 @@
             this.BoxTipo.FormattingEnabled = true;
             this.BoxTipo.Location = new System.Drawing.Point(3, 3);
             this.BoxTipo.Name = "BoxTipo";
-            this.BoxTipo.Size = new System.Drawing.Size(258, 49);
+            this.BoxTipo.Size = new System.Drawing.Size(248, 49);
             this.BoxTipo.TabIndex = 0;
             this.BoxTipo.SelectedIndexChanged += new System.EventHandler(this.BoxTipo_SelectedIndexChanged);
+            // 
+            // tableLayoutPanel6
+            // 
+            this.tableLayoutPanel6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel6.ColumnCount = 1;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel6.Controls.Add(this.tableLayoutPanel5, 0, 1);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(620, 3);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel6.RowCount = 2;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 22.6601F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 77.3399F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(248, 203);
+            this.tableLayoutPanel6.TabIndex = 11;
+            // 
+            // tableLayoutPanel5
+            // 
+            this.tableLayoutPanel5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel5.ColumnCount = 2;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.Controls.Add(this.Bdesc10, 1, 0);
+            this.tableLayoutPanel5.Controls.Add(this.Bdesc5, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.Bdesc20, 1, 2);
+            this.tableLayoutPanel5.Controls.Add(this.Bdesc15, 0, 2);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 49);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 3;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 66F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(242, 151);
+            this.tableLayoutPanel5.TabIndex = 11;
+            // 
+            // Bdesc10
+            // 
+            this.Bdesc10.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Bdesc10.Location = new System.Drawing.Point(124, 3);
+            this.Bdesc10.Name = "Bdesc10";
+            this.Bdesc10.Size = new System.Drawing.Size(115, 56);
+            this.Bdesc10.TabIndex = 15;
+            this.Bdesc10.Text = "10%";
+            this.Bdesc10.UseVisualStyleBackColor = true;
+            this.Bdesc10.Click += new System.EventHandler(this.descuentoFijo);
+            // 
+            // Bdesc5
+            // 
+            this.Bdesc5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Bdesc5.Location = new System.Drawing.Point(3, 3);
+            this.Bdesc5.Name = "Bdesc5";
+            this.Bdesc5.Size = new System.Drawing.Size(115, 56);
+            this.Bdesc5.TabIndex = 14;
+            this.Bdesc5.Text = "5%";
+            this.Bdesc5.UseVisualStyleBackColor = true;
+            this.Bdesc5.Click += new System.EventHandler(this.descuentoFijo);
+            // 
+            // Bdesc20
+            // 
+            this.Bdesc20.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Bdesc20.Location = new System.Drawing.Point(124, 88);
+            this.Bdesc20.Name = "Bdesc20";
+            this.Bdesc20.Size = new System.Drawing.Size(115, 60);
+            this.Bdesc20.TabIndex = 13;
+            this.Bdesc20.Text = "20%";
+            this.Bdesc20.UseVisualStyleBackColor = true;
+            this.Bdesc20.Click += new System.EventHandler(this.descuentoFijo);
+            // 
+            // Bdesc15
+            // 
+            this.Bdesc15.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Bdesc15.Location = new System.Drawing.Point(3, 88);
+            this.Bdesc15.Name = "Bdesc15";
+            this.Bdesc15.Size = new System.Drawing.Size(115, 60);
+            this.Bdesc15.TabIndex = 12;
+            this.Bdesc15.Text = "15%";
+            this.Bdesc15.UseVisualStyleBackColor = true;
+            this.Bdesc15.Click += new System.EventHandler(this.descuentoFijo);
             // 
             // aplicarDesc
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(670, 272);
+            this.ClientSize = new System.Drawing.Size(901, 277);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "aplicarDesc";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Aplicar Descuento";
             this.groupBox1.ResumeLayout(false);
+            this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel6.ResumeLayout(false);
+            this.tableLayoutPanel5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -238,5 +360,12 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
+        private System.Windows.Forms.Button Bdesc20;
+        private System.Windows.Forms.Button Bdesc15;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
+        private System.Windows.Forms.Button Bdesc10;
+        private System.Windows.Forms.Button Bdesc5;
     }
 }

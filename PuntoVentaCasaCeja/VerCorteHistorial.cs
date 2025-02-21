@@ -95,7 +95,7 @@ namespace PuntoVentaCasaCeja
 
             // Lógica para imprimir el ticket
             CreaTicket Ticket1 = new CreaTicket();
-            Ticket1.impresora = localDM.impresora;
+            Ticket1.impresora = localDM.impresora;            
             Ticket1.TextoCentro("CASA CEJA");
             Ticket1.TextoCentro("SUCURSAL: " + localDM.getSucursalname(int.Parse(corte["sucursal_id"])).ToUpper());
             Ticket1.TextoCentro("CZ FOLIO:  " + corte["folio_corte"]);

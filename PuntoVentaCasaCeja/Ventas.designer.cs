@@ -60,6 +60,7 @@ namespace PuntoVentaCasaCeja
             this.apartados = new System.Windows.Forms.Button();
             this.eliminarCarrito_button = new System.Windows.Forms.Button();
             this.Bdescuento = new System.Windows.Forms.Button();
+            this.BdescTemporada = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tabla)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -274,7 +275,6 @@ namespace PuntoVentaCasaCeja
             this.actualizarBaseDeDatosToolStripMenuItem});
             this.opcionesToolStripMenuItem.Name = "opcionesToolStripMenuItem";
             resources.ApplyResources(this.opcionesToolStripMenuItem, "opcionesToolStripMenuItem");
-            this.opcionesToolStripMenuItem.Click += new System.EventHandler(this.opcionesToolStripMenuItem_Click);
             // 
             // ingresarEfectivoF3ToolStripMenuItem
             // 
@@ -360,11 +360,21 @@ namespace PuntoVentaCasaCeja
             this.Bdescuento.UseVisualStyleBackColor = false;
             this.Bdescuento.Click += new System.EventHandler(this.Bdescuento_Click);
             // 
+            // BdescTemporada
+            // 
+            resources.ApplyResources(this.BdescTemporada, "BdescTemporada");
+            this.BdescTemporada.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(166)))), ((int)(((byte)(64)))));
+            this.BdescTemporada.FlatAppearance.BorderSize = 0;
+            this.BdescTemporada.Name = "BdescTemporada";
+            this.BdescTemporada.UseVisualStyleBackColor = false;
+            this.BdescTemporada.Click += new System.EventHandler(this.BdescTemporada_Click);
+            // 
             // Ventas
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
+            this.Controls.Add(this.BdescTemporada);
             this.Controls.Add(this.Bdescuento);
             this.Controls.Add(this.eliminarCarrito_button);
             this.Controls.Add(this.apartados);
@@ -430,5 +440,6 @@ namespace PuntoVentaCasaCeja
         private ToolStripMenuItem historialDeCortesToolStripMenuItem;
         private ToolStripMenuItem adminUsuariosToolStripMenuItem;
         private Button Bdescuento;
+        private Button BdescTemporada;
     }
 }

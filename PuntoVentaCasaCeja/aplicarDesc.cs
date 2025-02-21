@@ -16,20 +16,20 @@ namespace PuntoVentaCasaCeja
     public partial class aplicarDesc : Form
     {
         private List<string> tipo = new List<string>();
-        private readonly string[] rangeTipo = { "PORCENTAJE", "CANTIDAD" };   
-        double total;        
+        private readonly string[] rangeTipo = { "PORCENTAJE", "CANTIDAD" };
+        double total;
         CurrentData data;
-        bool esDescuento;       
+        bool esDescuento;
         double descuento = 0;
 
         public aplicarDesc(double total, CurrentData data)
         {
             InitializeComponent();
             this.data = data;
-            this.total = total;            
+            this.total = total;
             txtDescuento.Text = "0.00";
             tipo.AddRange(rangeTipo);
-            BoxTipo.DataSource = tipo;           
+            BoxTipo.DataSource = tipo;
         }
 
         private void Bsalir_Click(object sender, EventArgs e)
@@ -39,7 +39,7 @@ namespace PuntoVentaCasaCeja
 
         private void aceptar_Click(object sender, EventArgs e)
         {
-            calcularDesc(esDescuento);            
+            calcularDesc(esDescuento);
             this.Close();
         }
 
@@ -110,21 +110,50 @@ namespace PuntoVentaCasaCeja
 
         private void calcularDesc(bool esDescuento)
         {
-         double maxDescuento = total * 0.30;          
-         double.TryParse(txtDescuento.Text, out double valordescuento);                           
-         descuento = (BoxTipo.SelectedIndex == 0) ? total * (valordescuento / 100) : valordescuento;              
+            double maxDescuento = total * 0.30;
+            double.TryParse(txtDescuento.Text, out double valordescuento);
+            descuento = (BoxTipo.SelectedIndex == 0) ? total * (valordescuento / 100) : valordescuento;
             if (descuento > maxDescuento)
-             {
+            {
                 MessageBox.Show("Se alcanzó el límite de descuento permitido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
-             }
+            }
             data.esDescuento = true;
-            data.descuento = descuento;           
+            data.descuento = descuento;
         }
 
         private void txtDescuento_Click(object sender, EventArgs e)
         {
             txtDescuento.SelectAll();
+        }
+
+        private void descuentoFijo(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            if (button == null) return;
+
+            switch (button.Name)
+            {
+                case "Bdesc5":
+                    BoxTipo.SelectedIndex = 0;
+                    txtDescuento.Text = "5.00";
+                    break;
+                case "Bdesc10":
+                    BoxTipo.SelectedIndex = 0;
+                    txtDescuento.Text = "10.00";
+                    break;
+                case "Bdesc15":
+                    BoxTipo.SelectedIndex = 0;
+                    txtDescuento.Text = "15.00";
+                    break;
+                case "Bdesc20":
+                    BoxTipo.SelectedIndex = 0;
+                    txtDescuento.Text = "20.00";
+                    break;
+                default:
+                    MessageBox.Show("Botón no reconocido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+            }
         }
     }
 }

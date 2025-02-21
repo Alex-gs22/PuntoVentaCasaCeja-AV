@@ -44,11 +44,13 @@ namespace PuntoVentaCasaCeja
         public VerCredApa(int tipo, CurrentData data)
         {
             InitializeComponent();
+            tabla.ColumnHeadersDefaultCellStyle.Font = new Font(tabla.Font.FontFamily, 18);
+            tabla.RowsDefaultCellStyle.Font = new Font(tabla.Font.FontFamily, 16);
             this.KeyPreview = true;
             this.tipo = tipo;
             this.webDM = data.webDM;
             this.localDM = webDM.localDM;
-            this.idCliente = data.cliente.id;
+            this.idCliente = data.cliente.id;         
             this.data = data;
             source.DataSource = infoTabla;
             tabla.DataSource = source;
@@ -59,7 +61,7 @@ namespace PuntoVentaCasaCeja
             {
                 this.Text = "Mis créditos";
                 groupBox1.Text = "MIS CRÉDITOS";
-                creditos = localDM.getCreditosCliente(idCliente);
+                creditos = localDM.getCreditosCliente(idCliente, data.idSucursal);
                 string[] range = { "PENDIENTE", "EXPIRO", "CANCELADO", "PAGADO", "TODOS"};
                 estados.AddRange(range);
             }
@@ -67,7 +69,7 @@ namespace PuntoVentaCasaCeja
             {
                 this.Text = "Mis apartados";
                 groupBox1.Text = "MIS APARTADOS";
-                apartados = localDM.getApartadosCliente(idCliente);
+                apartados = localDM.getApartadosCliente(idCliente, data.idSucursal);
                 string[] range = { "PENDIENTE", "EXPIRO", "CANCELADO", "PAGADO", "ENTREGADO", "TODOS" };
                 estados.AddRange(range);
             }
@@ -177,11 +179,11 @@ namespace PuntoVentaCasaCeja
         {
             if (tipo == 0)
             {
-                creditos = localDM.getCreditosCliente(idCliente);
+                creditos = localDM.getCreditosCliente(idCliente, data.idSucursal);
             }
             if (tipo == 1)
             {
-                apartados = localDM.getApartadosCliente(idCliente);
+                apartados = localDM.getApartadosCliente(idCliente, data.idSucursal);
             }            
             loadData();
             cargarTicketCarta();

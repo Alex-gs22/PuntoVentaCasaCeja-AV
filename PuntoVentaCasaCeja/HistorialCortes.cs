@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace PuntoVentaCasaCeja
@@ -21,6 +22,7 @@ namespace PuntoVentaCasaCeja
             this.localDM = webDM.localDM;
             this.tablaCortesZ.DataSource = localDM.getCortesBySucursal(data.idSucursal);
             this.tablaCortesZ.CellDoubleClick += new DataGridViewCellEventHandler(this.tablaCortesZ_CellDoubleClick);
+            tablaCortesZ.ColumnHeadersDefaultCellStyle.Font = new Font(tablaCortesZ.Font.FontFamily, 16);
         }
 
         protected override bool ProcessDialogKey(Keys keyData)

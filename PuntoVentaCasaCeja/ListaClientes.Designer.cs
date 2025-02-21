@@ -30,9 +30,9 @@ namespace PuntoVentaCasaCeja
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.BSelCliente = new System.Windows.Forms.Button();
             this.exitButton = new System.Windows.Forms.Button();
@@ -59,11 +59,9 @@ namespace PuntoVentaCasaCeja
             this.groupBox1.Controls.Add(this.exitButton);
             this.groupBox1.Controls.Add(this.tableLayoutPanel3);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI Semibold", 24F, System.Drawing.FontStyle.Bold);
-            this.groupBox1.Location = new System.Drawing.Point(16, 15);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(1460, 821);
+            this.groupBox1.Size = new System.Drawing.Size(1095, 667);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "LISTA DE CLIENTES";
@@ -72,10 +70,9 @@ namespace PuntoVentaCasaCeja
             // 
             this.BSelCliente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BSelCliente.Font = new System.Drawing.Font("Segoe UI Semibold", 20F, System.Drawing.FontStyle.Bold);
-            this.BSelCliente.Location = new System.Drawing.Point(783, -4);
-            this.BSelCliente.Margin = new System.Windows.Forms.Padding(4);
+            this.BSelCliente.Location = new System.Drawing.Point(587, -3);
             this.BSelCliente.Name = "BSelCliente";
-            this.BSelCliente.Size = new System.Drawing.Size(385, 57);
+            this.BSelCliente.Size = new System.Drawing.Size(289, 46);
             this.BSelCliente.TabIndex = 6;
             this.BSelCliente.Text = "SEL. CLIENTE (ENTER)";
             this.BSelCliente.UseVisualStyleBackColor = true;
@@ -85,10 +82,9 @@ namespace PuntoVentaCasaCeja
             // 
             this.exitButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.exitButton.Font = new System.Drawing.Font("Segoe UI Semibold", 22F, System.Drawing.FontStyle.Bold);
-            this.exitButton.Location = new System.Drawing.Point(1187, -4);
-            this.exitButton.Margin = new System.Windows.Forms.Padding(4);
+            this.exitButton.Location = new System.Drawing.Point(890, -3);
             this.exitButton.Name = "exitButton";
-            this.exitButton.Size = new System.Drawing.Size(259, 57);
+            this.exitButton.Size = new System.Drawing.Size(194, 46);
             this.exitButton.TabIndex = 5;
             this.exitButton.Text = "SALIR (Esc)";
             this.exitButton.UseVisualStyleBackColor = true;
@@ -103,14 +99,13 @@ namespace PuntoVentaCasaCeja
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel2, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.clientinfo, 0, 0);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(9, 60);
-            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(4);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(7, 49);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 3;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(1443, 753);
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 65F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 16F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(1082, 612);
             this.tableLayoutPanel3.TabIndex = 2;
             // 
             // tableLayoutPanel2
@@ -121,18 +116,17 @@ namespace PuntoVentaCasaCeja
             this.tableLayoutPanel2.ColumnCount = 3;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.32275F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.67725F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 490F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 368F));
             this.tableLayoutPanel2.Controls.Add(this.modificarButton, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.altaButton, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.BajaButton, 2, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(4, 657);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 534);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 72F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 72F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1435, 72);
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 58F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 58F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1076, 59);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
             // modificarButton
@@ -140,10 +134,9 @@ namespace PuntoVentaCasaCeja
             this.modificarButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.modificarButton.Location = new System.Drawing.Point(489, 4);
-            this.modificarButton.Margin = new System.Windows.Forms.Padding(4);
+            this.modificarButton.Location = new System.Drawing.Point(366, 3);
             this.modificarButton.Name = "modificarButton";
-            this.modificarButton.Size = new System.Drawing.Size(452, 64);
+            this.modificarButton.Size = new System.Drawing.Size(338, 53);
             this.modificarButton.TabIndex = 13;
             this.modificarButton.Text = "MODIFICAR (F6)";
             this.modificarButton.UseVisualStyleBackColor = true;
@@ -154,10 +147,9 @@ namespace PuntoVentaCasaCeja
             this.altaButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.altaButton.Location = new System.Drawing.Point(4, 4);
-            this.altaButton.Margin = new System.Windows.Forms.Padding(4);
+            this.altaButton.Location = new System.Drawing.Point(3, 3);
             this.altaButton.Name = "altaButton";
-            this.altaButton.Size = new System.Drawing.Size(477, 64);
+            this.altaButton.Size = new System.Drawing.Size(357, 53);
             this.altaButton.TabIndex = 11;
             this.altaButton.Text = "ALTA DE CLIENTE (F5)";
             this.altaButton.UseVisualStyleBackColor = true;
@@ -168,10 +160,9 @@ namespace PuntoVentaCasaCeja
             this.BajaButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.BajaButton.Location = new System.Drawing.Point(949, 4);
-            this.BajaButton.Margin = new System.Windows.Forms.Padding(4);
+            this.BajaButton.Location = new System.Drawing.Point(710, 3);
             this.BajaButton.Name = "BajaButton";
-            this.BajaButton.Size = new System.Drawing.Size(482, 64);
+            this.BajaButton.Size = new System.Drawing.Size(363, 53);
             this.BajaButton.TabIndex = 12;
             this.BajaButton.Text = "DAR DE BAJA (F7)";
             this.BajaButton.UseVisualStyleBackColor = true;
@@ -186,8 +177,7 @@ namespace PuntoVentaCasaCeja
             this.clientinfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.clientinfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.clientinfo.Controls.Add(this.tablaClientes, 0, 0);
-            this.clientinfo.Location = new System.Drawing.Point(4, 4);
-            this.clientinfo.Margin = new System.Windows.Forms.Padding(4);
+            this.clientinfo.Location = new System.Drawing.Point(3, 3);
             this.clientinfo.Name = "clientinfo";
             this.clientinfo.RowCount = 1;
             this.clientinfo.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -208,7 +198,7 @@ namespace PuntoVentaCasaCeja
             this.clientinfo.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.clientinfo.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.clientinfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66767F));
-            this.clientinfo.Size = new System.Drawing.Size(1435, 645);
+            this.clientinfo.Size = new System.Drawing.Size(1076, 525);
             this.clientinfo.TabIndex = 0;
             // 
             // tablaClientes
@@ -216,35 +206,35 @@ namespace PuntoVentaCasaCeja
             this.tablaClientes.AllowUserToAddRows = false;
             this.tablaClientes.AllowUserToDeleteRows = false;
             this.tablaClientes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI Semibold", 24F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.tablaClientes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.tablaClientes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.tablaClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI Semibold", 24F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.tablaClientes.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI Semibold", 24F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.tablaClientes.DefaultCellStyle = dataGridViewCellStyle2;
             this.tablaClientes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tablaClientes.Location = new System.Drawing.Point(3, 2);
-            this.tablaClientes.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tablaClientes.Location = new System.Drawing.Point(2, 2);
+            this.tablaClientes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tablaClientes.Name = "tablaClientes";
             this.tablaClientes.ReadOnly = true;
             this.tablaClientes.RowHeadersVisible = false;
             this.tablaClientes.RowHeadersWidth = 51;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
-            this.tablaClientes.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.tablaClientes.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.tablaClientes.RowTemplate.Height = 50;
             this.tablaClientes.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.tablaClientes.Size = new System.Drawing.Size(1429, 641);
+            this.tablaClientes.Size = new System.Drawing.Size(1072, 521);
             this.tablaClientes.TabIndex = 0;
             this.tablaClientes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tablaClientes_CellClick);
             this.tablaClientes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tablaClientes_CellContentClick);
@@ -253,11 +243,11 @@ namespace PuntoVentaCasaCeja
             // 
             // ListaClientes
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1492, 850);
+            this.ClientSize = new System.Drawing.Size(1119, 691);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ListaClientes";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Clientes";
