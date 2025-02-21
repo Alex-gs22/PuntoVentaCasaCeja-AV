@@ -362,9 +362,9 @@ namespace PuntoVentaCasaCeja
             // 
             // BdescTemporada
             // 
-            resources.ApplyResources(this.BdescTemporada, "BdescTemporada");
             this.BdescTemporada.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(166)))), ((int)(((byte)(64)))));
             this.BdescTemporada.FlatAppearance.BorderSize = 0;
+            resources.ApplyResources(this.BdescTemporada, "BdescTemporada");
             this.BdescTemporada.Name = "BdescTemporada";
             this.BdescTemporada.UseVisualStyleBackColor = false;
             this.BdescTemporada.Click += new System.EventHandler(this.BdescTemporada_Click);
