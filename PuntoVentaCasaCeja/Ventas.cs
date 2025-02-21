@@ -1048,8 +1048,8 @@ namespace PuntoVentaCasaCeja
         {   
             sucursalName = localDM.getSucursalname(idsucursal);
             sucursalDir = localDM.getSucursalAddr(idsucursal);
-            Dictionary<string, string> d = localDM.getCorte2(idcorte);
-            VerCorte vc = new VerCorte(d, idsucursal, cajero.id, idcorte, idcaja, localDM);
+            Dictionary<string, string> data = localDM.getCorte2(idcorte);
+            VerCorte vc = new VerCorte(data, idsucursal, cajero.id, idcorte, idcaja, localDM);
             DialogResult response = vc.ShowDialog();
             if (response == DialogResult.Yes)
             {

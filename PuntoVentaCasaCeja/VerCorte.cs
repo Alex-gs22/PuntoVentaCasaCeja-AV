@@ -79,6 +79,11 @@ namespace PuntoVentaCasaCeja
 
         }
 
+        private void txttotcred_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void txtingresos_TextChanged(object sender, EventArgs e)
         {
 

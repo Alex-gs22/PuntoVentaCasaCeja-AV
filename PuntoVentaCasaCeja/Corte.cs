@@ -19,8 +19,12 @@ public class Corte
     public string fecha_corte_caja { get; set; }
     public int sucursal_id { get; set; }
     public int usuario_id { get; set; }
-    public int estado {  get; set; }
-    public string detalles {  get; set; }
+    public int estado { get; set; }
+    public string detalles { get; set; }
     public string created_at { get; set; }
     public string updated_at { get; set; }
+
+    // Nuevas propiedades agregadas
+    public decimal total_apartados { get; set; }
+    public decimal total_creditos { get; set; }
 }
