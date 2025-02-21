@@ -79,7 +79,7 @@ namespace PuntoVentaCasaCeja
 
         private void aceptar_Click(object sender, EventArgs e)
         {
-            bool isOnlyEfective = false;
+            //bool isOnlyEfective = false;
             if (txtnombre.Text.Equals("") || txtcorreo.Text.Equals("") || txttel.Text.Equals("") || txtdias.Text.Equals(""))
             {
                 MessageBox.Show("Favor de completar los campos requeridos", "Advertencia");
@@ -132,7 +132,7 @@ namespace PuntoVentaCasaCeja
                             localDM.acumularEfectivoApartado(pagos["efectivo"], idcorte);
                         }
                     }
-                    isOnlyEfective = (pagos.Count == 1 && pagos.ContainsKey("efectivo"));
+                    /*isOnlyEfective = (pagos.Count == 1 && pagos.ContainsKey("efectivo"));
 
                     txtfolio.Text = folio;
                     if (isOnlyEfective)
@@ -143,7 +143,10 @@ namespace PuntoVentaCasaCeja
                     {
                         imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
                         imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
-                    }
+                    }*/
+
+                    imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
+                    imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
 
                     send(na);
                     this.DialogResult = DialogResult.Yes;
