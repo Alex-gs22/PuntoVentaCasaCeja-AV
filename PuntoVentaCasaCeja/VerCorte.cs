@@ -34,7 +34,7 @@ namespace PuntoVentaCasaCeja
             {
                 sobrante = float.Parse(txtsobrante.Text);
             }
-            localDM.completarCorte(idcorte, idsucursal, idusuario, txtfechcorte.Text, sobrante);
+            localDM.completarCorte(idcorte, idsucursal, idusuario, txtfechcorte.Text, sobrante, data);
             this.DialogResult = DialogResult.Yes; 
             this.Close();
         }

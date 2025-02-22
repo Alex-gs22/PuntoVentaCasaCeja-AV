@@ -3239,20 +3239,25 @@ FROM usuarios";
             return id;
         }
 
-        public void completarCorte(int idcorte, int idsucursal, int idusuario, string fecha, double sobrante)
+        public void completarCorte(int idcorte, int idsucursal, int idusuario, string fecha, double sobrante, Dictionary<string, string> data)
         {
             DateTime localDate = DateTime.Now;
             SQLiteCommand command = connection.CreateCommand();
-            command.CommandText = "UPDATE cortes SET sobrante = @setSobrante, fecha_corte_caja = @setFecha, sucursal_id = @setSucursal, usuario_id = @setUsuario, estado = 1, detalles = @setDetalles, updated_at = @setFechaActual WHERE id = @setId";
+            command.CommandText = "UPDATE cortes SET sobrante = @setSobrante, fecha_corte_caja = @setFecha, sucursal_id = @setSucursal, usuario_id = @setUsuario, estado = 1, detalles = @setDetalles, total_apartados = @setTotalApartados, total_creditos = @setTotalCreditos, updated_at = @setFechaActual WHERE id = @setId";
+
             command.Parameters.AddWithValue("setId", idcorte);
             command.Parameters.AddWithValue("setSobrante", sobrante);
             command.Parameters.AddWithValue("setFecha", fecha);
             command.Parameters.AddWithValue("setSucursal", idsucursal);
             command.Parameters.AddWithValue("setUsuario", idusuario);
             command.Parameters.AddWithValue("setDetalles", "Pendiente de envío");
+            command.Parameters.AddWithValue("setTotalApartados", data.ContainsKey("total_apartados") ? data["total_apartados"] : "0");
+            command.Parameters.AddWithValue("setTotalCreditos", data.ContainsKey("total_creditos") ? data["total_creditos"] : "0");
             command.Parameters.AddWithValue("setFechaActual", localDate.ToString("yyyy-MM-dd HH:mm:ss"));
+
             command.ExecuteNonQuery();
         }
+
         //Agregar los parametros de total_apartados y total_creditos
         public Dictionary<string, string> getCorte(int id)
         {
