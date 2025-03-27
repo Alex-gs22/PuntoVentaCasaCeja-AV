@@ -189,6 +189,7 @@ namespace PuntoVentaCasaCeja
                         else
                         {
                             data.webDM.localDM.imprimirAbono(tipo, pagos, data.webDM.activeUser.nombre, data.sucursalName, data.sucursalDir, localDate.ToString("dd/MM/yyyy hh:mm tt"), abonado, porpagar, folioabono, folio);
+                            data.webDM.localDM.imprimirAbono(tipo, pagos, data.webDM.activeUser.nombre, data.sucursalName, data.sucursalDir, localDate.ToString("dd/MM/yyyy hh:mm tt"), abonado, porpagar, folioabono, folio);
                             if (reprint)
                             {
                                 data.webDM.localDM.imprimirAbono(tipo, pagos, data.webDM.activeUser.nombre, data.sucursalName, data.sucursalDir, localDate.ToString("dd/MM/yyyy hh:mm tt"), abonado, porpagar, folioabono, folio);

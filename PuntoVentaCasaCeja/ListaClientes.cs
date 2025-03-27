@@ -89,6 +89,7 @@ namespace PuntoVentaCasaCeja
         
         private async void BajaButton_Click(object sender, EventArgs e)
         {
+
             if (tablaClientes.SelectedRows.Count == 0)
             {
                 MessageBox.Show("No se ha seleccionado ningun cliente");
@@ -103,21 +104,30 @@ namespace PuntoVentaCasaCeja
                 int idCliente = Convert.ToInt32(tablaClientes.SelectedRows[0].Cells[0].Value);
 
                 // Llamar al método para desactivar el cliente
-                var desactivarResult = await webDM.DesactivarClienteAsync(idCliente);
-
-                if (desactivarResult["status"] == "success")
+                DialogResult deleteConfirmation = MessageBox.Show("Desea dar de baja este cliente??", "Eliminar Cliente", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (deleteConfirmation == DialogResult.Yes)
                 {
-                    MessageBox.Show("Cliente dado de baja correctamente");
-                    localDM.eliminarCliente(idCliente);
-                    localDM.eliminarClienteTemporal(idCliente);
-                    tablaClientes.DataSource = localDM.getClientes();
+                    var desactivarResult = await webDM.DesactivarClienteAsync(idCliente);
+
+                    if (desactivarResult["status"] == "success")
+                    {
+                        MessageBox.Show("Cliente dado de baja correctamente");
+                        localDM.eliminarCliente(idCliente);
+                        localDM.eliminarClienteTemporal(idCliente);
+                        tablaClientes.DataSource = localDM.getClientes();
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Error al desactivar el cliente: {desactivarResult["message"]}");
+                    }
+
+                    tablaClientes.Focus();
                 }
                 else
                 {
-                    MessageBox.Show($"Error al desactivar el cliente: {desactivarResult["message"]}");
+                    MessageBox.Show("Operación cancelada");
+                    return;
                 }
-
-                tablaClientes.Focus();
             }
             else
             {

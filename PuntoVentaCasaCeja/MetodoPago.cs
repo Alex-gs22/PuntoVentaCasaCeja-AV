@@ -23,14 +23,17 @@ namespace PuntoVentaCasaCeja
             //this.abonado = data.totalabonado;
             this.total = total;
             this.abonar = Abonar;           
-            this.data = data;            
+            this.data = data;                         
         }
         private void MetodoPago_Load(object sender, EventArgs e)
         {          
             lbltotal.Text = total.ToString("0.00");
             lblabonado.Text = abonado.ToString("0.00");
             lblfaltante.Text = total.ToString("0.00");
-
+            if (data.isventa)
+            {
+                efectivo_Click(sender, e);
+            }
         }
 
         private void efectivo_Click(object sender, EventArgs e)

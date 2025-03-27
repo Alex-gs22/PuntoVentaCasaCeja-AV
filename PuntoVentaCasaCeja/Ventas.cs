@@ -102,6 +102,7 @@ namespace PuntoVentaCasaCeja
                 successful = false,
                 usuario = null,
                 desbloqDesc = desbloqDesc,
+                isventa = false,
             };
         }
         void setInt(int x)
@@ -331,7 +332,7 @@ namespace PuntoVentaCasaCeja
                     corteZF7ToolStripMenuItem.Enabled = false;
                     establecerImpresoraToolStripMenuItem.Enabled = true;
                     //administrarCatálogoToolStripMenuItem.Enabled = false;
-                    actualizarBaseDeDatosToolStripMenuItem.Enabled = false;
+                    //actualizarBaseDeDatosToolStripMenuItem.Enabled = false;
                     historialDeCortesToolStripMenuItem.Enabled = false;
                     adminUsuariosToolStripMenuItem.Enabled = false;
                 }
@@ -594,6 +595,7 @@ namespace PuntoVentaCasaCeja
             totalcarrito = 0;
             data.esDescuento = false;
             Bdescuento.Enabled = true;
+            data.isventa = false;
             data.descuento = 0;
             data.totalabonado = 0;
             tabla.Rows.Clear();
@@ -915,6 +917,7 @@ namespace PuntoVentaCasaCeja
         {
             if (carrito.Count > 0)
             {
+                data.isventa = true;
                 MetodoPago mp = new MetodoPago(totalcarrito - totalpagado, abono, data);
                 mp.ShowDialog();
 
@@ -934,6 +937,7 @@ namespace PuntoVentaCasaCeja
                 else
                 {
                     txttotal.Text = "Por pagar MXN: $" + (totalcarrito - totalpagado).ToString("0.00");
+                    data.isventa = false;                  
                 }
             }
             else

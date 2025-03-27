@@ -609,7 +609,38 @@ namespace PuntoVentaCasaCeja
                 new System.Drawing.Printing.PrintPageEventHandler(
                 docToPrint_PrintPage);
         }
-        private void docToPrint_PrintPage(
+        private void docToPrint_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            string text1 = ticket;
+
+            // Verificar si el nombre de la fuente no está vacío
+            if (string.IsNullOrEmpty(data.fontName))
+            {
+                throw new ArgumentException("El nombre de la fuente no puede estar vacío.");
+            }
+
+            // Verificar si la fuente está instalada en el sistema
+            if (!FontFamily.Families.Any(f => f.Name.Equals(data.fontName, StringComparison.OrdinalIgnoreCase)))
+            {
+                throw new ArgumentException($"La fuente '{data.fontName}' no está instalada en el sistema.");
+            }
+
+            FontFamily fontFamily = new FontFamily(data.fontName);
+            Font font = new Font(
+               fontFamily,
+               data.fontSize,
+               FontStyle.Regular,
+               GraphicsUnit.Point);
+            Rectangle rect = new Rectangle(10, 10, 750, 1000);
+            StringFormat stringFormat = new StringFormat();
+            SolidBrush solidBrush = new SolidBrush(Color.FromArgb(255, 0, 0, 0));
+
+            stringFormat.SetTabStops(0, tabs[data.fontSize]);
+
+            e.Graphics.DrawString(text1, font, solidBrush, rect, stringFormat);
+        }
+
+        private void docToPrint_PrintPageOriginal(
     object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
 
