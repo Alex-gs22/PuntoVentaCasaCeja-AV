@@ -242,9 +242,8 @@ namespace PuntoVentaCasaCeja
             }
         }
 
-
-            private void GenerarExcel(int opc)
-             {
+        private void GenerarExcel(int opc)
+        {
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             int idSucursal = data.idSucursal;
             DataTable creditosTable = localDM.GetCreditosDataTable(idSucursal);
@@ -268,8 +267,12 @@ namespace PuntoVentaCasaCeja
                 return;
             }
 
-            // Especificar la carpeta y el nombre del archivo
-            string carpeta = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CasaCejaDocs");
+            // Especificar la carpeta principal y la subcarpeta
+            string carpetaPrincipal = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CasaCejaDocs");
+            string subcarpeta = Path.Combine(carpetaPrincipal, "PuntoDeVenta");
+
+            // Utilizamos la subcarpeta para guardar el archivo
+            string carpeta = subcarpeta;
             string nombre = "";
             if (opc == 0)
             {
@@ -286,10 +289,14 @@ namespace PuntoVentaCasaCeja
             string nombreArchivo = nombre + fecha + ".xlsx";
             string rutaArchivo = Path.Combine(carpeta, nombreArchivo);
 
-            // Verificar si la carpeta existe, si no, crearla
-            if (!Directory.Exists(carpeta))
+            // Verificar si la carpeta principal y la subcarpeta existen, si no, crearlas
+            if (!Directory.Exists(carpetaPrincipal))
             {
-                Directory.CreateDirectory(carpeta);
+                Directory.CreateDirectory(carpetaPrincipal);
+            }
+            if (!Directory.Exists(subcarpeta))
+            {
+                Directory.CreateDirectory(subcarpeta);
             }
 
             // Verificar si el archivo ya existe
@@ -366,5 +373,5 @@ namespace PuntoVentaCasaCeja
                 MessageBox.Show("Ocurrió un error al generar el archivo: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        }
     }
-}
