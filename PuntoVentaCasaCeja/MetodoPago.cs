@@ -50,7 +50,7 @@ namespace PuntoVentaCasaCeja
         {
             total -= cant;
             abonado += cant;
-            data.totalabonado = abonado;
+            data.totalabonado = abonado;            
             lblfaltante.Text = total.ToString("0.00");
             lblabonado.Text = abonado.ToString("0.00");
         }

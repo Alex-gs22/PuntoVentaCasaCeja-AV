@@ -3664,11 +3664,22 @@ FROM usuarios";
             if (result.Read())
             {
                 var temp = JsonConvert.DeserializeObject<Dictionary<string, double>>(result.GetString(0));
-                command.CommandText = "UPDATE cortes SET gastos = @setGastos WHERE id = @setId";
-                
-                command.Parameters.AddWithValue("setId", idcorte);
+                double total_efectivo = result.GetDouble(1);
+                result.Close(); // Cierra el DataReader antes de ejecutar otro comando
+
+                if (temp.ContainsKey(concepto))
+                    temp[concepto] += monto;
+                else
+                    temp.Add(concepto, monto);
+
+                command.CommandText = "UPDATE cortes SET total_efectivo = @setTotalEfectivo, gastos = @setGastos WHERE id = @setId";
+                command.Parameters.AddWithValue("setTotalEfectivo", total_efectivo - monto);
                 command.Parameters.AddWithValue("setGastos", JsonConvert.SerializeObject(temp));
-                command.ExecuteNonQuery();                
+                command.ExecuteNonQuery();
+            }
+            else
+            {
+                result.Close(); // Asegúrate de cerrar el DataReader si no se leen datos
             }
         }
 

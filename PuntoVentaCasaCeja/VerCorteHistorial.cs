@@ -92,36 +92,55 @@ namespace PuntoVentaCasaCeja
                              double.Parse(corte["total_tarjetas_credito"]) + double.Parse(corte["total_cheques"]) +
                              double.Parse(corte["total_transferencias"]) + double.Parse(corte["sobrante"]);
             string nc = localDM.getNombreUsuario(int.Parse(corte["usuario_id"]));
+            string sucursalName = localDM.getSucursalname(int.Parse(corte["sucursal_id"]));
 
-            // Lógica para imprimir el ticket
             CreaTicket Ticket1 = new CreaTicket();
-            Ticket1.impresora = localDM.impresora;            
-            Ticket1.TextoCentro("CASA CEJA");
-            Ticket1.TextoCentro("SUCURSAL: " + localDM.getSucursalname(int.Parse(corte["sucursal_id"])).ToUpper());
-            Ticket1.TextoCentro("CZ FOLIO:  " + corte["folio_corte"]);
-            Ticket1.TextoExtremos("FECHA DE APERTURA:", corte["fecha_apertura_caja"]);
-            Ticket1.TextoExtremos("FECHA DE CORTE:", corte["fecha_corte_caja"]);
-            Ticket1.TextoExtremos("FONDO DE APERTURA:", corte["fondo_apertura"]);
-            Ticket1.TextoExtremos("EFECTIVO DE CREDITOS:", corte["efectivo_creditos"]);
-            Ticket1.TextoExtremos("EFECTIVO DE APARTADOS:", corte["efectivo_apartados"]);
-            Ticket1.TextoExtremos("EFECTIVO DIRECTO: ", efedir.ToString("0.00"));
-            Ticket1.TextoExtremos("EFECTIVO TOTAL: ", corte["total_efectivo"]);
-            Ticket1.TextoExtremos("TOTAL T. DEBITO", corte["total_tarjetas_debito"]);
-            Ticket1.TextoExtremos("TOTAL T. CREDITO", corte["total_tarjetas_credito"]);
-            Ticket1.TextoExtremos("TOTAL CHEQUES", corte["total_cheques"]);
-            Ticket1.TextoExtremos("TOTAL TRANSFERENCIAS", corte["total_transferencias"]);
-            Ticket1.TextoExtremos("SOBRANTE:", corte["sobrante"]);
-            Ticket1.TextoExtremos("GASTOS:", tgastos.ToString("0.00"));
-            Ticket1.TextoExtremos("INGRESOS:", tingresos.ToString("0.00"));
-            Ticket1.TextoExtremos("TOTAL CZ:", totalCZ.ToString("0.00"));
-            Ticket1.TextoCentro("CAJERO:" + nc.ToUpper());
+            Ticket1.impresora = localDM.impresora;
+            Ticket1.TextoCentroCorte("CASA CEJA");
+            Ticket1.TextoCentroCorte(" ");
+            Ticket1.TextoCentroCorte("SUCURSAL: " + sucursalName.ToUpper());
+            Ticket1.TextoCentroCorte(" ");
+            Ticket1.TextoCentroCorte("CZ FOLIO:  " + corte["folio_corte"]);
+            Ticket1.TextoCentroCorte(" ");
+            Ticket1.LineasGuion(); // imprime una linea de guiones
+            Ticket1.TextoExtremosCorte("FECHA DE APERTURA:", corte["fecha_apertura_caja"]);
+            Ticket1.TextoExtremosCorte("FECHA DE CORTE:", corte["fecha_corte_caja"]);
+            Ticket1.LineasGuion(); // imprime una linea de guiones
+            Ticket1.TextoCentroCorte(" ");
+            Ticket1.TextoExtremosCorte("FONDO DE APERTURA:", corte["fondo_apertura"]);
+            Ticket1.TextoCentroCorte(" ");
+            Ticket1.TextoExtremosCorte("TOTAL CZ:", totalCZ.ToString("0.00"));
+            Ticket1.LineasGuion();
+            Ticket1.TextoExtremosCorte("EFECTIVO DE CREDITOS:", corte["efectivo_creditos"]);
+            Ticket1.TextoExtremosCorte("EFECTIVO DE APARTADOS:", corte["efectivo_apartados"]);
+            Ticket1.TextoExtremosCorte("EFECTIVO DIRECTO: ", efedir.ToString("0.00"));
+            Ticket1.LineasGuion();
+            Ticket1.TextoCentroCorte(" ");
+            Ticket1.LineasGuion();
+            Ticket1.TextoExtremosCorte("TOTAL T. DEBITO", corte["total_tarjetas_debito"]);
+            Ticket1.TextoExtremosCorte("TOTAL T. CREDITO", corte["total_tarjetas_credito"]);
+            Ticket1.TextoExtremosCorte("TOTAL CHEQUES", corte["total_cheques"]);
+            Ticket1.TextoExtremosCorte("TOTAL TRANSFERENCIAS", corte["total_transferencias"]);
+            Ticket1.LineasGuion();
+            Ticket1.TextoCentroCorte(" ");
+            Ticket1.LineasGuion();
+            Ticket1.TextoExtremosCorte("SOBRANTE:", corte["sobrante"]);
+            Ticket1.TextoExtremosCorte("GASTOS:", tgastos.ToString("0.00"));
+            Ticket1.TextoExtremosCorte("INGRESOS:", tingresos.ToString("0.00"));
+            Ticket1.TextoExtremosCorte("EFECTIVO TOTAL: ", corte["total_efectivo"]);
+            Ticket1.LineasGuion();
+            Ticket1.TextoCentroCorte(" ");
+            Ticket1.TextoCentroCorte(" ");
+            Ticket1.TextoCentroCorte(" ");
+            Ticket1.TextoCentroCorte(" ");
+            Ticket1.LineasGuion();
+            Ticket1.TextoCentroCorte("CAJERO:" + nc.ToUpper());
 
             Ticket1.CortaTicket();
         }
 
         private void Bimprimir_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Imprimiendo corte");
             int selectedRowIndex = 1;
             if (selectedRowIndex < 0)
             {

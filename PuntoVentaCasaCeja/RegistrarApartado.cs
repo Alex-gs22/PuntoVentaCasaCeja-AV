@@ -236,7 +236,7 @@ namespace PuntoVentaCasaCeja
             txtfolio.Text = folio;
             txtnombre.Text = cliente.nombre;
             txttel.Text = cliente.telefono;
-            txtcorreo.Text = cliente.telefono;
+            txtcorreo.Text = cliente.correo;
             txttotal.Text = totalcarrito.ToString("0.00");
             txtabonado.Text = "0.00";
             txtpagoentrega.Text = totalcarrito.ToString("0.00");
@@ -335,6 +335,7 @@ namespace PuntoVentaCasaCeja
             MetodoPago mp = new MetodoPago(totalcarrito-totalpagado, abono, data);
             mp.ShowDialog();
             this.txtPorcentajeDesc.Text = "0";
+            data.porcentajeDesc = 0;
             //aceptar.PerformClick();
         }
 

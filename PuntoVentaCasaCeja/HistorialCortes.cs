@@ -85,6 +85,8 @@ namespace PuntoVentaCasaCeja
             BSelCorte_Click(sender, e);
         }
 
+        /*
+
         void imprimirCorte(Dictionary<string, string> corte)
         {
             double efedir = double.Parse(corte["total_efectivo"]) - double.Parse(corte["efectivo_apartados"]) - double.Parse(corte["efectivo_creditos"]);
@@ -152,6 +154,7 @@ namespace PuntoVentaCasaCeja
 
             Ticket1.CortaTicket();
         }
+        
         private void Bimprimir_Click(object sender, EventArgs e)
         {
             if (localDM.impresora == null)
@@ -184,6 +187,7 @@ namespace PuntoVentaCasaCeja
                 MessageBox.Show("No se pudo obtener la información del corte.", "Error");
             }
         }
+        */
 
         private void BelimHistorial_Click(object sender, EventArgs e)
         {

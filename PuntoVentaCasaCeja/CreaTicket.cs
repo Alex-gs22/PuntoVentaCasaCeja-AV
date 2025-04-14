@@ -31,6 +31,72 @@ namespace PuntoVentaCasaCeja
         string parte1, parte2;
         public string impresora = ""; // nombre exacto de la impresora como esta en el panel de control
         int max, cort;
+
+        public void TextoCentroCorte(string par1)
+        {
+            ticket = "";
+            max = par1.Length;
+            if (max > 43) // Ajustamos el límite a 43 caracteres
+            {
+                cort = max - 43;
+                parte1 = par1.Remove(43, cort); // si es mayor que 43 caracteres, lo corta
+            }
+            else { parte1 = par1; }
+            max = (int)(43 - parte1.Length) / 2;
+            for (int i = 0; i < max; i++)
+            {
+                ticket += " ";
+            }
+            ticket += parte1 + "\n";
+            RawPrinterHelper.SendStringToPrinter(impresora, "\x1B\x21\x10" + ticket); // Código de control para texto grande
+        }
+
+        public void TextoExtremosCorte(string par1, string par2)
+        {
+            max = par1.Length;
+            if (max > 21) // Ajustamos el límite a 21 caracteres
+            {
+                cort = max - 21;
+                parte1 = par1.Remove(21, cort); // si par1 es mayor que 21 lo corta
+            }
+            else { parte1 = par1; }
+            ticket = parte1;
+            max = par2.Length;
+            if (max > 21) // Ajustamos el límite a 21 caracteres
+            {
+                cort = max - 21;
+                parte2 = par2.Remove(21, cort); // si par2 es mayor que 21 lo corta
+            }
+            else { parte2 = par2; }
+            max = 43 - (parte1.Length + parte2.Length);
+            for (int i = 0; i < max; i++)
+            {
+                ticket += " ";
+            }
+            ticket += parte2 + "\n";
+            RawPrinterHelper.SendStringToPrinter(impresora, "\x1B\x21\x10" + ticket); // Código de control para texto grande
+        }
+
+        public void AgregaTotalesCorte(string par1, double total)
+        {
+            max = par1.Length;
+            if (max > 32) // Ajustamos el límite a 32 caracteres
+            {
+                cort = max - 32;
+                parte1 = par1.Remove(32, cort); // si es mayor que 32 lo corta
+            }
+            else { parte1 = par1; }
+            ticket = parte1;
+            parte2 = total.ToString("c");
+            max = 43 - (parte1.Length + parte2.Length);
+            for (int i = 0; i < max; i++)
+            {
+                ticket += " ";
+            }
+            ticket += parte2 + "\n";
+            RawPrinterHelper.SendStringToPrinter(impresora, "\x1B\x21\x10" + ticket); // Código de control para texto grande
+        }
+
         public void LineasGuion()
         {
             ticket = "----------------------------------------\n";   // agrega lineas separadoras -

@@ -21,6 +21,12 @@ namespace PuntoVentaCasaCeja
             this.localDM = localdataManager;
             this.setUser = setUser;
             this.admin = admin;
+            automatizarLogin();
+        }
+        void automatizarLogin()
+        {
+            user.Text = "admin";
+            password.Text = "admin";           
         }
 
         private void cancel_Click(object sender, EventArgs e)
