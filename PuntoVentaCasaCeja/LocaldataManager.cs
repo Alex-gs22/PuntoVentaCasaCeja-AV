@@ -21,46 +21,51 @@ namespace PuntoVentaCasaCeja
         public string impresora = "";
         string dbpath;
         public SQLiteConnection connection;
-        private const string PreloadedDbName = "PreloadedCatalog.db"; // Nuevo: Nombre del archivo precargado
+        private const string PreloadedDbName = "PreLoadedCatalog.db"; // Nuevo: Nombre del archivo precargado
         public bool IsCatalogPreloaded { get; private set; } // Nuevo: Bandera para saber si usó el catálogo precargado
                                                              // Diccionario completo de comandos CREATE TABLE
         private readonly Dictionary<string, string> tableCreationCommands = new Dictionary<string, string>
         {
-            // 1. Tablas básicas sin dependencias
+            // 1. Tablas de PreLoadedCatalog.db correspondiente a productos, categorias y medidas
+            { "productos", "CREATE TABLE 'productos' ( 'id' INTEGER NOT NULL, 'codigo' TEXT, 'nombre' TEXT, 'presentacion' TEXT, 'iva' REAL, 'menudeo' REAL, 'mayoreo' REAL, 'cantidad_mayoreo' INTEGER, 'especial' REAL, 'vendedor' REAL, 'imagen' TEXT, 'activo' INTEGER, 'created_at' TEXT, 'updated_at' TEXT, 'medida_id' INTEGER, 'categoria_id' INTEGER, FOREIGN KEY('categoria_id') REFERENCES 'categorias'('id'), PRIMARY KEY('id'), FOREIGN KEY('medida_id') REFERENCES 'medidas'('id'))" },
+            { "categorias", "CREATE TABLE 'categorias' ( 'id' INTEGER NOT NULL, 'nombre' TEXT, 'activo' INTEGER, 'created_at' TEXT, 'updated_at' TEXT, PRIMARY KEY('id'))" },
+            { "medidas", "CREATE TABLE 'medidas' ( 'id' INTEGER NOT NULL, 'nombre' TEXT, 'activo' INTEGER, 'created_at' TEXT, 'updated_at' TEXT, PRIMARY KEY('id'))" },
+            
+            // 2. Tablas básicas sin dependencias
             {"sucursales", "CREATE TABLE 'sucursales' ('id' INTEGER NOT NULL, 'puerta_enlace1' TEXT, 'puerta_enlace2' TEXT, 'puerta_enlace3' TEXT, 'puerta_enlace4' TEXT, 'razon_social' TEXT, 'direccion' TEXT, 'correo' TEXT, 'activo' INTEGER, 'created_at' TEXT, 'updated_at' TEXT, PRIMARY KEY('id' AUTOINCREMENT))"},
             {"proveedores", "CREATE TABLE 'proveedores' ('id' INTEGER NOT NULL, 'nombre' TEXT, 'direccion' TEXT, 'correo' TEXT, 'telefono' TEXT, 'descripcion' TEXT, 'activo' INTEGER, 'created_at' TEXT, 'updated_at' TEXT, PRIMARY KEY('id'))"},
             {"usuarios", "CREATE TABLE 'usuarios' ('id' INTEGER NOT NULL, 'nombre' TEXT, 'correo' TEXT, 'confirmacion' INTEGER, 'telefono' TEXT, 'imagen' TEXT, 'usuario' TEXT, 'clave' TEXT, 'is_root' INTEGER, 'activo' INTEGER, 'created_at' TEXT, 'updated_at' TEXT, PRIMARY KEY('id'))"},
 
-            // 2. Tablas que dependen de las básicas
+            // 3. Tablas que dependen de las básicas
             {"clientes", "CREATE TABLE 'clientes' ('id' INTEGER, 'nombre' TEXT, 'rfc' TEXT, 'calle' TEXT, 'no_exterior' TEXT, 'no_interior' TEXT, 'cp' TEXT, 'colonia' TEXT, 'ciudad' TEXT, 'telefono' TEXT, 'correo' TEXT, 'activo' INTEGER, 'created_at' TEXT, 'updated_at' TEXT, PRIMARY KEY('id'))"},
             {"clientes_temporal", "CREATE TABLE 'clientes_temporal' ('id' INTEGER, 'nombre' TEXT, 'rfc' TEXT, 'calle' TEXT, 'no_exterior' TEXT, 'no_interior' TEXT, 'cp' TEXT, 'colonia' TEXT, 'ciudad' TEXT, 'telefono' TEXT, 'correo' TEXT, PRIMARY KEY('id' AUTOINCREMENT))"},
             {"entradas", "CREATE TABLE 'entradas' ('id' INTEGER NOT NULL, 'fecha_factura' TEXT, 'total_factura' REAL, 'folio_factura' TEXT, 'usuario_id' INTEGER, 'sucursal_id' INTEGER, 'proveedor_id' INTEGER, 'cancelacion' INTEGER, 'estado' INTEGER, 'detalles' TEXT, 'created_at' TEXT, 'updated_at' TEXT, PRIMARY KEY('id' AUTOINCREMENT))"},
         
-            // 3. Tablas de transacciones principales
+            // 4. Tablas de transacciones principales
             {"ventas", "CREATE TABLE 'ventas' ('id' INTEGER NOT NULL, 'total' REAL, 'descuento' REAL, 'folio' TEXT, 'folio_corte' TEXT, 'fecha_venta' TEXT, 'metodo_pago' TEXT, 'tipo' INTEGER, 'sucursal_id' INTEGER, 'usuario_id' INTEGER, 'cancelacion' TEXT, 'estado' INTEGER, 'detalles' TEXT, FOREIGN KEY('usuario_id') REFERENCES 'usuarios'('id'), FOREIGN KEY('sucursal_id') REFERENCES 'sucursales'('id'), PRIMARY KEY('id' AUTOINCREMENT))"},
             {"apartados", "CREATE TABLE 'apartados' ('id' INTEGER, 'productos' TEXT, 'total' REAL, 'total_pagado' REAL, 'fecha_apartado' TEXT, 'folio_corte' TEXT, 'fecha_entrega' TEXT, 'estado' INTEGER, 'cliente_creditos_id' INTEGER, 'id_cajero_registro' INTEGER, 'id_cejero_entrega' INTEGER, 'sucursal_id' INTEGER, 'observaciones' TEXT, 'created_at' TEXT, 'updated_at' TEXT, FOREIGN KEY('id_cajero_registro') REFERENCES 'usuarios'('id'), FOREIGN KEY('id_cejero_entrega') REFERENCES 'usuarios'('id'), PRIMARY KEY('id' AUTOINCREMENT))"},
             {"creditos", "CREATE TABLE 'creditos' ('id' INTEGER, 'productos' TEXT, 'total' REAL, 'total_pagado' REAL, 'fecha_de_credito' TEXT, 'folio' TEXT, 'estado' INTEGER, 'cliente_creditos_id' INTEGER, 'id_cajero_registro' INTEGER, 'sucursal_id' INTEGER, 'observaciones' TEXT, 'created_at' TEXT, 'updated_at' TEXT, FOREIGN KEY('sucursal_id') REFERENCES 'sucursales'('id'), FOREIGN KEY('id_cajero_registro') REFERENCES 'usuarios'('id'), PRIMARY KEY('id'))"},
 
-            // 4. Tablas de soporte para transacciones
+            // 5. Tablas de soporte para transacciones
             {"producto_venta", "CREATE TABLE 'producto_venta' ('id' INTEGER NOT NULL, 'venta_id' INTEGER, 'producto_id' INTEGER, 'codigo' TEXT, 'cantidad' INTEGER, 'precio_venta' REAL, 'estado' INTEGER, 'detalles' TEXT, PRIMARY KEY('id' AUTOINCREMENT), FOREIGN KEY('producto_id') REFERENCES 'productos'('id'), FOREIGN KEY('venta_id') REFERENCES 'ventas'('id'))"},
             {"producto_entrada", "CREATE TABLE 'producto_entrada' ('id' INTEGER NOT NULL, 'entrada_id' INTEGER, 'producto_id' INTEGER, 'codigo' INTEGER, 'cantidad' INTEGER, 'costo' REAL, 'estado' INTEGER, 'detalles' TEXT, 'created_at' TEXT, 'updated_at' TEXT, PRIMARY KEY('id' AUTOINCREMENT))"},
             {"salidas", "CREATE TABLE 'salidas' ('id' INTEGER NOT NULL, 'id_sucursal_origen' INTEGER NOT NULL, 'id_sucursal_destino' INTEGER NOT NULL, 'productos' TEXT NOT NULL, 'folio' TEXT NOT NULL, 'fecha_salida' TEXT NOT NULL, 'usuario_id' INTEGER NOT NULL, 'total_importe' REAL NOT NULL, 'cancelado' INTEGER NOT NULL DEFAULT 0, 'created_at' TEXT NOT NULL, 'updated_at' TEXT NOT NULL, PRIMARY KEY('id' AUTOINCREMENT))"},
 
-            // 5. Tablas temporales
+            // 6. Tablas temporales
             {"apartados_temporal", "CREATE TABLE 'apartados_temporal' ('id' INTEGER, 'productos' TEXT, 'total' REAL, 'total_pagado' REAL, 'fecha_apartado' TEXT, 'folio_corte' TEXT, 'fecha_entrega' TEXT, 'estado' INTEGER, 'cliente_creditos_id' INTEGER, 'id_cajero_registro' INTEGER, 'id_cajero_entrega' INTEGER, 'sucursal_id' INTEGER, 'temporal' INTEGER, 'observaciones' TEXT, PRIMARY KEY('id' AUTOINCREMENT), FOREIGN KEY('id_cajero_entrega') REFERENCES 'usuarios'('id'), FOREIGN KEY('sucursal_id') REFERENCES 'sucursales'('id'), FOREIGN KEY('id_cajero_registro') REFERENCES 'usuarios'('id'))"},
             {"creditos_temporal", "CREATE TABLE 'creditos_temporal' ('id' INTEGER, 'productos' TEXT, 'total' REAL, 'total_pagado' REAL, 'fecha_de_credito' TEXT, 'folio' TEXT, 'estado' INTEGER, 'cliente_creditos_id' INTEGER, 'id_cajero_registro' INTEGER, 'sucursal_id' INTEGER, 'temporal' INTEGER, 'observaciones' TEXT, FOREIGN KEY('id_cajero_registro') REFERENCES 'usuarios'('id'), FOREIGN KEY('sucursal_id') REFERENCES 'sucursales'('id'), PRIMARY KEY('id' AUTOINCREMENT))"},
             {"salidas_temporal", "CREATE TABLE 'salidas_temporal' ('id' INTEGER NOT NULL, 'id_sucursal_origen' INTEGER, 'id_sucursal_destino' INTEGER, 'productos' TEXT, 'folio' TEXT, 'fecha_salida' TEXT, 'usuario_id' INTEGER, 'total_importe' REAL, 'estado' INTEGER, 'created_at' TEXT, 'updated_at' TEXT, PRIMARY KEY('id' AUTOINCREMENT))"},
 
-            // 6. Tablas de abonos
+            // 7. Tablas de abonos
             {"abonos_apartado", "CREATE TABLE 'abonos_apartado' ('id' INTEGER, 'folio' TEXT, 'metodo_pago' TEXT, 'total_abonado' REAL, 'fecha' TEXT, 'id_apartado' INTEGER, 'folio_corte' TEXT, 'id_cajero' INTEGER, 'created_at' TEXT, 'updated_at' TEXT, FOREIGN KEY('id_apartado') REFERENCES 'apartados'('id'), FOREIGN KEY('id_cajero') REFERENCES 'usuarios'('id'))"},
             {"abonos_credito", "CREATE TABLE 'abonos_credito' ('id' INTEGER, 'folio' TEXT, 'metodo_pago' TEXT, 'total_abonado' REAL, 'fecha' TEXT, 'id_credito' INTEGER, 'folio_corte' TEXT, 'id_cajero' INTEGER, 'created_at' TEXT, 'updated_at' TEXT, FOREIGN KEY('id_credito') REFERENCES 'creditos'('id'), FOREIGN KEY('id_cajero') REFERENCES 'usuarios'('id'))"},
             {"abonos_apartado_temporal", "CREATE TABLE 'abonos_apartado_temporal' ('id' INTEGER NOT NULL, 'folio' TEXT, 'metodo_pago' TEXT, 'total_abonado' REAL, 'fecha' TEXT, 'folio_apartado' TEXT, 'id_apartado' INTEGER, 'folio_corte' TEXT, 'id_cajero' INTEGER, PRIMARY KEY('id' AUTOINCREMENT))"},
             {"abonos_credito_temporal", "CREATE TABLE 'abonos_credito_temporal' ('id' INTEGER NOT NULL, 'folio' TEXT, 'metodo_pago' TEXT, 'total_abonado' REAL, 'fecha' TEXT, 'folio_credito' TEXT, 'id_credito' INTEGER, 'folio_corte' TEXT, 'id_cajero' INTEGER, PRIMARY KEY('id' AUTOINCREMENT))"},
 
-            // 7. Otras tablas
+            // 8. Otras tablas
             {"cortes", "CREATE TABLE 'cortes' ('id' INTEGER NOT NULL UNIQUE, 'folio_corte' TEXT, 'fondo_apertura' REAL, 'total_efectivo' REAL, 'total_tarjetas_debito' REAL, 'total_tarjetas_credito' REAL, 'total_cheques' REAL, 'total_transferencias' REAL, 'efectivo_apartados' REAL, 'efectivo_creditos' REAL, 'gastos' TEXT, 'ingresos' TEXT, 'sobrante' REAL, 'fecha_apertura_caja' TEXT, 'fecha_corte_caja' TEXT, 'sucursal_id' INTEGER, 'usuario_id' INTEGER, 'estado' INTEGER, 'detalles' TEXT, 'created_at' TEXT, 'updated_at' TEXT, 'total_apartados' REAL DEFAULT 0, 'total_creditos' REAL DEFAULT 0, FOREIGN KEY('sucursal_id') REFERENCES 'sucursales'('id'), FOREIGN KEY('usuario_id') REFERENCES 'usuarios'('id'), PRIMARY KEY('id' AUTOINCREMENT))"},
             {"operaciones", "CREATE TABLE 'operaciones' ('id' INTEGER NOT NULL, 'accion' TEXT, 'confirmar' INTEGER, 'created_at' TEXT, 'updated_at' TEXT, 'producto_id' INTEGER, 'usuario_id' INTEGER, PRIMARY KEY('id'))"},
-            {"alta_temporal", "CREATE TABLE 'alta_temporal' ('id' INTEGER NOT NULL, 'codigo' TEXT, 'nombre' TEXT, 'presentacion' TEXT, 'menudeo' REAL, 'mayoreo' REAL, 'cantidad_mayoreo' INTEGER, 'especial' REAL, 'vendedor' REAL, 'medida_id' INTEGER, 'categoria_id' INTEGER, 'estado' INTEGER, 'detalles' TEXT, FOREIGN KEY('medida_id') REFERENCES 'medidas'('id'), PRIMARY KEY('id' AUTOINCREMENT), FOREIGN KEY('categoria_id') REFERENCES 'categorias'('id'))"}
+            {"alta_temporal", "CREATE TABLE 'alta_temporal' ('id' INTEGER NOT NULL, 'codigo' TEXT, 'nombre' TEXT, 'presentacion' TEXT, 'menudeo' REAL, 'mayoreo' REAL, 'cantidad_mayoreo' INTEGER, 'especial' REAL, 'vendedor' REAL, 'medida_id' INTEGER, 'categoria_id' INTEGER, 'estado' INTEGER, 'detalles' TEXT, FOREIGN KEY('medida_id') REFERENCES 'medidas'('id'), PRIMARY KEY('id' AUTOINCREMENT), FOREIGN KEY('categoria_id') REFERENCES 'categorias'('id'))"},           
         };
 
         public LocaldataManager()
