@@ -171,49 +171,81 @@ namespace PuntoVentaCasaCeja
 
             if (loaded == false)
             {
-                
+
                 loaded = true;
                 //var runningProcessByName = Process.GetProcessesByName("CCSync");
                 //if (runningProcessByName.Length == 0)
                 //{
 
                 this.Enabled = false;
-                    LoadWindow lw = new LoadWindow();
-                    lw.Show(this);
-                    if (await webDM.GetProductos())
+                LoadWindow lw = new LoadWindow();
+                lw.Show(this);
+                
+                try { 
+                    // orden optimizado para precarga
+                    if (localDM.IsCatalogPreloaded)
                     {
-                        lw.setData(7, "Sincronizando datos desde el servidor...");
+                        Debug.WriteLine("Base de datos precargada detectada. Sincronizando datos esenciales primero...");
+                        // 1. Sincronizar datos esenciales primero
+                        lw.setData(10, "Sincronizando datos básicos...");
                         await webDM.GetSucursales();
-                        lw.setData(14, "Sincronizando datos desde el servidor...");
-                        await webDM.GetMedidas();
-                        lw.setData(21, "Sincronizando datos desde el servidor...");
-                        await webDM.GetCategorias();
-                        lw.setData(28, "Sincronizando datos desde el servidor...");
                         await webDM.GetUsuarios();
-                        lw.setData(35, "Sincronizando datos desde el servidor...");
+
+                        // 2. Actualizar catálogo (solo cambios)
+                        lw.setData(30, "Actualizando catálogo...");
+                        await webDM.GetProductos();
+
+                        // 3. El resto de sincronizaciones
+                        lw.setData(50, "Sincronizando otros datos...");
                         await webDM.GetApartados();
-                        lw.setData(42, "Sincronizando datos desde el servidor...");
                         await webDM.GetCreditos();
-                        lw.setData(49, "Sincronizando datos desde el servidor...");
                         await webDM.GetClientes();
-                        lw.setData(56, "Sincronizando datos desde el servidor...");
                         await webDM.enviarApartadosTemporal();
-                        lw.setData(63, "Sincronizando datos desde el servidor...");
                         await webDM.enviarCreditosTemporal();
-                        lw.setData(84, "Sincronizando datos desde el servidor...");
                         await webDM.GetAbonosApartado();
-                        lw.setData(100, "Sincronizando datos desde el servidor...");
                         await webDM.GetAbonosCredito();
-                        lw.setData(100, "Sincronizando datos desde el servidor...");
                         await webDM.GetCortes();
-                }
+                    }
                     else
                     {
-                        lw.Dispose();
-                        MessageBox.Show("No se pudo conectar con el servidor, favor de intentar más tarde", "Advertencia");
-                    
-
+                        Debug.WriteLine("No se detectó base de datos precargada. Sincronizando datos desde el servidor...");
+                        // Flujo tradicional para instalaciones sin precarga
+                        if (await webDM.GetProductos())
+                        {
+                            lw.setData(7, "Sincronizando datos desde el servidor...");
+                            await webDM.GetSucursales();
+                            lw.setData(14, "Sincronizando datos desde el servidor...");
+                            await webDM.GetMedidas();
+                            lw.setData(21, "Sincronizando datos desde el servidor...");
+                            await webDM.GetCategorias();
+                            lw.setData(28, "Sincronizando datos desde el servidor...");
+                            await webDM.GetUsuarios();
+                            lw.setData(35, "Sincronizando datos desde el servidor...");
+                            await webDM.GetApartados();
+                            lw.setData(42, "Sincronizando datos desde el servidor...");
+                            await webDM.GetCreditos();
+                            lw.setData(49, "Sincronizando datos desde el servidor...");
+                            await webDM.GetClientes();
+                            lw.setData(56, "Sincronizando datos desde el servidor...");
+                            await webDM.enviarApartadosTemporal();
+                            lw.setData(63, "Sincronizando datos desde el servidor...");
+                            await webDM.enviarCreditosTemporal();
+                            lw.setData(84, "Sincronizando datos desde el servidor...");
+                            await webDM.GetAbonosApartado();
+                            lw.setData(100, "Sincronizando datos desde el servidor...");
+                            await webDM.GetAbonosCredito();
+                            lw.setData(100, "Sincronizando datos desde el servidor...");
+                            await webDM.GetCortes();
+                        }
                     }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Error en carga inicial: {ex.Message}");
+                    MessageBox.Show("Error al sincronizar datos. Por favor revise su conexión.");
+                }
+                finally
+                {
                     lw.Dispose();
                     this.Enabled = true;
                     //try
@@ -225,9 +257,11 @@ namespace PuntoVentaCasaCeja
                     //{
 
                     //}
-                //}            
-                this.Focus();
+                    //}            
+                    this.Focus();
+                }
             }
+
             getConfig();
             refreshFolio();
             cajaActual++;

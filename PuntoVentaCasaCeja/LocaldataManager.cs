@@ -12,6 +12,7 @@ using System.Windows.Markup;
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Text.Json;
+using System.Diagnostics;
 
 namespace PuntoVentaCasaCeja
 {
@@ -20,80 +21,366 @@ namespace PuntoVentaCasaCeja
         public string impresora = "";
         string dbpath;
         public SQLiteConnection connection;
+        private const string PreloadedDbName = "PreloadedCatalog.db"; // Nuevo: Nombre del archivo precargado
+        public bool IsCatalogPreloaded { get; private set; } // Nuevo: Bandera para saber si usó el catálogo precargado
+                                                             // Diccionario completo de comandos CREATE TABLE
+        private readonly Dictionary<string, string> tableCreationCommands = new Dictionary<string, string>
+        {
+            // 1. Tablas básicas sin dependencias
+            {"sucursales", "CREATE TABLE 'sucursales' ('id' INTEGER NOT NULL, 'puerta_enlace1' TEXT, 'puerta_enlace2' TEXT, 'puerta_enlace3' TEXT, 'puerta_enlace4' TEXT, 'razon_social' TEXT, 'direccion' TEXT, 'correo' TEXT, 'activo' INTEGER, 'created_at' TEXT, 'updated_at' TEXT, PRIMARY KEY('id' AUTOINCREMENT))"},
+            {"proveedores", "CREATE TABLE 'proveedores' ('id' INTEGER NOT NULL, 'nombre' TEXT, 'direccion' TEXT, 'correo' TEXT, 'telefono' TEXT, 'descripcion' TEXT, 'activo' INTEGER, 'created_at' TEXT, 'updated_at' TEXT, PRIMARY KEY('id'))"},
+            {"usuarios", "CREATE TABLE 'usuarios' ('id' INTEGER NOT NULL, 'nombre' TEXT, 'correo' TEXT, 'confirmacion' INTEGER, 'telefono' TEXT, 'imagen' TEXT, 'usuario' TEXT, 'clave' TEXT, 'is_root' INTEGER, 'activo' INTEGER, 'created_at' TEXT, 'updated_at' TEXT, PRIMARY KEY('id'))"},
+
+            // 2. Tablas que dependen de las básicas
+            {"clientes", "CREATE TABLE 'clientes' ('id' INTEGER, 'nombre' TEXT, 'rfc' TEXT, 'calle' TEXT, 'no_exterior' TEXT, 'no_interior' TEXT, 'cp' TEXT, 'colonia' TEXT, 'ciudad' TEXT, 'telefono' TEXT, 'correo' TEXT, 'activo' INTEGER, 'created_at' TEXT, 'updated_at' TEXT, PRIMARY KEY('id'))"},
+            {"clientes_temporal", "CREATE TABLE 'clientes_temporal' ('id' INTEGER, 'nombre' TEXT, 'rfc' TEXT, 'calle' TEXT, 'no_exterior' TEXT, 'no_interior' TEXT, 'cp' TEXT, 'colonia' TEXT, 'ciudad' TEXT, 'telefono' TEXT, 'correo' TEXT, PRIMARY KEY('id' AUTOINCREMENT))"},
+            {"entradas", "CREATE TABLE 'entradas' ('id' INTEGER NOT NULL, 'fecha_factura' TEXT, 'total_factura' REAL, 'folio_factura' TEXT, 'usuario_id' INTEGER, 'sucursal_id' INTEGER, 'proveedor_id' INTEGER, 'cancelacion' INTEGER, 'estado' INTEGER, 'detalles' TEXT, 'created_at' TEXT, 'updated_at' TEXT, PRIMARY KEY('id' AUTOINCREMENT))"},
+        
+            // 3. Tablas de transacciones principales
+            {"ventas", "CREATE TABLE 'ventas' ('id' INTEGER NOT NULL, 'total' REAL, 'descuento' REAL, 'folio' TEXT, 'folio_corte' TEXT, 'fecha_venta' TEXT, 'metodo_pago' TEXT, 'tipo' INTEGER, 'sucursal_id' INTEGER, 'usuario_id' INTEGER, 'cancelacion' TEXT, 'estado' INTEGER, 'detalles' TEXT, FOREIGN KEY('usuario_id') REFERENCES 'usuarios'('id'), FOREIGN KEY('sucursal_id') REFERENCES 'sucursales'('id'), PRIMARY KEY('id' AUTOINCREMENT))"},
+            {"apartados", "CREATE TABLE 'apartados' ('id' INTEGER, 'productos' TEXT, 'total' REAL, 'total_pagado' REAL, 'fecha_apartado' TEXT, 'folio_corte' TEXT, 'fecha_entrega' TEXT, 'estado' INTEGER, 'cliente_creditos_id' INTEGER, 'id_cajero_registro' INTEGER, 'id_cejero_entrega' INTEGER, 'sucursal_id' INTEGER, 'observaciones' TEXT, 'created_at' TEXT, 'updated_at' TEXT, FOREIGN KEY('id_cajero_registro') REFERENCES 'usuarios'('id'), FOREIGN KEY('id_cejero_entrega') REFERENCES 'usuarios'('id'), PRIMARY KEY('id' AUTOINCREMENT))"},
+            {"creditos", "CREATE TABLE 'creditos' ('id' INTEGER, 'productos' TEXT, 'total' REAL, 'total_pagado' REAL, 'fecha_de_credito' TEXT, 'folio' TEXT, 'estado' INTEGER, 'cliente_creditos_id' INTEGER, 'id_cajero_registro' INTEGER, 'sucursal_id' INTEGER, 'observaciones' TEXT, 'created_at' TEXT, 'updated_at' TEXT, FOREIGN KEY('sucursal_id') REFERENCES 'sucursales'('id'), FOREIGN KEY('id_cajero_registro') REFERENCES 'usuarios'('id'), PRIMARY KEY('id'))"},
+
+            // 4. Tablas de soporte para transacciones
+            {"producto_venta", "CREATE TABLE 'producto_venta' ('id' INTEGER NOT NULL, 'venta_id' INTEGER, 'producto_id' INTEGER, 'codigo' TEXT, 'cantidad' INTEGER, 'precio_venta' REAL, 'estado' INTEGER, 'detalles' TEXT, PRIMARY KEY('id' AUTOINCREMENT), FOREIGN KEY('producto_id') REFERENCES 'productos'('id'), FOREIGN KEY('venta_id') REFERENCES 'ventas'('id'))"},
+            {"producto_entrada", "CREATE TABLE 'producto_entrada' ('id' INTEGER NOT NULL, 'entrada_id' INTEGER, 'producto_id' INTEGER, 'codigo' INTEGER, 'cantidad' INTEGER, 'costo' REAL, 'estado' INTEGER, 'detalles' TEXT, 'created_at' TEXT, 'updated_at' TEXT, PRIMARY KEY('id' AUTOINCREMENT))"},
+            {"salidas", "CREATE TABLE 'salidas' ('id' INTEGER NOT NULL, 'id_sucursal_origen' INTEGER NOT NULL, 'id_sucursal_destino' INTEGER NOT NULL, 'productos' TEXT NOT NULL, 'folio' TEXT NOT NULL, 'fecha_salida' TEXT NOT NULL, 'usuario_id' INTEGER NOT NULL, 'total_importe' REAL NOT NULL, 'cancelado' INTEGER NOT NULL DEFAULT 0, 'created_at' TEXT NOT NULL, 'updated_at' TEXT NOT NULL, PRIMARY KEY('id' AUTOINCREMENT))"},
+
+            // 5. Tablas temporales
+            {"apartados_temporal", "CREATE TABLE 'apartados_temporal' ('id' INTEGER, 'productos' TEXT, 'total' REAL, 'total_pagado' REAL, 'fecha_apartado' TEXT, 'folio_corte' TEXT, 'fecha_entrega' TEXT, 'estado' INTEGER, 'cliente_creditos_id' INTEGER, 'id_cajero_registro' INTEGER, 'id_cajero_entrega' INTEGER, 'sucursal_id' INTEGER, 'temporal' INTEGER, 'observaciones' TEXT, PRIMARY KEY('id' AUTOINCREMENT), FOREIGN KEY('id_cajero_entrega') REFERENCES 'usuarios'('id'), FOREIGN KEY('sucursal_id') REFERENCES 'sucursales'('id'), FOREIGN KEY('id_cajero_registro') REFERENCES 'usuarios'('id'))"},
+            {"creditos_temporal", "CREATE TABLE 'creditos_temporal' ('id' INTEGER, 'productos' TEXT, 'total' REAL, 'total_pagado' REAL, 'fecha_de_credito' TEXT, 'folio' TEXT, 'estado' INTEGER, 'cliente_creditos_id' INTEGER, 'id_cajero_registro' INTEGER, 'sucursal_id' INTEGER, 'temporal' INTEGER, 'observaciones' TEXT, FOREIGN KEY('id_cajero_registro') REFERENCES 'usuarios'('id'), FOREIGN KEY('sucursal_id') REFERENCES 'sucursales'('id'), PRIMARY KEY('id' AUTOINCREMENT))"},
+            {"salidas_temporal", "CREATE TABLE 'salidas_temporal' ('id' INTEGER NOT NULL, 'id_sucursal_origen' INTEGER, 'id_sucursal_destino' INTEGER, 'productos' TEXT, 'folio' TEXT, 'fecha_salida' TEXT, 'usuario_id' INTEGER, 'total_importe' REAL, 'estado' INTEGER, 'created_at' TEXT, 'updated_at' TEXT, PRIMARY KEY('id' AUTOINCREMENT))"},
+
+            // 6. Tablas de abonos
+            {"abonos_apartado", "CREATE TABLE 'abonos_apartado' ('id' INTEGER, 'folio' TEXT, 'metodo_pago' TEXT, 'total_abonado' REAL, 'fecha' TEXT, 'id_apartado' INTEGER, 'folio_corte' TEXT, 'id_cajero' INTEGER, 'created_at' TEXT, 'updated_at' TEXT, FOREIGN KEY('id_apartado') REFERENCES 'apartados'('id'), FOREIGN KEY('id_cajero') REFERENCES 'usuarios'('id'))"},
+            {"abonos_credito", "CREATE TABLE 'abonos_credito' ('id' INTEGER, 'folio' TEXT, 'metodo_pago' TEXT, 'total_abonado' REAL, 'fecha' TEXT, 'id_credito' INTEGER, 'folio_corte' TEXT, 'id_cajero' INTEGER, 'created_at' TEXT, 'updated_at' TEXT, FOREIGN KEY('id_credito') REFERENCES 'creditos'('id'), FOREIGN KEY('id_cajero') REFERENCES 'usuarios'('id'))"},
+            {"abonos_apartado_temporal", "CREATE TABLE 'abonos_apartado_temporal' ('id' INTEGER NOT NULL, 'folio' TEXT, 'metodo_pago' TEXT, 'total_abonado' REAL, 'fecha' TEXT, 'folio_apartado' TEXT, 'id_apartado' INTEGER, 'folio_corte' TEXT, 'id_cajero' INTEGER, PRIMARY KEY('id' AUTOINCREMENT))"},
+            {"abonos_credito_temporal", "CREATE TABLE 'abonos_credito_temporal' ('id' INTEGER NOT NULL, 'folio' TEXT, 'metodo_pago' TEXT, 'total_abonado' REAL, 'fecha' TEXT, 'folio_credito' TEXT, 'id_credito' INTEGER, 'folio_corte' TEXT, 'id_cajero' INTEGER, PRIMARY KEY('id' AUTOINCREMENT))"},
+
+            // 7. Otras tablas
+            {"cortes", "CREATE TABLE 'cortes' ('id' INTEGER NOT NULL UNIQUE, 'folio_corte' TEXT, 'fondo_apertura' REAL, 'total_efectivo' REAL, 'total_tarjetas_debito' REAL, 'total_tarjetas_credito' REAL, 'total_cheques' REAL, 'total_transferencias' REAL, 'efectivo_apartados' REAL, 'efectivo_creditos' REAL, 'gastos' TEXT, 'ingresos' TEXT, 'sobrante' REAL, 'fecha_apertura_caja' TEXT, 'fecha_corte_caja' TEXT, 'sucursal_id' INTEGER, 'usuario_id' INTEGER, 'estado' INTEGER, 'detalles' TEXT, 'created_at' TEXT, 'updated_at' TEXT, 'total_apartados' REAL DEFAULT 0, 'total_creditos' REAL DEFAULT 0, FOREIGN KEY('sucursal_id') REFERENCES 'sucursales'('id'), FOREIGN KEY('usuario_id') REFERENCES 'usuarios'('id'), PRIMARY KEY('id' AUTOINCREMENT))"},
+            {"operaciones", "CREATE TABLE 'operaciones' ('id' INTEGER NOT NULL, 'accion' TEXT, 'confirmar' INTEGER, 'created_at' TEXT, 'updated_at' TEXT, 'producto_id' INTEGER, 'usuario_id' INTEGER, PRIMARY KEY('id'))"},
+            {"alta_temporal", "CREATE TABLE 'alta_temporal' ('id' INTEGER NOT NULL, 'codigo' TEXT, 'nombre' TEXT, 'presentacion' TEXT, 'menudeo' REAL, 'mayoreo' REAL, 'cantidad_mayoreo' INTEGER, 'especial' REAL, 'vendedor' REAL, 'medida_id' INTEGER, 'categoria_id' INTEGER, 'estado' INTEGER, 'detalles' TEXT, FOREIGN KEY('medida_id') REFERENCES 'medidas'('id'), PRIMARY KEY('id' AUTOINCREMENT), FOREIGN KEY('categoria_id') REFERENCES 'categorias'('id'))"}
+        };
+
         public LocaldataManager()
         {
             dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"CasaCeja\DataBase\CasaCeja.db");
 
             if (!File.Exists(dbpath))
             {
-                string subPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"CasaCeja\DataBase");
-                Directory.CreateDirectory(subPath);
+                string preloadedPath = Path.Combine(Application.StartupPath, "Data", PreloadedDbName);
 
-                SQLiteConnection.CreateFile(dbpath);
+                // Intentar usar la base precargada si existe
+                if (File.Exists(preloadedPath))
+                {
+                    try
+                    {
+                        string subPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"CasaCeja\DataBase");
+                        Directory.CreateDirectory(subPath);
+                        File.Copy(preloadedPath, dbpath);
+                        IsCatalogPreloaded = true;
 
-                connection = new SQLiteConnection(@"data source=" + dbpath);
+                        connection = new SQLiteConnection(@"data source=" + dbpath);
+                        connection.Open();
+                        EnsureAdditionalTablesExist();
+                        return;
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine($"Error usando DB precargada: {ex.Message}");
+                    }
+                }
 
-                connection.Open();
-                SQLiteCommand command = connection.CreateCommand();
-                command.CommandText = "CREATE TABLE 'abonos_apartado' (    'id'    INTEGER,	'folio' TEXT,	'metodo_pago'   TEXT,	'total_abonado' REAL,	'fecha' TEXT,	'id_apartado'   INTEGER,	'folio_corte'   TEXT,	'id_cajero' INTEGER,	'created_at'    TEXT,	'updated_at'    TEXT,	FOREIGN KEY('id_apartado') REFERENCES 'apartados'('id'),	FOREIGN KEY('id_cajero') REFERENCES 'usuarios'('id'))";
-                command.ExecuteNonQuery();
-                command.CommandText = "CREATE TABLE 'abonos_apartado_temporal' (    'id'    INTEGER NOT NULL,	'folio' TEXT,	'metodo_pago'   TEXT,	'total_abonado' REAL,	'fecha' TEXT,	'folio_apartado'    TEXT,	'id_apartado'   INTEGER,	'folio_corte'   TEXT,	'id_cajero' INTEGER,	PRIMARY KEY('id' AUTOINCREMENT))";
-                command.ExecuteNonQuery();
-                command.CommandText = "CREATE TABLE 'abonos_credito' (    'id'    INTEGER,	'folio' TEXT,	'metodo_pago'   TEXT,	'total_abonado' REAL,	'fecha' TEXT,	'id_credito'    INTEGER,	'folio_corte'   TEXT,	'id_cajero' INTEGER,	'created_at'    TEXT,	'updated_at'    TEXT,	FOREIGN KEY('id_credito') REFERENCES 'creditos'('id'),	FOREIGN KEY('id_cajero') REFERENCES 'usuarios'('id'))";
-                command.ExecuteNonQuery();
-                command.CommandText = "CREATE TABLE 'abonos_credito_temporal' (    'id'    INTEGER NOT NULL,	'folio' TEXT,	'metodo_pago'   TEXT,	'total_abonado' REAL,	'fecha' TEXT,	'folio_credito' TEXT,	'id_credito'    INTEGER,	'folio_corte'   TEXT,	'id_cajero' INTEGER,	PRIMARY KEY('id' AUTOINCREMENT))";
-                command.ExecuteNonQuery();
-                command.CommandText = "CREATE TABLE 'alta_temporal' (    'id'    INTEGER NOT NULL,	'codigo'    TEXT,	'nombre'    TEXT,	'presentacion'  TEXT,	'menudeo'   REAL,	'mayoreo'   REAL,	'cantidad_mayoreo'  INTEGER,	'especial'  REAL,	'vendedor'  REAL,	'medida_id' INTEGER,	'categoria_id'  INTEGER,	'estado'    INTEGER,	'detalles'  TEXT,	FOREIGN KEY('medida_id') REFERENCES 'medidas'('id'),	PRIMARY KEY('id' AUTOINCREMENT),	FOREIGN KEY('categoria_id') REFERENCES 'categorias'('id'))";
-                command.ExecuteNonQuery();
-                command.CommandText = "CREATE TABLE 'apartados' (    'id'    INTEGER,	'productos' TEXT,	'total' REAL,	'total_pagado'  REAL,	'fecha_apartado'    TEXT,	'folio_corte' TEXT,	'fecha_entrega' TEXT,	'estado'    INTEGER,	'cliente_creditos_id'   INTEGER,	'id_cajero_registro'    INTEGER,	'id_cejero_entrega' INTEGER,	'sucursal_id'   INTEGER,	'observaciones' TEXT,	'created_at'    TEXT,	'updated_at'    TEXT,	FOREIGN KEY('id_cajero_registro') REFERENCES 'usuarios'('id'),	FOREIGN KEY('id_cejero_entrega') REFERENCES 'usuarios'('id'),	PRIMARY KEY('id' AUTOINCREMENT))";
-                command.ExecuteNonQuery();
-                command.CommandText = "CREATE TABLE 'apartados_temporal' (    'id'    INTEGER,	'productos' TEXT,	'total' REAL,	'total_pagado'  REAL,	'fecha_apartado'    TEXT,	'folio_corte' TEXT,	'fecha_entrega' TEXT,	'estado'    INTEGER,	'cliente_creditos_id'   INTEGER,	'id_cajero_registro'    INTEGER,	'id_cajero_entrega' INTEGER,	'sucursal_id'   INTEGER,	'temporal'  INTEGER,	'observaciones' TEXT,	PRIMARY KEY('id' AUTOINCREMENT),	FOREIGN KEY('id_cajero_entrega') REFERENCES 'usuarios'('id'),	FOREIGN KEY('sucursal_id') REFERENCES 'sucursales'('id'),	FOREIGN KEY('id_cajero_registro') REFERENCES 'usuarios'('id'))";
-                command.ExecuteNonQuery();
-                command.CommandText = "CREATE TABLE 'categorias' (    'id'    INTEGER NOT NULL,	'nombre'    TEXT,	'activo'    INTEGER,	'created_at'    TEXT,	'updated_at'    TEXT,	PRIMARY KEY('id'))";
-                command.ExecuteNonQuery();
-                command.CommandText = "CREATE TABLE 'clientes' (    'id'    INTEGER,	'nombre'    TEXT,	'rfc'   TEXT,	'calle' TEXT,	'no_exterior'   TEXT,	'no_interior'   TEXT,	'cp'    TEXT,	'colonia'   TEXT,	'ciudad'    TEXT,	'telefono'  TEXT,	'correo'    TEXT,	'activo'    INTEGER,	'created_at'    TEXT,	'updated_at'    TEXT,	PRIMARY KEY('id'))";
-                command.ExecuteNonQuery();
-                command.CommandText = "CREATE TABLE 'clientes_temporal' (    'id'    INTEGER,	'nombre'    TEXT,	'rfc'   TEXT,	'calle' TEXT,	'no_exterior'   TEXT,	'no_interior'   TEXT,	'cp'    TEXT,	'colonia'   TEXT,	'ciudad'    TEXT,	'telefono'  TEXT,	'correo'    TEXT,	PRIMARY KEY('id' AUTOINCREMENT))";
-                command.ExecuteNonQuery();
-                command.CommandText = "CREATE TABLE 'creditos' (    'id'    INTEGER,	'productos' TEXT,	'total' REAL,	'total_pagado'  REAL,	'fecha_de_credito'  TEXT,	'folio' TEXT,	'estado'    INTEGER,	'cliente_creditos_id'   INTEGER,	'id_cajero_registro'    INTEGER,	'sucursal_id'   INTEGER,	'observaciones' TEXT,	'created_at'    TEXT,	'updated_at'    TEXT,	FOREIGN KEY('sucursal_id') REFERENCES 'sucursales'('id'),	FOREIGN KEY('id_cajero_registro') REFERENCES 'usuarios'('id'),	PRIMARY KEY('id'))";
-                command.ExecuteNonQuery();
-                command.CommandText = "CREATE TABLE 'creditos_temporal' (    'id'    INTEGER,	'productos' TEXT,	'total' REAL,	'total_pagado'  REAL,	'fecha_de_credito'  TEXT,	'folio' TEXT,	'estado'    INTEGER,	'cliente_creditos_id'   INTEGER,	'id_cajero_registro'    INTEGER,	'sucursal_id'   INTEGER,	'temporal'  INTEGER,	'observaciones' TEXT,	FOREIGN KEY('id_cajero_registro') REFERENCES 'usuarios'('id'),	FOREIGN KEY('sucursal_id') REFERENCES 'sucursales'('id'),	PRIMARY KEY('id' AUTOINCREMENT))";
-                command.ExecuteNonQuery();
-                command.CommandText = "CREATE TABLE 'entradas' (    'id'    INTEGER NOT NULL,	'fecha_factura' TEXT,	'total_factura' REAL,	'folio_factura' TEXT,	'usuario_id'    INTEGER,	'sucursal_id'   INTEGER,	'proveedor_id'  INTEGER,	'cancelacion'   INTEGER,	'estado'    INTEGER,	'detalles'  TEXT, 'created_at'    TEXT, 'updated_at'    TEXT,	PRIMARY KEY('id' AUTOINCREMENT))";
-                command.ExecuteNonQuery();
-
-                command.CommandText = "CREATE TABLE 'salidas' ('id' INTEGER NOT NULL, 'id_sucursal_origen' INTEGER NOT NULL, 'id_sucursal_destino' INTEGER NOT NULL, 'productos' TEXT NOT NULL, 'folio' TEXT NOT NULL, 'fecha_salida' TEXT NOT NULL, 'usuario_id' INTEGER NOT NULL, 'total_importe' REAL NOT NULL, 'cancelado' INTEGER NOT NULL DEFAULT 0, 'created_at' TEXT NOT NULL, 'updated_at' TEXT NOT NULL, PRIMARY KEY('id' AUTOINCREMENT))";
-                command.ExecuteNonQuery();
-                command.CommandText = "CREATE TABLE 'cortes' (  'id'    INTEGER NOT NULL UNIQUE,    'folio_corte' TEXT, 'fondo_apertura'      REAL, 'total_efectivo'      REAL, 'total_tarjetas_debito'  REAL, 'total_tarjetas_credito' REAL, 'total_cheques' REAL, 'total_transferencias'    REAL, 'efectivo_apartados'      REAL, 'efectivo_creditos' REAL, 'gastos'      TEXT, 'ingresos'  TEXT, 'sobrante'      REAL, 'fecha_apertura_caja'      TEXT, 'fecha_corte_caja'     TEXT, 'sucursal_id'     INTEGER, 'usuario_id'      INTEGER, 'estado'      INTEGER, 'detalles'  TEXT, 'created_at'      TEXT, 'updated_at'  TEXT, 'total_apartados' REAL DEFAULT 0, 'total_creditos' REAL DEFAULT 0, FOREIGN KEY('sucursal_id') REFERENCES 'sucursales'('id'), FOREIGN KEY('usuario_id') REFERENCES 'usuarios'('id'), PRIMARY KEY('id' AUTOINCREMENT))";
-                command.ExecuteNonQuery();
-
-                command.CommandText = "CREATE TABLE 'medidas' (    'id'    INTEGER NOT NULL,	'nombre'    TEXT,	'activo'    INTEGER,	'created_at'    TEXT,	'updated_at'    TEXT,	PRIMARY KEY('id'))";
-                command.ExecuteNonQuery();
-                command.CommandText = "CREATE TABLE 'operaciones' (    'id'    INTEGER NOT NULL,	'accion'    TEXT,	'confirmar' INTEGER,	'created_at'    TEXT,	'updated_at'    TEXT,	'producto_id'   INTEGER,	'usuario_id'    INTEGER,	PRIMARY KEY('id'))";
-                command.ExecuteNonQuery();
-                command.CommandText = "CREATE TABLE 'producto_entrada' (    'id'    INTEGER NOT NULL,	'entrada_id'    INTEGER,	'producto_id'   INTEGER,	'codigo'    INTEGER,	'cantidad'  INTEGER,	'costo' REAL,	'estado'    INTEGER,	'detalles'  TEXT, 'created_at'    TEXT, 'updated_at'    TEXT,	PRIMARY KEY('id' AUTOINCREMENT))";
-                command.ExecuteNonQuery();
-                command.CommandText = "CREATE TABLE 'producto_venta' (    'id'    INTEGER NOT NULL,	'venta_id'  INTEGER,	'producto_id'   INTEGER,	'codigo'    TEXT,	'cantidad'  INTEGER,	'precio_venta'  REAL,	'estado'    INTEGER,	'detalles'  TEXT,	PRIMARY KEY('id' AUTOINCREMENT),	FOREIGN KEY('producto_id') REFERENCES 'productos'('id'),	FOREIGN KEY('venta_id') REFERENCES 'ventas'('id'))";
-                command.ExecuteNonQuery();
-                command.CommandText = "CREATE TABLE 'productos' (    'id'    INTEGER NOT NULL,	'codigo'    TEXT,	'nombre'    TEXT,	'presentacion'  TEXT,	'iva'   REAL,	'menudeo'   REAL,	'mayoreo'   REAL,	'cantidad_mayoreo'  INTEGER,	'especial'  REAL,	'vendedor'  REAL,	'imagen'    TEXT,	'activo'    INTEGER,	'created_at'    TEXT,	'updated_at'    TEXT,	'medida_id' INTEGER,	'categoria_id'  INTEGER,	FOREIGN KEY('categoria_id') REFERENCES 'categorias'('id'),	PRIMARY KEY('id'),	FOREIGN KEY('medida_id') REFERENCES 'medidas'('id'))";
-                command.ExecuteNonQuery();
-                command.CommandText = "CREATE TABLE 'proveedores' (    'id'    INTEGER NOT NULL,	'nombre'    TEXT,	'direccion' TEXT,	'correo'    TEXT,	'telefono'  TEXT,	'descripcion'   TEXT,	'activo'    INTEGER,	'created_at'    TEXT,	'updated_at'    TEXT,	PRIMARY KEY('id'))";
-                command.ExecuteNonQuery();
-                command.CommandText = "CREATE TABLE 'salidas_temporal' (    'id'    INTEGER NOT NULL,	'id_sucursal_origen'    INTEGER,	'id_sucursal_destino'   INTEGER,	'productos' TEXT,	'folio' TEXT,	'fecha_salida'  TEXT,	'usuario_id'    INTEGER,	'total_importe' REAL,	'estado'    INTEGER, 'created_at'    TEXT, 'updated_at'    TEXT,	PRIMARY KEY('id' AUTOINCREMENT))";
-                command.ExecuteNonQuery();
-                command.CommandText = "CREATE TABLE 'sucursales' (    'id'    INTEGER NOT NULL,	'puerta_enlace1'    TEXT,	'puerta_enlace2'    TEXT,	'puerta_enlace3'    TEXT,	'puerta_enlace4'    TEXT,	'razon_social'  TEXT,	'direccion' TEXT,	'correo'    TEXT,	'activo'    INTEGER,	'created_at'    TEXT,	'updated_at'    TEXT,	PRIMARY KEY('id' AUTOINCREMENT))";
-                command.ExecuteNonQuery();
-                command.CommandText = "CREATE TABLE 'usuarios' (    'id'    INTEGER NOT NULL,	'nombre'    TEXT,	'correo'    TEXT,	'confirmacion'  INTEGER,	'telefono'  TEXT,	'imagen'    TEXT,	'usuario'   TEXT,	'clave' TEXT,	'is_root'   INTEGER,	'activo'    INTEGER,	'created_at'    TEXT,	'updated_at'    TEXT,	PRIMARY KEY('id'))";
-                command.ExecuteNonQuery();
-                command.CommandText = "CREATE TABLE 'ventas' (    'id'    INTEGER NOT NULL,	'total' REAL, 'descuento' REAL,	'folio' TEXT,	'folio_corte'   TEXT,	'fecha_venta'   TEXT,	'metodo_pago'   TEXT,	'tipo'  INTEGER,	'sucursal_id'   INTEGER,	'usuario_id'    INTEGER,	'cancelacion'   TEXT,	'estado'    INTEGER,	'detalles'  TEXT,	FOREIGN KEY('usuario_id') REFERENCES 'usuarios'('id'),	FOREIGN KEY('sucursal_id') REFERENCES 'sucursales'('id'),	PRIMARY KEY('id' AUTOINCREMENT))";
-                command.ExecuteNonQuery();
+                CreateNewDatabase();
             }
             else
             {
                 connection = new SQLiteConnection(@"data source=" + dbpath);
                 connection.Open();
+                EnsureAdditionalTablesExist();
+                IsCatalogPreloaded = CheckIfCatalogPreloaded();
+
             }
         }
+
+        private void CreateNewDatabase()
+        {
+            string subPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"CasaCeja\DataBase");
+            Directory.CreateDirectory(subPath);
+            SQLiteConnection.CreateFile(dbpath);
+            connection = new SQLiteConnection(@"data source=" + dbpath);
+            connection.Open();
+            CreateAllTables();
+            IsCatalogPreloaded = false;
+        }
+
+        private void CreateAllTables()
+        {
+            using (var transaction = connection.BeginTransaction())
+            {
+                try
+                {
+                    foreach (var cmdText in tableCreationCommands.Values)
+                    {
+                        using (var command = connection.CreateCommand())
+                        {
+                            command.CommandText = cmdText;
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                    transaction.Commit();
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+        }
+
+        // Nuevo método: Verificar tablas adicionales
+        private void EnsureAdditionalTablesExist()
+        {
+            var requiredTables = new List<string>
+            {             
+                "sucursales", "proveedores", "usuarios",                
+                "clientes", "clientes_temporal", "entradas",
+                "ventas", "apartados", "creditos",
+                "producto_venta", "producto_entrada", "salidas",
+                "apartados_temporal", "creditos_temporal", "salidas_temporal",   
+                "abonos_apartado", "abonos_credito", "abonos_apartado_temporal", "abonos_credito_temporal",
+                "cortes", "operaciones", "alta_temporal"
+            };
+
+            foreach (var table in requiredTables)
+            {
+                if (!TableExists(table))
+                {                  
+                    CreateSingleTable(table);
+                }
+                Console.WriteLine("Existe la tabla: " + table);
+            }
+        }
+
+        private bool TableExists(string tableName)
+        {
+            using (var cmd = connection.CreateCommand())
+            {
+                cmd.CommandText = "SELECT count(*) FROM sqlite_master WHERE type='table' AND name=@name";
+                cmd.Parameters.AddWithValue("@name", tableName);
+                return Convert.ToInt32(cmd.ExecuteScalar()) > 0;
+            }           
+        }
+
+        private void CreateSingleTable(string tableName)
+        {            
+            if (tableCreationCommands.TryGetValue(tableName, out string createCommand))
+            {
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = createCommand;
+                    command.ExecuteNonQuery();
+                }
+                Console.WriteLine("Se creo la tabla: " + tableName);
+            }
+            else
+            {
+                throw new ArgumentException($"No se encontró el comando CREATE TABLE para: {tableName}");
+            }
+        }
+
+
+        // Modificado: Método para verificar si la tabla productos tiene datos
+        public bool IsTableEmpty(string table)
+        {
+            // Tablas precargadas nunca se consideran vacías
+            if (IsCatalogPreloaded && (table == "productos" || table == "categorias" || table == "medidas"))
+                return false;
+
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = "SELECT COUNT(1) FROM " + table;
+                using (var result = command.ExecuteReader())
+                {
+                    return !(result.Read() && result.GetInt32(0) > 0);
+                }
+            }
+        }
+
+        public void UpdateExistingProducts(List<Producto> productosActualizados)
+        {
+            using (var transaction = connection.BeginTransaction())
+            {
+                try
+                {
+                    foreach (var producto in productosActualizados)
+                    {
+                        var productoLocal = GetProductById(producto.id);
+
+                        // Convertir fechas a DateTime para comparación
+                        DateTime fechaActualizado;
+                        DateTime fechaLocal;
+
+                        bool fechaValidaActualizado = DateTime.TryParse(producto.updated_at, out fechaActualizado);
+                        bool fechaValidaLocal = DateTime.TryParse(productoLocal?.updated_at, out fechaLocal);
+
+                        if (productoLocal == null ||
+                           (fechaValidaActualizado && fechaValidaLocal && fechaActualizado > fechaLocal))
+                        {
+                            if (productoLocal == null)
+                            {
+                                InsertProduct(producto);
+                            }
+                            else
+                            {
+                                UpdateProduct(producto);
+                            }
+                        }
+                    }
+                    transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    Debug.WriteLine($"Errorrrrr en actualización: {ex.Message}");
+                    throw;
+                }
+            }
+        }
+        private Producto GetProductById(int id)
+        {
+            using (var cmd = connection.CreateCommand())
+            {
+                cmd.CommandText = "SELECT * FROM productos WHERE id = @id";
+                cmd.Parameters.AddWithValue("@id", id);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        return new Producto
+                        {
+                            id = reader.GetInt32(0),
+                            codigo = reader.IsDBNull(1) ? "" : reader.GetString(1),
+                            nombre = reader.IsDBNull(2) ? "" : reader.GetString(2),
+                            presentacion = reader.IsDBNull(3) ? "" : reader.GetString(3),
+                            iva = reader.IsDBNull(4) ? 0 : reader.GetDouble(4),
+                            menudeo = reader.IsDBNull(5) ? 0 : reader.GetDouble(5),
+                            mayoreo = reader.IsDBNull(6) ? 0 : reader.GetDouble(6),
+                            cantidad_mayoreo = reader.IsDBNull(7) ? 0 : reader.GetInt32(7),
+                            especial = reader.IsDBNull(8) ? 0 : reader.GetDouble(8),
+                            vendedor = reader.IsDBNull(9) ? 0 : reader.GetDouble(9),
+                            imagen = reader.IsDBNull(10) ? "" : reader.GetString(10),
+                            activo = reader.IsDBNull(11) ? 0 : reader.GetInt32(11),
+                            created_at = reader.IsDBNull(12)
+                                ? DateTime.MinValue.ToString("yyyy-MM-dd HH:mm:ss")
+                                : reader.GetString(12),
+                            updated_at = reader.IsDBNull(13)
+                                ? DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+                                : reader.GetString(13),
+                            medida_id = reader.IsDBNull(14) ? 0 : reader.GetInt32(14),
+                            categoria_id = reader.IsDBNull(15) ? 0 : reader.GetInt32(15)
+                        };
+                    }
+                }
+            }
+            return null;
+        }
+
+        private bool CheckIfCatalogPreloaded()
+        {
+            try
+            {
+                // Verificar si productos tiene datos
+                using (var cmd = connection.CreateCommand())
+                {
+                    cmd.CommandText = "SELECT COUNT(*) FROM productos";
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    Console.WriteLine("Productos en la base de datos: " + count);
+                    return count > 0;
+                }
+                
+            }
+            catch { return false; }
+        }
+
+        private void UpdateProduct(Producto producto)
+        {
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = @"
+            UPDATE productos SET
+                codigo = @codigo,
+                nombre = @nombre,
+                presentacion = @presentacion,
+                iva = @iva,
+                menudeo = @menudeo,
+                mayoreo = @mayoreo,
+                cantidad_mayoreo = @cantidad_mayoreo,
+                especial = @especial,
+                vendedor = @vendedor,
+                imagen = @imagen,
+                activo = @activo,
+                updated_at = @updated_at,
+                medida_id = @medida_id,
+                categoria_id = @categoria_id
+            WHERE id = @id";
+
+                command.Parameters.AddWithValue("@id", producto.id);
+                command.Parameters.AddWithValue("@codigo", producto.codigo ?? "");
+                command.Parameters.AddWithValue("@nombre", producto.nombre ?? "");
+                command.Parameters.AddWithValue("@presentacion", producto.presentacion ?? "");
+                command.Parameters.AddWithValue("@iva", producto.iva);
+                command.Parameters.AddWithValue("@menudeo", producto.menudeo);
+                command.Parameters.AddWithValue("@mayoreo", producto.mayoreo);
+                command.Parameters.AddWithValue("@cantidad_mayoreo", producto.cantidad_mayoreo);
+                command.Parameters.AddWithValue("@especial", producto.especial);
+                command.Parameters.AddWithValue("@vendedor", producto.vendedor);
+                command.Parameters.AddWithValue("@imagen", producto.imagen ?? "");
+                command.Parameters.AddWithValue("@activo", producto.activo);
+                command.Parameters.AddWithValue("@created_at", producto.created_at);
+                command.Parameters.AddWithValue("@updated_at", producto.updated_at);
+                command.Parameters.AddWithValue("@medida_id", producto.medida_id);
+                command.Parameters.AddWithValue("@categoria_id", producto.categoria_id);
+                
+                command.ExecuteNonQuery();
+            }
+        }
+
+        private void InsertProduct(Producto producto)
+        {
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = @"
+            INSERT INTO productos 
+            (id, codigo, nombre, presentacion, iva, menudeo, mayoreo, cantidad_mayoreo, especial, 
+             vendedor, imagen, activo, created_at, updated_at, medida_id, categoria_id) 
+            VALUES 
+            (@id, @codigo, @nombre, @presentacion, @iva, @menudeo, @mayoreo, @cantidad_mayoreo, @especial, 
+             @vendedor, @imagen, @activo, @created_at, @updated_at, @medida_id, @categoria_id)";
+
+                command.Parameters.AddWithValue("@id", producto.id);
+                command.Parameters.AddWithValue("@codigo", producto.codigo ?? "");
+                command.Parameters.AddWithValue("@nombre", producto.nombre ?? "");
+                command.Parameters.AddWithValue("@presentacion", producto.presentacion ?? "");
+                command.Parameters.AddWithValue("@iva", producto.iva);
+                command.Parameters.AddWithValue("@menudeo", producto.menudeo);
+                command.Parameters.AddWithValue("@mayoreo", producto.mayoreo);
+                command.Parameters.AddWithValue("@cantidad_mayoreo", producto.cantidad_mayoreo);
+                command.Parameters.AddWithValue("@especial", producto.especial);
+                command.Parameters.AddWithValue("@vendedor", producto.vendedor);
+                command.Parameters.AddWithValue("@imagen", producto.imagen ?? "");
+                command.Parameters.AddWithValue("@activo", producto.activo);
+                command.Parameters.AddWithValue("@created_at", producto.created_at);
+                command.Parameters.AddWithValue("@updated_at", producto.updated_at);
+                command.Parameters.AddWithValue("@medida_id", producto.medida_id);
+                command.Parameters.AddWithValue("@categoria_id", producto.categoria_id);       
+
+                command.ExecuteNonQuery();
+            }
+        }
+       
+
         public void AnalisisTemporalTotal()
         {
             AnalizarAbonosApartadoTemporales();
@@ -107,34 +394,17 @@ namespace PuntoVentaCasaCeja
         {
             this.impresora = impresora;
         }
-        public bool IsTableEmpty(string table)
+
+        public int GetTableRowCount(string table)
         {
-            SQLiteCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT COUNT(1) AS RowCnt FROM " + table;
-            command.Parameters.AddWithValue("setTable", table);
-            SQLiteDataReader result = command.ExecuteReader();
-            if (result.Read())
+            using (var command = connection.CreateCommand())
             {
-                if (result.GetInt32(0) == 0)
+                command.CommandText = "SELECT COUNT(1) FROM " + table + " WHERE activo=1";
+                using (var result = command.ExecuteReader())
                 {
-                    return true;
+                    return result.Read() ? result.GetInt32(0) : 0;
                 }
             }
-
-            return false;
-        }
-        public int getTableRowCount(string table)
-        {
-            SQLiteCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT COUNT(1) AS RowCnt FROM " + table + " WHERE activo=1";
-            command.Parameters.AddWithValue("setTable", table);
-            SQLiteDataReader result = command.ExecuteReader();
-            if (result.Read())
-            {
-                int count = result.GetInt32(0);
-                return count;
-            }
-            return 0;
         }
         public string getSucursalname(int id)
         {

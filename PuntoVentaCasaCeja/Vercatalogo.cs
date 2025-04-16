@@ -50,7 +50,7 @@ namespace PuntoVentaCasaCeja
             boxmedida.Items.AddRange(mapamedidas.Keys.ToArray());
             boxcategoria.SelectedIndex = currentcat;
             boxmedida.SelectedIndex = currentmed;
-            int rowCount = webDM.localDM.getTableRowCount("productos");
+            int rowCount = webDM.localDM.GetTableRowCount("productos");
             calculateMaxPages(rowCount);
             if (active)
             {

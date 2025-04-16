@@ -578,6 +578,9 @@
     <EmbeddedResource Include="VerOperaciones.resx">
       <DependentUpon>VerOperaciones.cs</DependentUpon>
     </EmbeddedResource>
+    <Content Include="Data\PreloadedCatalog.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

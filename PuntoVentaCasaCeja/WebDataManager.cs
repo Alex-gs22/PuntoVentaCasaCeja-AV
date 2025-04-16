@@ -14,6 +14,7 @@ using System.Text;
 using Newtonsoft.Json.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using System.Linq;
+using System.Diagnostics;
 
 namespace PuntoVentaCasaCeja
 {
@@ -50,11 +51,25 @@ namespace PuntoVentaCasaCeja
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
-            productos_lastupdate = localDM.getTableLastUpdate("productos");
-            categorias_lastupdate = localDM.getTableLastUpdate("categorias");
-            medidas_lastupdate = localDM.getTableLastUpdate("medidas");
-            usuarios_lastupdate = localDM.getTableLastUpdate("usuarios");
+
+            // Inicialización optimizada para tablas precargadas           
+            if (localDM.IsCatalogPreloaded)
+            {
+                Console.WriteLine("Obteniendo fecha de actualizacion para base de datos precargada");
+                productos_lastupdate = localDM.getTableLastUpdate("productos");
+                categorias_lastupdate = localDM.getTableLastUpdate("categorias");
+                medidas_lastupdate = localDM.getTableLastUpdate("medidas");
+            }
+            else
+            {
+                // Comportamiento normal para instalaciones sin precarga
+                Console.WriteLine("Obteniendo fecha de actualizacion para base de datos normal");
+                productos_lastupdate = localDM.getTableLastUpdate("productos");
+                categorias_lastupdate = localDM.getTableLastUpdate("categorias");
+                medidas_lastupdate = localDM.getTableLastUpdate("medidas");
+            }            
             proveedores_lastupdate = localDM.getTableLastUpdate("proveedores");
+            usuarios_lastupdate = localDM.getTableLastUpdate("usuarios");            
             sucursales_lastupdate = localDM.getTableLastUpdate("sucursales");
             apartados_lastupdate = localDM.getTableLastUpdate("apartados");
             creditos_lastupdate = localDM.getTableLastUpdate("creditos");
@@ -86,17 +101,23 @@ namespace PuntoVentaCasaCeja
         }
         public async Task<bool> GetCategorias()
         {
-            string res="";
+            if (localDM.IsCatalogPreloaded)
+            {
+                // No descargar categorías si están precargadas
+                return true;
+            }
+
+            string res = "";
             Dictionary<string, string> date = new Dictionary<string, string>();
             date["fecha_de_actualizacion"] = categorias_lastupdate;
+
             try
             {
                 HttpResponseMessage response = await client.PostAsJsonAsync(url + "api/categorias/sincronizar", date);
                 res = await response.Content.ReadAsStringAsync();
+
                 if (response.IsSuccessStatusCode)
                 {
-                    res = await response.Content.ReadAsStringAsync();
-
                     var result = JsonConvert.DeserializeObject<Dictionary<string, object>>(res);
                     if (result["status"].ToString().Equals("success"))
                     {
@@ -107,36 +128,34 @@ namespace PuntoVentaCasaCeja
                         categorias_lastupdate = localDM.getTableLastUpdate("categorias");
                         return true;
                     }
-                    else
-                    {
-                        //MessageBox.Show("Error", result["data"].ToString());
-                    }
-
-                }
-                else
-                {
                 }
             }
             catch (Exception e)
             {
-                //MessageBox.Show(e.Message, "Hubo un problema al establecer la conexion con el servidor");
+                Debug.WriteLine($"Error sincronizando categorías: {e.Message}");
             }
             return false;
-
         }
+
         public async Task<bool> GetMedidas()
         {
+            if (localDM.IsCatalogPreloaded)
+            {
+                // No descargar medidas si están precargadas
+                return true;
+            }
+
             string res = "";
             Dictionary<string, string> date = new Dictionary<string, string>();
             date["fecha_de_actualizacion"] = medidas_lastupdate;
+
             try
             {
                 HttpResponseMessage response = await client.PostAsJsonAsync(url + "api/medidas/sincronizar", date);
                 res = await response.Content.ReadAsStringAsync();
+
                 if (response.IsSuccessStatusCode)
                 {
-                    res = await response.Content.ReadAsStringAsync();
-
                     var result = JsonConvert.DeserializeObject<Dictionary<string, object>>(res);
                     if (result["status"].ToString().Equals("success"))
                     {
@@ -147,20 +166,11 @@ namespace PuntoVentaCasaCeja
                         medidas_lastupdate = localDM.getTableLastUpdate("medidas");
                         return true;
                     }
-                    else
-                    {
-                        //MessageBox.Show("Error", result["data"].ToString());
-                    }
-
-                }
-                else
-                {
-                    //MessageBox.Show("Hubo un problema al establecer la conexion con el servidor", "Error");
                 }
             }
             catch (Exception e)
             {
-                //MessageBox.Show(e.Message, "Hubo un problema al establecer la conexion con el servidor");
+                Debug.WriteLine($"Error sincronizando medidas: {e.Message}");
             }
             return false;
         }
@@ -242,39 +252,45 @@ namespace PuntoVentaCasaCeja
         {
             string res = "";
             Dictionary<string, string> date = new Dictionary<string, string>();
+
+            // Usamos la fecha de última actualización o fecha mínima si es precargado
             date["fecha_de_actualizacion"] = productos_lastupdate;
+
             try
             {
                 HttpResponseMessage response = await client.PostAsJsonAsync(url + "api/productos/sincronizar", date);
                 res = await response.Content.ReadAsStringAsync();
+
                 if (response.IsSuccessStatusCode)
                 {
                     var result = JsonConvert.DeserializeObject<Dictionary<string, object>>(res);
-                if (result["status"].ToString().Equals("success"))
+                    if (result["status"].ToString().Equals("success"))
+                    {
+                        var data = JsonConvert.DeserializeObject<Dictionary<string, object>>(result["data"].ToString());
+                        var productos = JsonConvert.DeserializeObject<List<Producto>>(data["productos"].ToString());
 
-                {
-                    var data = JsonConvert.DeserializeObject<Dictionary<string, object>>(result["data"].ToString());
-                    var productos = JsonConvert.DeserializeObject<List<Producto>>(data["productos"].ToString());
-                    localDM.saveProductos(productos);
-                    localDM.AnalizarProductosTemporales();
-                    productos_lastupdate = localDM.getTableLastUpdate("productos");
+                        // Procesamos los productos recibidos
+                        if (localDM.IsCatalogPreloaded)
+                        {
+                            // Para precarga, solo actualizamos los productos modificados
+                            localDM.UpdateExistingProducts(productos);
+                        }
+                        else
+                        {
+                            // Para instalación nueva, guardamos todos los productos
+                            localDM.saveProductos(productos);
+                        }
+
+                        // Actualizamos la fecha de última sincronización
+                        productos_lastupdate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                         return true;
-                }
-                else
-                {
-                        //MessageBox.Show("Error", result["data"].ToString());
                     }
-                }
-                else
-                {
-                    //MessageBox.Show("Hubo un problema al establecer la conexion con el servidor", "Error");
                 }
             }
             catch (Exception e)
             {
-                //MessageBox.Show(e.Message, "Hubo un problema al establecer la conexion con el servidor");
+                Debug.WriteLine($"Errorrrrr sincronizando productos: {e.Message}");
             }
-
             return false;
         }
 
