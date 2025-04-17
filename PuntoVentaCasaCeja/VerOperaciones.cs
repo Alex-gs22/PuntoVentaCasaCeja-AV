@@ -12,6 +12,7 @@ using Windows.Storage;
 using Newtonsoft.Json;
 using PuntoVentaCasaCeja.Properties;
 using Windows.UI.Xaml;
+using System.Drawing.Printing;
 
 namespace PuntoVentaCasaCeja
 {
@@ -42,7 +43,7 @@ namespace PuntoVentaCasaCeja
         BindingSource source = new BindingSource();
         private System.Drawing.Printing.PrintDocument docToPrint =
         new System.Drawing.Printing.PrintDocument();
-   
+
         public VerOperaciones(LocaldataManager localdata, int idcaja, string sucursalName, string sucursalDir, int userlvl)
         {
             InitializeComponent();
@@ -57,7 +58,7 @@ namespace PuntoVentaCasaCeja
             this.sucursalDir = sucursalDir;
             this.fontName = Settings.Default["fontName"].ToString();
             this.fontSize = int.Parse(Settings.Default["fontSize"].ToString());
-            this.printerType = int.Parse(Settings.Default["printertype"].ToString());
+            this.printerType = int.Parse(Settings.Default["printertype"].ToString());       
             this.tabs = new Dictionary<int, float[]> () 
             {
                 {5, new float[]{ 110, 30, 50, 50 } },
@@ -278,75 +279,73 @@ namespace PuntoVentaCasaCeja
         }
         private void createdoc()
         {
-            
+            // Configura el tamaño de papel según el tipo de impresora
+            if (printerType == 0) // Ticket
+            {
+                // 78 mm ≈ 3.07 pulgadas; en PaperSize se usa hundredths of an inch, entonces 3.07*100 ≈ 307.
+                // La altura se define de forma arbitraria, ajústala según la longitud de tu ticket.
+                PaperSize ticketSize = new PaperSize("Ticket", 465, 1169);
+                docToPrint.DefaultPageSettings.PaperSize = ticketSize;
+                // Establecemos márgenes en 0 para aprovechar todo el ancho.
+                docToPrint.DefaultPageSettings.Margins = new Margins(10, 10, 10, 10);
+            }
+            else if (printerType == 1)// Papel tamaño carta
+            {
+                // Por ejemplo, tamaño carta: 8.5 x 11 pulgadas.
+                // En hundredths of an inch: ancho=850, alto=1100.
+                PaperSize letterSize = new PaperSize("Letter", 850, 1100);
+                docToPrint.DefaultPageSettings.PaperSize = letterSize;
+                // Márgenes más amplios para papel carta (los puedes ajustar a tu preferencia)
+                docToPrint.DefaultPageSettings.Margins = new Margins(50, 50, 50, 50);
+            }
+
+            // Establecemos la ruta y configuramos el control de vista previa de impresión.
             string path = Path.Combine(ApplicationData.Current.LocalFolder.Path, "reimprimirVenta.txt");
-            // Construct the PrintPreviewControl.
-
-            //// Set location, name, and dock style for printPreviewControl1.
-            //this.printPreviewControl1.Name = "printPreviewControl1";
-
-            // Set the Document property to the PrintDocument 
-            // for which the PrintPage event has been handled.
             this.printPreviewControl1.Document = docToPrint;
+
+            // Ajustamos el Zoom del control según el tamaño de fuente (estas condiciones son de ejemplo)
             this.printPreviewControl1.Zoom = 2;
             if (fontSize > 6)
                 this.printPreviewControl1.Zoom = 1.5;
-            if (fontSize>10)
+            if (fontSize > 10)
                 this.printPreviewControl1.Zoom = 1.1;
             if (fontSize > 13)
                 this.printPreviewControl1.Zoom = 1.0;
-            // Set the document name. This will show be displayed when 
-            // the document is loading into the control.
+
+            // Definimos el nombre del documento y seleccionamos la impresora según la configuración
             this.printPreviewControl1.Document.DocumentName = path;
             this.printPreviewControl1.Document.PrinterSettings.PrinterName = localDM.impresora;
 
-            // Set the UseAntiAlias property to true so fonts are smoothed
-            // by the operating system.
+            // Utilizamos anti alias para suavizar las fuentes
             this.printPreviewControl1.UseAntiAlias = true;
-            // Add the control to the form.
 
-            // Associate the event-handling method with the
-            // document's PrintPage event.
-            this.docToPrint.PrintPage +=
-                new System.Drawing.Printing.PrintPageEventHandler(
-                docToPrint_PrintPage);
+            // Asociamos el evento PrintPage para el documento
+            this.docToPrint.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(docToPrint_PrintPage);
         }
-        private void docToPrint_PrintPage(
-    object sender, System.Drawing.Printing.PrintPageEventArgs e)
+
+        private void docToPrint_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
-
-            // Insert code to render the page here.
-            // This code will be called when the control is drawn.
-
-            // The following code will render a simple
-            // message on the document in the control.
+            // Contenido del ticket (por ejemplo, variable 'ticket')
             string text1 = ticket;
-            //StringFormat format = new StringFormat(StringFormatFlags.NoClip);
-            //format.Alignment = StringAlignment.Center;
-            //System.Drawing.Font printFont =
-            //    new Font(fontName, fontSize, FontStyle.Regular);
 
-            //e.Graphics.DrawString(text1, printFont,
-            //    Brushes.Black, 50, 50);
-
+            // Creamos la fuente con el nombre y tamaño configurados
             FontFamily fontFamily = new FontFamily(fontName);
-            Font font = new Font(
-               fontFamily,
-               fontSize,
-               FontStyle.Regular,
-               GraphicsUnit.Point);
-            Rectangle rect = new Rectangle(10, 10, 750, 1000);
-            StringFormat stringFormat = new StringFormat();
-            SolidBrush solidBrush = new SolidBrush(Color.FromArgb(255, 0, 0, 0));
-            
+            Font font = new Font(fontFamily, fontSize, FontStyle.Regular, GraphicsUnit.Point);
 
+            // Usamos e.MarginBounds para definir el área de impresión según la configuración del tamaño de papel y márgenes
+            Rectangle rect = e.MarginBounds;
+
+            // Configuramos el formato de la cadena para gestionar tabulaciones (si aplica)
+            StringFormat stringFormat = new StringFormat();
             stringFormat.SetTabStops(0, tabs[fontSize]);
 
-            e.Graphics.DrawString(text1, font, solidBrush, rect, stringFormat);
+            // Usamos un pincel sólido para dibujar el texto en negro
+            SolidBrush solidBrush = new SolidBrush(Color.Black);
 
-            //Pen pen = Pens.Black;
-            //e.Graphics.DrawRectangle(pen, rect);
+            // Dibujamos el contenido en el área definida
+            e.Graphics.DrawString(text1, font, solidBrush, rect, stringFormat);
         }
+
 
         private void tabla_KeyDown(object sender, KeyEventArgs e)
         {
