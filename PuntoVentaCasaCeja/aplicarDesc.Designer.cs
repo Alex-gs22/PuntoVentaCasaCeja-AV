@@ -61,9 +61,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.tableLayoutPanel4);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI Semibold", 22F, System.Drawing.FontStyle.Bold);
-            this.groupBox1.Location = new System.Drawing.Point(12, 5);
+            this.groupBox1.Location = new System.Drawing.Point(9, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(877, 260);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Size = new System.Drawing.Size(658, 211);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "APLICAR DESCUENTO";
@@ -75,12 +77,13 @@
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.16188F));
             this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel1, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel6, 1, 0);
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 45);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 37);
+            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(871, 209);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(653, 170);
             this.tableLayoutPanel4.TabIndex = 11;
             // 
             // tableLayoutPanel1
@@ -90,25 +93,26 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.58044F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.41956F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 263F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 22F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 197F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 16F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 15F));
             this.tableLayoutPanel1.Controls.Add(this.Bsalir, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.aceptar, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label2, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 2);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(2, 2);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 5;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 34.09091F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 65.90909F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 69F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 17F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 67F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(611, 203);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 14F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 54F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 16F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(458, 165);
             this.tableLayoutPanel1.TabIndex = 10;
             // 
             // Bsalir
@@ -116,10 +120,9 @@
             this.Bsalir.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Bsalir.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
-            this.Bsalir.Location = new System.Drawing.Point(300, 139);
-            this.Bsalir.Margin = new System.Windows.Forms.Padding(4);
+            this.Bsalir.Location = new System.Drawing.Point(225, 113);
             this.Bsalir.Name = "Bsalir";
-            this.Bsalir.Size = new System.Drawing.Size(307, 60);
+            this.Bsalir.Size = new System.Drawing.Size(230, 49);
             this.Bsalir.TabIndex = 3;
             this.Bsalir.Text = "CANCELAR (Esc)";
             this.Bsalir.UseVisualStyleBackColor = true;
@@ -130,10 +133,9 @@
             this.aceptar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.aceptar.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
-            this.aceptar.Location = new System.Drawing.Point(4, 139);
-            this.aceptar.Margin = new System.Windows.Forms.Padding(4);
+            this.aceptar.Location = new System.Drawing.Point(3, 113);
             this.aceptar.Name = "aceptar";
-            this.aceptar.Size = new System.Drawing.Size(288, 60);
+            this.aceptar.Size = new System.Drawing.Size(216, 49);
             this.aceptar.TabIndex = 2;
             this.aceptar.Text = "ACEPTAR (Enter)";
             this.aceptar.UseVisualStyleBackColor = true;
@@ -143,9 +145,10 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
-            this.label3.Location = new System.Drawing.Point(3, 17);
+            this.label3.Location = new System.Drawing.Point(2, 13);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(121, 32);
+            this.label3.Size = new System.Drawing.Size(97, 27);
             this.label3.TabIndex = 8;
             this.label3.Text = "Tipo (F1)";
             // 
@@ -155,9 +158,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold);
-            this.label2.Location = new System.Drawing.Point(299, 17);
+            this.label2.Location = new System.Drawing.Point(224, 13);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(309, 32);
+            this.label2.Size = new System.Drawing.Size(232, 27);
             this.label2.TabIndex = 7;
             this.label2.Text = "DESC. A APLICAR (F2)";
             // 
@@ -171,21 +175,23 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 85.32423F));
             this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.txtDescuento, 1, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(299, 52);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(224, 42);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 65.97938F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 34.02062F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(309, 63);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(232, 52);
             this.tableLayoutPanel2.TabIndex = 6;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 20F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Location = new System.Drawing.Point(2, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(34, 46);
+            this.label1.Size = new System.Drawing.Size(28, 37);
             this.label1.TabIndex = 4;
             this.label1.Text = "-";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -196,9 +202,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtDescuento.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
-            this.txtDescuento.Location = new System.Drawing.Point(48, 3);
+            this.txtDescuento.Location = new System.Drawing.Point(36, 2);
+            this.txtDescuento.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtDescuento.Name = "txtDescuento";
-            this.txtDescuento.Size = new System.Drawing.Size(258, 47);
+            this.txtDescuento.Size = new System.Drawing.Size(194, 39);
             this.txtDescuento.TabIndex = 1;
             this.txtDescuento.Click += new System.EventHandler(this.txtDescuento_Click);
             this.txtDescuento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericInput_KeyPress);
@@ -212,12 +219,13 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 87.68116F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.31884F));
             this.tableLayoutPanel3.Controls.Add(this.BoxTipo, 0, 0);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 52);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(2, 42);
+            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(290, 63);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(218, 52);
             this.tableLayoutPanel3.TabIndex = 7;
             // 
             // BoxTipo
@@ -228,9 +236,10 @@
             this.BoxTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.BoxTipo.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
             this.BoxTipo.FormattingEnabled = true;
-            this.BoxTipo.Location = new System.Drawing.Point(3, 3);
+            this.BoxTipo.Location = new System.Drawing.Point(2, 2);
+            this.BoxTipo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.BoxTipo.Name = "BoxTipo";
-            this.BoxTipo.Size = new System.Drawing.Size(248, 49);
+            this.BoxTipo.Size = new System.Drawing.Size(187, 40);
             this.BoxTipo.TabIndex = 0;
             this.BoxTipo.SelectedIndexChanged += new System.EventHandler(this.BoxTipo_SelectedIndexChanged);
             // 
@@ -243,12 +252,13 @@
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel6.Controls.Add(this.tableLayoutPanel5, 0, 1);
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(620, 3);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(464, 2);
+            this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 2;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 22.6601F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 77.3399F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(248, 203);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(187, 166);
             this.tableLayoutPanel6.TabIndex = 11;
             // 
             // tableLayoutPanel5
@@ -263,13 +273,14 @@
             this.tableLayoutPanel5.Controls.Add(this.Bdesc5, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.Bdesc20, 1, 2);
             this.tableLayoutPanel5.Controls.Add(this.Bdesc15, 0, 2);
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 49);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(2, 39);
+            this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 3;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 66F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(242, 151);
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 19F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 54F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(183, 125);
             this.tableLayoutPanel5.TabIndex = 11;
             // 
             // Bdesc10
@@ -277,9 +288,10 @@
             this.Bdesc10.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Bdesc10.Location = new System.Drawing.Point(124, 3);
+            this.Bdesc10.Location = new System.Drawing.Point(93, 2);
+            this.Bdesc10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Bdesc10.Name = "Bdesc10";
-            this.Bdesc10.Size = new System.Drawing.Size(115, 56);
+            this.Bdesc10.Size = new System.Drawing.Size(88, 48);
             this.Bdesc10.TabIndex = 15;
             this.Bdesc10.Text = "10%";
             this.Bdesc10.UseVisualStyleBackColor = true;
@@ -290,9 +302,10 @@
             this.Bdesc5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Bdesc5.Location = new System.Drawing.Point(3, 3);
+            this.Bdesc5.Location = new System.Drawing.Point(2, 2);
+            this.Bdesc5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Bdesc5.Name = "Bdesc5";
-            this.Bdesc5.Size = new System.Drawing.Size(115, 56);
+            this.Bdesc5.Size = new System.Drawing.Size(87, 48);
             this.Bdesc5.TabIndex = 14;
             this.Bdesc5.Text = "5%";
             this.Bdesc5.UseVisualStyleBackColor = true;
@@ -303,9 +316,10 @@
             this.Bdesc20.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Bdesc20.Location = new System.Drawing.Point(124, 88);
+            this.Bdesc20.Location = new System.Drawing.Point(93, 73);
+            this.Bdesc20.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Bdesc20.Name = "Bdesc20";
-            this.Bdesc20.Size = new System.Drawing.Size(115, 60);
+            this.Bdesc20.Size = new System.Drawing.Size(88, 50);
             this.Bdesc20.TabIndex = 13;
             this.Bdesc20.Text = "20%";
             this.Bdesc20.UseVisualStyleBackColor = true;
@@ -316,9 +330,10 @@
             this.Bdesc15.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Bdesc15.Location = new System.Drawing.Point(3, 88);
+            this.Bdesc15.Location = new System.Drawing.Point(2, 73);
+            this.Bdesc15.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Bdesc15.Name = "Bdesc15";
-            this.Bdesc15.Size = new System.Drawing.Size(115, 60);
+            this.Bdesc15.Size = new System.Drawing.Size(87, 50);
             this.Bdesc15.TabIndex = 12;
             this.Bdesc15.Text = "15%";
             this.Bdesc15.UseVisualStyleBackColor = true;
@@ -326,11 +341,12 @@
             // 
             // aplicarDesc
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(901, 277);
+            this.ClientSize = new System.Drawing.Size(676, 225);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "aplicarDesc";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Aplicar Descuento";

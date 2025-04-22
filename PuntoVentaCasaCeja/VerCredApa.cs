@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using PuntoVentaCasaCeja.Properties;
 using Windows.Storage;
 using Newtonsoft.Json;
+using System.Drawing.Printing;
 
 namespace PuntoVentaCasaCeja
 {
@@ -29,6 +30,7 @@ namespace PuntoVentaCasaCeja
         string ticket;
         string folio;
         int idOperacion;
+        int printerType;
         Dictionary<int, float[]> tabs;
         List<AbonoCredito> listaAbonosCredito;
         List<AbonoApartado> listaAbonosApartado;
@@ -46,6 +48,7 @@ namespace PuntoVentaCasaCeja
             InitializeComponent();
             tabla.ColumnHeadersDefaultCellStyle.Font = new Font(tabla.Font.FontFamily, 18);
             tabla.RowsDefaultCellStyle.Font = new Font(tabla.Font.FontFamily, 16);
+            this.printerType = int.Parse(Settings.Default["printertype"].ToString());
             this.KeyPreview = true;
             this.tipo = tipo;
             this.webDM = data.webDM;
@@ -574,7 +577,25 @@ namespace PuntoVentaCasaCeja
         }
         private void createdoc()
         {
-
+            // Configura el tamaño de papel según el tipo de impresora
+            if (printerType == 0) // Ticket
+            {
+                // 78 mm ≈ 3.07 pulgadas; en PaperSize se usa hundredths of an inch, entonces 3.07*100 ≈ 307.
+                // La altura se define de forma arbitraria, ajústala según la longitud de tu ticket.
+                PaperSize ticketSize = new PaperSize("Ticket", 465, 1169);
+                docToPrint.DefaultPageSettings.PaperSize = ticketSize;
+                // Establecemos márgenes en 0 para aprovechar todo el ancho.
+                docToPrint.DefaultPageSettings.Margins = new Margins(10, 10, 10, 10);
+            }
+            else if (printerType == 1)// Papel tamaño carta
+            {
+                // Por ejemplo, tamaño carta: 8.5 x 11 pulgadas.
+                // En hundredths of an inch: ancho=850, alto=1100.
+                PaperSize letterSize = new PaperSize("Letter", 850, 1100);
+                docToPrint.DefaultPageSettings.PaperSize = letterSize;
+                // Márgenes más amplios para papel carta (los puedes ajustar a tu preferencia)
+                docToPrint.DefaultPageSettings.Margins = new Margins(50, 50, 50, 50);
+            }
             string path = Path.Combine(ApplicationData.Current.LocalFolder.Path, "Abono.txt");
             // Construct the PrintPreviewControl.
 
