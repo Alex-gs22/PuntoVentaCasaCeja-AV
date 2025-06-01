@@ -1,8 +1,10 @@
-﻿using System;
+﻿using OfficeOpenXml;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,7 +32,15 @@ namespace PuntoVentaCasaCeja
             this.localDM = webDM.localDM;
             this.tablaClientes.DataSource = localDM.getClientes();
             this.altaCliente = new AltaCliente(data);
+
             tablaClientes.ColumnHeadersDefaultCellStyle.Font = new Font(tablaClientes.Font.FontFamily, 14);
+            tablaClientes.Columns[4].Visible = false; // RFC
+            tablaClientes.Columns[5].Visible = false; // numero_exterior
+            tablaClientes.Columns[6].Visible = false; // numero_interior
+            tablaClientes.Columns[7].Visible = false; // codigo_postal
+            tablaClientes.Columns[8].Visible = false; // calle
+            tablaClientes.Columns[9].Visible = false; // colonia
+            tablaClientes.Columns[10].Visible = false; // ciudad
         }
 
         protected override bool ProcessDialogKey(Keys keyData)
@@ -42,6 +52,9 @@ namespace PuntoVentaCasaCeja
                     case Keys.Escape:
                         this.Close();
                         break;
+                    case Keys.F1:
+                        BinfoCliente.PerformClick();
+                        break;
                     case Keys.F5:
                         altaButton.PerformClick();
                         break;
@@ -50,6 +63,9 @@ namespace PuntoVentaCasaCeja
                         break;
                     case Keys.F7:
                         BajaButton.PerformClick();
+                        break;
+                    case Keys.F8:
+                        BgenerarExcel.PerformClick();
                         break;
                     default:
                         return base.ProcessDialogKey(keyData);
@@ -203,11 +219,6 @@ namespace PuntoVentaCasaCeja
             tablaClientes.DataSource = localDM.getClientes();
         }
 
-        private void tablaClientes_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-   
-        }
-
         private void altaButton_Click(object sender, EventArgs e)
         {
             AltaCliente altaCliente = new AltaCliente(data);
@@ -220,5 +231,121 @@ namespace PuntoVentaCasaCeja
             seleccion(sender, e);
             tablaClientes.Focus();
         }
+
+
+        private void BinfoCliente_Click(object sender, EventArgs e)
+        {
+            // Verificar que hay una fila seleccionada
+            if (tablaClientes.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("No se ha seleccionado ningún cliente.", "Selección requerida",
+                               MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                // Obtener el ID del cliente seleccionado
+                int idCliente = Convert.ToInt32(tablaClientes.SelectedRows[0].Cells[0].Value);
+
+                // Obtener el cliente completo desde la base de datos local
+                Cliente clienteSeleccionado = localDM.getCliente(idCliente);
+
+                if (clienteSeleccionado != null)
+                {
+                    // Crear la vista de información y enviar el cliente
+                    infoCliente infoCliente = new infoCliente(data, clienteSeleccionado);
+                    infoCliente.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("No se pudo obtener la información del cliente.", "Error",
+                                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al obtener la información del cliente: {ex.Message}", "Error",
+                               MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void BgenerarExcel_Click(object sender, EventArgs e)
+        {
+            ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+            int idSucursal = data.idSucursal;
+            DataTable clientesTable = localDM.getClientes();           
+            DateTime localDate = DateTime.Now;
+            string fecha = localDate.ToString("dd-MM-yyyy");            
+
+            // Especificar la carpeta principal y la subcarpeta
+            string carpetaPrincipal = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CasaCejaDocs");
+            string subcarpeta = Path.Combine(carpetaPrincipal, "PuntoDeVenta");
+
+            // Utilizamos la subcarpeta para guardar el archivo
+            string carpeta = subcarpeta;                    
+            string nombreArchivo = "ListaClientes " + fecha + ".xlsx";
+            string rutaArchivo = Path.Combine(carpeta, nombreArchivo);
+
+            // Verificar si la carpeta principal y la subcarpeta existen, si no, crearlas
+            if (!Directory.Exists(carpetaPrincipal))
+            {
+                Directory.CreateDirectory(carpetaPrincipal);
+            }
+            if (!Directory.Exists(subcarpeta))
+            {
+                Directory.CreateDirectory(subcarpeta);
+            }
+
+            // Verificar si el archivo ya existe
+            if (File.Exists(rutaArchivo))
+            {
+                DialogResult dialogResult = MessageBox.Show("El archivo ya existe. ¿Deseas sobrescribirlo?", "Archivo Existente", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dialogResult == DialogResult.No)
+                {
+                    return;
+                }
+            }
+
+            // Generar el archivo Excel
+            try
+            {
+                using (ExcelPackage paquete = new ExcelPackage())
+                {                                  
+                       // Crear la hoja para los clientes
+                        ExcelWorksheet hojaClientes = paquete.Workbook.Worksheets.Add("ListadoClientes " + fecha);
+
+                        // Agregar los encabezados de las columnas
+                        for (int i = 0; i < clientesTable.Columns.Count; i++)
+                        {
+                            hojaClientes.Cells[1, i + 1].Value = clientesTable.Columns[i].ColumnName;
+                            hojaClientes.Cells[1, i + 1].Style.Font.Bold = true;
+                            hojaClientes.Cells[1, i + 1].Style.Font.Size = 14;
+                        }
+
+                        // Agregar los datos de las filas
+                        for (int fila = 0; fila < clientesTable.Rows.Count; fila++)
+                        {
+                            for (int col = 0; col < clientesTable.Columns.Count; col++)
+                            {
+                                hojaClientes.Cells[fila + 2, col + 1].Value = clientesTable.Rows[fila][col].ToString();
+                            }
+                        }
+                    
+
+                    // Guardar el archivo en la ruta especificada
+                    FileInfo archivo = new FileInfo(rutaArchivo);
+                    paquete.SaveAs(archivo);
+
+                    // Mostrar mensaje de éxito si se ha creado correctamente
+                    MessageBox.Show("Lista de Clientes " + fecha + ".xlsx" + " se generó correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error al generar el archivo: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
     }
-}
+    }

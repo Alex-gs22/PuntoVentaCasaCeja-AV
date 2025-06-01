@@ -146,9 +146,18 @@ namespace PuntoVentaCasaCeja
                 }
                 else
                 {
-                    MessageBox.Show("Cliente no encontrado", "Advertencia");
-                    txttel.Text = "";
-                    txttel.Focus();
+                    DialogResult dialogResult = MessageBox.Show("No se encontró el cliente, desea añadirlo como nuevo?", "Cliente no Encontrado", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (dialogResult == DialogResult.No)
+                    {
+                        txttel.Text = "";
+                        txttel.Focus();                       
+                    } 
+                    else if (dialogResult == DialogResult.Yes)
+                    {
+                        AltaCliente altaCliente = new AltaCliente(data);
+                        altaCliente.ShowDialog();
+                    }
+                    
                 }
             }
             else
