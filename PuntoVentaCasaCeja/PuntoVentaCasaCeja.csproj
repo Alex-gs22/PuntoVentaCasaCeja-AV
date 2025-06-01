@@ -314,6 +314,12 @@
     <Compile Include="HistorialCortes.Designer.cs">
       <DependentUpon>HistorialCortes.cs</DependentUpon>
     </Compile>
+    <Compile Include="infoCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="infoCliente.Designer.cs">
+      <DependentUpon>infoCliente.cs</DependentUpon>
+    </Compile>
     <Compile Include="IngresarMonto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -503,6 +509,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="HistorialCortes.resx">
       <DependentUpon>HistorialCortes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="infoCliente.resx">
+      <DependentUpon>infoCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="IngresarMonto.resx">
       <DependentUpon>IngresarMonto.cs</DependentUpon>
