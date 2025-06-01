@@ -56,6 +56,8 @@ namespace PuntoVentaCasaCeja
         private System.Drawing.Printing.PrintDocument docZToPrint =
    new System.Drawing.Printing.PrintDocument();
         CurrentData data;
+        private double totalDescuentoPrecioEspecial = 0; // Acumula descuentos por precio especial
+
         public Ventas()
         {
             InitializeComponent();
@@ -449,6 +451,10 @@ namespace PuntoVentaCasaCeja
         {
             apertura = monto;
         }
+
+        // ===========================================
+        // MODIFICACIÓN: agregarProducto - INICIALIZAR NUEVOS CAMPOS
+        // ===========================================
         private void agregarProducto(Producto p)
         {
             int index = list.IndexOf(p.codigo);
@@ -456,12 +462,23 @@ namespace PuntoVentaCasaCeja
             {
                 tabla.Rows[index].Cells[1].Value = int.Parse(tabla.Rows[index].Cells[1].Value.ToString()) + 1;
                 carrito[index].cantidad++;
+
+                // RECALCULAR descuento si tiene precio especial aplicado
+                if (carrito[index].es_precio_especial)
+                {
+                    double descuentoAnterior = carrito[index].descuento_unitario * (carrito[index].cantidad - 1);
+                    double descuentoNuevo = carrito[index].descuento_unitario * carrito[index].cantidad;
+
+                    // Actualizar total de descuentos
+                    totalDescuentoPrecioEspecial = totalDescuentoPrecioEspecial - descuentoAnterior + descuentoNuevo;
+                }
+
                 if (p.cantidad_mayoreo != 0 && carrito[index].cantidad == p.cantidad_mayoreo && p.mayoreo > 0)
                 {
                     if (!mensajeMayoreoMostrado)
                     {
                         MessageBox.Show("Precio de Mayoreo");
-                        mensajeMayoreoMostrado = true;
+                        mensajeMayoreoMostrado = true;                        
                     }
                     carrito[index].precio_venta = Math.Round(p.mayoreo, 2);
                     tabla["precio", index].Value = p.mayoreo.ToString("0.00");
@@ -477,14 +494,18 @@ namespace PuntoVentaCasaCeja
                     codigo = p.codigo,
                     nombre = p.nombre,
                     cantidad = 1,
-                    precio_venta = Math.Round(p.menudeo, 2)
+                    precio_venta = Math.Round(p.menudeo, 2),
+                    // NUEVOS CAMPOS INICIALIZADOS
+                    precio_original = Math.Round(p.menudeo, 2),
+                    es_precio_especial = false,
+                    descuento_unitario = 0
                 });
                 tabla.Rows.Insert(0, new object[]{
-            p.nombre.ToUpper().ToString() + " " + p.presentacion.ToUpper().ToString(),
-            1,
-            p.menudeo.ToString("0.00"),
-            p.menudeo.ToString("0.00")
-        });
+                p.nombre.ToUpper().ToString() + " " + p.presentacion.ToUpper().ToString(),
+                1,
+                p.menudeo.ToString("0.00"),
+                p.menudeo.ToString("0.00")
+            });
                 tabla.Rows[0].Selected = true;
                 txtcodigo.Focus();
             }
@@ -492,16 +513,29 @@ namespace PuntoVentaCasaCeja
             {
                 hasTemporal = true;
             }
-            totalcarrito = GetTotal();
-            txttotal.Text = "Por pagar MXN: $" + totalcarrito.ToString("0.00");
+
+            RecalcularTotales(); // Usar nuevo método que maneja descuentos
         }
 
+        // ===========================================
+        // MODIFICACIÓN: modCant - RECALCULAR DESCUENTOS
+        // ===========================================
         private void modCant(int index, int cantidad)
         {
             Producto p = localDM.GetProductByCode(list[index]);
-            carrito[index].cantidad = cantidad;
 
+            // Si tiene precio especial, actualizar descuentos
+            if (carrito[index].es_precio_especial)
+            {
+                double descuentoAnterior = carrito[index].descuento_unitario * carrito[index].cantidad;
+                double descuentoNuevo = carrito[index].descuento_unitario * cantidad;
+
+                totalDescuentoPrecioEspecial = totalDescuentoPrecioEspecial - descuentoAnterior + descuentoNuevo;
+            }
+
+            carrito[index].cantidad = cantidad;
             tabla[1, index].Value = cantidad;
+
             if (cantidad >= p.cantidad_mayoreo && p.cantidad_mayoreo != 0 && p.mayoreo > 0)
             {
                 if (!mensajeMayoreoMostrado)
@@ -514,16 +548,19 @@ namespace PuntoVentaCasaCeja
             }
             else
             {
-                carrito[index].precio_venta = Math.Round(p.menudeo, 2);
-                tabla[2, index].Value = p.menudeo.ToString("0.00");
+                if (!carrito[index].es_precio_especial) // Solo cambiar si no tiene precio especial
+                {
+                    carrito[index].precio_venta = Math.Round(p.menudeo, 2);
+                    tabla[2, index].Value = p.menudeo.ToString("0.00");
+                }
                 if (mensajeMayoreoMostrado && cantidad < p.cantidad_mayoreo)
                 {
                     mensajeMayoreoMostrado = false;
                 }
             }
             tabla["total", index].Value = (carrito[index].cantidad * carrito[index].precio_venta).ToString("0.00");
-            totalcarrito = GetTotal();
-            txttotal.Text = "Por pagar MXN: $" + totalcarrito.ToString("0.00");
+
+            RecalcularTotales();
         }
 
         double GetTotal()
@@ -564,6 +601,10 @@ namespace PuntoVentaCasaCeja
                 MessageBox.Show("Favor de seleccionar un artículo", "Advertencia");
             }
         }
+
+        // ===========================================
+        // MODIFICACIÓN: completarVenta - INCLUIR DESCUENTOS PRECIO ESPECIAL
+        // ===========================================
         private async void completarVenta()
         {
             sucursalName = localDM.getSucursalname(idsucursal);
@@ -575,7 +616,11 @@ namespace PuntoVentaCasaCeja
 
             Dictionary<string, string> venta = new Dictionary<string, string>();
             venta["total"] = totalcarrito.ToString("0.00");
-            venta["descuento"] = data.descuento.ToString();
+
+            // CALCULAR DESCUENTO TOTAL (descuento de venta + descuento por precio especial)
+            double descuentoTotal = data.descuento + totalDescuentoPrecioEspecial;
+            venta["descuento"] = descuentoTotal.ToString("0.00");
+
             venta["folio"] = folio;
             venta["folio_corte"] = folioCorte;
             venta["fecha_venta"] = localDate.ToString("yyyy-MM-dd HH:mm:ss.fff");
@@ -586,6 +631,7 @@ namespace PuntoVentaCasaCeja
 
             int id = localDM.CrearVenta(venta, carrito);
             imprimirTicketCarta(fechaVentaImpresion);
+
 
             if (localDM.impresora.Equals(""))
             {
@@ -624,6 +670,9 @@ namespace PuntoVentaCasaCeja
             resetVenta();
         }
 
+        // ===========================================
+        // MODIFICACIÓN: resetVenta - LIMPIAR DESCUENTOS PRECIO ESPECIAL
+        // ===========================================
         void resetVenta()
         {
             reprint = false;
@@ -640,7 +689,11 @@ namespace PuntoVentaCasaCeja
             refreshFolio();
             txttotal.Text = "Por pagar MXN: $" + totalcarrito.ToString("0.00");
             pagos.Clear();
+
+            // NUEVO: Limpiar descuentos de precio especial
+            totalDescuentoPrecioEspecial = 0;
         }
+
         public async Task send(Dictionary<string, string> venta, int id)
         {   
             
@@ -698,7 +751,6 @@ namespace PuntoVentaCasaCeja
                //cambiarVentana(key);
                 return true;
             }
-
             if ((keyData & Keys.Alt) == Keys.Alt)
             {
                 if (key == Keys.F4)
@@ -707,8 +759,6 @@ namespace PuntoVentaCasaCeja
                     return true;
                 }
             }
-
-
             if ((keyData & Keys.Shift) == Keys.Shift)
                 {
                     if (key == Keys.F5)
@@ -717,6 +767,14 @@ namespace PuntoVentaCasaCeja
                         return true;
                     }
                 }
+            if ((keyData & Keys.Shift) == Keys.Shift)
+            {
+                if (key == Keys.P)
+                {
+                    TogglePrecioEspecial();
+                    return true;
+                }
+            }
             else
             {
                 switch (key)
@@ -763,7 +821,7 @@ namespace PuntoVentaCasaCeja
                         break;
                     case Keys.F12:
                         apartados.PerformClick();
-                        break;
+                        break;                    
                     default:
                         return base.ProcessDialogKey(keyData);
                 }
@@ -1249,16 +1307,32 @@ namespace PuntoVentaCasaCeja
                 {
                     n = p.nombre;
                 }
-                ticket += n + "\t" + p.cantidad + "\t" + p.precio_venta.ToString("0.00") + "\t" + (p.cantidad * p.precio_venta).ToString("0.00") + "\n";
+
+                // Indicador de precio especial
+                string indicadorPrecio = p.es_precio_especial ? "*ESP" : "";
+
+                // Precio original en P. UNIT
+                double precioUnitarioOriginal = p.precio_original > 0 ? p.precio_original : p.precio_venta;
+                // Importe final en P. TOTAL  
+                double importeFinal = p.cantidad * p.precio_venta;
+
+                ticket += n + indicadorPrecio + "\t" + p.cantidad + "\t" + precioUnitarioOriginal.ToString("0.00") + "\t" + importeFinal.ToString("0.00") + "\n";
             }
             if (!fontName.Equals("Consolas"))
                 ticket += "--------------------";
             ticket += "--------------------------------------------------------------\n" +
                  "TOTAL $\t------>\t\t" + totalcarrito.ToString("0.00") + "\n";
+
+            // Mostrar descuentos
             if (data.esDescuento)
             {
                 ticket += "SE APLICO DESCUENTO DE $\t------>\t" + data.descuento.ToString("0.00") + "\n";
-            } 
+            }
+            if (totalDescuentoPrecioEspecial > 0)
+            {
+                ticket += "DESC. PRECIO ESPECIAL\t------>\t" + totalDescuentoPrecioEspecial.ToString("0.00") + "\n";
+            }
+
             if (pagos.ContainsKey("debito"))
             {
                 ticket += "PAGO T. DEBITO\t------>\t\t" + pagos["debito"].ToString("0.00") + "\n";
@@ -1305,7 +1379,8 @@ namespace PuntoVentaCasaCeja
                  "https://cm-papeleria.com/public/facturacion";
 
             createdoc();
-    }
+        }
+
         private void createdoc()
         {
 
@@ -1721,5 +1796,154 @@ namespace PuntoVentaCasaCeja
                 MessageBox.Show("Autenticación Fallida");
             }
         }
+
+
+        // ===========================================
+        // NUEVOS MÉTODOS PARA PRECIO ESPECIAL
+        // ===========================================
+        private void TogglePrecioEspecial()
+        {
+            if (tabla.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Seleccione un producto para aplicar precio especial", "Aviso",
+                               MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            try
+            {
+                int index = tabla.SelectedRows[0].Index;
+
+                if (index >= 0 && index < carrito.Count)
+                {
+                    AplicarOQuitarPrecioEspecial(index);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al procesar precio especial: {ex.Message}", "Error",
+                               MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void AplicarOQuitarPrecioEspecial(int index)
+        {
+            ProductoVenta productoVenta = carrito[index];
+            Producto producto = localDM.GetProductByCode(productoVenta.codigo);
+
+            if (producto == null)
+            {
+                MessageBox.Show("No se pudo obtener información del producto", "Error",
+                               MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (producto.especial <= 0)
+            {
+                MessageBox.Show("Este producto no tiene precio especial configurado", "Sin precio especial",
+                               MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (productoVenta.es_precio_especial)
+            {
+                // QUITAR precio especial
+                QuitarPrecioEspecial(index, productoVenta, producto);
+            }
+            else
+            {
+                // APLICAR precio especial
+                AplicarPrecioEspecial(index, productoVenta, producto);
+            }
+
+            ActualizarVisualizacionTabla(index);
+            RecalcularTotales();
+        }
+
+        private void AplicarPrecioEspecial(int index, ProductoVenta productoVenta, Producto producto)
+        {
+            // Guardar precio original si no se ha guardado
+            if (productoVenta.precio_original == 0)
+            {
+                productoVenta.precio_original = productoVenta.precio_venta;
+            }
+
+            // Calcular y aplicar descuento
+            double descuentoUnitario = productoVenta.precio_venta - producto.especial;
+            double descuentoTotal = descuentoUnitario * productoVenta.cantidad;
+
+            productoVenta.precio_venta = producto.especial;
+            productoVenta.es_precio_especial = true;
+            productoVenta.descuento_unitario = descuentoUnitario;
+
+            // Actualizar total de descuentos
+            totalDescuentoPrecioEspecial += descuentoTotal;
+
+            MessageBox.Show($"Precio especial aplicado: ${producto.especial:0.00}\nDescuento: ${descuentoUnitario:0.00} por unidad",
+                           "Precio Especial Aplicado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void QuitarPrecioEspecial(int index, ProductoVenta productoVenta, Producto producto)
+        {
+            // Calcular descuento que se va a quitar
+            double descuentoTotal = productoVenta.descuento_unitario * productoVenta.cantidad;
+
+            // Restaurar precio original
+            if (productoVenta.precio_original > 0)
+            {
+                productoVenta.precio_venta = productoVenta.precio_original;
+            }
+            else
+            {
+                productoVenta.precio_venta = producto.menudeo;
+            }
+
+            // Restar del total de descuentos
+            totalDescuentoPrecioEspecial -= descuentoTotal;
+
+            // Resetear campos
+            productoVenta.es_precio_especial = false;
+            productoVenta.descuento_unitario = 0;
+
+            MessageBox.Show($"Precio especial removido. Precio actual: ${productoVenta.precio_venta:0.00}",
+                           "Precio Normal Restaurado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void ActualizarVisualizacionTabla(int index)
+        {
+            ProductoVenta producto = carrito[index];
+
+            // Actualizar precio y total en la tabla
+            tabla.Rows[index].Cells["precio"].Value = producto.precio_venta.ToString("0.00");
+            tabla.Rows[index].Cells["total"].Value = (producto.cantidad * producto.precio_venta).ToString("0.00");
+
+            // Cambiar color para indicar precio especial
+            if (producto.es_precio_especial)
+            {
+                tabla.Rows[index].DefaultCellStyle.BackColor = Color.LimeGreen;
+                tabla.Rows[index].DefaultCellStyle.ForeColor = Color.Black;
+            }
+            else
+            {
+                tabla.Rows[index].DefaultCellStyle.BackColor = SystemColors.Window;
+                tabla.Rows[index].DefaultCellStyle.ForeColor = SystemColors.WindowText;
+            }
+        }
+
+        private void RecalcularTotales()
+        {
+            totalcarrito = GetTotal();
+
+            // Mostrar información de descuentos si hay precios especiales
+            if (totalDescuentoPrecioEspecial > 0)
+            {
+                txttotal.Text = $"Por pagar MXN: ${totalcarrito:0.00} (Desc. P.Esp: ${totalDescuentoPrecioEspecial:0.00})";
+            }
+            else
+            {
+                txttotal.Text = "Por pagar MXN: $" + totalcarrito.ToString("0.00");
+            }
+        }
+
     }
 }

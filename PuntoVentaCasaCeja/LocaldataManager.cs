@@ -1967,6 +1967,10 @@ namespace PuntoVentaCasaCeja
             }
             return 0;
         }
+        // ===========================================
+        // MODIFICACIÓN: CrearVenta - INCLUIR DESCUENTOS PRECIO ESPECIAL
+        // ===========================================
+        // MÉTODO CrearVenta EN LocaldataManager - NO MODIFICAR
         public int CrearVenta(Dictionary<string, string> venta, List<ProductoVenta> productos)
         {
             int id = 0;
@@ -3987,7 +3991,7 @@ FROM usuarios";
         //}
 
         public bool imprimirTicket(Dictionary<string, string> venta, List<ProductoVenta> productos, Dictionary<string, double> pagos,
-            string cajero, string sucursalName, string sucursalDir, bool re, double cambio, bool esDescuento, double descuento)
+        string cajero, string sucursalName, string sucursalDir, bool re, double cambio, bool esDescuento, double descuento)
         {
             double total = double.Parse(venta["total"].ToString());
             bool state = false;
@@ -4010,18 +4014,48 @@ FROM usuarios";
                 Ticket1.TextoCentro(" ");
                 Ticket1.EncabezadoVenta();
 
+                // MODIFICADO: Mostrar productos con indicador de precio especial
                 foreach (ProductoVenta p in productos)
                 {
                     art++;
-                    Ticket1.AgregaArticulo(p.nombre, p.cantidad, p.precio_venta, p.cantidad * p.precio_venta);
+                    string nombreProducto = p.nombre;
+
+                    // AGREGAR indicador *ESP si tiene precio especial
+                    if (p.es_precio_especial)
+                    {
+                        nombreProducto += "*ESP";
+                    }
+
+                    // Precio original en P.UNIT
+                    double precioUnitarioOriginal = p.precio_original > 0 ? p.precio_original : p.precio_venta;
+                    // Importe final calculado
+                    double importeFinal = p.cantidad * p.precio_venta;
+
+                    Ticket1.AgregaArticulo(nombreProducto, p.cantidad, precioUnitarioOriginal, importeFinal);
                 }
 
                 Ticket1.LineasGuion();
                 Ticket1.AgregaTotales("Total", total);
 
-                if (esDescuento)
+                // MODIFICADO: Mostrar descuentos por separado
+                if (esDescuento && descuento > 0)
                 {
                     Ticket1.AgregaTotales("SE APLICO DESCUENTO DE $", descuento);
+                }
+
+                // NUEVO: Calcular y mostrar descuento por precio especial
+                double descuentoPrecioEspecial = 0;
+                foreach (ProductoVenta p in productos)
+                {
+                    if (p.es_precio_especial)
+                    {
+                        descuentoPrecioEspecial += p.descuento_unitario * p.cantidad;
+                    }
+                }
+
+                if (descuentoPrecioEspecial > 0)
+                {
+                    Ticket1.AgregaTotales("DESC. PRECIO ESPECIAL", descuentoPrecioEspecial);
                 }
 
                 if (pagos.ContainsKey("debito"))
@@ -4080,7 +4114,6 @@ FROM usuarios";
 
             return state;
         }
-
 
         public bool imprimirApartado(Apartado apartado, List<ProductoVenta> productos, Dictionary<string, double> pagos, string cajero, string sucursalName, string sucursalDir, string fechavencimiento)
         {

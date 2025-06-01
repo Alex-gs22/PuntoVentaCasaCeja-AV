@@ -203,13 +203,18 @@ namespace PuntoVentaCasaCeja
                 ticket += "CASA CEJA\n" +
                     "SUCURSAL: " + sucursalName.ToUpper() + "\n" +
                     "" + sucursalDir.ToUpper() + "\n" +
-                    "" + fecha + "\n" + 
+                    "" + fecha + "\n" +
                     "FOLIO: " + folio + "\n\n" +
-                    "DESCRIPCION\tCANT\tP. UNIT\tP. TOTAL\n";
-                    
+                    "DESCRIPCION\tCANT\tP. UNIT\tImporte\n";
+
                 string id = tabla.SelectedRows[0].Cells[0].Value.ToString();
                 productos = localDM.getProductosVenta(id);
-                foreach(ProductoVenta p in productos)
+
+                // MODIFICADO: Calcular descuento por precio especial basado en la información disponible
+                double totalSinDescuentos = 0;
+                double totalConDescuentos = 0;
+
+                foreach (ProductoVenta p in productos)
                 {
                     string n;
                     if (p.nombre.Length > 19)
@@ -218,21 +223,43 @@ namespace PuntoVentaCasaCeja
                     }
                     else
                     {
-                        n=p.nombre;
+                        n = p.nombre;
                     }
-                    ticket +=  n + "\t" + p.cantidad + "\t" + p.precio_venta.ToString("0.00")+ "\t" + (p.cantidad*p.precio_venta).ToString("0.00")+"\n";
+
+                    // NUEVO: Obtener precio original del producto desde la base de datos
+                    Producto productoCompleto = localDM.GetProductByCode(p.codigo);
+                    double precioOriginal = productoCompleto != null ? productoCompleto.menudeo : p.precio_venta;
+                    double importeFinal = p.cantidad * p.precio_venta;
+
+                    // Acumular para calcular descuento por precio especial
+                    totalSinDescuentos += p.cantidad * precioOriginal;
+                    totalConDescuentos += importeFinal;
+
+                    // MODIFICADO: Mostrar precio original vs importe final
+                    string indicadorPrecio = (precioOriginal > p.precio_venta) ? "*ESP" : "";
+                    ticket += n + indicadorPrecio + "\t" + p.cantidad + "\t" + precioOriginal.ToString("0.00") + "\t" + importeFinal.ToString("0.00") + "\n";
                 }
+
                 if (!fontName.Equals("Consolas"))
                     ticket += "--------------------";
                 ticket += "--------------------------------------------------------------\n" +
                      "TOTAL $\t------>\t\t" + totalformat.ToString("0.00") + "\n";
-                if (descuento>0)                
+
+                // NUEVO: Mostrar descuento por precio especial si existe
+                double descuentoPrecioEspecial = totalSinDescuentos - totalConDescuentos;
+                if (descuentoPrecioEspecial > 0)
+                {
+                    ticket += "DESC. PRECIO ESPECIAL\t------>\t" + descuentoPrecioEspecial.ToString("0.00") + "\n";
+                }
+
+                if (descuento > 0)
                 {
                     ticket += "SE APLICO DESCUENTO DE $\t------>\t\t" + descuento.ToString("0.00") + "\n";
                 }
+
                 if (pagos.ContainsKey("debito"))
                 {
-                    ticket += "PAGO T. DEBITO\t------>\t\t" + pagos["debito"].ToString("0.00")+"\n";
+                    ticket += "PAGO T. DEBITO\t------>\t\t" + pagos["debito"].ToString("0.00") + "\n";
                     cambio -= pagos["debito"];
                 }
                 if (pagos.ContainsKey("credito"))
@@ -260,7 +287,7 @@ namespace PuntoVentaCasaCeja
                     ticket += "--------------------";
                 ticket += "--------------------------------------------------------------\n\n" +
                      "LE ATENDIO: " + cajero.ToUpper() + "\n" +
-                     "NO DE ARTICULOS: "+productos.Count.ToString().PadLeft(5, '0')+"\n" +
+                     "NO DE ARTICULOS: " + productos.Count.ToString().PadLeft(5, '0') + "\n" +
                      "GRACIAS POR SU COMPRA\n\n" +
                      "ANTONIO CEJA MARON\n" +
                      "RFC: CEMA-721020-NM5\n\n";
@@ -274,7 +301,7 @@ namespace PuntoVentaCasaCeja
 
                 ticket += "SI DESEA FACTURAR ESTA COMPRA INGRESE A :\n" +
                      "https://cm-papeleria.com/public/facturacion";
-            }            
+            }
             createdoc();
         }
         private void createdoc()
