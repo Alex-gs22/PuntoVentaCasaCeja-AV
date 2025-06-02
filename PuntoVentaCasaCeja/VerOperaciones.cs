@@ -198,8 +198,8 @@ namespace PuntoVentaCasaCeja
 
                 totalformat = double.Parse(total);
 
-                // CORREGIDO: El descuento en BD es solo el descuento de venta (no incluye precio especial)
-                double descuentoVenta = double.Parse(tabla.SelectedRows[0].Cells[2].Value.ToString());
+                // SIMPLIFICADO: Usar el mismo approach que la impresión física
+                double descuentoTotalBD = double.Parse(tabla.SelectedRows[0].Cells[2].Value.ToString());
 
                 pagos = JsonConvert.DeserializeObject<Dictionary<string, double>>(tabla.SelectedRows[0].Cells[6].Value.ToString());
 
@@ -213,7 +213,10 @@ namespace PuntoVentaCasaCeja
                 string id = tabla.SelectedRows[0].Cells[0].Value.ToString();
                 productos = localDM.getProductosVenta(id);
 
-                // CORREGIDO: Enriquecer los productos con información de precio especial
+                // SIMPLIFICADO: Enriquecer productos igual que en print_Click
+                double totalSinDescuentosEspeciales = 0;
+                double totalConDescuentosEspeciales = 0;
+
                 foreach (ProductoVenta p in productos)
                 {
                     Producto productoCompleto = localDM.GetProductByCode(p.codigo);
@@ -237,12 +240,13 @@ namespace PuntoVentaCasaCeja
                         p.es_precio_especial = false;
                         p.descuento_unitario = 0;
                     }
+
+                    // Acumular totales
+                    totalSinDescuentosEspeciales += p.cantidad * p.precio_original;
+                    totalConDescuentosEspeciales += p.cantidad * p.precio_venta;
                 }
 
-                // CORREGIDO: Calcular descuento por precio especial correctamente
-                double totalSinDescuentosEspeciales = 0;
-                double totalConDescuentosEspeciales = 0;
-
+                // Mostrar productos en el ticket
                 foreach (ProductoVenta p in productos)
                 {
                     string n;
@@ -256,15 +260,8 @@ namespace PuntoVentaCasaCeja
                     }
 
                     double importeFinal = p.cantidad * p.precio_venta;
-
-                    // CORREGIDO: Usar los campos ya calculados
-                    totalSinDescuentosEspeciales += p.cantidad * p.precio_original;
-                    totalConDescuentosEspeciales += importeFinal;
-
-                    // CORREGIDO: Usar el campo es_precio_especial
                     string indicadorPrecio = p.es_precio_especial ? "*ESP" : "";
 
-                    // CORREGIDO: Usar precio_original para P.UNIT
                     ticket += n + indicadorPrecio + "\t" + p.cantidad + "\t" + p.precio_original.ToString("0.00") + "\t" + importeFinal.ToString("0.00") + "\n";
                 }
 
@@ -273,25 +270,24 @@ namespace PuntoVentaCasaCeja
                 ticket += "--------------------------------------------------------------\n" +
                      "TOTAL $\t------>\t\t" + totalformat.ToString("0.00") + "\n";
 
-                // CORREGIDO: Calcular descuento por precio especial
+                // SIMPLIFICADO: Calcular descuentos exactamente igual que en print_Click
                 double descuentoPrecioEspecial = totalSinDescuentosEspeciales - totalConDescuentosEspeciales;
+                double descuentoVenta = descuentoTotalBD - descuentoPrecioEspecial;
 
-                // Mostrar descuento por precio especial si existe
+                // Mostrar descuentos
                 if (descuentoPrecioEspecial > 0)
                 {
                     ticket += "DESC. PRECIO ESPECIAL\t------>\t" + descuentoPrecioEspecial.ToString("0.00") + "\n";
                 }
 
-                // Mostrar descuento de venta si existe
                 if (descuentoVenta > 0)
                 {
                     ticket += "SE APLICO DESCUENTO DE $\t------>\t" + descuentoVenta.ToString("0.00") + "\n";
                 }
 
-                // CORREGIDO: Calcular cambio correctamente
-                // Total a pagar = total - descuento de venta
+                // SIMPLIFICADO: Calcular cambio exactamente igual que en print_Click
                 double totalAPagar = totalformat - descuentoVenta;
-                cambio = totalAPagar; // Inicializar cambio con el total a pagar
+                cambio = totalAPagar;
 
                 if (pagos.ContainsKey("debito"))
                 {
@@ -319,7 +315,6 @@ namespace PuntoVentaCasaCeja
                     cambio -= pagos["efectivo"];
                 }
 
-                // CORREGIDO: El cambio final - si es negativo, es lo que se devuelve al cliente
                 ticket += "SU CAMBIO $\t------>\t\t" + Math.Abs(cambio).ToString("0.00") + "\n";
 
                 if (!fontName.Equals("Consolas"))
@@ -350,7 +345,7 @@ namespace PuntoVentaCasaCeja
             {
                 // 78 mm ≈ 3.07 pulgadas; en PaperSize se usa hundredths of an inch, entonces 3.07*100 ≈ 307.
                 // La altura se define de forma arbitraria, ajústala según la longitud de tu ticket.
-                PaperSize ticketSize = new PaperSize("Ticket", 465, 1169);
+                PaperSize ticketSize = new PaperSize("Ticket", 500, 1169);
                 docToPrint.DefaultPageSettings.PaperSize = ticketSize;
                 // Establecemos márgenes en 0 para aprovechar todo el ancho.
                 docToPrint.DefaultPageSettings.Margins = new Margins(10, 10, 10, 10);
