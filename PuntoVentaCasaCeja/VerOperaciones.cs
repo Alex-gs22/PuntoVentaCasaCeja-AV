@@ -196,10 +196,13 @@ namespace PuntoVentaCasaCeja
                 folio = tabla.SelectedRows[0].Cells[3].Value.ToString();
                 total = tabla.SelectedRows[0].Cells[1].Value.ToString();
 
-                cambio = double.Parse(total);
-                cambio -= descuento;
                 totalformat = double.Parse(total);
+
+                // CORREGIDO: El descuento en BD es solo el descuento de venta (no incluye precio especial)
+                double descuentoVenta = double.Parse(tabla.SelectedRows[0].Cells[2].Value.ToString());
+
                 pagos = JsonConvert.DeserializeObject<Dictionary<string, double>>(tabla.SelectedRows[0].Cells[6].Value.ToString());
+
                 ticket += "CASA CEJA\n" +
                     "SUCURSAL: " + sucursalName.ToUpper() + "\n" +
                     "" + sucursalDir.ToUpper() + "\n" +
@@ -210,9 +213,35 @@ namespace PuntoVentaCasaCeja
                 string id = tabla.SelectedRows[0].Cells[0].Value.ToString();
                 productos = localDM.getProductosVenta(id);
 
-                // MODIFICADO: Calcular descuento por precio especial basado en la información disponible
-                double totalSinDescuentos = 0;
-                double totalConDescuentos = 0;
+                // CORREGIDO: Enriquecer los productos con información de precio especial
+                foreach (ProductoVenta p in productos)
+                {
+                    Producto productoCompleto = localDM.GetProductByCode(p.codigo);
+                    if (productoCompleto != null)
+                    {
+                        p.precio_original = productoCompleto.menudeo;
+                        if (p.precio_venta < productoCompleto.menudeo)
+                        {
+                            p.es_precio_especial = true;
+                            p.descuento_unitario = productoCompleto.menudeo - p.precio_venta;
+                        }
+                        else
+                        {
+                            p.es_precio_especial = false;
+                            p.descuento_unitario = 0;
+                        }
+                    }
+                    else
+                    {
+                        p.precio_original = p.precio_venta;
+                        p.es_precio_especial = false;
+                        p.descuento_unitario = 0;
+                    }
+                }
+
+                // CORREGIDO: Calcular descuento por precio especial correctamente
+                double totalSinDescuentosEspeciales = 0;
+                double totalConDescuentosEspeciales = 0;
 
                 foreach (ProductoVenta p in productos)
                 {
@@ -226,18 +255,17 @@ namespace PuntoVentaCasaCeja
                         n = p.nombre;
                     }
 
-                    // NUEVO: Obtener precio original del producto desde la base de datos
-                    Producto productoCompleto = localDM.GetProductByCode(p.codigo);
-                    double precioOriginal = productoCompleto != null ? productoCompleto.menudeo : p.precio_venta;
                     double importeFinal = p.cantidad * p.precio_venta;
 
-                    // Acumular para calcular descuento por precio especial
-                    totalSinDescuentos += p.cantidad * precioOriginal;
-                    totalConDescuentos += importeFinal;
+                    // CORREGIDO: Usar los campos ya calculados
+                    totalSinDescuentosEspeciales += p.cantidad * p.precio_original;
+                    totalConDescuentosEspeciales += importeFinal;
 
-                    // MODIFICADO: Mostrar precio original vs importe final
-                    string indicadorPrecio = (precioOriginal > p.precio_venta) ? "*ESP" : "";
-                    ticket += n + indicadorPrecio + "\t" + p.cantidad + "\t" + precioOriginal.ToString("0.00") + "\t" + importeFinal.ToString("0.00") + "\n";
+                    // CORREGIDO: Usar el campo es_precio_especial
+                    string indicadorPrecio = p.es_precio_especial ? "*ESP" : "";
+
+                    // CORREGIDO: Usar precio_original para P.UNIT
+                    ticket += n + indicadorPrecio + "\t" + p.cantidad + "\t" + p.precio_original.ToString("0.00") + "\t" + importeFinal.ToString("0.00") + "\n";
                 }
 
                 if (!fontName.Equals("Consolas"))
@@ -245,17 +273,25 @@ namespace PuntoVentaCasaCeja
                 ticket += "--------------------------------------------------------------\n" +
                      "TOTAL $\t------>\t\t" + totalformat.ToString("0.00") + "\n";
 
-                // NUEVO: Mostrar descuento por precio especial si existe
-                double descuentoPrecioEspecial = totalSinDescuentos - totalConDescuentos;
+                // CORREGIDO: Calcular descuento por precio especial
+                double descuentoPrecioEspecial = totalSinDescuentosEspeciales - totalConDescuentosEspeciales;
+
+                // Mostrar descuento por precio especial si existe
                 if (descuentoPrecioEspecial > 0)
                 {
                     ticket += "DESC. PRECIO ESPECIAL\t------>\t" + descuentoPrecioEspecial.ToString("0.00") + "\n";
                 }
 
-                if (descuento > 0)
+                // Mostrar descuento de venta si existe
+                if (descuentoVenta > 0)
                 {
-                    ticket += "SE APLICO DESCUENTO DE $\t------>\t\t" + descuento.ToString("0.00") + "\n";
+                    ticket += "SE APLICO DESCUENTO DE $\t------>\t" + descuentoVenta.ToString("0.00") + "\n";
                 }
+
+                // CORREGIDO: Calcular cambio correctamente
+                // Total a pagar = total - descuento de venta
+                double totalAPagar = totalformat - descuentoVenta;
+                cambio = totalAPagar; // Inicializar cambio con el total a pagar
 
                 if (pagos.ContainsKey("debito"))
                 {
@@ -282,7 +318,10 @@ namespace PuntoVentaCasaCeja
                     ticket += "EFECTIVO ENTREGADO\t------>\t\t" + pagos["efectivo"].ToString("0.00") + "\n";
                     cambio -= pagos["efectivo"];
                 }
-                ticket += "SU CAMBIO $\t------>\t\t" + (cambio * -1).ToString("0.00") + "\n";
+
+                // CORREGIDO: El cambio final - si es negativo, es lo que se devuelve al cliente
+                ticket += "SU CAMBIO $\t------>\t\t" + Math.Abs(cambio).ToString("0.00") + "\n";
+
                 if (!fontName.Equals("Consolas"))
                     ticket += "--------------------";
                 ticket += "--------------------------------------------------------------\n\n" +
@@ -497,15 +536,62 @@ namespace PuntoVentaCasaCeja
                         printPreviewControl1.Document.Print();
                     else
                     {
-                        double descuento = double.Parse(tabla.SelectedRows[0].Cells[2].Value.ToString());
-                        bool esDescuento = descuento > 0;
+                        // CORREGIDO: Enriquecer los productos con información de precio especial
+                        foreach (ProductoVenta p in productos)
+                        {
+                            Producto productoCompleto = localDM.GetProductByCode(p.codigo);
+                            if (productoCompleto != null)
+                            {
+                                p.precio_original = productoCompleto.menudeo;
+                                if (p.precio_venta < productoCompleto.menudeo)
+                                {
+                                    p.es_precio_especial = true;
+                                    p.descuento_unitario = productoCompleto.menudeo - p.precio_venta;
+                                }
+                                else
+                                {
+                                    p.es_precio_especial = false;
+                                    p.descuento_unitario = 0;
+                                }
+                            }
+                            else
+                            {
+                                p.precio_original = p.precio_venta;
+                                p.es_precio_especial = false;
+                                p.descuento_unitario = 0;
+                            }
+                        }
+
+                        // CORREGIDO: El descuento total de BD incluye ambos descuentos
+                        double descuentoTotalBD = double.Parse(tabla.SelectedRows[0].Cells[2].Value.ToString());
+
+                        // Calcular descuento por precio especial para separar los descuentos
+                        double totalSinDescuentosEspeciales = 0;
+                        double totalConDescuentosEspeciales = 0;
+
+                        foreach (ProductoVenta p in productos)
+                        {
+                            totalSinDescuentosEspeciales += p.cantidad * p.precio_original;
+                            totalConDescuentosEspeciales += p.cantidad * p.precio_venta;
+                        }
+
+                        double descuentoPrecioEspecial = totalSinDescuentosEspeciales - totalConDescuentosEspeciales;
+                        double descuentoVenta = descuentoTotalBD - descuentoPrecioEspecial;
+
+                        bool esDescuento = descuentoVenta > 0;
+
                         Dictionary<string, string> venta = new Dictionary<string, string>();
                         venta["fecha_venta"] = fecha;
                         venta["folio"] = folio;
                         venta["total"] = total;
-                        cambio = double.Parse(total) - descuento;
+
+                        // CORREGIDO: Calcular cambio - solo aplicar descuento de venta al total
+                        double totalAPagar = totalformat - descuentoVenta;
+                        cambio = totalAPagar;
+
+                        // CORREGIDO: Llamar al método de impresión con el descuento de venta real
                         localDM.imprimirTicket(venta, productos, pagos, cajero, sucursalName, sucursalDir,
-                            true, cambio, esDescuento, descuento);
+                            true, cambio, esDescuento, descuentoVenta);
                     }
                 }
                 catch (System.ComponentModel.Win32Exception)
@@ -514,6 +600,6 @@ namespace PuntoVentaCasaCeja
                 }
             }
         }
-      
+
     }
 }

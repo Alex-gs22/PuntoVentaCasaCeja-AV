@@ -1542,23 +1542,47 @@ namespace PuntoVentaCasaCeja
         }
         public List<ProductoVenta> getProductosVenta(string id_venta)
         {
-            List<ProductoVenta> l = new List<ProductoVenta>();
+            List<ProductoVenta> productos = new List<ProductoVenta>();
             SQLiteCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT producto_venta.id AS ID, productos.codigo AS CODIGO, productos.nombre AS NOMBRE_PRODUCTO, producto_venta.cantidad AS CANTIDAD, producto_venta.precio_venta AS PRECIO_VENTA FROM producto_venta  INNER JOIN productos ON producto_venta.producto_id=productos.id WHERE producto_venta.venta_id = @setId";
-            command.Parameters.AddWithValue("setId", id_venta);
+            command.CommandText = "SELECT producto_venta.producto_id, productos.nombre, producto_venta.codigo, producto_venta.cantidad, producto_venta.precio_venta FROM producto_venta INNER JOIN productos ON producto_venta.Producto_id = productos.id WHERE producto_venta.venta_id = @setVenta";
+            command.Parameters.AddWithValue("setVenta", id_venta);
             SQLiteDataReader result = command.ExecuteReader();
             while (result.Read())
             {
-                l.Add(new ProductoVenta
+                // NUEVO: Obtener el producto completo para comparar precios
+                string codigo = result.GetString(2);
+                Producto productoCompleto = GetProductByCode(codigo);
+                double precioVenta = result.GetDouble(4);
+
+                // NUEVO: Determinar si es precio especial comparando con el precio menudeo
+                bool esPrecioEspecial = false;
+                double precioOriginal = precioVenta;
+                double descuentoUnitario = 0;
+
+                if (productoCompleto != null)
+                {
+                    precioOriginal = productoCompleto.menudeo;
+                    if (precioVenta < productoCompleto.menudeo)
+                    {
+                        esPrecioEspecial = true;
+                        descuentoUnitario = productoCompleto.menudeo - precioVenta;
+                    }
+                }
+
+                productos.Add(new ProductoVenta
                 {
                     id = result.GetInt32(0),
-                    codigo = result.GetString(1),
-                    nombre = result.GetString(2),
+                    nombre = result.GetString(1),
+                    codigo = codigo,
                     cantidad = result.GetInt32(3),
-                    precio_venta = result.GetDouble(4)
+                    precio_venta = precioVenta,
+                    // NUEVO: Agregar los campos faltantes
+                    precio_original = precioOriginal,
+                    es_precio_especial = esPrecioEspecial,
+                    descuento_unitario = descuentoUnitario
                 });
             }
-            return l;
+            return productos;
         }
         public DataTable getMedidas()
         {
