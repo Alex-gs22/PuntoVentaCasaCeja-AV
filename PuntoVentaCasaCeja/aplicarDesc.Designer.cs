@@ -120,9 +120,9 @@
             this.Bsalir.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Bsalir.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
-            this.Bsalir.Location = new System.Drawing.Point(225, 113);
+            this.Bsalir.Location = new System.Drawing.Point(225, 114);
             this.Bsalir.Name = "Bsalir";
-            this.Bsalir.Size = new System.Drawing.Size(230, 49);
+            this.Bsalir.Size = new System.Drawing.Size(230, 48);
             this.Bsalir.TabIndex = 3;
             this.Bsalir.Text = "CANCELAR (Esc)";
             this.Bsalir.UseVisualStyleBackColor = true;
@@ -133,9 +133,9 @@
             this.aceptar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.aceptar.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
-            this.aceptar.Location = new System.Drawing.Point(3, 113);
+            this.aceptar.Location = new System.Drawing.Point(3, 114);
             this.aceptar.Name = "aceptar";
-            this.aceptar.Size = new System.Drawing.Size(216, 49);
+            this.aceptar.Size = new System.Drawing.Size(216, 48);
             this.aceptar.TabIndex = 2;
             this.aceptar.Text = "ACEPTAR (Enter)";
             this.aceptar.UseVisualStyleBackColor = true;

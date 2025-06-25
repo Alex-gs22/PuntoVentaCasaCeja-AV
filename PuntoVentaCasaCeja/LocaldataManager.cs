@@ -28,7 +28,7 @@ namespace PuntoVentaCasaCeja
         {
             // 1. Tablas de PreLoadedCatalog.db correspondiente a productos, categorias y medidas
             { "productos", "CREATE TABLE 'productos' ( 'id' INTEGER NOT NULL, 'codigo' TEXT, 'nombre' TEXT, 'presentacion' TEXT, 'iva' REAL, 'menudeo' REAL, 'mayoreo' REAL, 'cantidad_mayoreo' INTEGER, 'especial' REAL, 'vendedor' REAL, 'imagen' TEXT, 'activo' INTEGER, 'created_at' TEXT, 'updated_at' TEXT, 'medida_id' INTEGER, 'categoria_id' INTEGER, FOREIGN KEY('categoria_id') REFERENCES 'categorias'('id'), PRIMARY KEY('id'), FOREIGN KEY('medida_id') REFERENCES 'medidas'('id'))" },
-            { "categorias", "CREATE TABLE 'categorias' ( 'id' INTEGER NOT NULL, 'nombre' TEXT, 'activo' INTEGER, 'created_at' TEXT, 'updated_at' TEXT, PRIMARY KEY('id'))" },
+            { "categorias", "CREATE TABLE 'categorias' ( 'id' INTEGER NOT NULL, 'nombre' TEXT, 'activo' INTEGER, 'isdescuento' INTEGER, 'descuento' REAL, 'created_at' TEXT, 'updated_at' TEXT, PRIMARY KEY('id'))" },
             { "medidas", "CREATE TABLE 'medidas' ( 'id' INTEGER NOT NULL, 'nombre' TEXT, 'activo' INTEGER, 'created_at' TEXT, 'updated_at' TEXT, PRIMARY KEY('id'))" },
             
             // 2. Tablas básicas sin dependencias
@@ -729,6 +729,34 @@ namespace PuntoVentaCasaCeja
             adapter.Fill(dt);
             return dt;
         }
+
+        // Agregar este método en LocaldataManager.cs si no lo tienes ya
+        public (bool tieneDescuento, decimal porcentajeDescuento) GetDescuentoCategoria(int categoriaId)
+        {
+            try
+            {
+                SQLiteCommand command = connection.CreateCommand();
+                command.CommandText = "SELECT isdescuento, descuento FROM categorias WHERE id = @categoriaId AND activo = 1";
+                command.Parameters.AddWithValue("@categoriaId", categoriaId);
+
+                SQLiteDataReader result = command.ExecuteReader();
+                if (result.Read())
+                {
+                    bool tiene = result.GetInt32(0) == 1;
+                    decimal descuento = result.IsDBNull(1) ? 0 : result.GetDecimal(1);
+                    result.Close();
+                    return (tiene, descuento);
+                }
+                result.Close();
+                return (false, 0);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al obtener descuento de categoría: {ex.Message}");
+                return (false, 0);
+            }
+        }
+
         public DataTable getVentasPendientes()
         {
             DataTable dt = new DataTable();

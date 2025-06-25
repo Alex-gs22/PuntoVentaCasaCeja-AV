@@ -13,9 +13,15 @@ namespace PuntoVentaCasaCeja
         public string nombre { get; set; }
         public int cantidad { get; set; }
         public double precio_venta { get; set; }
-        // NUEVOS CAMPOS PARA PRECIO ESPECIAL
-        public double precio_original { get; set; }  // Para guardar el precio original (menudeo)
-        public bool es_precio_especial { get; set; } // Indica si tiene precio especial aplicado
-        public double descuento_unitario { get; set; } // Descuento por unidad aplicado
+
+        // CAMPOS PARA PRECIO ESPECIAL (ya existentes)
+        public double precio_original { get; set; }
+        public bool es_precio_especial { get; set; }
+        public double descuento_unitario { get; set; }
+
+        // NUEVOS CAMPOS PARA DESCUENTO POR CATEGORÍA
+        public bool es_descuento_categoria { get; set; }
+        public double descuento_categoria_unitario { get; set; }
+        public double porcentaje_descuento_categoria { get; set; } // Para mostrar en tickets
     }
 }
