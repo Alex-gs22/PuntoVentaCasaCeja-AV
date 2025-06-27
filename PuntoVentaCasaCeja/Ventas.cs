@@ -693,11 +693,33 @@ namespace PuntoVentaCasaCeja
             if (tabla.SelectedRows.Count > 0)
             {
                 int index = tabla.SelectedRows[0].Cells[0].RowIndex;
+
+                // SOLUCIÓN PROBLEMA 2: Restar descuentos antes de eliminar el producto
+                ProductoVenta productoAEliminar = carrito[index];
+
+                // Restar descuento de precio especial si lo tiene
+                if (productoAEliminar.es_precio_especial)
+                {
+                    double descuentoEspecialTotal = productoAEliminar.descuento_unitario * productoAEliminar.cantidad;
+                    totalDescuentoPrecioEspecial -= descuentoEspecialTotal;
+                    Console.WriteLine($"Restando descuento precio especial: ${descuentoEspecialTotal:0.00}");
+                }
+
+                // Restar descuento de categoría si lo tiene
+                if (productoAEliminar.es_descuento_categoria)
+                {
+                    double descuentoCategoriaTotal = productoAEliminar.descuento_categoria_unitario * productoAEliminar.cantidad;
+                    totalDescuentoCategoria -= descuentoCategoriaTotal;
+                    Console.WriteLine($"Restando descuento categoría: ${descuentoCategoriaTotal:0.00}");
+                }
+
+                // Eliminar producto del carrito y tabla
                 list.Remove(list[index]);
                 carrito.Remove(carrito[index]);
                 tabla.Rows.Remove(tabla.SelectedRows[0]);
-                totalcarrito = GetTotal();                
-                txttotal.Text = "Por pagar MXN: $" + totalcarrito.ToString("0.00");
+
+                // Recalcular totales
+                RecalcularTotales();
             }
             else
             {
@@ -771,7 +793,7 @@ namespace PuntoVentaCasaCeja
             await send(venta, id);
             resetVenta();
         }
-        
+
         void resetVenta()
         {
             reprint = false;
@@ -791,7 +813,7 @@ namespace PuntoVentaCasaCeja
 
             // LIMPIAR TODOS LOS DESCUENTOS
             totalDescuentoPrecioEspecial = 0;
-            totalDescuentoCategoria = 0; // NUEVO: Limpiar descuentos de categoría
+            totalDescuentoCategoria = 0;
         }
 
         public async Task send(Dictionary<string, string> venta, int id)
@@ -1398,6 +1420,9 @@ namespace PuntoVentaCasaCeja
                 "FOLIO: " + folio + "\n\n" +
                  "DESCRIPCION\tCANT\tP. UNIT\tP. TOTAL\n";
 
+            // Calcular subtotal sin descuentos
+            double subtotalSinDescuentos = 0;
+
             foreach (ProductoVenta p in carrito)
             {
                 string n;
@@ -1410,7 +1435,7 @@ namespace PuntoVentaCasaCeja
                     n = p.nombre;
                 }
 
-                // Construir indicadores de descuentos
+                // AGREGAR INDICADORES de descuentos al nombre
                 string indicadores = "";
 
                 if (p.es_precio_especial)
@@ -1424,60 +1449,70 @@ namespace PuntoVentaCasaCeja
                     indicadores += $"*CAT{p.porcentaje_descuento_categoria:0}%";
                 }
 
-                // Precio unitario original (antes de cualquier descuento)
+                // PRECIO ORIGINAL (sin ningún descuento) - P. UNIT
                 double precioUnitarioOriginal;
 
                 if (p.precio_original > 0)
                 {
-                    // Si tiene precio original guardado, usarlo
                     precioUnitarioOriginal = p.precio_original;
-
-                    // Si tiene descuento de categoría pero el precio original no incluye ese descuento,
-                    // necesitamos ajustarlo
-                    if (p.es_descuento_categoria && !p.es_precio_especial)
-                    {
-                        // El precio original podría no incluir el descuento de categoría
-                        // En este caso, usar el precio actual + descuento de categoría
-                        precioUnitarioOriginal = p.precio_venta + p.descuento_categoria_unitario;
-                    }
                 }
                 else
                 {
-                    // Si no hay precio original, calcularlo
+                    // Calcular precio original basado en el precio actual + todos los descuentos
+                    precioUnitarioOriginal = p.precio_venta;
+
                     if (p.es_descuento_categoria)
                     {
-                        precioUnitarioOriginal = p.precio_venta + p.descuento_categoria_unitario;
+                        precioUnitarioOriginal += p.descuento_categoria_unitario;
                     }
-                    else
+
+                    if (p.es_precio_especial)
                     {
-                        precioUnitarioOriginal = p.precio_venta;
+                        precioUnitarioOriginal += p.descuento_unitario;
                     }
                 }
 
-                // Importe final (precio actual * cantidad)
-                double importeFinal = p.cantidad * p.precio_venta;
+                // PRECIO FINAL CON DESCUENTOS - P. TOTAL (precio actual * cantidad)
+                double precioFinalConDescuentos = p.precio_venta * p.cantidad;
 
-                ticket += n + indicadores + "\t" + p.cantidad + "\t" + precioUnitarioOriginal.ToString("0.00") + "\t" + importeFinal.ToString("0.00") + "\n";
+                // SUBTOTAL SIN DESCUENTOS (para el cálculo del subtotal)
+                double totalSinDescuentos = precioUnitarioOriginal * p.cantidad;
+                subtotalSinDescuentos += totalSinDescuentos;
+
+                // MOSTRAR: Nombre con indicadores, cantidad, precio original, precio final con descuentos
+                ticket += n + indicadores + "\t" + p.cantidad + "\t" + precioUnitarioOriginal.ToString("0.00") + "\t" + precioFinalConDescuentos.ToString("0.00") + "\n";
             }
 
             if (!fontName.Equals("Consolas"))
                 ticket += "--------------------";
-            ticket += "--------------------------------------------------------------\n" +
-                 "TOTAL $\t------>\t\t" + totalcarrito.ToString("0.00") + "\n";
+            ticket += "--------------------------------------------------------------\n";
 
-            // Mostrar todos los tipos de descuentos aplicados
-            if (data.esDescuento)
-            {
-                ticket += "DESCUENTO DE VENTA\t------>\t" + data.descuento.ToString("0.00") + "\n";
-            }
-            if (totalDescuentoPrecioEspecial > 0)
-            {
-                ticket += "DESC. PRECIO ESPECIAL\t------>\t" + totalDescuentoPrecioEspecial.ToString("0.00") + "\n";
-            }
+            // MOSTRAR SUBTOTAL SIN DESCUENTOS
+            ticket += "SUBTOTAL $\t------>\t\t" + subtotalSinDescuentos.ToString("0.00") + "\n";
+
+            // MOSTRAR TODOS LOS DESCUENTOS APLICADOS
             if (totalDescuentoCategoria > 0)
             {
-                ticket += "DESC. POR CATEGORIA\t------>\t" + totalDescuentoCategoria.ToString("0.00") + "\n";
+                ticket += "DESC. POR CATEGORIA\t------>\t-" + totalDescuentoCategoria.ToString("0.00") + "\n";
             }
+
+            if (totalDescuentoPrecioEspecial > 0)
+            {
+                ticket += "DESC. PRECIO ESPECIAL\t------>\t-" + totalDescuentoPrecioEspecial.ToString("0.00") + "\n";
+            }
+
+            if (data.esDescuento)
+            {
+                ticket += "DESCUENTO DE VENTA\t------>\t-" + data.descuento.ToString("0.00") + "\n";
+            }
+
+            // CALCULAR Y MOSTRAR TOTAL FINAL CORRECTO
+            double totalFinalConTodosLosDescuentos = subtotalSinDescuentos - totalDescuentoCategoria - totalDescuentoPrecioEspecial - data.descuento;
+            ticket += "TOTAL A PAGAR $\t------>\t\t" + totalFinalConTodosLosDescuentos.ToString("0.00") + "\n";
+
+            if (!fontName.Equals("Consolas"))
+                ticket += "--------------------";
+            ticket += "--------------------------------------------------------------\n";
 
             // Métodos de pago
             if (pagos.ContainsKey("debito"))
@@ -1997,15 +2032,45 @@ namespace PuntoVentaCasaCeja
             {
                 // QUITAR precio especial
                 QuitarPrecioEspecial(index, productoVenta, producto);
+
+                // SOLUCIÓN PROBLEMA 1: Después de quitar precio especial, verificar descuento de categoría
+                VerificarYAplicarDescuentoCategoria(index);
             }
             else
             {
-                // APLICAR precio especial
+                // APLICAR precio especial (primero quitar descuento de categoría si lo tiene)
+                if (productoVenta.es_descuento_categoria)
+                {
+                    QuitarDescuentoCategoria(index);
+                }
+
                 AplicarPrecioEspecial(index, productoVenta, producto);
             }
 
             ActualizarVisualizacionTabla(index);
             RecalcularTotales();
+        }
+       
+        private void QuitarDescuentoCategoria(int index)
+        {
+            ProductoVenta productoVenta = carrito[index];
+
+            if (productoVenta.es_descuento_categoria)
+            {
+                // Restar del total de descuentos de categoría
+                double descuentoTotal = productoVenta.descuento_categoria_unitario * productoVenta.cantidad;
+                totalDescuentoCategoria -= descuentoTotal;
+
+                // Restaurar precio sin descuento de categoría
+                productoVenta.precio_venta += productoVenta.descuento_categoria_unitario;
+
+                // Resetear campos de descuento de categoría
+                productoVenta.es_descuento_categoria = false;
+                productoVenta.descuento_categoria_unitario = 0;
+                productoVenta.porcentaje_descuento_categoria = 0;
+
+                Console.WriteLine($"Descuento de categoría removido. Descuento total reducido en: ${descuentoTotal:0.00}");
+            }
         }
 
         private void AplicarPrecioEspecial(int index, ProductoVenta productoVenta, Producto producto)
