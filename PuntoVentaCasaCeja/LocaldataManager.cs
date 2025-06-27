@@ -4066,50 +4066,95 @@ FROM usuarios";
                 Ticket1.TextoCentro(" ");
                 Ticket1.EncabezadoVenta();
 
-                // MODIFICADO: Mostrar productos con indicador de precio especial
+                // CALCULAR SUBTOTAL SIN DESCUENTOS y DESCUENTOS TOTALES
+                double subtotalSinDescuentos = 0;
+                double totalDescuentoCategoria = 0;
+                double totalDescuentoPrecioEspecial = 0;
+
+                // MOSTRAR productos con indicadores y calcular totales
                 foreach (ProductoVenta p in productos)
                 {
                     art++;
                     string nombreProducto = p.nombre;
 
-                    // AGREGAR indicador *ESP si tiene precio especial
+                    // AGREGAR INDICADORES de descuentos
                     if (p.es_precio_especial)
                     {
                         nombreProducto += "*ESP";
                     }
 
-                    // Precio original en P.UNIT
-                    double precioUnitarioOriginal = p.precio_original > 0 ? p.precio_original : p.precio_venta;
-                    // Importe final calculado
-                    double importeFinal = p.cantidad * p.precio_venta;
+                    if (p.es_descuento_categoria)
+                    {
+                        nombreProducto += $" *CAT{p.porcentaje_descuento_categoria:0}%";
+                    }
 
-                    Ticket1.AgregaArticulo(nombreProducto, p.cantidad, precioUnitarioOriginal, importeFinal);
+                    // PRECIO ORIGINAL (sin descuentos) - P.UNIT
+                    double precioUnitarioOriginal;
+                    if (p.precio_original > 0)
+                    {
+                        precioUnitarioOriginal = p.precio_original;
+                    }
+                    else
+                    {
+                        // Calcular precio original sumando todos los descuentos
+                        precioUnitarioOriginal = p.precio_venta;
+                        if (p.es_descuento_categoria)
+                        {
+                            precioUnitarioOriginal += p.descuento_categoria_unitario;
+                        }
+                        if (p.es_precio_especial)
+                        {
+                            precioUnitarioOriginal += p.descuento_unitario;
+                        }
+                    }
+
+                    // PRECIO FINAL CON DESCUENTOS - P.TOTAL
+                    double precioFinalConDescuentos = p.precio_venta * p.cantidad;
+
+                    // ACUMULAR para subtotal
+                    subtotalSinDescuentos += precioUnitarioOriginal * p.cantidad;
+
+                    // ACUMULAR descuentos
+                    if (p.es_descuento_categoria)
+                    {
+                        totalDescuentoCategoria += p.descuento_categoria_unitario * p.cantidad;
+                    }
+                    if (p.es_precio_especial)
+                    {
+                        totalDescuentoPrecioEspecial += p.descuento_unitario * p.cantidad;
+                    }
+
+                    Ticket1.AgregaArticulo(nombreProducto, p.cantidad, precioUnitarioOriginal, precioFinalConDescuentos);
                 }
 
                 Ticket1.LineasGuion();
-                Ticket1.AgregaTotales("Total", total);
 
-                // MODIFICADO: Mostrar descuentos por separado
+                // MOSTRAR SUBTOTAL
+                Ticket1.AgregaTotales("SUBTOTAL $", subtotalSinDescuentos);
+
+                // MOSTRAR DESCUENTOS POR SEPARADO (solo si existen)
+                if (totalDescuentoCategoria > 0)
+                {
+                    Ticket1.AgregaTotales("DESC. POR CATEGORIA", -totalDescuentoCategoria);
+                }
+
+                if (totalDescuentoPrecioEspecial > 0)
+                {
+                    Ticket1.AgregaTotales("DESC. PRECIO ESPECIAL", -totalDescuentoPrecioEspecial);
+                }
+
                 if (esDescuento && descuento > 0)
                 {
-                    Ticket1.AgregaTotales("SE APLICO DESCUENTO DE $", descuento);
+                    Ticket1.AgregaTotales("DESCUENTO DE VENTA", -descuento);
                 }
 
-                // NUEVO: Calcular y mostrar descuento por precio especial
-                double descuentoPrecioEspecial = 0;
-                foreach (ProductoVenta p in productos)
-                {
-                    if (p.es_precio_especial)
-                    {
-                        descuentoPrecioEspecial += p.descuento_unitario * p.cantidad;
-                    }
-                }
+                // CALCULAR Y MOSTRAR TOTAL FINAL
+                double totalFinalConTodosLosDescuentos = subtotalSinDescuentos - totalDescuentoCategoria - totalDescuentoPrecioEspecial - descuento;
+                Ticket1.AgregaTotales("TOTAL FINAL $", totalFinalConTodosLosDescuentos);
 
-                if (descuentoPrecioEspecial > 0)
-                {
-                    Ticket1.AgregaTotales("DESC. PRECIO ESPECIAL", descuentoPrecioEspecial);
-                }
+                Ticket1.LineasGuion();
 
+                // MÉTODOS DE PAGO
                 if (pagos.ContainsKey("debito"))
                 {
                     Ticket1.AgregaTotales("PAGO T. DEBITO", pagos["debito"]);
