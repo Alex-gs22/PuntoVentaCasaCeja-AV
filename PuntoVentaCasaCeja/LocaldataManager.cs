@@ -4042,8 +4042,9 @@ FROM usuarios";
         //    connection.Close();
         //}
 
+        // Reemplazar completamente el método imprimirTicket en LocalDataManager
         public bool imprimirTicket(Dictionary<string, string> venta, List<ProductoVenta> productos, Dictionary<string, double> pagos,
-        string cajero, string sucursalName, string sucursalDir, bool re, double cambio, bool esDescuento, double descuento)
+            string cajero, string sucursalName, string sucursalDir, bool re, double cambio, bool esDescuento, double descuento)
         {
             double total = double.Parse(venta["total"].ToString());
             bool state = false;
@@ -4078,15 +4079,26 @@ FROM usuarios";
                     string nombreProducto = p.nombre;
 
                     // AGREGAR INDICADORES de descuentos
+                    string indicadores = "";
+
                     if (p.es_precio_especial)
                     {
-                        nombreProducto += "*ESP";
+                        indicadores += "*ESP";
                     }
 
-                    if (p.es_descuento_categoria)
+                    // MOSTRAR INDICADOR DE CATEGORÍA SI LO TUVO ORIGINALMENTE
+                    if (p.tuvo_descuento_categoria_original)
                     {
-                        nombreProducto += $" *CAT{p.porcentaje_descuento_categoria:0}%";
+                        if (indicadores.Length > 0) indicadores += " ";
+                        indicadores += $"*CAT{p.porcentaje_categoria_original:0}%";
                     }
+                    else if (p.es_descuento_categoria)
+                    {
+                        if (indicadores.Length > 0) indicadores += " ";
+                        indicadores += $"*CAT{p.porcentaje_descuento_categoria:0}%";
+                    }
+
+                    nombreProducto += indicadores;
 
                     // PRECIO ORIGINAL (sin descuentos) - P.UNIT
                     double precioUnitarioOriginal;
@@ -4096,16 +4108,9 @@ FROM usuarios";
                     }
                     else
                     {
-                        // Calcular precio original sumando todos los descuentos
-                        precioUnitarioOriginal = p.precio_venta;
-                        if (p.es_descuento_categoria)
-                        {
-                            precioUnitarioOriginal += p.descuento_categoria_unitario;
-                        }
-                        if (p.es_precio_especial)
-                        {
-                            precioUnitarioOriginal += p.descuento_unitario;
-                        }
+                        // Obtener producto completo para precio menudeo
+                        Producto productoCompleto = GetProductByCode(p.codigo);
+                        precioUnitarioOriginal = productoCompleto?.menudeo ?? p.precio_venta;
                     }
 
                     // PRECIO FINAL CON DESCUENTOS - P.TOTAL
@@ -4114,11 +4119,16 @@ FROM usuarios";
                     // ACUMULAR para subtotal
                     subtotalSinDescuentos += precioUnitarioOriginal * p.cantidad;
 
-                    // ACUMULAR descuentos
-                    if (p.es_descuento_categoria)
+                    // *** ACUMULAR DESCUENTOS USANDO VALORES ORIGINALES ***
+                    if (p.tuvo_descuento_categoria_original)
+                    {
+                        totalDescuentoCategoria += p.descuento_categoria_original * p.cantidad;
+                    }
+                    else if (p.es_descuento_categoria)
                     {
                         totalDescuentoCategoria += p.descuento_categoria_unitario * p.cantidad;
                     }
+
                     if (p.es_precio_especial)
                     {
                         totalDescuentoPrecioEspecial += p.descuento_unitario * p.cantidad;
@@ -4212,17 +4222,21 @@ FROM usuarios";
             return state;
         }
 
-        public bool imprimirApartado(Apartado apartado, List<ProductoVenta> productos, Dictionary<string, double> pagos, string cajero, string sucursalName, string sucursalDir, string fechavencimiento)
+        // Reemplazar completamente el método imprimirApartado en LocalDataManager
+        public bool imprimirApartado(Apartado apartado, List<ProductoVenta> productos, Dictionary<string, double> pagos,
+            string cajero, string sucursalName, string sucursalDir, string fechavencimiento, string clienteNombre, string clienteTelefono)
         {
             double total = (double)apartado.total;
             bool state = false;
             int art = 0;
+
             if (!impresora.Equals(""))
             {
                 state = true;
                 CreaTicket Ticket1 = new CreaTicket();
                 Ticket1.impresora = impresora;
                 Ticket1.AbreCajon();
+
                 Ticket1.TextoCentro("CASA CEJA");
                 Ticket1.TextoCentro("Sucursal: " + sucursalName.ToUpper());
                 Ticket1.TextoCentro(sucursalDir.ToUpper());
@@ -4231,57 +4245,160 @@ FROM usuarios";
                 Ticket1.TextoCentro(" ");
                 Ticket1.TextoCentro("TICKET DE APARTADO");
                 Ticket1.EncabezadoVenta();
+
+                // CALCULAR SUBTOTAL SIN DESCUENTOS y DESCUENTOS TOTALES
+                double subtotalSinDescuentos = 0;
+                double totalDescuentoCategoria = 0;
+                double totalDescuentoPrecioEspecial = 0;
+
+                // MOSTRAR productos con indicadores y calcular totales
                 foreach (ProductoVenta p in productos)
                 {
                     art++;
-                    Ticket1.AgregaArticulo(p.nombre, p.cantidad, p.precio_venta, p.cantidad * p.precio_venta);
+                    string nombreProducto = p.nombre;
+
+                    // AGREGAR INDICADORES de descuentos
+                    string indicadores = "";
+
+                    if (p.es_precio_especial)
+                    {
+                        indicadores += "*ESP";
+                    }
+
+                    // MOSTRAR INDICADOR DE CATEGORÍA SI LO TUVO ORIGINALMENTE
+                    if (p.tuvo_descuento_categoria_original)
+                    {
+                        if (indicadores.Length > 0) indicadores += " ";
+                        indicadores += $"*CAT{p.porcentaje_categoria_original:0}%";
+                    }
+
+                    nombreProducto += indicadores;
+
+                    // PRECIO ORIGINAL (sin descuentos) - P.UNIT
+                    double precioUnitarioOriginal;
+                    if (p.precio_original > 0)
+                    {
+                        precioUnitarioOriginal = p.precio_original;
+                    }
+                    else
+                    {
+                        // Obtener producto completo para precio menudeo
+                        Producto productoCompleto = GetProductByCode(p.codigo);
+                        precioUnitarioOriginal = productoCompleto?.menudeo ?? p.precio_venta;
+                    }
+
+                    // PRECIO FINAL CON DESCUENTOS - P.TOTAL
+                    double precioFinalConDescuentos = p.precio_venta * p.cantidad;
+
+                    // ACUMULAR para subtotal
+                    subtotalSinDescuentos += precioUnitarioOriginal * p.cantidad;
+
+                    // *** ACUMULAR DESCUENTOS USANDO VALORES ORIGINALES ***
+                    if (p.tuvo_descuento_categoria_original)
+                    {
+                        totalDescuentoCategoria += p.descuento_categoria_original * p.cantidad;
+                    }
+
+                    if (p.es_precio_especial)
+                    {
+                        totalDescuentoPrecioEspecial += p.descuento_unitario * p.cantidad;
+                    }
+
+                    Ticket1.AgregaArticulo(nombreProducto, p.cantidad, precioUnitarioOriginal, precioFinalConDescuentos);
                 }
+
                 Ticket1.LineasGuion();
-                Ticket1.AgregaTotales("Total", total);
+
+                // MOSTRAR SUBTOTAL
+                Ticket1.AgregaTotales("SUBTOTAL $", subtotalSinDescuentos);
+
+                // MOSTRAR DESCUENTOS POR SEPARADO (solo si existen)
+                if (totalDescuentoCategoria > 0)
+                {
+                    Ticket1.AgregaTotales("DESC. POR CATEGORIA", -totalDescuentoCategoria);
+                }
+
+                if (totalDescuentoPrecioEspecial > 0)
+                {
+                    Ticket1.AgregaTotales("DESC. PRECIO ESPECIAL", -totalDescuentoPrecioEspecial);
+                }
+
+                // TOTAL FINAL
+                Ticket1.AgregaTotales("TOTAL $", total);
+
+                // MÉTODOS DE PAGO
                 if (pagos.ContainsKey("debito"))
                 {
-                    Ticket1.AgregaTotales("PAGO T. DEBITO", double.Parse(pagos["debito"].ToString()));
+                    Ticket1.AgregaTotales("PAGO T. DEBITO", pagos["debito"]);
                 }
                 if (pagos.ContainsKey("credito"))
                 {
-                    Ticket1.AgregaTotales("PAGO T.CREDITO", double.Parse(pagos["credito"].ToString()));
+                    Ticket1.AgregaTotales("PAGO T.CREDITO", pagos["credito"]);
                 }
                 if (pagos.ContainsKey("cheque"))
                 {
-                    Ticket1.AgregaTotales("PAGO CHEQUES", double.Parse(pagos["cheque"].ToString()));
+                    Ticket1.AgregaTotales("PAGO CHEQUES", pagos["cheque"]);
                 }
                 if (pagos.ContainsKey("transferencia"))
                 {
-                    Ticket1.AgregaTotales("PAGO TRANSFERENCIA", double.Parse(pagos["transferencia"].ToString()));
+                    Ticket1.AgregaTotales("PAGO TRANSFERENCIA", pagos["transferencia"]);
                 }
                 if (pagos.ContainsKey("efectivo"))
                 {
-                    Ticket1.AgregaTotales("EFECTIVO ENTREGADO", double.Parse(pagos["efectivo"].ToString()));
+                    Ticket1.AgregaTotales("EFECTIVO ENTREGADO", pagos["efectivo"]);
                 }
+
                 Ticket1.LineasGuion();
                 Ticket1.AgregaTotales("POR PAGAR $", (apartado.total - apartado.total_pagado));
-
                 Ticket1.TextoCentro(" ");
                 Ticket1.TextoCentro("LE ATENDIO: " + cajero.ToUpper());
                 Ticket1.TextoCentro("NO DE ARTICULOS: " + art.ToString().PadLeft(5, '0'));
                 Ticket1.TextoCentro("FECHA DE VENCIMIENTO:");
                 Ticket1.TextoCentro(fechavencimiento);
-                Ticket1.CortaTicket(); // corta el ticket
+                Ticket1.TextoCentro("CLIENTE:");
+                Ticket1.TextoCentro(clienteNombre);
+                Ticket1.TextoCentro("NUMERO TELEFONICO:");
+                Ticket1.TextoCentro(clienteTelefono);
+                Ticket1.TextoCentro(" ");
 
+                // Agregar el texto adicional
+                Ticket1.TextoCentro("ANTONIO CEJA MARON");
+                Ticket1.TextoCentro("RFC: CEMA-721020-NM5");
+                Ticket1.TextoCentro(" ");
+
+                // Agregar el pie de ticket si está disponible
+                string piedeticket = Settings.Default["pieDeTicket"].ToString();
+                if (!string.IsNullOrEmpty(piedeticket))
+                {
+                    Ticket1.LineasGuion();
+                    Ticket1.TextoCentro(piedeticket);
+                    Ticket1.LineasGuion();
+                }
+
+                Ticket1.TextoCentro("SI DESEA FACTURAR ESTA COMPRA INGRESE A");
+                Ticket1.TextoCentro("https://cm-papeleria.com/public/facturacion");
+
+                Ticket1.CortaTicket(); // corta el ticket
             }
+
             return state;
         }
-        public bool imprimirCredito(Credito credito, List<ProductoVenta> productos, Dictionary<string, double> pagos, string cajero, string sucursalName, string sucursalDir, string fechavencimiento)
+
+        // Reemplazar completamente el método imprimirCredito en LocalDataManager
+        public bool imprimirCredito(Credito credito, List<ProductoVenta> productos, Dictionary<string, double> pagos,
+            string cajero, string sucursalName, string sucursalDir, string fechavencimiento, string clienteNombre, string clienteTelefono)
         {
             double total = (double)credito.total;
             bool state = false;
             int art = 0;
+
             if (!impresora.Equals(""))
             {
                 state = true;
                 CreaTicket Ticket1 = new CreaTicket();
                 Ticket1.impresora = impresora;
                 Ticket1.AbreCajon();
+
                 Ticket1.TextoCentro("CASA CEJA");
                 Ticket1.TextoCentro("Sucursal: " + sucursalName.ToUpper());
                 Ticket1.TextoCentro(sucursalDir.ToUpper());
@@ -4290,44 +4407,142 @@ FROM usuarios";
                 Ticket1.TextoCentro(" ");
                 Ticket1.TextoCentro("TICKET DE CREDITO");
                 Ticket1.EncabezadoVenta();
+
+                // CALCULAR SUBTOTAL SIN DESCUENTOS y DESCUENTOS TOTALES
+                double subtotalSinDescuentos = 0;
+                double totalDescuentoCategoria = 0;
+                double totalDescuentoPrecioEspecial = 0;
+
+                // MOSTRAR productos con indicadores y calcular totales
                 foreach (ProductoVenta p in productos)
                 {
                     art++;
-                    Ticket1.AgregaArticulo(p.nombre, p.cantidad, p.precio_venta, p.cantidad * p.precio_venta);
+                    string nombreProducto = p.nombre;
+
+                    // AGREGAR INDICADORES de descuentos
+                    string indicadores = "";
+
+                    if (p.es_precio_especial)
+                    {
+                        indicadores += "*ESP";
+                    }
+
+                    // MOSTRAR INDICADOR DE CATEGORÍA SI LO TUVO ORIGINALMENTE
+                    if (p.tuvo_descuento_categoria_original)
+                    {
+                        if (indicadores.Length > 0) indicadores += " ";
+                        indicadores += $"*CAT{p.porcentaje_categoria_original:0}%";
+                    }
+
+                    nombreProducto += indicadores;
+
+                    // PRECIO ORIGINAL (sin descuentos) - P.UNIT
+                    double precioUnitarioOriginal;
+                    if (p.precio_original > 0)
+                    {
+                        precioUnitarioOriginal = p.precio_original;
+                    }
+                    else
+                    {
+                        // Obtener producto completo para precio menudeo
+                        Producto productoCompleto = GetProductByCode(p.codigo);
+                        precioUnitarioOriginal = productoCompleto?.menudeo ?? p.precio_venta;
+                    }
+
+                    // PRECIO FINAL CON DESCUENTOS - P.TOTAL
+                    double precioFinalConDescuentos = p.precio_venta * p.cantidad;
+
+                    // ACUMULAR para subtotal
+                    subtotalSinDescuentos += precioUnitarioOriginal * p.cantidad;
+
+                    // *** ACUMULAR DESCUENTOS USANDO VALORES ORIGINALES ***
+                    if (p.tuvo_descuento_categoria_original)
+                    {
+                        totalDescuentoCategoria += p.descuento_categoria_original * p.cantidad;
+                    }
+
+                    if (p.es_precio_especial)
+                    {
+                        totalDescuentoPrecioEspecial += p.descuento_unitario * p.cantidad;
+                    }
+
+                    Ticket1.AgregaArticulo(nombreProducto, p.cantidad, precioUnitarioOriginal, precioFinalConDescuentos);
                 }
+
                 Ticket1.LineasGuion();
-                Ticket1.AgregaTotales("Total", total);
+
+                // MOSTRAR SUBTOTAL
+                Ticket1.AgregaTotales("SUBTOTAL $", subtotalSinDescuentos);
+
+                // MOSTRAR DESCUENTOS POR SEPARADO (solo si existen)
+                if (totalDescuentoCategoria > 0)
+                {
+                    Ticket1.AgregaTotales("DESC. POR CATEGORIA", -totalDescuentoCategoria);
+                }
+
+                if (totalDescuentoPrecioEspecial > 0)
+                {
+                    Ticket1.AgregaTotales("DESC. PRECIO ESPECIAL", -totalDescuentoPrecioEspecial);
+                }
+
+                // TOTAL FINAL
+                Ticket1.AgregaTotales("TOTAL $", total);
+
+                // MÉTODOS DE PAGO
                 if (pagos.ContainsKey("debito"))
                 {
-                    Ticket1.AgregaTotales("PAGO T. DEBITO", double.Parse(pagos["debito"].ToString()));
+                    Ticket1.AgregaTotales("PAGO T. DEBITO", pagos["debito"]);
                 }
                 if (pagos.ContainsKey("credito"))
                 {
-                    Ticket1.AgregaTotales("PAGO T.CREDITO", double.Parse(pagos["credito"].ToString()));
+                    Ticket1.AgregaTotales("PAGO T.CREDITO", pagos["credito"]);
                 }
                 if (pagos.ContainsKey("cheque"))
                 {
-                    Ticket1.AgregaTotales("PAGO CHEQUES", double.Parse(pagos["cheque"].ToString()));
+                    Ticket1.AgregaTotales("PAGO CHEQUES", pagos["cheque"]);
                 }
                 if (pagos.ContainsKey("transferencia"))
                 {
-                    Ticket1.AgregaTotales("PAGO TRANSFERENCIA", double.Parse(pagos["transferencia"].ToString()));
+                    Ticket1.AgregaTotales("PAGO TRANSFERENCIA", pagos["transferencia"]);
                 }
                 if (pagos.ContainsKey("efectivo"))
                 {
-                    Ticket1.AgregaTotales("EFECTIVO ENTREGADO", double.Parse(pagos["efectivo"].ToString()));
+                    Ticket1.AgregaTotales("EFECTIVO ENTREGADO", pagos["efectivo"]);
                 }
+
                 Ticket1.LineasGuion();
                 Ticket1.AgregaTotales("POR PAGAR $", (credito.total - credito.total_pagado));
-
                 Ticket1.TextoCentro(" ");
                 Ticket1.TextoCentro("LE ATENDIO: " + cajero.ToUpper());
                 Ticket1.TextoCentro("NO DE ARTICULOS: " + art.ToString().PadLeft(5, '0'));
                 Ticket1.TextoCentro("FECHA DE VENCIMIENTO:");
                 Ticket1.TextoCentro(fechavencimiento);
-                Ticket1.CortaTicket(); // corta el ticket
+                Ticket1.TextoCentro("CLIENTE:");
+                Ticket1.TextoCentro(clienteNombre);
+                Ticket1.TextoCentro("NUMERO TELEFONICO:");
+                Ticket1.TextoCentro(clienteTelefono);
+                Ticket1.TextoCentro(" ");
 
+                // Agregar el texto adicional
+                Ticket1.TextoCentro("ANTONIO CEJA MARON");
+                Ticket1.TextoCentro("RFC: CEMA-721020-NM5");
+                Ticket1.TextoCentro(" ");
+
+                // Agregar el pie de ticket si está disponible
+                string piedeticket = Settings.Default["pieDeTicket"].ToString();
+                if (!string.IsNullOrEmpty(piedeticket))
+                {
+                    Ticket1.LineasGuion();
+                    Ticket1.TextoCentro(piedeticket);
+                    Ticket1.LineasGuion();
+                }
+
+                Ticket1.TextoCentro("SI DESEA FACTURAR ESTA COMPRA INGRESE A");
+                Ticket1.TextoCentro("https://cm-papeleria.com/public/facturacion");
+
+                Ticket1.CortaTicket(); // corta el ticket
             }
+
             return state;
         }
         public bool imprimirAbono(int tipo, Dictionary<string, double> pagos, string cajero, string sucursalName, string sucursalDir, string fecha, double abonado, double porpagar, string folioAbono, string folioOperacion)

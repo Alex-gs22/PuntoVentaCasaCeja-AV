@@ -616,10 +616,7 @@ namespace PuntoVentaCasaCeja
 
                 if (tieneDescuento && porcentajeDescuento > 0)
                 {
-                    // CORRECCIÓN: Convertir decimal a double explícitamente
                     double porcentajeDescuentoDouble = (double)porcentajeDescuento;
-
-                    // Calcular descuento sobre el precio actual (puede ser menudeo, mayoreo o especial)
                     double precioBase = productoVenta.precio_venta;
                     double descuentoUnitario = precioBase * (porcentajeDescuentoDouble / 100.0);
                     double nuevoPrecio = precioBase - descuentoUnitario;
@@ -630,19 +627,21 @@ namespace PuntoVentaCasaCeja
                     productoVenta.descuento_categoria_unitario = Math.Round(descuentoUnitario, 2);
                     productoVenta.porcentaje_descuento_categoria = porcentajeDescuentoDouble;
 
+                    // *** GUARDAR ESTADO ORIGINAL ***
+                    productoVenta.tuvo_descuento_categoria_original = true;
+                    productoVenta.descuento_categoria_original = Math.Round(descuentoUnitario, 2);
+                    productoVenta.porcentaje_categoria_original = porcentajeDescuentoDouble;
+
                     // Actualizar total de descuentos de categoría
                     double descuentoTotal = descuentoUnitario * productoVenta.cantidad;
                     totalDescuentoCategoria += descuentoTotal;
 
-                    // DEBUG: Verificar que se esté sumando
-                    Console.WriteLine($"Aplicando descuento categoría: Producto: {productoVenta.nombre}");
-                    Console.WriteLine($"Descuento unitario: {descuentoUnitario}, Cantidad: {productoVenta.cantidad}");
-                    Console.WriteLine($"Total descuento producto: {descuentoTotal}");
-                    Console.WriteLine($"Total descuento categoría acumulado: {totalDescuentoCategoria}");
+                    Console.WriteLine($"*** CATEGORÍA APLICADA Y GUARDADA: {productoVenta.nombre}");
+                    Console.WriteLine($"  Original guardado: {productoVenta.descuento_categoria_original}");
 
                     // Actualizar tabla visual
-                    tabla[2, index].Value = productoVenta.precio_venta.ToString("0.00"); // Columna precio
-                    tabla[3, index].Value = (productoVenta.cantidad * productoVenta.precio_venta).ToString("0.00"); // Columna total
+                    tabla[2, index].Value = productoVenta.precio_venta.ToString("0.00");
+                    tabla[3, index].Value = (productoVenta.cantidad * productoVenta.precio_venta).ToString("0.00");
 
                     ActualizarColorProducto(index);
                     MessageBox.Show($"Descuento de categoría aplicado: {porcentajeDescuentoDouble}% - Descuento unitario: ${descuentoUnitario:0.00}");
@@ -654,7 +653,7 @@ namespace PuntoVentaCasaCeja
             }
         }
 
-    private void RecalcularDescuentoCategoria(int index, int cantidadAnterior, int cantidadNueva)
+        private void RecalcularDescuentoCategoria(int index, int cantidadAnterior, int cantidadNueva)
         {
             ProductoVenta productoVenta = carrito[index];
 
@@ -736,8 +735,17 @@ namespace PuntoVentaCasaCeja
         // ===========================================
         // MODIFICACIÓN: completarVenta - INCLUIR DESCUENTOS PRECIO ESPECIAL
         // ===========================================
+        // =====================================
+        // SOLUCIÓN SIMPLE: Solo mover resetVenta() al final
+        // MODIFICAR el método completarVenta() 
+        // =====================================
+
         private async void completarVenta()
         {
+            Console.WriteLine("=== INICIO completarVenta ===");
+            Console.WriteLine($"ANTES de crear venta - totalDescuentoCategoria: {totalDescuentoCategoria}");
+            Console.WriteLine($"ANTES de crear venta - totalDescuentoPrecioEspecial: {totalDescuentoPrecioEspecial}");
+
             sucursalName = localDM.getSucursalname(idsucursal);
             sucursalDir = localDM.getSucursalAddr(idsucursal);
             DateTime localDate = DateTime.Now;
@@ -760,8 +768,13 @@ namespace PuntoVentaCasaCeja
             venta["sucursal_id"] = idsucursal.ToString();
             venta["usuario_id"] = cajero.id.ToString();
 
+            Console.WriteLine($"ANTES de CrearVenta - totalDescuentoCategoria: {totalDescuentoCategoria}");
             int id = localDM.CrearVenta(venta, carrito);
+            Console.WriteLine($"DESPUÉS de CrearVenta - totalDescuentoCategoria: {totalDescuentoCategoria}");
+
+            Console.WriteLine($"ANTES de imprimirTicketCarta - totalDescuentoCategoria: {totalDescuentoCategoria}");
             imprimirTicketCarta(fechaVentaImpresion);
+            Console.WriteLine($"DESPUÉS de imprimirTicketCarta - totalDescuentoCategoria: {totalDescuentoCategoria}");
 
             if (localDM.impresora.Equals(""))
             {
@@ -780,15 +793,8 @@ namespace PuntoVentaCasaCeja
                         }
                     }
                     else
-                    {                      
+                    {
                         localDM.imprimirTicket(venta, carrito, pagos, cajero.nombre, sucursalName, sucursalDir, false, cambio, data.esDescuento, data.descuento);
-                        //localDM.imprimirTicket(venta, carrito, pagos, cajero.nombre, sucursalName, sucursalDir, false, cambio, data.esDescuento, data.descuento);
-                        /*
-                        if (reprint)
-                        {
-                            localDM.imprimirTicket(venta, carrito, pagos, cajero.nombre, sucursalName, sucursalDir, false, cambio, data.esDescuento, data.descuento);
-                        }
-                        */
                     }
                 }
                 catch (System.ComponentModel.Win32Exception)
@@ -798,6 +804,7 @@ namespace PuntoVentaCasaCeja
             }
             await send(venta, id);
             resetVenta();
+            Console.WriteLine("=== FIN completarVenta ===");
         }
 
         void resetVenta()
@@ -817,12 +824,12 @@ namespace PuntoVentaCasaCeja
             txttotal.Text = "Por pagar MXN: $" + totalcarrito.ToString("0.00");
             pagos.Clear();
 
-            // AGREGAR ESTAS LÍNEAS PARA RESETEAR DESCUENTOS
+            // RESETEAR TODAS LAS VARIABLES DE DESCUENTO
             totalDescuentoPrecioEspecial = 0;
             totalDescuentoCategoria = 0;
-
-            // RESETEAR el flag del mensaje de mayoreo
             mensajeMayoreoMostrado = false;
+
+            Console.WriteLine("*** Reset completado");
         }
 
         public async Task send(Dictionary<string, string> venta, int id)
@@ -1415,6 +1422,12 @@ namespace PuntoVentaCasaCeja
             Vercatalogo vercatalogo = new Vercatalogo(webDM);
             vercatalogo.ShowDialog();
         }
+
+        // =====================================
+        // CORRECCIÓN: Evitar doble descuento en el cálculo del total
+        // MODIFICAR SOLO la parte del cálculo en imprimirTicketCarta()
+        // =====================================
+
         private void imprimirTicketCarta(string fecha)
         {
             string piedeticket = Settings.Default["pieDeTicket"].ToString();
@@ -1429,10 +1442,10 @@ namespace PuntoVentaCasaCeja
                 "FOLIO: " + folio + "\n\n" +
                  "DESCRIPCION\tCANT\tP. UNIT\tP. TOTAL\n";
 
-            // RECALCULAR descuentos por si no están actualizados
+            // CALCULAR descuentos para el ticket
             double subtotalSinDescuentos = 0;
-            double descuentoCategoriaRecalculado = 0;
-            double descuentoPrecioEspecialRecalculado = 0;
+            double descuentoCategoriaTicket = 0;
+            double descuentoPrecioEspecialTicket = 0;
 
             foreach (ProductoVenta p in carrito)
             {
@@ -1446,7 +1459,7 @@ namespace PuntoVentaCasaCeja
                     n = p.nombre;
                 }
 
-                // AGREGAR INDICADORES de descuentos al nombre
+                // AGREGAR INDICADORES basándose en el estado original
                 string indicadores = "";
 
                 if (p.es_precio_especial)
@@ -1454,78 +1467,60 @@ namespace PuntoVentaCasaCeja
                     indicadores += "*ESP";
                 }
 
-                if (p.es_descuento_categoria)
+                // MOSTRAR INDICADOR DE CATEGORÍA SI LO TUVO ORIGINALMENTE
+                if (p.tuvo_descuento_categoria_original)
                 {
                     if (indicadores.Length > 0) indicadores += " ";
-                    indicadores += $"*CAT{p.porcentaje_descuento_categoria:0}%";
+                    indicadores += $"*CAT{p.porcentaje_categoria_original:0}%";
                 }
 
-                // PRECIO ORIGINAL (sin ningún descuento) - P. UNIT
-                double precioUnitarioOriginal;
+                // PRECIO ORIGINAL (siempre menudeo)
+                Producto productoCompleto = localDM.GetProductByCode(p.codigo);
+                double precioUnitarioOriginal = productoCompleto?.menudeo ?? p.precio_venta;
 
-                if (p.precio_original > 0)
-                {
-                    precioUnitarioOriginal = p.precio_original;
-                }
-                else
-                {
-                    // Calcular precio original basado en el precio actual + todos los descuentos
-                    precioUnitarioOriginal = p.precio_venta;
-
-                    if (p.es_descuento_categoria)
-                    {
-                        precioUnitarioOriginal += p.descuento_categoria_unitario;
-                    }
-
-                    if (p.es_precio_especial)
-                    {
-                        precioUnitarioOriginal += p.descuento_unitario;
-                    }
-                }
-
-                // PRECIO FINAL CON DESCUENTOS - P. TOTAL (precio actual * cantidad)
+                // PRECIO FINAL 
                 double precioFinalConDescuentos = p.precio_venta * p.cantidad;
 
-                // SUBTOTAL SIN DESCUENTOS (para el cálculo del subtotal)
-                double totalSinDescuentos = precioUnitarioOriginal * p.cantidad;
-                subtotalSinDescuentos += totalSinDescuentos;
+                // SUBTOTAL SIN DESCUENTOS
+                subtotalSinDescuentos += precioUnitarioOriginal * p.cantidad;
 
-                // RECALCULAR descuentos para asegurar que estén correctos
-                if (p.es_descuento_categoria)
+                // *** ACUMULAR DESCUENTOS CORRECTAMENTE ***
+                if (p.tuvo_descuento_categoria_original)
                 {
-                    descuentoCategoriaRecalculado += p.descuento_categoria_unitario * p.cantidad;
-                    Console.WriteLine($"Producto: {p.nombre}, Desc Cat Unitario: {p.descuento_categoria_unitario}, Cantidad: {p.cantidad}, Total: {p.descuento_categoria_unitario * p.cantidad}");
+                    descuentoCategoriaTicket += p.descuento_categoria_original * p.cantidad;
+                    Console.WriteLine($"*** TICKET: {p.nombre} - Categoria original: {p.descuento_categoria_original * p.cantidad}");
                 }
 
                 if (p.es_precio_especial)
                 {
-                    descuentoPrecioEspecialRecalculado += p.descuento_unitario * p.cantidad;
+                    descuentoPrecioEspecialTicket += p.descuento_unitario * p.cantidad;
                 }
 
-                // MOSTRAR: Nombre con indicadores, cantidad, precio original, precio final con descuentos
                 ticket += n + indicadores + "\t" + p.cantidad + "\t" + precioUnitarioOriginal.ToString("0.00") + "\t" + precioFinalConDescuentos.ToString("0.00") + "\n";
             }
 
-            // DEBUG: Mostrar valores calculados
-            Console.WriteLine($"Descuento Categoría Recalculado: {descuentoCategoriaRecalculado}");
-            Console.WriteLine($"Descuento Precio Especial Recalculado: {descuentoPrecioEspecialRecalculado}");
+            Console.WriteLine($"*** TICKET TOTALES:");
+            Console.WriteLine($"  Subtotal sin descuentos: {subtotalSinDescuentos}");
+            Console.WriteLine($"  Descuento Categoría: {descuentoCategoriaTicket}");
+            Console.WriteLine($"  Descuento Precio Especial: {descuentoPrecioEspecialTicket}");
+            Console.WriteLine($"  Descuento de Venta: {data.descuento}");
 
             if (!fontName.Equals("Consolas"))
                 ticket += "--------------------";
             ticket += "--------------------------------------------------------------\n";
 
-            // MOSTRAR SUBTOTAL SIN DESCUENTOS
+            // MOSTRAR SUBTOTAL
             ticket += "SUBTOTAL $\t------>\t\t" + subtotalSinDescuentos.ToString("0.00") + "\n";
 
-            // USAR LOS DESCUENTOS RECALCULADOS PARA MOSTRAR
-            if (descuentoCategoriaRecalculado > 0)
+            // MOSTRAR DESCUENTOS USANDO VALORES ORIGINALES
+            if (descuentoCategoriaTicket > 0)
             {
-                ticket += "DESC. POR CATEGORIA\t------>\t-" + descuentoCategoriaRecalculado.ToString("0.00") + "\n";
+                ticket += "DESC. POR CATEGORIA\t------>\t-" + descuentoCategoriaTicket.ToString("0.00") + "\n";
             }
 
-            if (descuentoPrecioEspecialRecalculado > 0)
+            if (descuentoPrecioEspecialTicket > 0)
             {
-                ticket += "DESC. PRECIO ESPECIAL\t------>\t-" + descuentoPrecioEspecialRecalculado.ToString("0.00") + "\n";
+                ticket += "DESC. PRECIO ESPECIAL\t------>\t-" + descuentoPrecioEspecialTicket.ToString("0.00") + "\n";
             }
 
             if (data.esDescuento)
@@ -1533,15 +1528,22 @@ namespace PuntoVentaCasaCeja
                 ticket += "DESCUENTO DE VENTA\t------>\t-" + data.descuento.ToString("0.00") + "\n";
             }
 
-            // CALCULAR Y MOSTRAR TOTAL FINAL CORRECTO
-            double totalFinalConTodosLosDescuentos = subtotalSinDescuentos - descuentoCategoriaRecalculado - descuentoPrecioEspecialRecalculado - data.descuento;
-            ticket += "TOTAL A PAGAR $\t------>\t\t" + totalFinalConTodosLosDescuentos.ToString("0.00") + "\n";
+            // *** CORRECCIÓN: CALCULAR TOTAL USANDO EL TOTAL ACTUAL DEL CARRITO ***
+            // El totalcarrito YA tiene todos los descuentos aplicados correctamente
+            double totalFinalCorrecto = totalcarrito - data.descuento;
+
+            Console.WriteLine($"*** CÁLCULO TOTAL:");
+            Console.WriteLine($"  totalcarrito (con descuentos ya aplicados): {totalcarrito}");
+            Console.WriteLine($"  data.descuento: {data.descuento}");
+            Console.WriteLine($"  Total final correcto: {totalFinalCorrecto}");
+
+            ticket += "TOTAL A PAGAR $\t------>\t\t" + totalFinalCorrecto.ToString("0.00") + "\n";
 
             if (!fontName.Equals("Consolas"))
                 ticket += "--------------------";
             ticket += "--------------------------------------------------------------\n";
 
-            // Resto del código de métodos de pago igual...
+            // Métodos de pago (igual que antes)...
             if (pagos.ContainsKey("debito"))
             {
                 ticket += "PAGO T. DEBITO\t------>\t\t" + pagos["debito"].ToString("0.00") + "\n";
@@ -1590,7 +1592,6 @@ namespace PuntoVentaCasaCeja
 
             createdoc();
         }
-
 
         private void createdoc()
         {
@@ -2088,15 +2089,21 @@ namespace PuntoVentaCasaCeja
                 double descuentoTotal = productoVenta.descuento_categoria_unitario * productoVenta.cantidad;
                 totalDescuentoCategoria -= descuentoTotal;
 
-                // Restaurar precio sin descuento de categoría (volver al precio original)
+                // Restaurar precio sin descuento de categoría
                 productoVenta.precio_venta += productoVenta.descuento_categoria_unitario;
 
-                // Resetear campos de descuento de categoría
+                // Resetear campos ACTUALES
                 productoVenta.es_descuento_categoria = false;
                 productoVenta.descuento_categoria_unitario = 0;
                 productoVenta.porcentaje_descuento_categoria = 0;
 
-                Console.WriteLine($"Descuento de categoría removido. Descuento total reducido en: ${descuentoTotal:0.00}");
+                // *** NO TOCAR LOS CAMPOS ORIGINALES ***
+                // productoVenta.tuvo_descuento_categoria_original = MANTENER
+                // productoVenta.descuento_categoria_original = MANTENER
+                // productoVenta.porcentaje_categoria_original = MANTENER
+
+                Console.WriteLine($"Descuento de categoría removido de {productoVenta.nombre}");
+                Console.WriteLine($"PERO se mantiene el original guardado: {productoVenta.descuento_categoria_original}");
             }
         }
 

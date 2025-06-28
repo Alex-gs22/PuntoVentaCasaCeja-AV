@@ -23,5 +23,8 @@ namespace PuntoVentaCasaCeja
         public bool es_descuento_categoria { get; set; }
         public double descuento_categoria_unitario { get; set; }
         public double porcentaje_descuento_categoria { get; set; } // Para mostrar en tickets
+        public bool tuvo_descuento_categoria_original { get; set; } = false;
+        public double descuento_categoria_original { get; set; } = 0;
+        public double porcentaje_categoria_original { get; set; } = 0;
     }
 }
