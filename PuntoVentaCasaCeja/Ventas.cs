@@ -2226,8 +2226,36 @@ namespace PuntoVentaCasaCeja
 
             txttotal.Text = textoTotal;
             ActualizarCurrentData();
+            VerificarYResetearSiCarritoVacio();
         }
 
+        private void VerificarYResetearSiCarritoVacio()
+        {
+            if (carrito.Count == 0)
+            {
+                Console.WriteLine("*** CARRITO VACÍO DETECTADO - Reseteando variables ***");
+
+                // Resetear solo las variables de descuentos y totales
+                totalDescuentoPrecioEspecial = 0;
+                totalDescuentoCategoria = 0;
+                totalcarrito = 0;
+                totalpagado = 0;
+                mensajeMayoreoMostrado = false;
+                pagos.Clear();
+
+                // Resetear campos de data
+                data.esDescuento = false;
+                data.descuento = 0;
+                data.totalabonado = 0;
+                data.isventa = false;
+
+                // Actualizar UI
+                txttotal.Text = "Por pagar MXN: $0.00";
+                Bdescuento.Enabled = true;
+
+                Console.WriteLine("*** Variables reseteadas correctamente ***");
+            }
+        }
 
     }
 }
