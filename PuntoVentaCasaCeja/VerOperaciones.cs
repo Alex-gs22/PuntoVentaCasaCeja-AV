@@ -184,32 +184,127 @@ namespace PuntoVentaCasaCeja
         }
         private void loadTicket()
         {
-            obtenerDescuento();
             string piedeticket = Settings.Default["pieDeTicket"].ToString();
             ticket = "";
             isValidTicket = false;
+
             if (tabla.SelectedRows.Count > 0)
             {
                 isValidTicket = true;
                 cajero = tabla.SelectedRows[0].Cells[5].Value.ToString();
-                fecha = tabla.SelectedRows[0].Cells[4].Value.ToString();
+
+                DateTime fechaOriginal = DateTime.Parse(tabla.SelectedRows[0].Cells[4].Value.ToString());
+                fecha = fechaOriginal.ToString("dd/MM/yyyy hh:mm tt");
+
                 folio = tabla.SelectedRows[0].Cells[3].Value.ToString();
                 total = tabla.SelectedRows[0].Cells[1].Value.ToString();
-
-                cambio = double.Parse(total);
-                cambio -= descuento;
                 totalformat = double.Parse(total);
+
+                double descuentoTotalBD = double.Parse(tabla.SelectedRows[0].Cells[2].Value.ToString());
+
                 pagos = JsonConvert.DeserializeObject<Dictionary<string, double>>(tabla.SelectedRows[0].Cells[6].Value.ToString());
+
                 ticket += "CASA CEJA\n" +
                     "SUCURSAL: " + sucursalName.ToUpper() + "\n" +
                     "" + sucursalDir.ToUpper() + "\n" +
-                    "" + fecha + "\n" + 
+                    "" + fecha + "\n" +
                     "FOLIO: " + folio + "\n\n" +
                     "DESCRIPCION\tCANT\tP. UNIT\tP. TOTAL\n";
-                    
+
                 string id = tabla.SelectedRows[0].Cells[0].Value.ToString();
                 productos = localDM.getProductosVenta(id);
-                foreach(ProductoVenta p in productos)
+
+                double subtotalSinDescuentos = 0;
+                double totalDescuentoCategoria = 0;
+                double totalDescuentoPrecioEspecial = 0;
+
+                foreach (ProductoVenta p in productos)
+                {
+                    Producto productoCompleto = localDM.GetProductByCode(p.codigo);
+                    if (productoCompleto != null)
+                    {
+                        p.precio_original = productoCompleto.menudeo;
+
+                        // INICIALIZAR campos
+                        p.es_descuento_categoria = false;
+                        p.es_precio_especial = false;
+                        p.descuento_categoria_unitario = 0;
+                        p.descuento_unitario = 0;
+                        p.porcentaje_descuento_categoria = 0;
+
+                        Console.WriteLine($"\n=== ANALIZANDO: {p.nombre} ===");
+                        Console.WriteLine($"Precio BD: {p.precio_venta}");
+                        Console.WriteLine($"Menudeo: {productoCompleto.menudeo}");
+                        Console.WriteLine($"Especial: {productoCompleto.especial}");
+
+                        // VERIFICAR PRECIO ESPECIAL PRIMERO (tiene prioridad)
+                        if (productoCompleto.especial > 0 && Math.Abs(p.precio_venta - productoCompleto.especial) < 0.01)
+                        {
+                            // *** ES PRECIO ESPECIAL ***
+                            p.es_precio_especial = true;
+                            p.descuento_unitario = productoCompleto.menudeo - productoCompleto.especial;
+
+                            Console.WriteLine($"✅ PRECIO ESPECIAL: {p.descuento_unitario}");
+                        }
+                        else
+                        {
+                            // VERIFICAR DESCUENTO DE CATEGORÍA
+                            var (tieneDescuentoCategoria, porcentajeCategoria) = localDM.GetDescuentoCategoria(productoCompleto.categoria_id);
+
+                            if (tieneDescuentoCategoria && porcentajeCategoria > 0)
+                            {
+                                double precioConCategoria = productoCompleto.menudeo * (1 - (double)porcentajeCategoria / 100.0);
+                                Console.WriteLine($"Precio con categoría: {precioConCategoria}");
+
+                                if (Math.Abs(p.precio_venta - precioConCategoria) < 0.01)
+                                {
+                                    // *** ES DESCUENTO DE CATEGORÍA ***
+                                    p.es_descuento_categoria = true;
+                                    p.porcentaje_descuento_categoria = (double)porcentajeCategoria;
+                                    p.descuento_categoria_unitario = productoCompleto.menudeo - p.precio_venta;
+
+                                    Console.WriteLine($"✅ DESCUENTO DE CATEGORÍA: {p.descuento_categoria_unitario}");
+                                }
+                                else
+                                {
+                                    Console.WriteLine($"❌ NO COINCIDE CON NINGÚN PATRÓN");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine($"✅ SIN DESCUENTOS");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        p.precio_original = p.precio_venta;
+                        Console.WriteLine($"❌ PRODUCTO NO ENCONTRADO EN BD");
+                    }
+
+                    // ACUMULAR totales
+                    subtotalSinDescuentos += p.precio_original * p.cantidad;
+
+                    if (p.es_descuento_categoria)
+                    {
+                        totalDescuentoCategoria += p.descuento_categoria_unitario * p.cantidad;
+                        Console.WriteLine($"Acumulando desc categoría: +{p.descuento_categoria_unitario * p.cantidad} = {totalDescuentoCategoria}");
+                    }
+
+                    if (p.es_precio_especial)
+                    {
+                        totalDescuentoPrecioEspecial += p.descuento_unitario * p.cantidad;
+                        Console.WriteLine($"Acumulando desc especial: +{p.descuento_unitario * p.cantidad} = {totalDescuentoPrecioEspecial}");
+                    }
+                }
+
+                Console.WriteLine($"\n=== TOTALES FINALES ===");
+                Console.WriteLine($"Subtotal sin descuentos: {subtotalSinDescuentos}");
+                Console.WriteLine($"Total Descuento Categoría: {totalDescuentoCategoria}");
+                Console.WriteLine($"Total Descuento Precio Especial: {totalDescuentoPrecioEspecial}");
+
+                // MOSTRAR productos en el ticket
+                foreach (ProductoVenta p in productos)
                 {
                     string n;
                     if (p.nombre.Length > 19)
@@ -218,21 +313,62 @@ namespace PuntoVentaCasaCeja
                     }
                     else
                     {
-                        n=p.nombre;
+                        n = p.nombre;
                     }
-                    ticket +=  n + "\t" + p.cantidad + "\t" + p.precio_venta.ToString("0.00")+ "\t" + (p.cantidad*p.precio_venta).ToString("0.00")+"\n";
+
+                    // AGREGAR INDICADORES (solo uno, nunca ambos)
+                    string indicadores = "";
+                    if (p.es_precio_especial)
+                    {
+                        indicadores += "*ESP";
+                    }
+                    else if (p.es_descuento_categoria)
+                    {
+                        indicadores += $"*CAT{p.porcentaje_descuento_categoria:0}%";
+                    }
+
+                    double precioUnitarioOriginal = p.precio_original;
+                    double precioFinalConDescuentos = p.precio_venta * p.cantidad;
+
+                    ticket += n + indicadores + "\t" + p.cantidad + "\t" + precioUnitarioOriginal.ToString("0.00") + "\t" + precioFinalConDescuentos.ToString("0.00") + "\n";
                 }
+
                 if (!fontName.Equals("Consolas"))
                     ticket += "--------------------";
-                ticket += "--------------------------------------------------------------\n" +
-                     "TOTAL $\t------>\t\t" + totalformat.ToString("0.00") + "\n";
-                if (descuento>0)                
+                ticket += "--------------------------------------------------------------\n";
+
+                ticket += "SUBTOTAL $\t------>\t\t" + subtotalSinDescuentos.ToString("0.00") + "\n";
+
+                if (totalDescuentoCategoria > 0)
                 {
-                    ticket += "SE APLICO DESCUENTO DE $\t------>\t\t" + descuento.ToString("0.00") + "\n";
+                    ticket += "DESC. POR CATEGORIA\t------>\t-" + totalDescuentoCategoria.ToString("0.00") + "\n";
                 }
+
+                if (totalDescuentoPrecioEspecial > 0)
+                {
+                    ticket += "DESC. PRECIO ESPECIAL\t------>\t-" + totalDescuentoPrecioEspecial.ToString("0.00") + "\n";
+                }
+
+                double descuentoTotalCalculado = totalDescuentoCategoria + totalDescuentoPrecioEspecial;
+                double descuentoVenta = Math.Max(0, descuentoTotalBD - descuentoTotalCalculado);
+
+                if (descuentoVenta > 0)
+                {
+                    ticket += "DESCUENTO DE VENTA\t------>\t-" + descuentoVenta.ToString("0.00") + "\n";
+                }
+
+                double totalFinalConTodosLosDescuentos = subtotalSinDescuentos - totalDescuentoCategoria - totalDescuentoPrecioEspecial - descuentoVenta;
+                ticket += "TOTAL A PAGAR $\t------>\t\t" + totalFinalConTodosLosDescuentos.ToString("0.00") + "\n";
+
+                if (!fontName.Equals("Consolas"))
+                    ticket += "--------------------";
+                ticket += "--------------------------------------------------------------\n";
+
+                cambio = totalFinalConTodosLosDescuentos;
+
                 if (pagos.ContainsKey("debito"))
                 {
-                    ticket += "PAGO T. DEBITO\t------>\t\t" + pagos["debito"].ToString("0.00")+"\n";
+                    ticket += "PAGO T. DEBITO\t------>\t\t" + pagos["debito"].ToString("0.00") + "\n";
                     cambio -= pagos["debito"];
                 }
                 if (pagos.ContainsKey("credito"))
@@ -255,12 +391,14 @@ namespace PuntoVentaCasaCeja
                     ticket += "EFECTIVO ENTREGADO\t------>\t\t" + pagos["efectivo"].ToString("0.00") + "\n";
                     cambio -= pagos["efectivo"];
                 }
-                ticket += "SU CAMBIO $\t------>\t\t" + (cambio * -1).ToString("0.00") + "\n";
+
+                ticket += "SU CAMBIO $\t------>\t\t" + Math.Abs(cambio).ToString("0.00") + "\n";
+
                 if (!fontName.Equals("Consolas"))
                     ticket += "--------------------";
                 ticket += "--------------------------------------------------------------\n\n" +
                      "LE ATENDIO: " + cajero.ToUpper() + "\n" +
-                     "NO DE ARTICULOS: "+productos.Count.ToString().PadLeft(5, '0')+"\n" +
+                     "NO DE ARTICULOS: " + productos.Count.ToString().PadLeft(5, '0') + "\n" +
                      "GRACIAS POR SU COMPRA\n\n" +
                      "ANTONIO CEJA MARON\n" +
                      "RFC: CEMA-721020-NM5\n\n";
@@ -274,9 +412,10 @@ namespace PuntoVentaCasaCeja
 
                 ticket += "SI DESEA FACTURAR ESTA COMPRA INGRESE A :\n" +
                      "https://cm-papeleria.com/public/facturacion";
-            }            
+            }
             createdoc();
         }
+
         private void createdoc()
         {
             // Configura el tamaño de papel según el tipo de impresora
@@ -284,7 +423,7 @@ namespace PuntoVentaCasaCeja
             {
                 // 78 mm ≈ 3.07 pulgadas; en PaperSize se usa hundredths of an inch, entonces 3.07*100 ≈ 307.
                 // La altura se define de forma arbitraria, ajústala según la longitud de tu ticket.
-                PaperSize ticketSize = new PaperSize("Ticket", 465, 1169);
+                PaperSize ticketSize = new PaperSize("Ticket", 500, 1169);
                 docToPrint.DefaultPageSettings.PaperSize = ticketSize;
                 // Establecemos márgenes en 0 para aprovechar todo el ancho.
                 docToPrint.DefaultPageSettings.Margins = new Margins(10, 10, 10, 10);
@@ -470,15 +609,111 @@ namespace PuntoVentaCasaCeja
                         printPreviewControl1.Document.Print();
                     else
                     {
-                        double descuento = double.Parse(tabla.SelectedRows[0].Cells[2].Value.ToString());
-                        bool esDescuento = descuento > 0;
+                        // ENRIQUECER los productos con información completa de descuentos (IGUAL QUE EN loadTicket)
+                        double subtotalSinDescuentos = 0;
+                        double totalDescuentoCategoria = 0;
+                        double totalDescuentoPrecioEspecial = 0;
+
+                        foreach (ProductoVenta p in productos)
+                        {
+                            Producto productoCompleto = localDM.GetProductByCode(p.codigo);
+                            if (productoCompleto != null)
+                            {
+                                // ESTABLECER precio original
+                                p.precio_original = productoCompleto.menudeo;
+
+                                // VERIFICAR si tiene descuento de categoría
+                                var (tieneDescuentoCategoria, porcentajeCategoria) = localDM.GetDescuentoCategoria(productoCompleto.categoria_id);
+
+                                if (tieneDescuentoCategoria && porcentajeCategoria > 0)
+                                {
+                                    p.es_descuento_categoria = true;
+                                    p.porcentaje_descuento_categoria = (double)porcentajeCategoria;
+
+                                    // Calcular precio sin descuento de categoría
+                                    double precioSinDescuentoCategoria = p.precio_venta / (1 - (double)porcentajeCategoria / 100.0);
+                                    p.descuento_categoria_unitario = precioSinDescuentoCategoria - p.precio_venta;
+
+                                    // VERIFICAR precio especial sobre el precio sin descuento de categoría
+                                    if (precioSinDescuentoCategoria > productoCompleto.menudeo && productoCompleto.especial > 0 &&
+                                        Math.Abs(precioSinDescuentoCategoria - productoCompleto.especial) < 0.01)
+                                    {
+                                        // Tiene precio especial Y descuento de categoría
+                                        p.es_precio_especial = true;
+                                        p.descuento_unitario = productoCompleto.menudeo - productoCompleto.especial;
+                                        p.precio_original = productoCompleto.menudeo;
+                                    }
+                                    else
+                                    {
+                                        // Solo descuento de categoría
+                                        p.es_precio_especial = false;
+                                        p.descuento_unitario = 0;
+                                        p.precio_original = precioSinDescuentoCategoria;
+                                    }
+                                }
+                                else
+                                {
+                                    // NO tiene descuento de categoría, verificar solo precio especial
+                                    p.es_descuento_categoria = false;
+                                    p.descuento_categoria_unitario = 0;
+                                    p.porcentaje_descuento_categoria = 0;
+
+                                    if (p.precio_venta < productoCompleto.menudeo)
+                                    {
+                                        p.es_precio_especial = true;
+                                        p.descuento_unitario = productoCompleto.menudeo - p.precio_venta;
+                                    }
+                                    else
+                                    {
+                                        p.es_precio_especial = false;
+                                        p.descuento_unitario = 0;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                // Producto no encontrado, usar valores por defecto
+                                p.precio_original = p.precio_venta;
+                                p.es_precio_especial = false;
+                                p.descuento_unitario = 0;
+                                p.es_descuento_categoria = false;
+                                p.descuento_categoria_unitario = 0;
+                                p.porcentaje_descuento_categoria = 0;
+                            }
+
+                            // ACUMULAR totales
+                            subtotalSinDescuentos += p.precio_original * p.cantidad;
+
+                            if (p.es_descuento_categoria)
+                            {
+                                totalDescuentoCategoria += p.descuento_categoria_unitario * p.cantidad;
+                            }
+
+                            if (p.es_precio_especial)
+                            {
+                                totalDescuentoPrecioEspecial += p.descuento_unitario * p.cantidad;
+                            }
+                        }
+
+                        // CALCULAR DESCUENTO DE VENTA
+                        double descuentoTotalBD = double.Parse(tabla.SelectedRows[0].Cells[2].Value.ToString());
+                        double descuentoTotalCalculado = totalDescuentoCategoria + totalDescuentoPrecioEspecial;
+                        double descuentoVenta = Math.Max(0, descuentoTotalBD - descuentoTotalCalculado);
+
+                        bool esDescuento = descuentoVenta > 0;
+
                         Dictionary<string, string> venta = new Dictionary<string, string>();
                         venta["fecha_venta"] = fecha;
                         venta["folio"] = folio;
                         venta["total"] = total;
-                        cambio = double.Parse(total) - descuento;
+
+                        // CALCULAR cambio correcto
+                        double totalFinalConTodosLosDescuentos = subtotalSinDescuentos - totalDescuentoCategoria - totalDescuentoPrecioEspecial - descuentoVenta;
+                        cambio = totalFinalConTodosLosDescuentos;
+
+                        // LLAMAR al método de impresión con toda la información
                         localDM.imprimirTicket(venta, productos, pagos, cajero, sucursalName, sucursalDir,
-                            true, cambio, esDescuento, descuento);
+                            true, cambio, esDescuento, descuentoVenta);
                     }
                 }
                 catch (System.ComponentModel.Win32Exception)
@@ -487,6 +722,5 @@ namespace PuntoVentaCasaCeja
                 }
             }
         }
-      
-    }
+        }
 }

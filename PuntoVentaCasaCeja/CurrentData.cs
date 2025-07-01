@@ -29,5 +29,7 @@ namespace PuntoVentaCasaCeja
         public bool desbloqDesc { get; set; }
         public double porcentajeDesc { get; set; }
         public bool isventa { get; set; }
+        public double totalDescuentoCategoria { get; set; }
+        public double totalDescuentoPrecioEspecial { get; set; }
     }
 }

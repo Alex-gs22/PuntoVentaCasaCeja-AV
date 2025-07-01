@@ -77,102 +77,7 @@ namespace PuntoVentaCasaCeja
             };
         }
 
-        private void aceptar_Click(object sender, EventArgs e)
-        {
-            //bool isOnlyEfective = false;
-            if (txtnombre.Text.Equals("") || txtcorreo.Text.Equals("") || txttel.Text.Equals("") || txtdias.Text.Equals(""))
-            {
-                MessageBox.Show("Favor de completar los campos requeridos", "Advertencia");
-            }
-            else
-            {
-                // Verificar si el apartado ya existe antes de intentar guardarlo
-                if (!localDM.ApartadoExiste(folio))
-                {
-                    Apartado na = new Apartado()
-                    {
-                        productos = JsonConvert.SerializeObject(carrito),
-                        total = data.totalcarrito,
-                        total_pagado = totalpagado,
-                        folio_corte = data.folioCorte,
-                        fecha_de_apartado = localDate.ToString("yyyy-MM-dd HH:mm:ss"),
-                        estado = 0,
-                        cliente_creditos_id = cliente.id,
-                        temporal = cliente.activo == -1 ? 1 : 0,
-                        id_cajero_registro = webDM.activeUser.id,
-                        fecha_entrega = null,
-                        id_cajero_entrega = null,
-                        sucursal_id = idsucursal,
-                        observaciones = txtobservaciones.Text,
-                    };
-                    na.abonos = new List<AbonoApartado>();
-
-                    if (pagos.Count > 0)
-                    {
-                        Console.WriteLine("RegistarApartado: " + data.folioCorte);
-                        Console.Write(data.totalcarrito);
-                        AbonoApartado abono = new AbonoApartado
-                        {
-                            fecha = localDate.ToString("yyyy-MM-dd HH:mm:ss"),
-                            folio = idsucursal.ToString().PadLeft(2, '0') + idcaja.ToString().PadLeft(2, '0') + localDate.Second.ToString().PadLeft(2, '0') + localDate.Day.ToString().PadLeft(2, '0') + localDate.Month.ToString().PadLeft(2, '0') + localDate.Year + "A",
-                            folio_corte = data.folioCorte,
-                            apartado_id = 0,
-                            usuario_id = webDM.activeUser.id,
-                            folio_apartado = folio,
-                            metodo_pago = JsonConvert.SerializeObject(pagos),
-                            total_abonado = totalpagado,
-                        };
-
-                        int ida = localDM.abonoApartadoTemporal(abono);
-                        na.abonos.Add(abono);
-
-                        localDM.acumularPagos(pagos, idcorte, 0);
-                        if (pagos.ContainsKey("efectivo"))
-                        {
-                            localDM.acumularEfectivoApartado(pagos["efectivo"], idcorte);
-                        }
-                    }
-
-                    // ************************************************************************
-                    // Aquí insertamos la llamada a actualizarTotalesCorte
-                    decimal totalCarritoDecimal;
-                    if (decimal.TryParse(data.totalcarrito.ToString(), out totalCarritoDecimal)) // Intenta convertir a decimal
-                    {
-                        bool actualizado = localDM.actualizarTotalesCorte(idcorte, totalCarritoDecimal, true); // true porque es un apartado
-
-                        if (actualizado)
-                        {
-                            Console.WriteLine($"Total de apartados del corte {idcorte} actualizado correctamente.");
-                        }
-                        else
-                        {
-                            Console.WriteLine($"Error al actualizar el total de apartados del corte {idcorte}. Revisar logs.");
-                            // Considera agregar un MessageBox.Show para alertar al usuario de que no se actualizó el corte (opcional)
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Error al convertir data.totalcarrito a decimal. Valor: {data.totalcarrito}");
-                        // Manejar el error de conversión a decimal, quizás mostrar un mensaje al usuario o registrar el error.
-                        MessageBox.Show("Error interno: No se pudo procesar el total del carrito. Contacte a soporte técnico.", "Error");
-                        return; // Salir del método para evitar inconsistencias si no se puede procesar el total.
-                    }
-                    // ************************************************************************
-
-
-                    imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
-                    imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
-
-                    send(na);
-                    this.DialogResult = DialogResult.Yes;
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("El apartado ya existe en la base de datos.", "Advertencia");
-                }
-            }
-        }
+        
         async void send(Apartado apartado) //se hizo para probar una excepcion, si jala dejarlo, sino regresar al comentado
         {
             Dictionary<string, string> result = await webDM.SendapartadoAsync(apartado);
@@ -392,11 +297,18 @@ namespace PuntoVentaCasaCeja
             }
             return base.ProcessDialogKey(keyData);
         }
-       
+
+        // =====================================
+        // TICKET DE APARTADO CON LÓGICA DE DESCUENTOS
+        // Aplicar la misma lógica que el ticket de ventas
+        // =====================================
+
         private void imprimirTicketCarta(string fecha)
-        {   
+        {
+            string piedeticket = Settings.Default["pieDeTicket"].ToString();
             ticket = "";
             string caj = data.usuario.nombre;
+
             ticket += "CASA CEJA\n" +
                 "SUCURSAL: " + sucursalName.ToUpper() + "\n" +
                 "" + sucursalDir.ToUpper() + "\n" +
@@ -404,6 +316,12 @@ namespace PuntoVentaCasaCeja
                 "FOLIO: " + folio + "\n" +
                 "TICKET DE APARTADO\n\n" +
                  "DESCRIPCION\tCANT\tP. UNIT\tP. TOTAL\n";
+
+            // CALCULAR descuentos para el ticket - IGUAL QUE EN VENTAS
+            double subtotalSinDescuentos = 0;
+            double descuentoCategoriaTicket = 0;
+            double descuentoPrecioEspecialTicket = 0;
+
             foreach (ProductoVenta p in carrito)
             {
                 string n;
@@ -415,44 +333,312 @@ namespace PuntoVentaCasaCeja
                 {
                     n = p.nombre;
                 }
-                ticket += n + "\t" + p.cantidad + "\t" + p.precio_venta.ToString("0.00") + "\t" + (p.cantidad * p.precio_venta).ToString("0.00") + "\n";
+
+                // AGREGAR INDICADORES basándose en el estado original - IGUAL QUE EN VENTAS
+                string indicadores = "";
+
+                if (p.es_precio_especial)
+                {
+                    indicadores += "*ESP";
+                }
+
+                // MOSTRAR INDICADOR DE CATEGORÍA SI LO TUVO ORIGINALMENTE
+                if (p.tuvo_descuento_categoria_original)
+                {
+                    if (indicadores.Length > 0) indicadores += " ";
+                    indicadores += $"*CAT{p.porcentaje_categoria_original:0}%";
+                }
+
+                // PRECIO ORIGINAL (siempre menudeo) - IGUAL QUE EN VENTAS
+                Producto productoCompleto = localDM.GetProductByCode(p.codigo);
+                double precioUnitarioOriginal = productoCompleto?.menudeo ?? p.precio_venta;
+
+                // Si no tiene precio_original establecido, usar menudeo
+                if (p.precio_original <= 0 && productoCompleto != null)
+                {
+                    p.precio_original = productoCompleto.menudeo;
+                }
+
+                if (p.precio_original > 0)
+                {
+                    precioUnitarioOriginal = p.precio_original;
+                }
+
+                // PRECIO FINAL 
+                double precioFinalConDescuentos = p.precio_venta * p.cantidad;
+
+                // SUBTOTAL SIN DESCUENTOS
+                subtotalSinDescuentos += precioUnitarioOriginal * p.cantidad;
+
+                // *** ACUMULAR DESCUENTOS USANDO VALORES ORIGINALES - IGUAL QUE EN VENTAS ***
+                if (p.tuvo_descuento_categoria_original)
+                {
+                    descuentoCategoriaTicket += p.descuento_categoria_original * p.cantidad;
+                    Console.WriteLine($"*** APARTADO: {p.nombre} - Categoria original: {p.descuento_categoria_original * p.cantidad}");
+                }
+
+                if (p.es_precio_especial)
+                {
+                    descuentoPrecioEspecialTicket += p.descuento_unitario * p.cantidad;
+                }
+
+                ticket += n + indicadores + "\t" + p.cantidad + "\t" + precioUnitarioOriginal.ToString("0.00") + "\t" + precioFinalConDescuentos.ToString("0.00") + "\n";
             }
+
+            Console.WriteLine($"*** APARTADO TOTALES:");
+            Console.WriteLine($"  Subtotal sin descuentos: {subtotalSinDescuentos}");
+            Console.WriteLine($"  Descuento Categoría: {descuentoCategoriaTicket}");
+            Console.WriteLine($"  Descuento Precio Especial: {descuentoPrecioEspecialTicket}");
+            Console.WriteLine($"  Descuento adicional (porcentaje): {data.porcentajeDesc}");
+
             if (!fontName.Equals("Consolas"))
                 ticket += "--------------------";
-            ticket += "--------------------------------------------------------------\n" +
-                 "TOTAL $\t------>\t" + totalcarrito.ToString("0.00") + "\n";
+            ticket += "--------------------------------------------------------------\n";
+
+            // MOSTRAR SUBTOTAL - IGUAL QUE EN VENTAS
+            ticket += "SUBTOTAL $\t------>\t\t" + subtotalSinDescuentos.ToString("0.00") + "\n";
+
+            // *** MOSTRAR DESCUENTOS USANDO VALORES ORIGINALES - IGUAL QUE EN VENTAS ***
+            if (descuentoCategoriaTicket > 0)
+            {
+                ticket += "DESC. POR CATEGORIA\t------>\t-" + descuentoCategoriaTicket.ToString("0.00") + "\n";
+            }
+
+            if (descuentoPrecioEspecialTicket > 0)
+            {
+                ticket += "DESC. PRECIO ESPECIAL\t------>\t-" + descuentoPrecioEspecialTicket.ToString("0.00") + "\n";
+            }
+
+            // DESCUENTO ADICIONAL DE APARTADO (si existe)
+            if (data.porcentajeDesc > 0)
+            {
+                ticket += "DESCUENTO APARTADO\t------>\t-" + data.porcentajeDesc.ToString("0.00") + "\n";
+            }
+
+            // *** CALCULAR TOTAL USANDO EL TOTAL ACTUAL DEL CARRITO - IGUAL QUE EN VENTAS ***
+            // El totalcarrito YA tiene todos los descuentos aplicados correctamente
+            double totalFinalCorrecto = totalcarrito - data.porcentajeDesc;
+
+            Console.WriteLine($"*** APARTADO CÁLCULO TOTAL:");
+            Console.WriteLine($"  totalcarrito (con descuentos ya aplicados): {totalcarrito}");
+            Console.WriteLine($"  data.porcentajeDesc: {data.porcentajeDesc}");
+            Console.WriteLine($"  Total final correcto: {totalFinalCorrecto}");
+
+            ticket += "TOTAL $\t------>\t\t" + totalFinalCorrecto.ToString("0.00") + "\n";
+
+            // MÉTODOS DE PAGO - IGUAL QUE ANTES
             if (pagos.ContainsKey("debito"))
             {
-                ticket += "PAGO T. DEBITO\t------>\t" + pagos["debito"].ToString("0.00") + "\n";
+                ticket += "PAGO T. DEBITO\t------>\t\t" + pagos["debito"].ToString("0.00") + "\n";
             }
             if (pagos.ContainsKey("credito"))
             {
-                ticket += "PAGO T. CREDITO\t------>\t" + pagos["credito"].ToString("0.00") + "\n";
+                ticket += "PAGO T. CREDITO\t------>\t\t" + pagos["credito"].ToString("0.00") + "\n";
             }
             if (pagos.ContainsKey("cheque"))
             {
-                ticket += "PAGO CHEQUES\t------>\t" + pagos["cheque"].ToString("0.00") + "\n";
+                ticket += "PAGO CHEQUES\t------>\t\t" + pagos["cheque"].ToString("0.00") + "\n";
             }
             if (pagos.ContainsKey("transferencia"))
             {
-                ticket += "PAGO TRANSFERENCIA\t------>\t" + pagos["transferencia"].ToString("0.00") + "\n";
+                ticket += "PAGO TRANSFERENCIA\t------>\t\t" + pagos["transferencia"].ToString("0.00") + "\n";
             }
             if (pagos.ContainsKey("efectivo"))
             {
-                ticket += "EFECTIVO ENTREGADO\t------>\t" + pagos["efectivo"].ToString("0.00") + "\n";
+                ticket += "EFECTIVO ENTREGADO\t------>\t\t" + pagos["efectivo"].ToString("0.00") + "\n";
             }
+
             if (!fontName.Equals("Consolas"))
                 ticket += "--------------------";
             ticket += "--------------------------------------------------------------\n" +
-                "POR PAGAR $\t------>\t" + (totalcarrito - totalpagado).ToString("0.00") + "\n\n" +
+                "POR PAGAR $\t------>\t\t" + (totalFinalCorrecto - totalpagado).ToString("0.00") + "\n\n" +
                  "LE ATENDIO: " + data.usuario.nombre.ToUpper() + "\n" +
                  "NO DE ARTICULOS: " + carrito.Count.ToString().PadLeft(5, '0') + "\n" +
-                 "FECHA DE VENCIMIENTO:\n"+txtfecha.Text+"\n"+
-                 "CLIENTE:\n"+cliente.nombre+"\n"+
-                 "NUMERO DE CELULAR:\n"+cliente.telefono+"\n";
-            
-            
+                 "FECHA DE VENCIMIENTO:\n" + txtfecha.Text + "\n" +
+                 "CLIENTE:\n" + cliente.nombre + "\n" +
+                 "NUMERO DE CELULAR:\n" + cliente.telefono + "\n\n" +
+                 "ANTONIO CEJA MARON\n" +
+                 "RFC: CEMA-721020-NM5\n\n";
+
+            if (piedeticket != "")
+            {
+                ticket += "----------------------------------------------------------------------------------\n" +
+                piedeticket + "\n" +
+                "----------------------------------------------------------------------------------\n\n";
+            }
+
+            ticket += "SI DESEA FACTURAR ESTA COMPRA INGRESE A :\n" +
+                 "https://cm-papeleria.com/public/facturacion";
+
             createdoc();
+        }
+
+        // =====================================
+        // ASEGURAR que los productos del carrito tengan la información de descuentos
+        // Agregar este método para verificar/establecer descuentos antes de imprimir
+        // =====================================
+
+        private void PrepararDescuentosParaTicket()
+        {
+            Console.WriteLine("=== PREPARANDO DESCUENTOS PARA TICKET DE APARTADO ===");
+
+            foreach (ProductoVenta p in carrito)
+            {
+                Producto productoCompleto = localDM.GetProductByCode(p.codigo);
+                if (productoCompleto != null)
+                {
+                    // ESTABLECER precio original si no está
+                    if (p.precio_original <= 0)
+                    {
+                        p.precio_original = productoCompleto.menudeo;
+                    }
+
+                    // VERIFICAR si tiene descuento de categoría aplicado pero no marcado
+                    if (!p.tuvo_descuento_categoria_original)
+                    {
+                        var (tieneDescuentoCategoria, porcentajeCategoria) = localDM.GetDescuentoCategoria(productoCompleto.categoria_id);
+
+                        if (tieneDescuentoCategoria && porcentajeCategoria > 0)
+                        {
+                            double precioConCategoria = productoCompleto.menudeo * (1 - (double)porcentajeCategoria / 100.0);
+
+                            // Si el precio actual coincide con precio con categoría, marcarlo
+                            if (Math.Abs(p.precio_venta - precioConCategoria) < 0.01)
+                            {
+                                p.tuvo_descuento_categoria_original = true;
+                                p.descuento_categoria_original = productoCompleto.menudeo - p.precio_venta;
+                                p.porcentaje_categoria_original = (double)porcentajeCategoria;
+
+                                Console.WriteLine($"*** APARTADO: Detectado descuento categoría en {p.nombre}: {p.descuento_categoria_original}");
+                            }
+                        }
+                    }
+
+                    // VERIFICAR si tiene precio especial aplicado pero no marcado
+                    if (!p.es_precio_especial && productoCompleto.especial > 0)
+                    {
+                        if (Math.Abs(p.precio_venta - productoCompleto.especial) < 0.01)
+                        {
+                            p.es_precio_especial = true;
+                            p.descuento_unitario = productoCompleto.menudeo - productoCompleto.especial;
+
+                            Console.WriteLine($"*** APARTADO: Detectado precio especial en {p.nombre}: {p.descuento_unitario}");
+                        }
+                    }
+                }
+            }
+        }
+
+        // =====================================
+        // MODIFICAR el método aceptar_Click para preparar descuentos antes de imprimir
+        // =====================================
+
+        private void aceptar_Click(object sender, EventArgs e)
+        {
+            if (txtnombre.Text.Equals("") || txtcorreo.Text.Equals("") || txttel.Text.Equals("") || txtdias.Text.Equals(""))
+            {
+                MessageBox.Show("Favor de completar los campos requeridos", "Advertencia");
+            }
+            else
+            {
+                // Verificar si el apartado ya existe antes de intentar guardarlo
+                if (!localDM.ApartadoExiste(folio))
+                {
+                    Apartado na = new Apartado()
+                    {
+                        productos = JsonConvert.SerializeObject(carrito),
+                        total = data.totalcarrito,
+                        total_pagado = totalpagado,
+                        folio_corte = data.folioCorte,
+                        fecha_de_apartado = localDate.ToString("yyyy-MM-dd HH:mm:ss"),
+                        estado = 0,
+                        cliente_creditos_id = cliente.id,
+                        temporal = cliente.activo == -1 ? 1 : 0,
+                        id_cajero_registro = webDM.activeUser.id,
+                        fecha_entrega = null,
+                        id_cajero_entrega = null,
+                        sucursal_id = idsucursal,
+                        observaciones = txtobservaciones.Text,
+                    };
+                    na.abonos = new List<AbonoApartado>();
+
+                    if (pagos.Count > 0)
+                    {
+                        Console.WriteLine("RegistarApartado: " + data.folioCorte);
+                        Console.Write(data.totalcarrito);
+                        AbonoApartado abono = new AbonoApartado
+                        {
+                            fecha = localDate.ToString("yyyy-MM-dd HH:mm:ss"),
+                            folio = idsucursal.ToString().PadLeft(2, '0') + idcaja.ToString().PadLeft(2, '0') + localDate.Second.ToString().PadLeft(2, '0') + localDate.Day.ToString().PadLeft(2, '0') + localDate.Month.ToString().PadLeft(2, '0') + localDate.Year + "A",
+                            folio_corte = data.folioCorte,
+                            apartado_id = 0,
+                            usuario_id = webDM.activeUser.id,
+                            folio_apartado = folio,
+                            metodo_pago = JsonConvert.SerializeObject(pagos),
+                            total_abonado = totalpagado,
+                        };
+
+                        int ida = localDM.abonoApartadoTemporal(abono);
+                        na.abonos.Add(abono);
+
+                        localDM.acumularPagos(pagos, idcorte, 0);
+                        if (pagos.ContainsKey("efectivo"))
+                        {
+                            localDM.acumularEfectivoApartado(pagos["efectivo"], idcorte);
+                        }
+                    }
+
+                    decimal totalCarritoDecimal;
+                    if (decimal.TryParse(data.totalcarrito.ToString(), out totalCarritoDecimal))
+                    {
+                        bool actualizado = localDM.actualizarTotalesCorte(idcorte, totalCarritoDecimal, true);
+
+                        if (actualizado)
+                        {
+                            Console.WriteLine($"Total de apartados del corte {idcorte} actualizado correctamente.");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Error al actualizar el total de apartados del corte {idcorte}. Revisar logs.");
+                            MessageBox.Show("Error interno: No se pudo procesar el total del carrito. Contacte a soporte técnico.", "Error");
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Error al convertir data.totalcarrito a decimal. Valor: {data.totalcarrito}");
+                        MessageBox.Show("Error interno: No se pudo procesar el total del carrito. Contacte a soporte técnico.", "Error");
+                        return;
+                    }
+
+                    // *** PREPARAR DESCUENTOS ANTES DE IMPRIMIR ***
+                    PrepararDescuentosParaTicket();
+
+                    imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
+                    imprimirTicketCarta(localDate.ToString("dd/MM/yyyy hh:mm tt"));
+
+                    if (printerType != 1 && !localDM.impresora.Equals(""))
+                    {
+                        try
+                        {
+                            localDM.imprimirApartado(na, carrito, pagos, cajero.nombre, sucursalName, sucursalDir, txtfecha.Text, cliente.nombre, cliente.telefono);
+                            localDM.imprimirApartado(na, carrito, pagos, cajero.nombre, sucursalName, sucursalDir, txtfecha.Text, cliente.nombre, cliente.telefono);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error al imprimir en impresora térmica: " + ex.Message);
+                        }
+                    }
+
+                    send(na);
+                    this.DialogResult = DialogResult.Yes;
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("El apartado ya existe en la base de datos.", "Advertencia");
+                }
+            }
         }
 
         private void createdoc() // El codigo anterior esta en VerCredApa.
