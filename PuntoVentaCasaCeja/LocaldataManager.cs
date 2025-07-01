@@ -743,16 +743,17 @@ namespace PuntoVentaCasaCeja
                 if (result.Read())
                 {
                     bool tiene = result.GetInt32(0) == 1;
-                    decimal descuento = result.IsDBNull(1) ? 0 : result.GetDecimal(1);
-                    result.Close();
-                    return (tiene, descuento);
+                    decimal descuentoDecimal = result.IsDBNull(1) ? 0 : result.GetDecimal(1);
+
+                    Console.WriteLine($"POS - Descuento categoría {categoriaId}: tiene={tiene}, porcentaje={descuentoDecimal}");
+
+                    return (tiene, descuentoDecimal);
                 }
-                result.Close();
                 return (false, 0);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error al obtener descuento de categoría: {ex.Message}");
+                Console.WriteLine($"POS - Error al obtener descuento de categoría {categoriaId}: {ex.Message}");
                 return (false, 0);
             }
         }
@@ -1726,13 +1727,16 @@ namespace PuntoVentaCasaCeja
             foreach (Categoria categoria in categorias)
             {
                 SQLiteCommand command = connection.CreateCommand();
-                command.CommandText = "INSERT OR REPLACE INTO categorias (id, nombre, activo, created_at, updated_at) " +
-                "VALUES(@setId, @setNombre, @setActivo, @setCreated_at, @setUpdated_at) ";
+                command.CommandText = "INSERT OR REPLACE INTO categorias (id, nombre, activo, created_at, updated_at, isdescuento, descuento) " +
+                "VALUES(@setId, @setNombre, @setActivo, @setCreated_at, @setUpdated_at, @setIsdescuento, @setDescuento) ";
                 command.Parameters.AddWithValue("setId", categoria.id);
                 command.Parameters.AddWithValue("setNombre", categoria.nombre);
                 command.Parameters.AddWithValue("setActivo", categoria.activo);
                 command.Parameters.AddWithValue("setCreated_at", categoria.created_at);
                 command.Parameters.AddWithValue("setUpdated_at", categoria.updated_at);
+                command.Parameters.AddWithValue("setIsdescuento", categoria.isdescuento);
+                command.Parameters.AddWithValue("setDescuento", categoria.descuento);
+
                 command.ExecuteScalar();
             }
         }

@@ -176,17 +176,13 @@ namespace PuntoVentaCasaCeja
 
             if (loaded == false)
             {
-
                 loaded = true;
-                //var runningProcessByName = Process.GetProcessesByName("CCSync");
-                //if (runningProcessByName.Length == 0)
-                //{
-
                 this.Enabled = false;
                 LoadWindow lw = new LoadWindow();
                 lw.Show(this);
-                
-                try { 
+
+                try
+                {
                     // orden optimizado para precarga
                     if (localDM.IsCatalogPreloaded)
                     {
@@ -199,6 +195,10 @@ namespace PuntoVentaCasaCeja
                         // 2. Actualizar catálogo (solo cambios)
                         lw.setData(30, "Actualizando catálogo...");
                         await webDM.GetProductos();
+
+                        // *** AGREGAR ESTA LÍNEA: Sincronización forzada de categorías para descuentos ***
+                        lw.setData(40, "Sincronizando descuentos de categorías...");
+                        await webDM.ForzarSincronizacionCategorias();
 
                         // 3. El resto de sincronizaciones
                         lw.setData(50, "Sincronizando otros datos...");
@@ -214,7 +214,7 @@ namespace PuntoVentaCasaCeja
                     else
                     {
                         Debug.WriteLine("No se detectó base de datos precargada. Sincronizando datos desde el servidor...");
-                        // Flujo tradicional para instalaciones sin precarga
+                        // Flujo tradicional para instalaciones sin precarga (YA INCLUYE GetCategorias)
                         if (await webDM.GetProductos())
                         {
                             lw.setData(7, "Sincronizando datos desde el servidor...");
@@ -222,7 +222,7 @@ namespace PuntoVentaCasaCeja
                             lw.setData(14, "Sincronizando datos desde el servidor...");
                             await webDM.GetMedidas();
                             lw.setData(21, "Sincronizando datos desde el servidor...");
-                            await webDM.GetCategorias();
+                            await webDM.GetCategorias(); // ? ESTO YA ESTÁ
                             lw.setData(28, "Sincronizando datos desde el servidor...");
                             await webDM.GetUsuarios();
                             lw.setData(35, "Sincronizando datos desde el servidor...");
@@ -253,16 +253,6 @@ namespace PuntoVentaCasaCeja
                 {
                     lw.Dispose();
                     this.Enabled = true;
-                    //try
-                    //{
-                    //    string path = Path.Combine(Directory.GetCurrentDirectory(), @"CCSync/CCSync.exe");
-                    //    Process.Start(path);
-                    //}
-                    //catch (Exception e)
-                    //{
-
-                    //}
-                    //}            
                     this.Focus();
                 }
             }

@@ -137,6 +137,60 @@ namespace PuntoVentaCasaCeja
             return false;
         }
 
+        public async Task<bool> ForzarSincronizacionCategorias()
+        {
+            Console.WriteLine("=== POS - FORZAR SINCRONIZACIÓN CATEGORÍAS ===");
+
+            string res = "";
+            Dictionary<string, string> date = new Dictionary<string, string>();
+            date["fecha_de_actualizacion"] = categorias_lastupdate;
+
+            Console.WriteLine($"POS - Fecha última actualización: {categorias_lastupdate}");
+
+            try
+            {
+                HttpResponseMessage response = await client.PostAsJsonAsync(url + "api/categorias/sincronizar", date);
+                res = await response.Content.ReadAsStringAsync();
+
+                Console.WriteLine($"POS - Respuesta del servidor: {res}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = JsonConvert.DeserializeObject<Dictionary<string, object>>(res);
+                    if (result["status"].ToString().Equals("success"))
+                    {
+                        var data = JsonConvert.DeserializeObject<Dictionary<string, object>>(result["data"].ToString());
+
+                        // DESERIALIZAR COMO DYNAMIC para evitar problemas con propiedades faltantes
+                        var categoriasJson = data["categorias"].ToString();
+                        Console.WriteLine($"POS - JSON de categorías recibido: {categoriasJson}");
+
+                        // Convertir JSON a objetos Categoria usando deserialización dinámica
+                        var categoriasRaw = JsonConvert.DeserializeObject(categoriasJson);
+                        var categorias = JsonConvert.DeserializeObject<List<Categoria>>(categoriasJson);
+
+                        Console.WriteLine($"POS - Categorías recibidas: {categorias?.Count ?? 0}");
+
+                        // NO intentar acceder a isdescuento/descuento aquí - 
+                        // saveCategorias() se encargará de manejar las columnas correctamente
+
+                        localDM.saveCategorias(categorias);
+                        categorias_lastupdate = localDM.getTableLastUpdate("categorias");
+
+                        Console.WriteLine("POS - Categorías sincronizadas exitosamente");
+                        return true;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"POS - Error forzando sincronización: {e.Message}");
+                Console.WriteLine($"POS - StackTrace: {e.StackTrace}");
+            }
+
+            return false;
+        }
+
         public async Task<bool> GetMedidas()
         {
             if (localDM.IsCatalogPreloaded)

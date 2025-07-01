@@ -13,5 +13,7 @@ namespace PuntoVentaCasaCeja
         public int activo { get; set; }
         public string created_at { get; set; }
         public string updated_at { get; set; }
+        public int isdescuento { get; set; }
+        public double descuento { get; set; }
     }
 }
